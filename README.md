@@ -1,4 +1,4 @@
-Aacknowledge
+Acknowledge
 ============
 
 This is a genearl code deposite for the homeless.
