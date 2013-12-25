@@ -53,3 +53,23 @@ println "   invoked, e.g. a closure is not invoked at its definition time."
 println "10. A closure may be curried so that a copy of the closure"
 println "   is made with one or more of its parameters fixed to a constant"
 println "   value."
+println ""
+println "varibale scope"
+A sample = new A();
+def closureVar = sample.publicMethod("Xavier");
+closureVar();
+println "the closure inside of publicMethodhas access to all variables "
+println "that publicMethod may legally access."
+println "the variables bound with the closure also live on."
+println ""
+println "This will not work:"
+B aB = new B();
+  closureVar = aB.bMethod("Xavier");
+  closureVar();
+
+println "we now have a class B which dynamically instantiates "
+println "an object of type Aand then calls A.publicMethod()."
+println "However, in this code the closure within publicMethod() "
+println "is trying to reference a member from B, and this is "
+println "not allowed since the compiler cannot statically determine "
+println "that this is available."
