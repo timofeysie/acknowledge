@@ -371,7 +371,7 @@ assert x == [1, 2]
 println "Creating list ${x}"
 
 println ""
-println "22 Semi colons optional.  Multiple lines OK."
+println "22. Semi colons optional.  Multiple lines OK."
 x = [1, 2, 3,
 	4, 5, 6]
 println(
@@ -388,7 +388,7 @@ else
 }
 
 println ""
-println "multiple assignments"
+println "23,  multiple assignments"
 def geocode(String location) 
 {
     // implementation returns [48.824068, 2.531733] for Paris, France
@@ -409,35 +409,8 @@ assert lastname == "Laforge"
 println "for the case with more variables than list elements, "
 println "here, c will be null:"
 def elements = [1, 2]
-def (a, b, c) = elements
-assert a == 1
-assert b == 2
-assert c == null
-println "the standard school swap case in one line"
-// given those two variables
-a = 1, b = 2
-// swap variables with a list
-(a, b) = [b, a]
-assert a == 2
-assert b == 1
-
-println "the return statement is optional at the end of methods"
-println " Also you don't need to specify a return type"
-println "(it will default to Object in the bytecode if none is specified)"
-class Foo 
-{
-	def calculatePrice() 
-	{
-		1.23
-	}
-	
-	static void main(args) 
-	{
-		def foo = new Foo()
-		def p = foo.calculatePrice()
-		assert p > 0
-		println "Found price: " + p
-	}
-}
-
-// current method calls page
+def (a2, b2, c1) = elements
+assert a2 == 1
+assert b2 == 2
+assert c1 == null
+// Ack was here.
