@@ -117,8 +117,59 @@ SomeCollection stuff = new SomeCollection();
 println "In SomeCollection we added a body or get this error:"
 println "You defined a method without a body"
 println ""
+println "The more traditional syntax is also available, "
+println "and also note that in Groovy you can elide parenthesis "
+println "in many situations, so these two variations are also legal:"
+stuff = new SomeCollection();
+  stuff.each { println it }     // Look ma, no parens
+  stuff.each ({ println it })   // Strictly traditional
+
 println ""
+println "You cannot do this with a variable of type closure"
+println "When you are not defining a closure inline to a method call, "
+println "you cannot use this syntax"
+//counter = {count, item -> count + item  }
+//stuff.inject(0) counter               // Illegal!  No Groovy for you!
+println ""
+println "use the more verbose syntax:"
+def counter = {count, item -> count + item  }
+stuff.inject(0,counter)
+println ""
+println "Closures as keys"
+println "You can use a closure as a key. However, when putting it into "
+println "the map you must 'escape' it (as you would any other identifier "
+println "you don't want treated as a string) by enclosing it in parens, like so:"
+f = { println "f called" }
+m = [ (f): 123 ]
+println "When accessing the value of the closure in the map you must "
+println "use get(f) or m[f] as m.f will treat f as a string."
+println m.get(f)    // 123
+println m[f]        // 123
+println m.f         // null
+println "Closures as values"
+println "You can use a closure an a value and call that closure as if "
+println "it were a method on the map, similarly to Expandos."
+m = [ f: { println 'f called' } ]
+m.f()    // f called
+m = new Expando( f: { println 'f called' } )
+m.f()      // f called
+println ""
+println "Extending groovy with the use directive"
+println "You can provide your own specialized methods supporting closures "
+println "by implementing a Java class containing such methods. "
+println "These methods must be static and contain at least two parameters. "
+println "The first parameter to the method must be the type on which "
+println "the method should operate, and the last parameter must be "
+println "a Closure type".
+/*
+dir = new File("/tmp")
+use(ClassWithEachDirMethod.class) {
+  dir.eachDir {
+    println it
+  }
+}
 
 
 
 
+*/

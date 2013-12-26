@@ -5,4 +5,10 @@ class SomeCollection
       	println "Added body"  
     }
     
+    public void inject (x, Closure c)
+    {
+        println "Injected body"  
+    }
+
+    
 }
