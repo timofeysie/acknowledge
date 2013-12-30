@@ -205,5 +205,33 @@ import example.Employess
 def emps = [180, 140, 160].collect{ val -> new Employess(salary:val) }
 println emps.size()           // prints 3
 println highPaid(emps).size() // prints 2
+println "In this example, the closure block { e -> e.salary > threshold } "
+println "refers to the threshold variable defined in the highPaid() method."
+println " The example also used a closure to create the emps list."
+
+println ""
+println "There are cases you may want to take more arguments but "
+println "not using varargs/Object[]. For example, as an API provider, "
+println "you expose an API that take a closure as argument. "
+println "The closure may define one or two parameters up to the user. "
+println "(this is a typical case when passing JavaScript function) "
+println "The following is an example about how to simulate such behaivior:"
 
 
+import example.User
+// user code
+def user1 = new User(username:'user1', password:'pass1', version:0)
+update
+(
+		user1, 
+		[
+			password:
+			{
+				p,e-> Hash.md5(p, e.salt) 
+			}, 
+			version:
+			{
+				v-> v+1 
+			}
+		] //assume there is a MD5 util
+)
