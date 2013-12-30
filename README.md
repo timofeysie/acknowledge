@@ -2,6 +2,9 @@ Acknowledge
 ============
 
 This is a genearl code deposite for the homeless.
+Current code being added is Groovy closure work from the informal guide.
+
+Below is general usage examples for the markdown format:
 
 - syntax is intended for one purpose: to be used as a format for writing for the web.
 - HTML is a publishing format; Markdown is a writing format
@@ -57,9 +60,7 @@ _single underscores_ = <em>single underscores</em>
 **double asterisks** = <strong>double asterisks</strong>
 __double underscores__ = <strong>double underscores</strong>
 
-So this explains two things:  the readme file .md format, and also the  project information at the pobbom of each repository page on Github.  Here is one example:
+Here is one example:
 
 ![](http://f.cl.ly/items/3435000d3G1E3t3m0J0X/canvas.png)
 Canvas is a project to simplify iOS development for both designers and developers.
-It had been difficult for designers to get hands on building the product with the lack of objective-c and Xcode experience, and a hard time for developer to use reasonable amount of time and lines of code just to achieve really simple effects.
-With Canvas, creating stunning animations requires zero lines of code, trendy effects like the Parallex headers, Sticky sections, Blurred Backgrounds, will be as simple as few lines of code changes.
