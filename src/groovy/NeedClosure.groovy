@@ -1,4 +1,5 @@
 println "Closures"
+println "closures do not require a class or a method name."
 println "In functional language parlance,"
 println "such an anonymous code block might be referred to as "
 println "an anonymous lambda expression in general "
@@ -160,7 +161,7 @@ println "by implementing a Java class containing such methods. "
 println "These methods must be static and contain at least two parameters. "
 println "The first parameter to the method must be the type on which "
 println "the method should operate, and the last parameter must be "
-println "a Closure type".
+println "a Closure type"
 /*
 dir = new File("/tmp")
 use(ClassWithEachDirMethod.class) {
@@ -168,8 +169,41 @@ use(ClassWithEachDirMethod.class) {
     println it
   }
 }
-
-
-
-
 */
+println "Button actin inner class"
+println ""
+println "Button b = new Button ('Push Me');"
+println "  b.onClick (new Action()" 
+println "{"
+println "    public void execute (Object target)"
+println "    {"
+println "      buttonClicked();"
+println "    }"
+println "  });"
+println ""
+println "Streamlined Groovy version"
+println ""
+println "Button b = new Button ('Push Me');"
+println "  b.onClick { buttonClicked() }"
+println ""
+println ""
+import example.GVector
+def gVect = new GVector()
+gVect.add(2)
+gVect.add(3)
+gVect.add(4)
+def c1 = { numberToSquare -> numberToSquare * numberToSquare }
+gVect.apply(c1) // the elements in the GVector have all been squared.
+println ""
+c2 = { value -> println(value) }
+gVect.apply(c2) // the elements in the GVector have all been printed.
+println ""
+gVect.apply{ value -> println(value) }  // elements in GVector have been printed.
+println ""
+import example.Employess
+// no such property salary for class employess
+def emps = [180, 140, 160].collect{ val -> new Employess(salary:val) }
+println emps.size()           // prints 3
+println highPaid(emps).size() // prints 2
+
+
