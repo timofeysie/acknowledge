@@ -81,7 +81,7 @@ println ""
 println "http://www.nofluffjuststuff.com/blog/andrew_glover/2007/07/builders_are_groovy_s_bag"
 
 println ""
-println "How Builders Work example"
+println "How Builders Work Example"
 
 // create a builder, (note: this is not in one of the packages that are automatically imported
 
@@ -94,12 +94,17 @@ builder2.stocks {                              // step (2)
     stock(symbol: 'MSFT')                     // step (3-2)
     stock(symbol: 'IBM' )
 }
-
-/*
-==== result output =====>
-<stocks>
-  <stock symbol='JAVA' />
-  <stock symbol='MSFT' />
-  <stock symbol='IBM' />
-</stocks>
-*/
+println ""
+println "builder does not know the method stocks, so "
+println "the builder will 'missing method exception'."
+println "(unifinished tutrial)"
+println ""
+println "The @DelegatesTo annotation"
+import example.Email
+def email(Closure cl) 
+{
+    def email = new Email()
+    def code = cl.rehydrate(email, this, this)
+    code.resolveStrategy = DELEGATE_ONLY
+    code()
+}
