@@ -233,3 +233,43 @@ update( user1, [
 		] //assume there is a MD5 util
 )
 */
+println ""
+println "@DelegatesTo supports multiple modes:"
+println "Simple delegation"
+// def build(@DelegatesTo(BuilderItem) cl) { ... }}
+//
+println ""
+println "Delegation strategy"
+println "In this mode, you must specify both the delegate class and "
+println "a delegation strategy. This must be used if the closure will "
+println "not be called with the default delegation strategy, "
+println "which is Closure.OWNER_FIRST.
+def build(@DelegatesTo(strategy=Closure.DELEGATE_FIRST, value=BuilderItem) { ... }
+println ""
+println "Delegate to parameter"
+println "In this variant, we will tell the compiler that we are delegating "
+println "to another parameter of the method. Take the following code:
+
+def exec(Object target, Closure code) {
+   def clone = code.rehydrate(target, this, this)
+   clone()
+}"
+println ""
+def email = new Email()
+exec(email) {
+   from '...'
+   to '...'
+   send()
+}
+print;n ""
+println "Each of the method calls are delegated to the email parameter. "
+println "This is a widely used pattern which is also supported by "
+println "@DelegatesTo using a companion annotation:"
+def exec(@DelegatesTo.Target target, @DelegatesTo code) { ... }
+println ""
+import representing.Acknowledger
+def acknowkledge = new Acknowkledge()
+exec(greeter) 
+{
+   sayHello()
+}
