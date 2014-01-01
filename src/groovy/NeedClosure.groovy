@@ -200,11 +200,11 @@ gVect.apply(c2) // the elements in the GVector have all been printed.
 println ""
 gVect.apply{ value -> println(value) }  // elements in GVector have been printed.
 println ""
-import example.Employess
+import example.Employee
 // no such property salary for class employess
-def emps = [180, 140, 160].collect{ val -> new Employess(salary:val) }
+def emps = [180, 140, 160].collect{ val -> new Employee(salary:val) }
 println emps.size()           // prints 3
-println highPaid(emps).size() // prints 2
+// println highPaid(emps).size() // prints 2  this is just an example
 println "In this example, the closure block { e -> e.salary > threshold } "
 println "refers to the threshold variable defined in the highPaid() method."
 println " The example also used a closure to create the emps list."
@@ -217,14 +217,11 @@ println "The closure may define one or two parameters up to the user. "
 println "(this is a typical case when passing JavaScript function) "
 println "The following is an example about how to simulate such behaivior:"
 
-
+/* Example Code
 import example.User
 // user code
 def user1 = new User(username:'user1', password:'pass1', version:0)
-update
-(
-		user1, 
-		[
+update( user1, [
 			password:
 			{
 				p,e-> Hash.md5(p, e.salt) 
@@ -235,3 +232,4 @@ update
 			}
 		] //assume there is a MD5 util
 )
+*/

@@ -1,8 +1,8 @@
+package example
 // sample entity
 class User
 {
  	def username, password, version, salt = 'RANDOM';
-}
 
 	// your API, provide a Map of changes to update a entity. 
 	// the map value may be static value, or a closure that takes 
