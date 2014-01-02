@@ -94,6 +94,15 @@ builder2.stocks {                              // step (2)
     stock(symbol: 'MSFT')                     // step (3-2)
     stock(symbol: 'IBM' )
 }
+
+println ""
+def test_builder = new groovy.xml.MarkupBuilder()  // construct a builder step(1)
+test_builder.word {                              // step (2)
+    text(string: '»ç°ú')                     // step (3-1)
+    definition(string: 'apple')                     // step (3-2)
+}
+println ""
+
 println ""
 println "builder does not know the method stocks, so "
 println "the builder will 'missing method exception'."
@@ -108,3 +117,49 @@ def email(Closure cl)
     code.resolveStrategy = DELEGATE_ONLY
     code()
 }
+println "Documentation is important"
+println " IDEs can help the developper by suggesting, once they are in "
+println "the closure body, methods that exist on the class."
+println ""
+println "Type checking builders"
+println "The goal of this annotation is to solve both the documentation issue, "
+println "that will let your IDE know about the expected methods in the "
+println "closure body, and it will also solve the type checking issue, "
+println "by giving hints to the compiler about what are the potential "
+println "receivers of method calls in the closure body."
+println ""
+def email(@DelegatesTo(strategy=Closure.DELEGATE_ONLY, value=Email) cl) { ... }
+println ""
+println "DelegatesTo modes"
+println "Simple delegation"
+def build(@DelegatesTo(BuilderItem) cl) { ... }
+println "Delegation strategy"
+def build(@DelegatesTo(strategy=Closure.DELEGATE_FIRST, value=BuilderItem) { ... }
+println "Delegate to parameter"
+def exec(Object target, Closure code) {
+   def clone = code.rehydrate(target, this, this)
+   clone()
+}
+println "This is a widely used pattern which is also supported by "
+println "@DelegatesTo using a companion annotation:"
+def exec(@DelegatesTo.Target target, @DelegatesTo code) { ... }"
+println "annotating another parameter with @DelegatesTo.Target."
+println "In this mode, the @DelegatesTo annotation also supports the "
+println "strategy parameter that we've described upper."
+println ""
+println "Multiple closures"
+//def guardWith(Closure guard, Closure code, Closure fallback) { ... }
+//  annotating each closure with @DelegatesTo:
+//def guardWith(@DelegatesTo(Foo) Closure guard, @DelegatesTo(Bar) Closure code, @DelegatesTo(Baz) Closure fallback) { ... }
+println "if you have multiple closures and multiple arguments, "
+println "you can use several targets:
+def guardWith(@DelegatesTo.Target('guarded') guarded,??
+              @DelegatesTo.Target('codeObject') codeObject,??
+              @DelegatesTo.Target('fallbackObject') fallbackObject,  
+              @DelegatesTo(target='guarded') Closure guard,
+              @DelegatesTo(target='codeObject') Closure code,
+              @DelegatesTo(target='fallbackObject') Closure fallback) { ... }"
+println ""
+println ""
+println ""
+println ""
