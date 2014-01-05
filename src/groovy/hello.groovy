@@ -416,7 +416,7 @@ assert c1 == null
 // Ack was here.
 
 println ""
-println "23"
+println "24"
 println "Empty collections are coerced to false."
 def numbers = [1,2,3]
 assert numbers //true, as numbers in not empty
@@ -424,7 +424,7 @@ numbers = []
 assert !numbers //true, as numbers is now an empty collection
 
 println ""
-println "24"
+println "25"
 println "Iterators and Enumerations with no further elements are "
 println "coerced to false."
 assert ![].iterator() // false because the Iterator is empty
@@ -434,7 +434,6 @@ assert !v.elements()  // false because the Enumeration is empty
 v.add(new Object())
 assert v.elements()   // true because the Enumeration has more elements
 println ""
-println "Maps"
 println "Non-empty maps are coerced to true."
 assert ['one':1]
 assert ![:]
@@ -443,6 +442,65 @@ println "Matching regex patterns are coerced to true."
 println "Non-empty Strings, GStrings and CharSequences are coerced to true."
 println "Non-zero numbers are coerced to true."
 println "Non-null object references are coerced to true."
+println ""
+println "26. I/O"
+println "through each line of a file the following can be used..."
+def fields = ["a":"1", "b":"2", "c":"3"]
+new File("foo.ini").withWriter { out ->
+    fields.each() { key1, value1 ->
+        out.writeLine("${key1}=${value1}")
+    }
+}
+new File("foo.ini").eachLine { line -> println(line) }
+println ""
+println "27.  Ranges allow you to create a list of sequential values."
+// an inclusive range
+def range = 5..8
+assert range.size() == 4
+assert range.get(2) == 7
+assert range[2] == 7
+assert range instanceof java.util.List
+assert range.contains(5)
+assert range.contains(8)
+// lets use a half-open range
+range = 5..<8
+assert range.size() == 3
+assert range.get(2) == 7
+assert range[2] == 7
+assert range instanceof java.util.List
+assert range.contains(5)
+assert ! range.contains(8)
+//get the end points of the range without using indexes
+range = 1..10
+assert range.from == 1
+assert range.to == 
+// an inclusive range
+def range_i = 'a'..'d'
+assert range_i.size() == 4
+assert range_i.get(2) == 'c'
+assert range_i[2] == 'c'
+assert range_i instanceof java.util.List
+assert range_i.contains('a')
+assert range_i.contains('d')
+assert ! range_i.contains('e')
+println "also Ranges can be used to iterate using the for statement."
+for (i in 1..10) 
+{
+  println "Hello ${i}"
+}
+println "the same effect, by iterating a range with each method:"
+(1..10).each { i ->
+  println "Hello ${i}"
+}
+println "Ranges can be also used in the switch statements:"
+switch (years) {
+   case 1..10: interestRate = 0.076; break;
+  case 11..25: interestRate = 0.052; break;
+      default: interestRate = 0.037;
+}
+println ""
+println ""
+println ""
 println ""
 println ""
 println ""
