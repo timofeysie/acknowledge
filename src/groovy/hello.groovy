@@ -414,3 +414,37 @@ assert a2 == 1
 assert b2 == 2
 assert c1 == null
 // Ack was here.
+
+println ""
+println "23"
+println "Empty collections are coerced to false."
+def numbers = [1,2,3]
+assert numbers //true, as numbers in not empty
+numbers = []
+assert !numbers //true, as numbers is now an empty collection
+
+println ""
+println "24"
+println "Iterators and Enumerations with no further elements are "
+println "coerced to false."
+assert ![].iterator() // false because the Iterator is empty
+assert [0].iterator() // true because the Iterator has a next element
+def v = new Vector()
+assert !v.elements()  // false because the Enumeration is empty
+v.add(new Object())
+assert v.elements()   // true because the Enumeration has more elements
+println ""
+println "Maps"
+println "Non-empty maps are coerced to true."
+assert ['one':1]
+assert ![:]
+println ""
+println "Matching regex patterns are coerced to true."
+println "Non-empty Strings, GStrings and CharSequences are coerced to true."
+println "Non-zero numbers are coerced to true."
+println "Non-null object references are coerced to true."
+println ""
+println ""
+println ""
+println ""
+println ""
