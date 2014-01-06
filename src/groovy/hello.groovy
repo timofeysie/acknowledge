@@ -500,7 +500,26 @@ switch (years) {
       default: interestRate = 0.037;
 }
 println ""
-println ""
+println "28.  Maps"
+println " [:] is the empty map expression."
+println "Map keys are strings by default: [a:1] is equivalent to ['a':1]."
+println "But if you really want a variable to become the key, "
+println "you have to wrap it between parentheses: [(a):1]."
+map = [name:"Gromit", likes:"cheese", id:1234]
+assert map.get("name") == "Gromit"
+assert map.get("id") == 1234
+assert map["name"] == "Gromit"
+assert map['id'] == 1234
+assert map instanceof java.util.Map
+println "Maps like beans can use the dot notation."
+assert map.name == "Gromit"
+assert map.id == 1234
+def emptyMap = [:]
+assert emptyMap.size() == 0
+emptyMap.put("foo", 5)
+assert emptyMap.size() == 1
+assert emptyMap.get("foo") == 5
+assert emptyMap.foo == 5
 println ""
 println ""
 println ""
