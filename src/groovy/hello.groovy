@@ -473,7 +473,7 @@ assert ! range.contains(8)
 //get the end points of the range without using indexes
 range = 1..10
 assert range.from == 1
-assert range.to == 
+assert range.to == 10
 // an inclusive range
 def range_i = 'a'..'d'
 assert range_i.size() == 4
@@ -484,15 +484,16 @@ assert range_i.contains('a')
 assert range_i.contains('d')
 assert ! range_i.contains('e')
 println "also Ranges can be used to iterate using the for statement."
-for (i in 1..10) 
+for (K in 1..10) 
 {
-  println "Hello ${i}"
+  println "Hello ${K}"
 }
 println "the same effect, by iterating a range with each method:"
-(1..10).each { i ->
-  println "Hello ${i}"
+(1..10).each { l ->
+  println "Hello ${l}"
 }
 println "Ranges can be also used in the switch statements:"
+def years = 13
 switch (years) {
    case 1..10: interestRate = 0.076; break;
   case 11..25: interestRate = 0.052; break;
