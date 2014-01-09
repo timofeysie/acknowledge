@@ -521,8 +521,45 @@ assert emptyMap.size() == 1
 assert emptyMap.get("foo") == 5
 assert emptyMap.foo == 5
 println ""
+println "29.  the star-dot '*.' operator"
+println "can perform operations on all the members of a collection "
+println "using the '*.' operator"
+assert [1, 3, 5] == ['a', 'few', 'words']*.size()
+println "you can find big words from a list as follows"
+def words = ['ant', 'buffalo', 'cat', 'dinosaur']
+assert words.findAll{ w -> w.size() > 4 } == ['buffalo', 'dinosaur']
+println "Or you can find the first letters of some words as follows:"
+def words = ['ant', 'buffalo', 'cat', 'dinosaur']
+assert words.collect{ it[0] } == ['a', 'b', 'c', 'd']
+println "you have methods like findIndexOf, grep, any, every, min, max, "
+println "flatten, intersect, disjoint, sort, join and others."
 println ""
+println "30. Slicing with the subscript operator"
+println "you can use ranges to extract part of a List/array/String/regex. "
+println "This is often referred to as slicing in scripting languages "
+println "like Python. You can also use a list of indexes too."
+def sub = text[5..10]
+assert sub == 'cheese'
+println " use negative indices to count from the end of the List, array, "
+println "String etc."
+def text = "nice cheese gromit!"
+def x = text[-1]
+assert x == "!"
+def name = text[-7..-2]
+assert name == "gromit"
+println "Also if you use a backwards range (the starting index is greater than the end index) then the answer is reversed."
+def text = "nice cheese gromit!"
+def name = text[3..1]
+assert name == "eci"
 println ""
+println "Dynamic objects (Expandos)"
+println "do not have to have their properties defined in advance."
+def player = new Expando()
+player.name = "Dierk"
+player.greeting = { "Hello, my name is $name" }
+println player.greeting()
+player.name = "Jochen"
+println player.greeting()
 println ""
 println ""
 println ""
