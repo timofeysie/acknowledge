@@ -583,7 +583,7 @@ assert "cheese" == /cheese/   /*they are both string syntaxes*/
 assert ! ("cheese" =~ /ham/)
 println " ==~ tests, if String matches the pattern"
 assert "2009" ==~ /\d+/  // returns TRUE
-assert "holla" ==~ /\d+/ // returns FALSE
+println "How to assert a false? "+ ("holla" ==~ /\d+/ )// returns FALSE
 // lets create a Matcher
 def matcher = "cheesecheese" =~ /cheese/
 assert matcher instanceof Matcher
