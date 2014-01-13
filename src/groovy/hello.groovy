@@ -562,7 +562,7 @@ println player.greeting()
 player.name = "Jochen"
 println player.greeting()
 println ""
-println "32. egular expressions"
+println "32. Regular expressions"
 println "the ~\"pattern\" expression "
 println "creates a compiled Java Pattern object from the given pattern "
 println "string."
@@ -571,17 +571,17 @@ println "and ==~ (returns boolean, whether String matches the pattern) "
 println "operators."
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-// ~ creates a Pattern from String
+println " ~ creates a Pattern from String"
 def pattern = ~/foo/
 assert pattern instanceof Pattern
 assert pattern.matcher("foo").matches()    // returns TRUE
 assert ! pattern.matcher("foobar").matches() // returns FALSE, because matches() must match whole String
-// =~ creates a Matcher, and in a boolean context, it's "true" if it has at least one match, "false" otherwise.
+println " =~ creates a Matcher, and in a boolean context, it's \"true\" if it has at least one match, \"false\" otherwise."
 assert "cheesecheese" =~ "cheese"
 assert "cheesecheese" =~ /cheese/
 assert "cheese" == /cheese/   /*they are both string syntaxes*/
 assert ! ("cheese" =~ /ham/)
-// ==~ tests, if String matches the pattern
+println " ==~ tests, if String matches the pattern"
 assert "2009" ==~ /\d+/  // returns TRUE
 assert "holla" ==~ /\d+/ // returns FALSE
 // lets create a Matcher
