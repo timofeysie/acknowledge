@@ -1,0 +1,71 @@
+To Read:
+Groovy Advances OO
+http://groovy.codehaus.org/Advanced+OO
+http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
+...
+
+Got this error running AllTests:
+Failed to create Script instance for class: MultiplierTest.  Reason: java.lang.InstantiationException:  MultiplierTest.
+But if we run MultiplierTest by itself, there is no output at all.
+
+Questions and Exercises  Nested Classes (The Java™ Tutorials ) Learning the Java Language ) Classes and Objects).htm
+
+Questions and Exercises: Interfaces.  Questions 1:
+What methods would a class that implements the java.lang.CharSequence interface have to implement? 
+Our answers: All.  The Answer lists them.
+
+Java
+
+Regular Expressionses
+
+Instances of the Pattern class are immutable and are safe for use by multiple concurrent threads. Instances of the Matcher class are not safe for such use.
+
+Special non-capturing contructs like (?<=X) mean X, via zero-width positive lookbehind.
+
+Unicode
+
+\p{prop} specifies a unicode block
+\p{InMongolian}  for the Mongolian language.
+
+The supported categories are those of The Unicode Standard in the version specified by the Character class. 
+http://www.unicode.org/unicode/standard/standard.html
+The category names are those defined in the Standard, both normative and informative. The block names supported by Pattern are the valid block names accepted and defined by UnicodeBlock.forName.
+
+
+
+Groovy
+
+Grape (The Groovy Adaptable Packaging Engine or Groovy Advanced Packaging Engine) is the infrastructure enabling the grab() calls in Groovy, a set of classes leveraging Ivy to allow for a repository driven module system for Groovy. This allows a developer to write a script with an essentially arbitrary library requirement, and ship just the script. Grape will, at runtime, download as needed and link the named libraries and all dependencies forming a transitive closure when the script is run from existing repositories such as Ibiblio, Codehaus, and java.net.
+
+Testing
+often Ant / Maven look for *.java files to find unit tests with pattern matching, rather than *.class files.
+
+There's an option in Maven to ensure you search for classes (and so find any Groovy unit test cases) via this property
+
+maven.test.search.classdir = true
+Once you've got this enabled you can use Maven goals to run individual test cases like this
+
+maven test:single -Dtestcase=foo.MyGroovyTest
+
+
+Core Java
+All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extand anything else.
+An interface name can be used anywhere a type can be used.
+
+Questions and Exercises: Inheritance
+1.a and c incorrect.  How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
+http://docs.oracle.com/javase/tutorial/java/IandI/override.html
+
+You can prevent a class or method from being subclassed by using the final keyword.
+
+The byteValue, shortValue, and similar methods of the Number class convert one numeric type to another. The valueOf method converts a string to a number, and the toString method converts a number to a string.
+
+To format a string containing numbers for output, you can use the printf() or format() methods in the PrintStream class. 
+
+What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
+
+What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
+
+
+
+
