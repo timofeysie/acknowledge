@@ -1,0 +1,90 @@
+
+Objects
+Real-world objects contain state and behavior.
+A software object's state is stored in fields.
+A blueprint for a software object is called a class.
+Common behavior can be defined in a superclass and inherited into a subclass using the extends keyword.
+A collection of methods with no implementation is called an interface.
+
+Variables
+class variable = static field.
+instance variable = non-static field.
+A variable declared within the opening and closing parenthesis of a method is called a parameter.
+the eight primitive data types supported by the Java programming language: 
+byte an 8-bit signed two's complement integer. min -128 max 127 (inclusive).
+boolean, 
+char, 
+double, 
+int, 
+long, 
+float, 
+short a 16-bit signed two's complement integer.min -32,768 max 32,767 (inclusive).use a short to save memory in large arrays, in situations where the memory savings actually matters.
+
+int: By default, the int data type is a 32-bit signed two's complement integer, which has a minimum value of -231 and a maximum value of 231-1. In Java SE 8 and later, you can use the int data type to represent an unsigned 32-bit integer, which has a minimum value of 0 and a maximum value of 232-1. Use the Integer class to use int data type as an unsigned integer. See the section The Number Classes for more information. Static methods like compareUnsigned, divideUnsigned etc have been added to the Integer class to support the arithmetic operations for unsigned integers.
+long: The long data type is a 64-bit two's complement integer. The signed long has a minimum value of -263 and a maximum value of 263-1. In Java SE 8 and later, you can use the long data type to represent an unsigned 64-bit long, which has a minimum value of 0 and a maximum value of 264-1. The unsigned long has a minimum value of 0 and maximum value of 264-1. Use this data type when you need a range of values wider than those provided by int. The Long class also contains methods like compareUnsigned, divideUnsigned etc to support arithmetic operations for unsigned long.
+float: The float data type is a single-precision 32-bit IEEE 754 floating point. Its range of values is beyond the scope of this discussion, but is specified in the Floating-Point Types, Formats, and Values section of the Java Language Specification. As with the recommendations for byte and short, use a float (instead of double) if you need to save memory in large arrays of floating point numbers. This data type should never be used for precise values, such as currency. For that, you will need to use the java.math.BigDecimal class instead. Numbers and Strings covers BigDecimal and other useful classes provided by the Java platform.
+double: The double data type is a double-precision 64-bit IEEE 754 floating point. Its range of values is beyond the scope of this discussion, but is specified in the Floating-Point Types, Formats, and Values section of the Java Language Specification. For decimal values, this data type is generally the default choice. As mentioned above, this data type should never be used for precise values, such as currency.
+boolean: The boolean data type has only two possible values: true and false. Use this data type for simple flags that track true/false conditions. This data type represents one bit of information, but its "size" isn't something that's precisely defined.
+char: The char data type is a single 16-bit Unicode character. It has a minimum value of '\u0000' (or 0) and a maximum value of '\uffff' (or 65,535 inclusive).
+
+
+(Static Fields) A class variable is any field declared with the static modifier; this tells the compiler that there is exactly one copy of this variable in existence, regardless of how many times the class has been instantiated. 
+The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
+A type's fields, methods, and nested types are collectively called its members.
+
+Operators
+Consider the following code snippet:
+arrayOfInts[j] > arrayOfInts[j+1]
+Question: What operators does the code contain?
+Answer: >, +
+Consider the following code snippet:
+int i = 10;
+int n = i++%5;
+    Question: What are the values of i and n after the code is executed?
+    Answer: i is 11, and n is 0.
+    Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
+    Answer: i is 11, and n is 1.
+logical complement operator "!".
+result = result - 1; same as result -= 1;
+%       remainder operator
+// result is now 10
+        result = result % 7; // result is now 3
+Same as
+// result is now 10
+        result %= 7; // result is now 3
+// result is now 10
+   result = result + 8;
+        // result is now 3
+        result = result % 7;
+?:      Ternary (shorthand for 
+        if-then-else statement)
+~       Unary bitwise complement
+<<      Signed left shift
+>>      Signed right shift
+>>>     Unsigned right shift
+&       Bitwise AND
+^       Bitwise exclusive OR
+|       Bitwise inclusive OR
+
+Expressions, Statements, and Blocks
+aValue = 8933.234; // assignment statement
+System.out.println("Hello World!"); // method invocation statement
+Operators may be used in building expressions, which compute values.
+Expressions are the core components of statements.
+Statements may be grouped into blocks.
+a compound expression 1 * 2 * 3
+
+Control Flow Statements
+The do-while statement is similar to the while statement, but evaluates its expression at the bottom of the loop.
+for ( ; ; ) {} // an infinite loop using the for statement
+while (true) {} //  an infinite loop using the while statement
+enhanced for statement for iteration through Collections and arrays:
+int[] numbers =   {1,2,3,4,5,6,7,8,9,10};
+for (int item : numbers) 
+{
+             System.out.println("Count is: " + item);
+}
+
+
+http://docs.oracle.com/javase/tutorial/java/javaOO/index.html
+
