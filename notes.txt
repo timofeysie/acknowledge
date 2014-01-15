@@ -1,5 +1,8 @@
 To Read:
-Groovy Advances OO
+
+java -version works but javac is not recognized on the net book.
+
+Groovy Advances 
 http://groovy.codehaus.org/Advanced+OO
 http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 ...
@@ -10,9 +13,6 @@ But if we run MultiplierTest by itself, there is no output at all.
 
 Questions and Exercises  Nested Classes (The Java™ Tutorials ) Learning the Java Language ) Classes and Objects).htm
 
-Questions and Exercises: Interfaces.  Questions 1:
-What methods would a class that implements the java.lang.CharSequence interface have to implement? 
-Our answers: All.  The Answer lists them.
 
 Java
 
@@ -56,6 +56,21 @@ Questions and Exercises: Inheritance
 1.a and c incorrect.  How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
 http://docs.oracle.com/javase/tutorial/java/IandI/override.html
 
+Instance Methods - An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.  The version of the overridden instance method that gets invoked is the one in the subclass.
+
+Static Methods - If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass.
+
+Interface Methods - Default methods and abstract methods in interfaces are inherited like instance methods. However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
+- Instance methods are preferred over interface default methods.
+- •Methods that are already overridden by other candidates are ignored. This circumstance can arise when supertypes share a common ancestor.
+You could invoke any of the of the default implementations with the super keyword.
+You can use the super keyword to invoke a default method in both classes and interfaces.
+Inherited instance methods from classes can override abstract interface methods. 
+
+
+
+
+
 You can prevent a class or method from being subclassed by using the final keyword.
 
 The byteValue, shortValue, and similar methods of the Number class convert one numeric type to another. The valueOf method converts a string to a number, and the toString method converts a number to a string.
@@ -67,5 +82,24 @@ What Integer method would you use to convert a string expressed in base 5 into t
 What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 
 
+Parsing Wikitionary
 
+korean_wiki = http://ko.wiktionary.org/wiki/
+english_wkik = http://en.wiktionary.org/wiki/
+
+Seach wiki for word
+found no.  Page contains: 
+<div id="mw-content-text"><div class="noarticletext">
+mark text as unverified.
+found yes, mark as text verified.
+find word tyoe
+seach for definition.
+found/not found as above
+search for other definitions and create associations/
+
+
+
+Scratch 
+
+Catastrophic Backtracking.
 

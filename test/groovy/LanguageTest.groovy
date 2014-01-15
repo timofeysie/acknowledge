@@ -20,7 +20,7 @@ class LanguageTest
         assert languages['tom'].every{ it.contains("v") }
     }
 
-public static void main(args) 
+    public static void main(args) 
     {
         //TestRunner.run(AllTests.suite())
     }
