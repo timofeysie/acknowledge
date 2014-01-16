@@ -1,5 +1,7 @@
 To Read:
 
+Git problem on wndows.
+
 java -version works but javac is not recognized on the net book.
 
 Groovy Advances 
