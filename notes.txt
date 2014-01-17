@@ -5,6 +5,7 @@ Groovy failure in MultpilierTest
 http://groovy.codehaus.org/Advanced+OO
 http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 ...
+http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
 
 print table from
 C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
