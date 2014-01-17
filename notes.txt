@@ -1,5 +1,6 @@
 To Read:
 
+- need to move package overriding.interface_methods out of generics
 Groovy failure in MultpilierTest
 2 
 http://groovy.codehaus.org/Advanced+OO

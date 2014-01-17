@@ -42,7 +42,18 @@ public class Unboxing
 
 
         Pair<String, Integer> p1 = new OrderedPair<String, Integer>("Even", 8);
+        // Due to autoboxing, is it valid to pass a String and an int to the class.
         Pair<String, String>  p2 = new OrderedPair<String, String>("hello", "world");
+
+        //  Due to The Diamond these statements can be shortened:
+        OrderedPair<String, Integer> p11 = new OrderedPair<>("Even", 8);
+        OrderedPair<String, String>  p22 = new OrderedPair<>("hello", "world");
+
+        // You can also substitute a type parameter (i.e., K or V) with a parameterized type (i.e., List<String>). 
+        // For example, using the OrderedPair<K, V> example:
+        OrderedPair<String, Box<Integer>> p = new OrderedPair<>("primes", new Box<Integer>(...));
+
+
     }
 
     public static int absoluteValue(int i) 
