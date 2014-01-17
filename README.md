@@ -1,8 +1,8 @@
 Acknowledge
 ============
 
-This is a genearl code deposite for the homeless.
-Current code being added is Groovy closure work from the informal guide.
+This is a general code deposite for the homeless.
+Current code being added is Groovy code from the user guide, and Java core review code.
 
 Below is general usage examples for the markdown format:
 

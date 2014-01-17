@@ -9,6 +9,9 @@ http://groovy.codehaus.org/Advanced+OO
 http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 ...
 
+print table from
+C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
+
 Got this error running AllTests:
 Failed to create Script instance for class: MultiplierTest.  Reason: java.lang.InstantiationException:  MultiplierTest.
 But if we run MultiplierTest by itself, there is no output at all.
@@ -17,6 +20,8 @@ Questions and Exercises  Nested Classes (The Java™ Tutorials ) Learning the Ja
 
 
 Java
+
+* overriding.interface)methods contians code that needs Java 8.
 
 Regular Expressionses
 
@@ -62,18 +67,25 @@ Instance Methods - An instance method in a subclass with the same signature over
 
 Static Methods - If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass.
 
-Interface Methods - Default methods and abstract methods in interfaces are inherited like instance methods. However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
+Interface Methods - Default methods and abstract methods in interfaces are inherited like instance methods. 
+** What the hell is a default method?***
+
+However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
 - Instance methods are preferred over interface default methods.
 - •Methods that are already overridden by other candidates are ignored. This circumstance can arise when supertypes share a common ancestor.
 You could invoke any of the of the default implementations with the super keyword.
 You can use the super keyword to invoke a default method in both classes and interfaces.
 Inherited instance methods from classes can override abstract interface methods. 
 
+Modifiers
+The access specifier for an overriding method can allow more, but not less, access than the overridden method. For example, a protected instance method in the superclass can be made public, but not private, in the subclass.
 
-
-
+You will get a compile-time error if you attempt to change an instance method in the superclass to a static method in the subclass, and vice versa.
 
 You can prevent a class or method from being subclassed by using the final keyword.
+
+
+Numbers 
 
 The byteValue, shortValue, and similar methods of the Number class convert one numeric type to another. The valueOf method converts a string to a number, and the toString method converts a number to a string.
 
