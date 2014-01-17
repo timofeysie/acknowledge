@@ -1,10 +1,7 @@
 To Read:
 
-Git problem on wndows.  We have a bug from 1.8.5 version, if you don't want use SSH Key you can downgrade to 1.84 from
-
-java -version works but javac is not recognized on the net book.
-
-Groovy Advances 
+Groovy failure in MultpilierTest
+2 
 http://groovy.codehaus.org/Advanced+OO
 http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 ...
@@ -126,6 +123,26 @@ To format a string containing numbers for output, you can use the printf() or fo
 What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
 
 What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
+
+Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes
+
+List<Integer> li = new ArrayList<>();
+for (int i = 1; i < 50; i += 2)
+    li.add(i);
+
+becomes:
+
+List<Integer> li = new ArrayList<>();
+for (int i = 1; i < 50; i += 2)
+    li.add(Integer.valueOf(i));
+
+autoboxing happens when a primitive value is:
+- Passed as a parameter to a method that expects an object of the corresponding wrapper class.
+- Assigned to a variable of the corresponding wrapper class.
+
+unboxing is Converting an object of a wrapper type (Integer) to its corresponding primitive (int) value. The Java compiler applies unboxing when an object of a wrapper class is:
+- Passed as a parameter to a method that expects a value of the corresponding primitive type.
+- Assigned to a variable of the corresponding primitive type.
 
 
 Parsing Wikitionary
