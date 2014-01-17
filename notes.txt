@@ -56,6 +56,38 @@ maven test:single -Dtestcase=foo.MyGroovyTest
 
 
 Core Java
+
+Nested Classes
+There Static nested classes, but Non-static nested classes are called inner classes.
+A nested class can be declared private, public, protected, or package private. 
+
+class OuterClass {
+    ...
+    static class StaticNestedClass 
+    {
+        // cannot refer directly to instance variables or methods defined in its enclosing class
+        //  just like any other top-level class.
+    }
+
+    // to create an object for the static nested class, use this syntax:
+	OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
+
+    class InnerClass 
+    {
+        //  have access to other members of the enclosing class, even if they are declared private.
+        // cannot define any static members itself.
+    }
+
+    // To instantiate an inner class, you must first instantiate the outer class. 
+    // Then, create the inner object within the outer object with this syntax:
+	OuterClass.InnerClass innerObject = outerObject.new InnerClass();
+
+	// two kinds of inner classes: local classes and anonymous classes.
+}
+
+
+
+Enums
 All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extand anything else.
 An interface name can be used anywhere a type can be used.
 
