@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import static java.lang.Math.*;
+import generics.*;
 
 public class Unboxing 
 {
@@ -38,6 +39,10 @@ public class Unboxing
         System.out.println("Using the static import language feature, you don't have to write Math in front of every math function:");
         int angle = 90;
         System.out.println(cos(angle));
+
+
+        Pair<String, Integer> p1 = new OrderedPair<String, Integer>("Even", 8);
+        Pair<String, String>  p2 = new OrderedPair<String, String>("hello", "world");
     }
 
     public static int absoluteValue(int i) 

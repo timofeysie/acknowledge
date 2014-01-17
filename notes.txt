@@ -42,6 +42,7 @@ Groovy
 
 Grape (The Groovy Adaptable Packaging Engine or Groovy Advanced Packaging Engine) is the infrastructure enabling the grab() calls in Groovy, a set of classes leveraging Ivy to allow for a repository driven module system for Groovy. This allows a developer to write a script with an essentially arbitrary library requirement, and ship just the script. Grape will, at runtime, download as needed and link the named libraries and all dependencies forming a transitive closure when the script is run from existing repositories such as Ibiblio, Codehaus, and java.net.
 
+
 Testing
 often Ant / Maven look for *.java files to find unit tests with pattern matching, rather than *.class files.
 
@@ -112,6 +113,21 @@ autoboxing happens when a primitive value is:
 unboxing is Converting an object of a wrapper type (Integer) to its corresponding primitive (int) value. The Java compiler applies unboxing when an object of a wrapper class is:
 - Passed as a parameter to a method that expects a value of the corresponding primitive type.
 - Assigned to a variable of the corresponding primitive type.
+
+
+Generics
+
+
+a generic type invocation, which replaces T with some concrete value, 
+ such as Integer:
+		Box<Integer> integerBox;	
+Similar to an ordinary method invocation, but instead of passing an argument to a method, you are passing a type argument.
+the T in Foo<T> is a type parameter and the String in Foo<String> f is a type argument.  An invocation of a generic type is generally known as a parameterized type.
+To instantiate this class, use the new keyword, as usual, but place <Integer> between the class name and the parenthesis:
+	Box<Integer> integerBox = new Box<Integer>();
+you can replace the type arguments required to invoke the constructor of a generic class with an empty set of type arguments (<>) as long as the compiler can determine, or infer, the type arguments from the context. This pair of angle brackets, <>, is informally called the diamond. 
+
+Box<Integer> integerBox = new Box<>();
 
 
 Parsing Wikitionary
