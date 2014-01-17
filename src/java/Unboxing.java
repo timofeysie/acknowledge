@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import static java.lang.Math.*;
 
 public class Unboxing 
 {
@@ -31,6 +32,12 @@ public class Unboxing
         // 2. Unboxing through assignment
         double phi = ld.get(0);
         System.out.println("pi is autoboxed through method invocation: " + phi);
+
+        System.out.println("");
+        System.out.println("And now for something completely different,");
+        System.out.println("Using the static import language feature, you don't have to write Math in front of every math function:");
+        int angle = 90;
+        System.out.println(cos(angle));
     }
 
     public static int absoluteValue(int i) 
