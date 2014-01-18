@@ -7,6 +7,7 @@ http://groovy.codehaus.org/Advanced+OO
 http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 ...
 http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
+http://www.tutorialspoint.com/java/
 
 print table from
 C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
@@ -119,6 +120,8 @@ You can prevent a class or method from being subclassed by using the final keywo
 
 Numbers 
 
+Assignment Operators: C /= A is equivalent to C = C / A
+
 The byteValue, shortValue, and similar methods of the Number class convert one numeric type to another. The valueOf method converts a string to a number, and the toString method converts a number to a string.
 
 To format a string containing numbers for output, you can use the printf() or format() methods in the PrintStream class. 
@@ -150,14 +153,17 @@ unboxing is Converting an object of a wrapper type (Integer) to its correspondin
 
 Generics
 
+ * E - Element (used a lot by the Java Collections Framework)
+ * K - Key
+ * N - Number
+ * T - Type
+ * V - Value
 a generic type invocation, which replaces T with some concrete value, 
  such as Integer:
 		Box<Integer> integerBox;	
 Similar to an ordinary method invocation, but instead of passing an argument to a method, you are passing a type argument.
 the T in Foo<T> is a type parameter and the String in Foo<String> f is a type argument.  An invocation of a generic type is generally known as a parameterized type.
 
-
-\
 To instantiate this class, use the new keyword, as usual, but place <Integer> between the class name and the parenthesis:
 	Box<Integer> integerBox = new Box<Integer>();
 you can replace the type arguments required to invoke the constructor of a generic class with an empty set of type arguments (<>) as long as the compiler can determine, or infer, the type arguments from the context. This pair of angle brackets, <>, is informally called the diamond. 

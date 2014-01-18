@@ -10,7 +10,7 @@ packacge generics;
 /**
  * Generic version of the Box class.
  * Type Parameter Naming Conventions
- *  E - Element (used extensively by the Java Collections Framework)
+ * E - Element (used extensively by the Java Collections Framework)
  * K - Key
  * N - Number
  * T - Type
@@ -37,5 +37,12 @@ public class SomeClass()
 		Box<Integer> integerBox;	
 		// similar to an ordinary method invocation, but instead of 
 		// passing an argument to a method, you are passing a type argument
+
+		// will not compile
+		//List<Number> numbers = new ArrayList<Integer>(); 
+		// Generics does not support sub-typing which means 
+		// that List is not considered to be a sub-type of List,
+		// where S is a subtype of T. For example,
+
 	}
 }

@@ -1,11 +1,7 @@
 /**
 * Synonyms for random:
-* adj haphazard, chance
-* accidentalstar
-* indiscriminate
-* desultory
-* promiscuous
-*
+* haphazard, chance accidentalstar
+* indiscriminate desultory promiscuous
 */
 public class Aimless
 {
@@ -61,7 +57,7 @@ public class Aimless
      System.out.println(a+" << 2 = " + c+" signed left shift operator");
      System.out.println(Integer.toBinaryString(a)+" << "+Integer.toBinaryString(2)+" = " + Integer.toBinaryString(c));
      c = a >> 2;     /* 215 = 1111 */
-     System.out.println(a+">> 2  = " + c+" signed right shift");
+     System.out.println(a+" >> 2  = " + c+" signed right shift");
      System.out.println(Integer.toBinaryString(a)+">> "+Integer.toBinaryString(2)+"  = " + Integer.toBinaryString(c));
      c = a >>> 2;     /* 215 = 0000 1111 */
      System.out.println(a+" >>> 2 = " + c+" unsigned right shift operator");
