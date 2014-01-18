@@ -1,3 +1,5 @@
+packacge generics;
+
 public class NaturalNumber<T extends Integer> 
 {
 
@@ -7,7 +9,7 @@ public class NaturalNumber<T extends Integer>
 
     public boolean isEven() 
     {
-    	//invokes the intValue method defined in the Integer class
+    	// invokes the intValue method defined in the Integer class
     	// through n.
         return n.intValue() % 2 == 0; 
     }

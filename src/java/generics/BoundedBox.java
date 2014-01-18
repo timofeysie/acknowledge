@@ -1,3 +1,5 @@
+packacge generics;
+
 public class BoundedBox<T> 
 {
 

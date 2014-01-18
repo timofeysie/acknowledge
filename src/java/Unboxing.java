@@ -36,7 +36,8 @@ public class Unboxing
 
         System.out.println("");
         System.out.println("And now for something completely different,");
-        System.out.println("Using the static import language feature, you don't have to write Math in front of every math function:");
+        System.out.println("Using the static import language feature, ");
+        Ststem.out.println("you don't have to write Math in front of every math function:");
         int angle = 90;
         System.out.println(cos(angle));
 
@@ -49,7 +50,8 @@ public class Unboxing
         OrderedPair<String, Integer> p11 = new OrderedPair<>("Even", 8);
         OrderedPair<String, String>  p22 = new OrderedPair<>("hello", "world");
 
-        // You can also substitute a type parameter (i.e., K or V) with a parameterized type (i.e., List<String>). 
+        // You can also substitute a type parameter (i.e., K or V) with 
+        // a parameterized type (i.e., List<String>). 
         // For example, using the OrderedPair<K, V> example:
         OrderedPair<String, Box<Integer>> p = new OrderedPair<>("primes", new Box<Integer>(...));
 
