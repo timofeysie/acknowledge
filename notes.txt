@@ -9,6 +9,11 @@ http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
 http://www.tutorialspoint.com/java/
 
+agglomeration
+congeries
+convocation
+congeries
+
 print table from
 C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
 
@@ -169,6 +174,19 @@ To instantiate this class, use the new keyword, as usual, but place <Integer> be
 you can replace the type arguments required to invoke the constructor of a generic class with an empty set of type arguments (<>) as long as the compiler can determine, or infer, the type arguments from the context. This pair of angle brackets, <>, is informally called the diamond. 
 
 Box<Integer> integerBox = new Box<>();
+
+PECS stands for producer extends, consumer super.
+boolean addAll(Collection<? extends E> c)
+This ? extends E makes sure that you can not only add collection of type E but also of subtype of E.  
+List<Number> numbers = new ArrayList<Number>();
+ArrayList<Integer> integers = new ArrayList<Integer>();
+ArrayList<Long> longs = new ArrayList<Long>();
+ArrayList<Float> floats = new ArrayList<Float>();
+numbers.addAll(integers);
+numbers.addAll(longs);
+numbers.addAll(floats);
+public static <T> boolean addAll(Collection<? super T> c, T... elements) ;
+In this method you are adding elements of type T to the collection c. super is used instead of extends because elements are added into the collection c whereas in the previous example of Collection interface addAll method elements were read from the collection . 
 
 
 
