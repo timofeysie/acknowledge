@@ -1,4 +1,4 @@
-packacge generics;
+package generics;
 
 /**
 *A user tormetnts programs to make them stringer.

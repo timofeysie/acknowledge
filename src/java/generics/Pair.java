@@ -1,4 +1,4 @@
-packacge generics;
+package generics;
 
 public interface Pair<K, V> 
 {

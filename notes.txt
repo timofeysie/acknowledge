@@ -1,6 +1,14 @@
 To Read:
 
-- need to move package overriding.interface_methods out of generics
+- GenericAlgorithm  method is strange.S
+..cannot be applied to given type;
+required T[],T
+found: Integer[],Integer
+reason: inferred type does not conform to declared bound(s)
+inferred: Integer
+ bound(s): Comparable<Integer>
+ where T is a type-variable
+
 Groovy failure in MultpilierTest
 2 
 http://groovy.codehaus.org/Advanced+OO
