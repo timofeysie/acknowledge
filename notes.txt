@@ -1,5 +1,6 @@
 To Read:
 
+- @SuppressWarnings("unchecked")
 - GenericAlgorithm  method is strange.S
 ..cannot be applied to given type;
 required T[],T
@@ -8,6 +9,7 @@ reason: inferred type does not conform to declared bound(s)
 inferred: Integer
  bound(s): Comparable<Integer>
  where T is a type-variable
+http://docs.oracle.com/javase/tutorial/java/generics/methods.html
 
 Groovy failure in MultpilierTest
 2 
@@ -162,40 +164,6 @@ autoboxing happens when a primitive value is:
 unboxing is Converting an object of a wrapper type (Integer) to its corresponding primitive (int) value. The Java compiler applies unboxing when an object of a wrapper class is:
 - Passed as a parameter to a method that expects a value of the corresponding primitive type.
 - Assigned to a variable of the corresponding primitive type.
-
-
-Generics
-
- * E - Element (used a lot by the Java Collections Framework)
- * K - Key
- * N - Number
- * T - Type
- * V - Value
-a generic type invocation, which replaces T with some concrete value, 
- such as Integer:
-		Box<Integer> integerBox;	
-Similar to an ordinary method invocation, but instead of passing an argument to a method, you are passing a type argument.
-the T in Foo<T> is a type parameter and the String in Foo<String> f is a type argument.  An invocation of a generic type is generally known as a parameterized type.
-
-To instantiate this class, use the new keyword, as usual, but place <Integer> between the class name and the parenthesis:
-	Box<Integer> integerBox = new Box<Integer>();
-you can replace the type arguments required to invoke the constructor of a generic class with an empty set of type arguments (<>) as long as the compiler can determine, or infer, the type arguments from the context. This pair of angle brackets, <>, is informally called the diamond. 
-
-Box<Integer> integerBox = new Box<>();
-
-PECS stands for producer extends, consumer super.
-boolean addAll(Collection<? extends E> c)
-This ? extends E makes sure that you can not only add collection of type E but also of subtype of E.  
-List<Number> numbers = new ArrayList<Number>();
-ArrayList<Integer> integers = new ArrayList<Integer>();
-ArrayList<Long> longs = new ArrayList<Long>();
-ArrayList<Float> floats = new ArrayList<Float>();
-numbers.addAll(integers);
-numbers.addAll(longs);
-numbers.addAll(floats);
-public static <T> boolean addAll(Collection<? super T> c, T... elements) ;
-In this method you are adding elements of type T to the collection c. super is used instead of extends because elements are added into the collection c whereas in the previous example of Collection interface addAll method elements were read from the collection . 
-
 
 
 Parsing Wikitionary
