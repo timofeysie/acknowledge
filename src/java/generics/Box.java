@@ -1,12 +1,12 @@
-package generics;
-
+//package generics;
+/*
 {
     private Object object;
 
     public void set(Object object) { this.object = object; }
     public Object get() { return object; }
 }
-
+*/
 /**
  * Generic version of the Box class.
  * Type Parameter Naming Conventions
@@ -26,7 +26,7 @@ public class Box<T>
     public void set(T t) { this.t = t; }
     public T get() { return t; }
 }
-
+/*
 public class SomeClass()
 {
 
@@ -46,3 +46,4 @@ public class SomeClass()
 
 	}
 }
+*/

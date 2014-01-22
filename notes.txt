@@ -1,6 +1,7 @@
 To Read:
 
-- @SuppressWarnings("unchecked")
+- ho does BoxDemo use the ArrayList when it is not returned after being op0erated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?
+- @SuppressWarnings("unchecked") add to catechis
 - GenericAlgorithm  method is strange.S
 ..cannot be applied to given type;
 required T[],T
