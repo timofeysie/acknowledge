@@ -1,4 +1,4 @@
-Generics
+# Generics #
 - For generics to work, you need to supply objects, not primitives.
 - type parameters (also called type variables)
  * E - Element (used a lot by the Java Collections Framework)
@@ -54,4 +54,18 @@ BoxDemo.<Integer>addBox(Integer.valueOf(10), listOfIntegerBoxes);
 ...
 	List<String> listOne = Collections.emptyList();
 - This statement is expecting an instance of List<String>; this data type is the target type. 
+- Alternatively, you could use a type witness and specify the value of T as follows:
+	List<String> listOne = Collections.<String>emptyList();
+
+# Upper Bounded Wildcards #
+	List<Number> 
+is more restrictive than 
+	List<? extends Number> 
+because the former matches a list of type Number only, whereas the latter matches a list of type Number or any of its subclasses.
+- The following matches Foo and any subtype of Foo. The process method can access the list elements as type Foo:
+public static void process(List<? extends Foo> list) { /* ... */ }
+public static void process(List<? extends Foo> list) {
+    for (Foo elem : list) { /* ... */ }
+}
+
 
