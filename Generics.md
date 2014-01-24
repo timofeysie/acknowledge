@@ -68,4 +68,15 @@ public static void process(List<? extends Foo> list) {
     for (Foo elem : list) { /* ... */ }
 }
 
+	public void boxTest(Box<Number> n) { /* ... */ }
+- you ARE NOT allowed to pass in Box<Integer> or Box<Double>!
+- Box<Integer> is not a subtype of Box<Number> even though Integer is a subtype of Number. 
+- generic classes or interfaces are not related merely because there is a relationship between their types. 
+- However, you can use wildcards to create a relationship between generic classes or interfaces.
+- The common parent of List<Number> and List<Integer> is List<?>
+
+- wildcard capture. When the compiler infers the type of a wildcard. (and when you see an error message that contains the phrase "capture of", the compiler believes that you are assigning the wrong type to a variable)
+
+
+
 
