@@ -33,6 +33,18 @@ public class Aimless
         
         Aimless desultory = new Aimless();
         desultory.bitwise();
+
+        int i = 10;
+        int n = i++%5;
+        System.out.println(i+"++%5 = "+n);
+
+        i = 10;
+        n = i%5;
+        System.out.println(i+"%5 = "+n);
+
+        i = 5;
+        n = i%10;
+        System.out.println(i+"%10 = "+n);
     }
 
     private void bitwise()

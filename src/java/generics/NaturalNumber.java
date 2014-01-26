@@ -1,4 +1,4 @@
-packacge generics;
+package generics;
 
 public class NaturalNumber<T extends Integer> 
 {
