@@ -76,7 +76,7 @@ maven test:single -Dtestcase=foo.MyGroovyTest
 Core Java
 
 Nested Classes
-There Static nested classes, but Non-static nested classes are called inner classes.
+There are Static nested classes, but Non-static nested classes are called inner classes.
 A nested class can be declared private, public, protected, or package private. 
 
 class OuterClass {
