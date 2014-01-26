@@ -7,7 +7,7 @@ import java.util.List;
 * While List<Integer> and List<Double> both fulfill the criteria 
 * of List<? extends Number>, it is clearly incorrect to take an 
 * item from a list of Integer values and attempt to place it into
-* a list of Double values.
+*  a list of Double values.
 *
 */
 public class WildcardErrorBad 

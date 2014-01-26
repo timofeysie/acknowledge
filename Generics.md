@@ -77,6 +77,6 @@ public static void process(List<? extends Foo> list) {
 
 - wildcard capture. When the compiler infers the type of a wildcard. (and when you see an error message that contains the phrase "capture of", the compiler believes that you are assigning the wrong type to a variable)
 
-
+- Type erasure ensures that no new classes are created for parameterized types; consequently, generics incur no runtime overhead.
 
 
