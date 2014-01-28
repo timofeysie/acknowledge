@@ -1,7 +1,6 @@
-To Read:
+To Do:
 
--passwords are the new phone numbers.
-- ho does BoxDemo use the ArrayList when it is not returned after being op0erated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?
+- how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?
 - @SuppressWarnings("unchecked") add to catechis
 - GenericAlgorithm  method is strange.S
 ..cannot be applied to given type;
@@ -72,8 +71,13 @@ Once you've got this enabled you can use Maven goals to run individual test case
 
 maven test:single -Dtestcase=foo.MyGroovyTest
 
-
 Core Java
+
+- Enhancements in Java 5: Generics, Enhanced for loop, Auto(un)boxing, Typesafe Enums, Varargs, Annotations
+- Enhancements in Java 6: Collections framework, Webstart, Drag and drop, Instrumentation, i18n, I/O support, jar files, JDBC4
+- Constant Interface Antipattern: putting static memebers into an interface and inherting that to leave of the class name of static methos.  So we have the static import.
+- varags are the elipses (...) part indicates that an array or a sequence of arguments may be used in its place.  It must be in the final argument position or a method signature.
+- for each in example.  (Vector v) for (String s:v) {print(s);}
 
 Nested Classes
 There are Static nested classes, but Non-static nested classes are called inner classes.
@@ -182,6 +186,28 @@ find word tyoe
 seach for definition.
 found/not found as above
 search for other definitions and create associations/
+
+
+
+xAPI Notes
+
+Activity: An Activity is a type of Object making up the “this” in I did “this”; it is something with which an Actor interacted. It can be a unit of instruction
+THe first output from our TinCanJava test:
+
+"object": {"id": "http://en.wiktionary.org/wiki/cat","objectType": "Activity","definition": {"name": {"ko-KR": "고양이"},"description": "Reading","type": "http://ko.wiktionary.org/wiki/고양이"}}
+---
+Statement(
+    id=a5e60983-8a08-4d8e-98d1-bae66946eb2b, 
+    stored=2014-01-26T18:05:38.343+09:00, 
+    authority=Agent(
+        objectType=Agent, 
+        name=TestName, 
+        mbox=timofeyc@test.com, 
+        mboxSHA1Sum=null, 
+        openID=null, 
+        account=null), 
+    version=null, 
+    voided=null)
 
 
 
