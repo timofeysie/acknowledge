@@ -30,6 +30,18 @@ public class BoxDemo
     BoxDemo.addBox(Integer.valueOf(20), listOfIntegerBoxes);
     BoxDemo.addBox(Integer.valueOf(30), listOfIntegerBoxes);
     BoxDemo.outputBoxes(listOfIntegerBoxes);
+
+    List<String> live = new ArrayList<String>();
+    liveTest(live, "one");
+    liveTest(live, "two");
+    liveTest(live, "three");
+    for (String s:live)
+      System.out.println(s);
+  }
+
+  public static void liveTest(List al, String item)
+  {
+      al.add(item);
   }
 
 }

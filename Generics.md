@@ -97,3 +97,12 @@ Generate bridge methods to preserve polymorphism in extended generic types
 - Heap pollution occurs when a variable of a parameterized type refers to an object that is not of that parameterized type and gives an unchecked warning at compile-time.
 - If you ensure that your code compiles without warnings, then no heap pollution can occur.
 - Generic methods that include vararg input parameters can cause heap pollution.
+- Prevent Warnings from Varargs Methods with Non-Reifiable Formal Parameters, if you declare a varargs method that has parameters of a parameterized type, and you ensure that the body of the method does not throw a ClassCastException or other similar exception due to improper handling of the varargs formal parameter by adding the following annotation to static and non-constructor method declarations: @SafeVarargs
+
+Restrictions on Generics
+- Cannot Instantiate Generic Types with Primitive Types
+	Pair<int, char> p = new Pair<>(8, 'a');  // compile-time error
+	Pair<Integer, Character> p = new Pair<>(8, 'a'); // autoboxes 8 to Integer.valueOf(8) and 'a' to  new Character('a'):
+
+
+

@@ -1,6 +1,11 @@
 To Do:
 
-- how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?
+- make the Iteraction class use the for each in loop:
+for (String s: length)
+        int count = 0;
+        for (int i = 0; i < input.length( ); i++) 
+- add  @SuppressWarnings to ForEach class made today
+- how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?  Indeed it does change without being a member variable.
 - @SuppressWarnings("unchecked") add to catechis
 - GenericAlgorithm  method is strange.S
 ..cannot be applied to given type;
@@ -76,7 +81,8 @@ Core Java
 - Enhancements in Java 5: Generics, Enhanced for loop, Auto(un)boxing, Typesafe Enums, Varargs, Annotations
 - Enhancements in Java 6: Collections framework, Webstart, Drag and drop, Instrumentation, i18n, I/O support, jar files, JDBC4
 - Constant Interface Antipattern: putting static memebers into an interface and inherting that to leave of the class name of static methos.  So we have the static import.
-- varags are the elipses (...) part indicates that an array or a sequence of arguments may be used in its place.  It must be in the final argument position or a method signature.
+- varags (varibale arguments) are the elipses (...) part indicates that an array or a sequence of arguments may be used in its place.  It must be in the final argument position or a method signature.
+- the compiler translates the varargs formal parameter into an array. 
 - for each in example.  (Vector v) for (String s:v) {print(s);}
 
 Nested Classes
