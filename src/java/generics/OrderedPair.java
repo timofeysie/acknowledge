@@ -1,4 +1,4 @@
-packacge generics;
+package generics;
 
 /**
 *A user tormetnts programs to make them stringer.
@@ -18,6 +18,16 @@ public class OrderedPair<K, V> implements Pair<K, V>
     }
 
     public K getKey()	{ return key; }
+    public void setKey(K _key)	{ this.key = _key; }
     public V getValue() { return value; }
+    public void setValue(V _value)	{ this.key = _value; }
+
+    public static void main(String[] args) 
+    {
+    	OrderedPair <String,String>op = new OrderedPair<String,String>();
+    	op.setKey("key1");
+    	op.setValue("val1");
+    	System.out.println(op.getKey()+" "+op.getValue());
+    }
 
 }
