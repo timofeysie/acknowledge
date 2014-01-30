@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 To Do:
 
 - make the Iteraction class use the for each in loop:

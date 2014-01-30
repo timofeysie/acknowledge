@@ -9,6 +9,8 @@ public class Iteration
         }
  
         // for (String s: length)
+        // (Vector v) for (String s:v) {print(s);}
+        // cant work in this case.
         int count = 0;
         for (int i = 0; i < input.length( ); i++) 
 	    {

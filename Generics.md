@@ -10,6 +10,7 @@
 - a generic type invocation, which replaces T with some concrete value, 
  such as Integer:
 		Box<Integer> integerBox;	
+- this invocation CANNOT BE STATIC because a class's static field is a class-level variable shared by all non-static objects of the class.
 Similar to an ordinary method invocation, but instead of passing an argument to a method, you are passing a type argument.
 - the T in Foo<T> is a type parameter
 - the String in Foo<String> f is a type argument.  
@@ -103,6 +104,12 @@ Restrictions on Generics
 - Cannot Instantiate Generic Types with Primitive Types
 	Pair<int, char> p = new Pair<>(8, 'a');  // compile-time error
 	Pair<Integer, Character> p = new Pair<>(8, 'a'); // autoboxes 8 to Integer.valueOf(8) and 'a' to  new Character('a'):
-
+- Cannot Create Instances of Type Parameters: There is a workaround however using reflection.  See BoxDemo.java
+- The runtime does not keep track of type parameters, so it cannot tell the difference between an ArrayList<Integer> and an ArrayList<String>., so you Cannot Use Casts or instanceof with Parameterized Types.
+- You cannot create arrays of parameterized types. If arrays of parameterized lists were allowed, the previous code would fail to throw the desired ArrayStoreException.
+- Cannot Create, Catch, or Throw Objects of Parameterized Types.  You can, however, use a type parameter in a throws clause:
+class Parser<T extends Exception> { 
+	public void parse(File file) throws T { /* OK */ } }
+- Cannot Overload a Method Where the Formal Parameter Types of Each Overload Erase to the Same Raw Type.  A class cannot have two overloaded methods that will have the same signature after type erasure.
 
 
