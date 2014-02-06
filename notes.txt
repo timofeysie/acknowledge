@@ -1,13 +1,11 @@
 To Do:
 
-- make the Iteraction class use the for each in loop:
-for (String s: length)
-        int count = 0;
-        for (int i = 0; i < input.length( ); i++) 
+- Clojure is designed around a few core engineering principles, such as Software Transactional Memory
+-  imperative language
 - add  @SuppressWarnings to ForEach class made today
 - how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?  Indeed it does change without being a member variable.
 - @SuppressWarnings("unchecked") add to catechis
-- GenericAlgorithm  method is strange.S
+- GenericAlgorithm
 ..cannot be applied to given type;
 required T[],T
 found: Integer[],Integer
@@ -16,8 +14,7 @@ inferred: Integer
  bound(s): Comparable<Integer>
  where T is a type-variable
 http://docs.oracle.com/javase/tutorial/java/generics/methods.html
-
-Groovy failure in MultpilierTest
+- Groovy failure in MultpilierTest
 2 
 http://groovy.codehaus.org/Advanced+OO
 http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
@@ -25,10 +22,6 @@ http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
 http://www.tutorialspoint.com/java/
 
-agglomeration
-congeries
-convocation
-congeries
 
 print table from
 C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
@@ -36,8 +29,6 @@ C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overr
 Got this error running AllTests:
 Failed to create Script instance for class: MultiplierTest.  Reason: java.lang.InstantiationException:  MultiplierTest.
 But if we run MultiplierTest by itself, there is no output at all.
-
-Questions and Exercises  Nested Classes (The Java™ Tutorials ) Learning the Java Language ) Classes and Objects).htm
 
 
 Java

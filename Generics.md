@@ -58,6 +58,15 @@ BoxDemo.<Integer>addBox(Integer.valueOf(10), listOfIntegerBoxes);
 - Alternatively, you could use a type witness and specify the value of T as follows:
 	List<String> listOne = Collections.<String>emptyList();
 
+Multiple Bounds
+	Class A { /* ... */ }
+	interface B { /* ... */ }
+	interface C { /* ... */ }
+	class D <T extends A & B & C> { /* ... */ }
+- If one of the bounds is a class, it must be specified first.
+	class D <T extends B & A & C> { /* ... */ }  // compile-time error
+
+
 # Upper Bounded Wildcards #
 	List<Number> 
 is more restrictive than 
