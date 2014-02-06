@@ -1,8 +1,11 @@
-﻿To Read:
+To Do:
 
-- ho does BoxDemo use the ArrayList when it is not returned after being op0erated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?
+- Clojure is designed around a few core engineering principles, such as Software Transactional Memory
+-  imperative language
+- add  @SuppressWarnings to ForEach class made today
+- how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?  Indeed it does change without being a member variable.
 - @SuppressWarnings("unchecked") add to catechis
-- GenericAlgorithm  method is strange.S
+- GenericAlgorithm
 ..cannot be applied to given type;
 required T[],T
 found: Integer[],Integer
@@ -11,8 +14,7 @@ inferred: Integer
  bound(s): Comparable<Integer>
  where T is a type-variable
 http://docs.oracle.com/javase/tutorial/java/generics/methods.html
-
-Groovy failure in MultpilierTest
+- Groovy failure in MultpilierTest
 2 
 http://groovy.codehaus.org/Advanced+OO
 http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
@@ -20,10 +22,6 @@ http://groovy.codehaus.org/Groovy+way+to+implement+interfaces
 http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
 http://www.tutorialspoint.com/java/
 
-agglomeration
-congeries
-convocation
-congeries
 
 print table from
 C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
@@ -31,8 +29,6 @@ C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overr
 Got this error running AllTests:
 Failed to create Script instance for class: MultiplierTest.  Reason: java.lang.InstantiationException:  MultiplierTest.
 But if we run MultiplierTest by itself, there is no output at all.
-
-Questions and Exercises  Nested Classes (The Java™ Tutorials ) Learning the Java Language ) Classes and Objects).htm
 
 
 Java
@@ -71,8 +67,14 @@ Once you've got this enabled you can use Maven goals to run individual test case
 
 maven test:single -Dtestcase=foo.MyGroovyTest
 
-
 Core Java
+
+- Enhancements in Java 5: Generics, Enhanced for loop, Auto(un)boxing, Typesafe Enums, Varargs, Annotations
+- Enhancements in Java 6: Collections framework, Webstart, Drag and drop, Instrumentation, i18n, I/O support, jar files, JDBC4
+- Constant Interface Antipattern: putting static memebers into an interface and inherting that to leave of the class name of static methos.  So we have the static import.
+- varags (varibale arguments) are the elipses (...) part indicates that an array or a sequence of arguments may be used in its place.  It must be in the final argument position or a method signature.
+- the compiler translates the varargs formal parameter into an array. 
+- for each in example.  (Vector v) for (String s:v) {print(s);}
 
 Nested Classes
 There are Static nested classes, but Non-static nested classes are called inner classes.
@@ -167,6 +169,70 @@ unboxing is Converting an object of a wrapper type (Integer) to its correspondin
 - Assigned to a variable of the corresponding primitive type.
 
 
+Packages
+- package private are All the top-level, non-public types in the same file as a pulic class.
+- Importing java.awt.* imports all of the types in the java.awt package, but it does not import java.awt.color, java.awt.font, etc...  To import more, do this:
+    import java.awt.*;
+    import java.awt.color.*;
+
+Numbers
+
+- Signed numbers are positive to negative numbers where 0 is the middle.  For 8-bit numbers, unsigned values range from 0 to 255.  For signed two's-complement integers, the values range from -128 to 127.  The last bit is used as the +/- sign, and this makes arithmatics faster on computers.
+
+byte: 8-bit signed two's complement integer. -128 to 127 (inclusive). useful for saving memory in large arrays: a variable's range can serve as a form of documentation.
+
+short: 16-bit signed two's complement integer. -32,768 to 32,767 (inclusive). Same notes as byte
+
+int: 32-bit signed two's complement integer, -2 to the power of 31 to 2 to the power of 31 - 1. In Java SE 8 and later, you can use the int data type to represent an unsigned 32-bit integer, which has a minimum value of 0 and a maximum value of 232-1. Use the Integer class to use int data type as an unsigned integer. See the section The Number Classes for more information. Static methods like compareUnsigned, divideUnsigned etc have been added to the Integer class to support the arithmetic operations for unsigned integers.
+
+long: The long data type is a 64-bit two's complement integer. The signed long has a minimum value of -2 to the power of 63 and a maximum value of 2 to the power of 63-1. In Java SE 8 and later, you can use the long data type to represent an unsigned 64-bit long, which has a minimum value of 0 and a maximum value of 264-1. The unsigned long has a minimum value of 0 and maximum value of 2 to the power of 64-1. Also has compareUnsigned, divideUnsigned.
+
+float: The float data type is a single-precision 32-bit IEEE 754 floating point. Its range of values is beyond the scope of this discussion, but is specified in the Floating-Point Types, Formats, and Values section of the Java Language Specification. As with the recommendations for byte and short, use a float (instead of double) if you need to save memory in large arrays of floating point numbers. This data type should never be used for precise values, such as currency. For that, you will need to use the java.math.BigDecimal class instead. Numbers and Strings covers BigDecimal and other useful classes provided by the Java platform.
+
+double: The double data type is a double-precision 64-bit IEEE 754 floating point. Its range of values is beyond the scope of this discussion, but is specified in the Floating-Point Types, Formats, and Values section of the Java Language Specification. For decimal values, this data type is generally the default choice. As mentioned above, this data type should never be used for precise values, such as currency.
+
+- Single-precision floating-point format is a computer number format that occupies 4 bytes (32 bits, and  double is 64 bits.  The first bit is the signed bit, the next 8 bits are exponent value, the remaining 23 bits are the fraction. (IEEE 754 standard)
+
+boolean: true and false. represents one bit of information, but its "size" isn't something that's precisely defined.
+
+char: single 16-bit Unicode character. min '\u0000' (or 0) max'\uffff' (65,535 inclusive).
+
+- String objects are immutable, which means that once created, their values cannot be changed.
+    int hexVal = 0x1a; //  The number 26, in hexadecimal
+    int binVal = 0b11010; // The number 26, in binary
+    double d1 = 123.4;
+    // same value as d1, but in scientific notation
+    double d2 = 1.234e2;
+    float f1  = 123.4f;
+
+- "Unicode escape" such as '\u0108' (capital C with circumflex), or "S\u00ED Se\u00F1or" (Sí Señor in Spanish). Always use 'single quotes' for char literals and "double quotes" for String literals. Unicode escape sequences may be used elsewhere in a program (such as in field names
+
+ - special escape sequences for char and String literals: \b (backspace), \t (tab), \n (line feed), \f (form feed), \r (carriage return), \" (double quote), \' (single quote), and \\ (backslash).
+
+- null may be assigned to any variable, except variables of primitive types
+
+- class literal, formed by taking a type name and appending ".class"; for example, String.class. This refers to the object (of type Class) that represents the type itself.
+
+-  an underscore character to separate digits in groups of three, similar to how you would use a punctuation mark like a comma, or a space, as a separator.
+
+The following example shows other ways you can use the underscore in numeric literals:
+
+long creditCardNumber = 1234_5678_9012_3456L;
+float pi =  3.14_15F;
+long hexBytes = 0xFF_EC_DE_5E;
+long hexWords = 0xCAFE_BABE;
+long maxLong = 0x7fff_ffff_ffff_ffffL;
+byte nybbles = 0b0010_0101;
+long bytes = 0b11010010_01101001_10010100_10010010;
+
+- you cannot place underscores in the following places:
+
+At the beginning or end of a number
+Adjacent to a decimal point in a floating point literal
+Prior to an F or L suffix
+In positions where a string of digits is expected
+
+
 Parsing Wikitionary
 
 korean_wiki = http://ko.wiktionary.org/wiki/
@@ -181,6 +247,28 @@ find word tyoe
 seach for definition.
 found/not found as above
 search for other definitions and create associations/
+
+
+
+xAPI Notes
+
+Activity: An Activity is a type of Object making up the “this” in I did “this”; it is something with which an Actor interacted. It can be a unit of instruction
+THe first output from our TinCanJava test:
+
+"object": {"id": "http://en.wiktionary.org/wiki/cat","objectType": "Activity","definition": {"name": {"ko-KR": "고양이"},"description": "Reading","type": "http://ko.wiktionary.org/wiki/고양이"}}
+---
+Statement(
+    id=a5e60983-8a08-4d8e-98d1-bae66946eb2b, 
+    stored=2014-01-26T18:05:38.343+09:00, 
+    authority=Agent(
+        objectType=Agent, 
+        name=TestName, 
+        mbox=timofeyc@test.com, 
+        mboxSHA1Sum=null, 
+        openID=null, 
+        account=null), 
+    version=null, 
+    voided=null)
 
 
 

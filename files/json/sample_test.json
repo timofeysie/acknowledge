@@ -3,31 +3,31 @@
 	{
         	"objectType": "Agent", 
         	"mbox":"timofeyc@example.com" 
-    	},
-    	"verb" : 
+    },
+    "verb" : 
 	{ 
         	"id":"http://adlnet.gov/expapi/verbs/passed", 
         	"display":{"en-US":"passed"} 
-    	},
+    },
 	"object": 
 	{
-        	"id": "http://en.wiktionary.org/wiki/cat",
-        	"definition": 
+        "id": "http://en.wiktionary.org/wiki/cat",
+        "definition": 
 		{
-        		"description": {"en-US": "cat" },
-        		"object": 
+        	"description": {"en-US": "cat" },
+        	"object": 
 			{
-	        		"objectType": "SubStatement",
-        			"object": 
+	        	"objectType": "SubStatement",
+        		"object": 
 				{
-            				"id":"http://ko.wiktionary.org/wiki/고양이",
-            				"definition": 
-            				{
-            					"name" : {"ko-KR": "고양이"}
+            		"id":"http://ko.wiktionary.org/wiki/고양이",
+            		"definition": 
+            		{
+            			"name" : {"ko-KR": "고양이"}
 					}
-        			}
-    			}
-    		}		
+        		}
+    		}
+    	}		
 	},
 	"context": 
 	{
@@ -35,7 +35,7 @@
 		"platform" : "android"
 		"extensions": 
 		{
-        		"http://www.curchod.com/testing_type": {"type": "READING"}
-        	}
+        	"http://www.curchod.com/testing_type": {"type": "READING"}
+        }
 	}
 }

@@ -15,4 +15,12 @@ public class NaturalNumber<T extends Integer>
     }
 
     // ...
+
+    public static void main(String[] args) 
+    {
+    	NaturalNumber <Integer>nn1 = new NaturalNumber<>(6);
+    	NaturalNumber <Integer>nn2 = new NaturalNumber<>(7);
+    	System.out.println("6 is natural? "+nn1.isEven());	
+    	System.out.println("7 is natural? "+nn2.isEven());	
+    }
 }
