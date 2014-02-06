@@ -10,10 +10,10 @@ Generics
 - a generic type invocation, which replaces T with some concrete value, 
  such as Integer:
 		Box<Integer> integerBox;	
-Similar to an ordinary method invocation, but instead of passing an argument to a method, you are passing a type argument.
+- Similar to an ordinary method invocation, but instead of passing an argument to a method, you are passing a type argument.
 - the T in Foo<T> is a type parameter
 - the String in Foo<String> f is a type argument.  
-- An invocation of a generic type is generally known as a parameterized type.
+- parameterized type = invocation of a generic type.
 - To instantiate this class, use the new keyword, as usual, but place <Integer> between the class name and the parenthesis:
 	Box<Integer> integerBox = new Box<Integer>();
 - you can replace the type arguments required to invoke the constructor of a generic class with an empty set of type arguments (<>) as long as the compiler can determine, or infer, the type arguments from the context. This pair of angle brackets, <>, is informally called the diamond. 
