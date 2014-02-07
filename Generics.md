@@ -121,4 +121,13 @@ class Parser<T extends Exception> {
 	public void parse(File file) throws T { /* OK */ } }
 - Cannot Overload a Method Where the Formal Parameter Types of Each Overload Erase to the Same Raw Type.  A class cannot have two overloaded methods that will have the same signature after type erasure.
 
+FAQ
+- A generic anonymous class would be nonsensical.  Anonymous classes do not have a name, but the name of a generic class is needed for declaring an instantiation of the class and providing the type arguments.
+- exception handling mechanism is a runtime mechanism and the Java virtual machine does not know anything about Java generics.
+-  instantiations of a generic type share the same runtime type Because of type erasure.
+	runtime type of ArrayList<String> : class java.util. ArrayList 
+    runtime type of ArrayList<Long>   : class java.util. ArrayList
+- upcasts, from a subtype up to a supertype, such as the casts from String to Object or from LinkedList<String> to List<String>  They are automatic conversions that the compiler performs implicitly, even without an explicit cast expression in the source code. if an upcast appears somewhere in the source code then it is a purely static (compile time) cast that does not have a dynamic (runtime - potentially unsafe) part.
+-  we do not expect ClassCastException s when we extract an element from a list of strings.  This type of dynamic (implicit?) cast is considered a violation of the type-safety principle. the compiler emits "unchecked" warnings for every dynamic cast whose target type is a parameterized type.  Note that an upcast whose target type is a parameterized type does not lead to an "unchecked" warning, because the upcast has no dynamic part.
 
+ 
