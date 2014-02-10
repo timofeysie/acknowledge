@@ -12,6 +12,7 @@
 		Box<Integer> integerBox;	
 - this invocation CANNOT BE STATIC because a class's static field is a class-level variable shared by all non-static objects of the class.
 Similar to an ordinary method invocation, but instead of passing an argument to a method, you are passing a type argument.
+- methods parameterized by type are called polymorphic methods.
 - the T in Foo<T> is a type parameter
 - the String in Foo<String> f is a type argument.  
 - parameterized type = invocation of a generic type.
@@ -56,7 +57,8 @@ BoxDemo.<Integer>addBox(Integer.valueOf(10), listOfIntegerBoxes);
 	List<String> listOne = Collections.emptyList();
 - This statement is expecting an instance of List<String>; this data type is the target type. 
 - Alternatively, you could use a type witness and specify the value of T as follows:
-	List<String> listOne = Collections.<String>emptyList();
+	List<String> listOne = Collections.<String>emptyList()
+	- ;
 
 Multiple Bounds
 	Class A { /* ... */ }
@@ -65,6 +67,37 @@ Multiple Bounds
 	class D <T extends A & B & C> { /* ... */ }
 - If one of the bounds is a class, it must be specified first.
 	class D <T extends B & A & C> { /* ... */ }  // compile-time error
+
+
+# Wildcards #
+- A wildcard parameterized type denotes a family of types comprising concrete instantiations of a generic type.  
+- The kind of the wildcard being used determines which concrete parameterized types belong to the family. 
+- A wildcard parameterized type is not a concrete type that could appear in a new expression.  A wildcard parameterized type is similar to an interface type in the sense that reference variables of a wildcard parameterized type can be declared, but no objects of the wildcard parameterized type can be created. 
+	Collection<?> coll = new ArrayList<String>(); 
+- unbounded wildcard parameterized types are An instantiation of a generic type where all type arguments are the unbounded wildcard
+	Pair<?,?> and Map<?,?>
+- Assignment of another instantiation to the unbounded wildcard instantiation is permitted without warnings; assignment of the unbounded wildcard instantiation to another instantiation is illegal. 
+	ArrayList <?> anyList = new ArrayList<Long>();  
+	ArrayList<String> stringList = new ArrayList<String>(); 
+	anyList    = stringList; 
+	stringList = anyList;      // error
+- raw type and the unbounded wildcard parameterized type are semantically equivalent. But Certain operations performed on the raw type yield "unchecked" warnings, The same operations on unbounded wildcard parameterized type, errors. 
+- Wildcard parameterized type can NOT be used for the following purposes (different from non-parameterized classes and interfaces): 
+1. for creation of objects 
+2. for creation of arrays (except unbounded wildcard)
+3. in exception handling
+4. in instanceof expressions (except unbounded wildcard)
+5. as supertypes
+6. in a class literal
+- it is illegal that a wildcard parameterized type appears in a  new expression.
+- a wildcard parameterized type is like an interface type:  you can declare reference variables of the type, but you cannot create objects of the type.
+- Intgerfaces:
+	Cloneable clon1 = new Date(); 
+	Cloneable clon2 = new Cloneable();     // error
+- Wildcard
+	ArrayList<?> coll1 = new ArrayList <String> (); 
+	ArrayList<?> coll2 = new ArrayList <?> (); // error
+- concrete parameterized types are List<String> , Map<String,Date> , but not List<? extends Number> or Map<String,?> .
 
 
 # Upper Bounded Wildcards #
@@ -128,6 +161,13 @@ FAQ
 	runtime type of ArrayList<String> : class java.util. ArrayList 
     runtime type of ArrayList<Long>   : class java.util. ArrayList
 - upcasts, from a subtype up to a supertype, such as the casts from String to Object or from LinkedList<String> to List<String>  They are automatic conversions that the compiler performs implicitly, even without an explicit cast expression in the source code. if an upcast appears somewhere in the source code then it is a purely static (compile time) cast that does not have a dynamic (runtime - potentially unsafe) part.
--  we do not expect ClassCastException s when we extract an element from a list of strings.  This type of dynamic (implicit?) cast is considered a violation of the type-safety principle. the compiler emits "unchecked" warnings for every dynamic cast whose target type is a parameterized type.  Note that an upcast whose target type is a parameterized type does not lead to an "unchecked" warning, because the upcast has no dynamic part.
+-  we do not expect ClassCastExceptions when we extract an element from a list of strings.  This type of dynamic (implicit?) cast is considered a violation of the type-safety principle. the compiler emits "unchecked" warnings for every dynamic cast whose target type is a parameterized type.  Note that an upcast whose target type is a parameterized type does not lead to an "unchecked" warning, because the upcast has no dynamic part.
 
- 
+- you can, but you should not, declare a reference variable of an array type whose component type is a concrete parameterized type. it is neither helpful nor type-safe.
+- use arrays of raw types, arrays of unbounded wildcard parameteriezd types, or collections of concrete parameteriezd types as a workaround.
+- an array reference variable with parameterized component type): 
+
+	Pair<String,String>[] arr = null;  // fine 
+	arr = new Pair<String,String>[2] ; // error: generic array creation
+
+

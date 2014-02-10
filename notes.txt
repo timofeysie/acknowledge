@@ -1,5 +1,7 @@
 To Do:
 
+- RESTful - REpresentational State Transfer API.
+- a sentence, as part of a conversation, has words in it which are learning objects that can either pass or fail upon different aspects, such as speaking (pronunciation) or listening, or writing (mispelling) or reading.  Listening and reading could be more problematic, because we dont know if the person missted the point of the sentence because of a certain unknown word, or a combination of words/grammer.  The same with listening.
 - Clojure is designed around a few core engineering principles, such as Software Transactional Memory
 -  imperative language
 - add  @SuppressWarnings to ForEach class made today
