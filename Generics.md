@@ -1,5 +1,18 @@
 # Generics #
-- For generics to work, you need to supply objects, not primitives.
+
+TO fix:
+MaximalAlgorithm test method causes this error:
+method max ... cannot be applied to given types:
+	int count = max(ci, 0, 10);
+	required: List<? extends T>, int, int
+	found: List<Integer>,int,int 
+	reason: inferred type does not conform to declared bounds.
+	inferred: Integer
+	bounds: Object,Comparable<? super Integer>
+	where T is a type-variable
+SO the question is, how to invoke the upper bounded List<? extends T>?
+And the bounds in the error say it's lower bounded.
+
 - type parameters (also called type variables)
  * E - Element (used a lot by the Java Collections Framework)
  * K - Key
