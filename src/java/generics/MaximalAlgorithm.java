@@ -2,7 +2,7 @@ import java.util.*;
 
 public final class MaximalAlgorithm
 {
-    public static <T extends Object & Comparable<? super T>>
+    public static <T extends Object & Comparable<?>>
         T max(List<? extends T> list, int begin, int end) 
     {
         T maxElem = list.get(begin);
@@ -15,8 +15,18 @@ public final class MaximalAlgorithm
 
     public static void main(String[] args) 
     {
-    	List<Integer> ci = {0,1,2,3,4,5,6,7,8,9,10};
-        int count = max(ci, 0, 10);
-        System.out.println("max "+count);	
+    	//Integer[] array = {0,1,2,3,4,5,6,7,8,9,10};
+    	//List<Integer> ci = new ArrayList(array);
+        List<MaxComparable> list = Arrays.asList(
+            new MaxComparable(1),
+            new MaxComparable(2),
+            new MaxComparable(3),
+            new MaxComparable(4),
+            new MaxComparable(5));
+    	Integer ret = max(list, 0, 4);  
+
+    	// Error with current method. Child does not implement Comparable<Child>
+        // int count = max(ci, 0, 10);
+        System.out.println("Max "+ret);	
     }
 }
