@@ -1,5 +1,7 @@
 # Generics #
 
+"Generics are surpisingly complex because of (a) the lack of reification and (b) bounded generics *are* a complex subject." (Ilaith response to Gil on the developers release page for Java 8)
+
 - type parameters (also called type variables)
  * E - Element (used a lot by the Java Collections Framework)
  * K - Key

@@ -1,6 +1,6 @@
 # The Maximal Algorith Problem #
 
-Generics: "10% benefit and 90% head-scratching."
+Generics: "10% benefit and 90% head-scratching."  (Marko Topolnik)
 
 The Question:  Write a generic method to find the maximal element in the range [begin, end) of a list.
 

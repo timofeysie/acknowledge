@@ -1,4 +1,4 @@
-// losureInterfaces
+// ClosureInterfaces
 
 // a readable puts chars into a CharBuffer and returns the count of chars added
 def readable = { it.put("12 34".reverse()); 5 } as Readable

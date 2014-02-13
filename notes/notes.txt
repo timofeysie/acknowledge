@@ -1,4 +1,20 @@
 To Do:
+"an anonymous class seems a bit excessive and cumbersome."  (From 'Learning the Java Language' Trail)
+So Java 8 contains closures as well.  The above is admiting that Javas has been excessive and cumbersome for the past 20 years.  But maybe there is hope.  It would be nice if the docs admitted their inspiration.
+They could say, "Thanks to efforts by the creators of Groovy and Scala and Clojur to simplify the Java language, we has answered their calls after 10 years on JCP and introduced functions like lambda expressions."  They could even qualify this with "After all, they are riding on our coat-tails/bytcode platform".
+
+Groovy: this.args.each{ arg -> println "hello, ${arg}"}
+Java 8: printPersons(
+    roster,
+    p -> p.getGender() == Person.Sex.MALE
+        && p.getAge() >= 18
+        && p.getAge() <= 25
+);
+
+And look at that, only one semicolon!  Is programming finally being liberated from the von Neuman Style?
+After reading some comments from the developers release page of Java 8, it seems at least one developer our of the 8 million isn't so happy about Lambda's:
+"I uderstand the value of Lambdas but I'd prefer a slightly more verbose syntax if only it looked more ;Javaish' and easier to read... Perl as a culture favors tersness over readability.  This is evident in their syntax and total lack of comments in most public projects."
+Well, like Democratic politics, that's what happens when you try to please everyone; no one likes it.
 
 - RESTful - REpresentational State Transfer API.
 
