@@ -6,9 +6,7 @@ Control Flow Statements
 
 
 #Variables#
-class variable = static field.
-instance variable = non-static field.
-A variable declared within the opening and closing parenthesis of a method is called a parameter.
+
 the eight primitive data types supported by the Java programming language: 
 byte an 8-bit signed two's complement integer. min -128 max 127 (inclusive).
 boolean, 

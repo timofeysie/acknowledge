@@ -36,6 +36,10 @@ A collection of methods with no implementation is called an interface.
 - Local Variables declared in braces of a method. only visible to the methods in which they are declared;
 - Parameters classified as "variables" not "fields". other parameter-accepting constructs as well (constructors and exception handlers)
 - A type's fields, methods, and nested types are collectively called its members.
+class variable = static field.
+instance variable = non-static field.
+A variable declared within the opening and closing parenthesis of a method is called a parameter.
+
 
 #Initialization#
 - static initialization blocks are normal block of code enclosed in braces, { }, and preceded by the static keyword.  They are called in the order that they appear in the source code.
@@ -51,32 +55,14 @@ A collection of methods with no implementation is called an interface.
 - The method is final because calling non-final methods during instance initialization can cause problems.
 
 #Nested Classes#
-There are Static nested classes, but Non-static nested classes are called inner classes.
+- There are Static nested classes, but Non-static nested classes are called inner classes.
 A nested class can be declared private, public, protected, or package private. 
-
-class OuterClass {
-    ...
-    static class StaticNestedClass 
-    {
-        // cannot refer directly to instance variables or methods defined in its enclosing class
-        //  just like any other top-level class.
-    }
-
-    // to create an object for the static nested class, use this syntax:
-	OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
-
-    class InnerClass 
-    {
-        //  have access to other members of the enclosing class, even if they are declared private.
-        // cannot define any static members itself.
-    }
-
-    // To instantiate an inner class, you must first instantiate the outer class. 
-    // Then, create the inner object within the outer object with this syntax:
-	OuterClass.InnerClass innerObject = outerObject.new InnerClass();
-
-	// two kinds of inner classes: local classes and anonymous classes.
-}
+- cannot refer directly to instance variables or methods defined in its enclosing 
+- Just like any other top-level class.
+- have access to other members of the enclosing class, even if they are declared private.
+- cannot define any static members itself.
+- To instantiate an inner class, you must first instantiate the outer class. 
+- two kinds of inner classes: local classes and anonymous classes.
 
 #Enums#
 All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extend anything else.
