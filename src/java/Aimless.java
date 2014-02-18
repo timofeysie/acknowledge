@@ -5,10 +5,23 @@
 */
 public class Aimless
 {
-	
+
+    /**
+    * We need to return the min value of whatever type of number is passed
+    * in to this method.  Currently we get this compile time error:
+    * Unexpected type.  required: class  found: type parameter V
+    * Where V is a type-variable.
+    */
+    private static <V extends Number> V getMinimumValue(V <? extends Number> input)
+    {
+        return input.MIN_VALUE;
+    }
 
 	public static void main(String[] args) 
 	{
+
+        System.out.println("inter min "+getMinimumValue(new Integer("7")));
+
 		int a = 1;
 		int b = 3;
 		int result = a % b;

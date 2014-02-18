@@ -1,5 +1,3 @@
-package overriding;
-
 /**
 *The distinction between hiding a static method and overriding an instance 
 * method has important implications:
@@ -13,39 +11,40 @@ package overriding;
 */
 public class Cat extends Animal 
 {
-    public static void testClassMethod() 
+    public static void testClassMethod(String message) 
     {
+        // non static variable super cannot be referenced from a static context
+        //super.testClassMethod("Super Class Cat ============= ");
         // This method will be hidden when invoked from the superclass
-        System.out.println("The static method in Cat");
+        System.out.println(message+"The static method in Cat");
     }
 
-    public void testInstanceMethod() 
+    public void testInstanceMethod(String message) 
     {
-        System.out.println("The instance method in Cat");
+        System.out.println(message+"The instance method in Cat");
+        //super.testInstanceMethod("Super Instance Cat ========== ");
     }
 
     public static void main(String[] args) 
     {
         Cat myCat = new Cat();
         Animal myAnimal = myCat;
-        System.out.println("The version of the hidden static method "):
-        System.out.println("that gets invoked is the one in the superclass,");
-        System.out.println("Animal.testClassMethod() ======== ");
-        Animal.testClassMethod(); // The static method in Animal
-        System.out.println("Animal.testInstanceMethod() ===== ");
-        System.out.println("Cannot be referenced from a static contect");
-        System.out.println("myAnimal.testClassMethod() ====== ");
-        myAnimal.testClassMethod(); // static method in Animal
-        System.out.println("myAnimal.testInstanceMethod() === ");
-        myAnimal.testInstanceMethod(); // the instance method in Cat
-        System.out.println("Cat.testClassMethod() =========== ");
-        Cat.testClassMethod(); // the static method in Cat
-        System.out.println("Cat.testInstanceMethod() ======== ");
-        System.out.println("Cannot be referenced from a static contect");
-        System.out.println("myCat.testClassMethod() ========= ");
-        myCat.testClassMethod(); // the static method in Cat
-        System.out.println("myCat.testInstanceMethod() ====== ");
-        myCat.testInstanceMethod(); // the instance method in Cat
+        String message = null;
+        System.out.println("The version of the hidden static method ");
+        System.out.println("that gets invoked is the one in the superclass");
+        message = "Animal.testClassMethod() ==== ";Animal.testClassMethod(message); // The static method in Animal
+        System.out.println("Animal.testInstanceMethod() = Cannot be referenced from a static context");
+        System.out.println("Hidden Cat, Static Animal ------");
+        message = "myAnimal.testClassMethod() == ";myAnimal.testClassMethod(message); // static method in Animal
+        message = "myAnimal.testInstanceMethod() ";myAnimal.testInstanceMethod(message); // the instance method in Cat
+        message = "Cat.testClassMethod() ======= ";Cat.testClassMethod(message); // the static method in Cat
+        System.out.println("Cat.testInstanceMethod() ==== Cannot be referenced from a static context");
+        message = "myCat.testClassMethod() ===== ";myCat.testClassMethod(message); // the static method in Cat        
+        System.out.println("Overriding Cat --------------");
+        message = "myCat.testInstanceMethod() == ";myCat.testInstanceMethod(message); // the instance method in Cat
+
+        myCat.testNonStaticInstanceMethod(myCat);
+        
 
         String base5String = "230";
         int result = Integer.valueOf(base5String, 5);
@@ -60,6 +59,17 @@ public class Cat extends Animal
             System.out.println(var+" is aN");
         }
 
+    }
+
+    private void testNonStaticInstanceMethod(Animal myAnimal)
+    {
+        String message = "Animal.testInstanceMethod()";
+        //Animal.testInstanceMethod(message);
+        //Still cannot be referenced from a static context");
+        message = "Cat.testInstanceMethod()";
+        //Cat.testInstanceMethod(message);
+        //" ==== Cannot be referenced from a static context");
+        // The static context now is the using the Class to access the method.
     }
     
 }

@@ -1,12 +1,11 @@
 
-Objects
-Real-world objects contain state and behavior.
-A software object's state is stored in fields.
-A blueprint for a software object is called a class.
-Common behavior can be defined in a superclass and inherited into a subclass using the extends keyword.
-A collection of methods with no implementation is called an interface.
-
 Variables
+Operators
+Expressions, Statements, and Blocks
+Control Flow Statements
+
+
+#Variables#
 class variable = static field.
 instance variable = non-static field.
 A variable declared within the opening and closing parenthesis of a method is called a parameter.
@@ -32,7 +31,7 @@ char: The char data type is a single 16-bit Unicode character. It has a minimum 
 The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
 A type's fields, methods, and nested types are collectively called its members.
 
-Operators
+#Operators#
 Consider the following code snippet:
 arrayOfInts[j] > arrayOfInts[j+1]
 Question: What operators does the code contain?
@@ -66,7 +65,7 @@ Same as
 ^       Bitwise exclusive OR
 |       Bitwise inclusive OR
 
-Expressions, Statements, and Blocks
+#Expressions, Statements, and Blocks#
 aValue = 8933.234; // assignment statement
 System.out.println("Hello World!"); // method invocation statement
 Operators may be used in building expressions, which compute values.
@@ -74,7 +73,7 @@ Expressions are the core components of statements.
 Statements may be grouped into blocks.
 a compound expression 1 * 2 * 3
 
-Control Flow Statements
+#Control Flow Statements#
 The do-while statement is similar to the while statement, but evaluates its expression at the bottom of the loop.
 for ( ; ; ) {} // an infinite loop using the for statement
 while (true) {} //  an infinite loop using the while statement

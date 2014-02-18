@@ -1,12 +1,12 @@
 public class Animal 
 {
-    public static void testClassMethod() 
+    public static void testClassMethod(String message) 
     {
-        System.out.println("The static method in Animal");
+        System.out.println(message+"The static method in Animal");
     }
 
-    public void testInstanceMethod() 
+    public void testInstanceMethod(String message) 
     {
-        System.out.println("The instance method in Animal");
+        System.out.println(message+"The instance method in Animal");
     }
 }

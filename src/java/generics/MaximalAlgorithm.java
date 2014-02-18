@@ -2,7 +2,7 @@ import java.util.*;
 
 public final class MaximalAlgorithm
 {
-    public static <T extends Object & Comparable<?>>
+    public static <T extends Object & Comparable<? super T>>
         T max(List<? extends T> list, int begin, int end) 
     {
         T maxElem = list.get(begin);
