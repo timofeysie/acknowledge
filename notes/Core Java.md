@@ -10,6 +10,9 @@ Core Java
 #TOC#
 Objects
 Variables
+Operators
+Expressions, Statements, and Blocks
+Control Flow Statements
 Initialization
 Nested Classes
 Enums
@@ -38,7 +41,95 @@ A collection of methods with no implementation is called an interface.
 - A type's fields, methods, and nested types are collectively called its members.
 class variable = static field.
 instance variable = non-static field.
-A variable declared within the opening and closing parenthesis of a method is called a parameter.
+- A variable declared within the opening and closing parenthesis of a method is called a parameter.
+- Parameters refers to the list of variables in a method declaration. 
+- Arguments are the actual values that are passed in when the method is invoked.
+- Reference data type parameters (objects) are passed into methods by value. However, the values of the object's fields can be changed in the method (see RelatableCircle.java in the innards directory)
+- for example:
+        ValueCircle myCircle = new ValueCircle(5,5);
+        TestValueCircle test_circle = new TestValueCircle();
+        test_circle.moveCircle(myCircle, 23, 56);
+Even thought myCircle is not returned from the moveCircle method, that changes that happen in that method are reflected in the reference.
+- if moveCircle changes the values, they are changed in the calling method as well.  However, if it creates a new object, that object loses its reference after the method returns.
+- The difficult thing can be to understand that Java passes objects as references and those references are passed by value.  object references are passed by value. "call by value where the value is a reference" (Barbara Liskov re CLU language 1974), "call by sharing" (sometimes called "call by object-sharing or simply call by object")
+- The references are pointers to an address.  Thats' why the value of the object is the same.
+- In C you can assign a pointer, pass the pointer to a method, follow the pointer in the method and change the data that was pointed to. However, you cannot change where that pointer points.  In C++, Ada, Pascal and other languages that support pass-by-reference, you can actually change the variable that was passed.
+- Java is by value for built-in types, and by value of the pointer for object types.
+- however, primitive types are not changed by the method.
+the eight primitive data types supported by the Java programming language: byte, short, boolean, char, double, int, long, float. 
+
+-byte: 8-bit signed two's complement integer. min -128 max 127 (incl).
+
+- short: a 16-bit signed two's complement integer.min -32,768 max 32,767 (inclusive).use a short to save memory in large arrays, in situations where the memory savings actually matters.
+
+- int: By default, the int data type is a 32-bit signed two's complement integer, which has a minimum value of -231 and a maximum value of 231-1. In Java SE 8 and later, you can use the int data type to represent an unsigned 32-bit integer, which has a minimum value of 0 and a maximum value of 232-1. Use the Integer class to use int data type as an unsigned integer. compareUnsigned, divideUnsigned etc have been added to the Integer class to support the arithmetic operations for unsigned integers.
+
+- long: 64-bit two's complement integer. signed min -263 max 263-1. Java SE 8 an unsigned 64-bit long:min 0 and a max 264-1. Use this data type when you need a range of values wider than those provided by int. Also compareUnsigned, divideUnsigned etc
+
+- float: single-precision 32-bit IEEE 754 floating point. range specified in the Floating-Point Types, Formats, and Values section of the Java Language Spec. As with the recommendations for byte and short, use a float (instead of double) if you need to save memory in large arrays of floating point numbers. not for precise values, such as currency. For that, use the java.math.BigDecimal
+
+- double: double-precision 64-bit IEEE 754 floating point. (Range in Java Spec). decimal default choice. should never be used for precise values
+
+- boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.
+
+char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
+
+(Static Fields) A class variable is any field declared with the static modifier; this tells the compiler that there is exactly one copy of this variable in existence, regardless of how many times the class has been instantiated. 
+The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
+A type's fields, methods, and nested types are collectively called its members.
+
+#Operators#
+Consider the following code snippet:
+arrayOfInts[j] > arrayOfInts[j+1]
+Question: What operators does the code contain?
+Answer: >, +
+Consider the following code snippet:
+int i = 10;
+int n = i++%5;
+    Question: What are the values of i and n after the code is executed?
+    Answer: i is 11, and n is 0.
+    Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
+    Answer: i is 11, and n is 1.
+logical complement operator "!".
+result = result - 1; same as result -= 1;
+%       remainder operator
+// result is now 10
+        result = result % 7; // result is now 3
+Same as
+// result is now 10
+        result %= 7; // result is now 3
+// result is now 10
+   result = result + 8;
+        // result is now 3
+        result = result % 7;
+?:      Ternary (shorthand for 
+        if-then-else statement)
+~       Unary bitwise complement
+<<      Signed left shift
+>>      Signed right shift
+>>>     Unsigned right shift
+&       Bitwise AND
+^       Bitwise exclusive OR
+|       Bitwise inclusive OR
+
+#Expressions, Statements, and Blocks#
+aValue = 8933.234; // assignment statement
+System.out.println("Hello World!"); // method invocation statement
+Operators may be used in building expressions, which compute values.
+Expressions are the core components of statements.
+Statements may be grouped into blocks.
+a compound expression 1 * 2 * 3
+
+#Control Flow Statements#
+The do-while statement is similar to the while statement, but evaluates its expression at the bottom of the loop.
+for ( ; ; ) {} // an infinite loop using the for statement
+while (true) {} //  an infinite loop using the while statement
+enhanced for statement for iteration through Collections and arrays:
+int[] numbers =   {1,2,3,4,5,6,7,8,9,10};
+for (int item : numbers) 
+{
+             System.out.println("Count is: " + item);
+}
 
 
 #Initialization#
@@ -83,6 +174,7 @@ http://docs.oracle.com/javase/tutorial/java/IandI/override.html
         MountainBike myBike = (MountainBike)obj;
     }
 - virtual method invocation, an aspect of polymorphism, is when the jvm calls the appropriate method for the object that is referred to in each variable, not the method that is defined by the variable's type
+- The compiler automatically provides a no-argument, default constructor for any class without constructors. This default constructor will call the no-argument constructor of the superclass.
 - constructor chaining: If a constructor does not explicitly invoke a superclass constructor, the Java compiler automatically inserts a call to the no-argument constructor of the superclass. If the super class does not have a no-argument constructor, you will get a compile-time error.   But Oject has one.  there will be a whole chain of constructors called, all the way back to the constructor of Object.
 - Methods called from constructors should generally be declared final. If a constructor calls a non-final method, a subclass may redefine that method with surprising or undesirable results.
 - final classes cannot be subclassed, useful when creating an immutable class like the String class.
@@ -108,7 +200,13 @@ notify, notifyAll, and wait
 
 
 #Abstract & Interface#
+- Java does not permit multiple inheritance but interfaces provide an alternative because you can implement more than one interface.
+- an interface can extend any number of interfaces. 
 - If a class includes abstract methods, the class itself must be declared abstract
+- All methods declared in an interface are implicitly public, so the public modifier can be omitted.
+- All constant values defined in an interface are implicitly public, static, and final and these can be omitted.
+
+
 - if an abstract class is subclassed and contians unimplemented methods, it must also be declared abstract.
 - All of the methods in an interface are implicitly abstract, so the abstract modifier is not used. (it could be—it's just not necessary).
 - Unlike interfaces, abstract classes can contain fields that are not static and final, and they can contain implemented methods. 

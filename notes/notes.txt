@@ -116,3 +116,55 @@ Scratch
 
 Catastrophic Backtracking.
 I need to be sheilded from your sheilding.
+
+
+Happiness
+- to do
+- manage happiness folders.
+- put number of happy and sad images created in creation studio.
+- display name in studio.
+
+#settings file#
+- selection mode: singleexclusive or double/non-exclusive
+- definitions happyness = ?  sadness = ?
+- instructions for first screen. 
+- default settings: selection_mode=exclusive, into_title=Choose Happiness, into_positive_text=Try to choose happy images to continue.  intro_negative_text=Avoid choosing sad images. final_title=Summary  final_positive_text=Amount of happiness, final_negative_text=Amount of sadness.
+
+- show instructions from folder-settings before each exercise.
+- statistics tracking: send to e-mail.
+- statistics: happy presses, sad presses. sad presses could g
+
+Features
+- webiste for upload and download of happiesive you compassion points.  package folder into a zip utility for up/download
+- when sadness has a reason.
+- art therapy or measure/check youre happiness/mood/feelings
+- plan your happiness.
+
+What is Happiness?
+- hap is the root of the word and means good fortune.
+
+#When sadness has a reason#
+- sadness/trauma can make you stronger.  appreciate youre life as it is.  people are the better for their sadness, for coming out the end/survivor.  stronger, wiser and more compassionate for coming thru the sadness.  A challenge that leads to growth.  Going thru turmoil with someone lets you know how compatible they are with you.
+- happy about going somewhere
+- people in hosptal are sad, but they have a reason to be sad.
+- upward or downward comparrisons.  When you are the only person with something, you are happy.  but when everyone has it, then you don't feel happy anymor (ex: refridgerators)
+- happy days, hollidays as happy picutres.  working weekdays as sad.  No, because you can be happy at work, and sad on hollidays due to the orgy of meterialism.  the hedonic treadmill.  companies convincing ppl what they've got isn;t good enough.  You are what you own.  Who you are is what you own.
+- useless purchases that eventually get thrown away.
+- religeron and community and happiness.  images of god & the devil
+- what about settings so that people can choose both images, and that says something about their mood.  How many sad choices vs happy ones.
+For this we need a settings file in each user created folder 
+- disorganized things vs organized things.
+- cold vs. warm
+- ego vs. selflessness.
+- homeless vs. warm homes
+- wrapped gifts vs. ? opened gifts?  
+- toys in their package vs. toys out of their packages.
+- group of people vs. single people (non-exclusive)
+- mental patients vs healthy minds (is is wrong to avoid mental health?)
+- face mash.  what was the formula?
+- the dali lama has a book on happiness
+- affection humility, compassion.
+- blank faces. non-exclusive
+- professions.  non-exclusive.  can lead to an idication of what job would be good for someone.
+
+
