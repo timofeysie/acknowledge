@@ -1,13 +1,9 @@
 public class ShadowTest 
 {
-
     public int x = 0;  
-
     class FirstLevel 
     {
-
         public int x = 1;  // the member variable of the inner class FirstLevel called x
-
         /**
         * The parameter in the method methodInFirstLevel is also called x
         * It shadows the variable of the inner class FirstLevel x.
