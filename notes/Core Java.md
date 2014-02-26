@@ -10,6 +10,10 @@ Core Java
 #TOC#
 Objects
 Variables
+Return from a method
+Controlling Access
+Pass by Value
+Numbers
 Operators
 Expressions, Statements, and Blocks
 Control Flow Statements
@@ -44,27 +48,57 @@ instance variable = non-static field.
 - A variable declared within the opening and closing parenthesis of a method is called a parameter.
 - Parameters refers to the list of variables in a method declaration. 
 - Arguments are the actual values that are passed in when the method is invoked.
+
+#Return from a method#
+- Any method declared void doesn't need to return a value, but it may do so to branch out of a control flow block and exit the method.
+- When a method uses a class name as its return type, such as whosFastest does, the class of the type of the returned object must be either a subclass of, or the exact class of, the return type. 
+- covariant return type, means that the return type is allowed to vary in the same direction as the subclass when You override a method and define it to return a subclass of the original method,
+- when you use an interface as a return type the object returned must implement the specified interface.
+
+- explicit constructor invocation From within a constructor, you can also use the this keyword to call another constructor in the same class.
+
+- (Static Fields) A class variable is any field declared with the static modifier; this tells the compiler that there is exactly one copy of this variable in existence, regardless of how many times the class has been instantiated. 
+- The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
+A type's fields, methods, and nested types are collectively called its members. 
+
+#Controlling Access#
+- package-private: when a class (or member) has no explicit public(private/protected) modifyer.
+- The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package.
+- Public fields tend to link you to a particular implementation and limit your flexibility in changing your code.
+Access Levels
+Modifier    Class   Package Subclass World
+public      Y       Y       Y        Y
+protected   Y       Y       Y        N
+no modifier Y       Y       N        N
+private     Y       N       N        N
+
+
+#Pass by Value#
 - Reference data type parameters (objects) are passed into methods by value. However, the values of the object's fields can be changed in the method (see RelatableCircle.java in the innards directory)
 - for example:
         ValueCircle myCircle = new ValueCircle(5,5);
         TestValueCircle test_circle = new TestValueCircle();
         test_circle.moveCircle(myCircle, 23, 56);
-Even thought myCircle is not returned from the moveCircle method, that changes that happen in that method are reflected in the reference.
+Even thought myCircle is not returned from the moveCircle method, the changes that happen in that method are reflected in the reference.
 - if moveCircle changes the values, they are changed in the calling method as well.  However, if it creates a new object, that object loses its reference after the method returns.
 - The difficult thing can be to understand that Java passes objects as references and those references are passed by value.  object references are passed by value. "call by value where the value is a reference" (Barbara Liskov re CLU language 1974), "call by sharing" (sometimes called "call by object-sharing or simply call by object")
 - The references are pointers to an address.  Thats' why the value of the object is the same.
 - In C you can assign a pointer, pass the pointer to a method, follow the pointer in the method and change the data that was pointed to. However, you cannot change where that pointer points.  In C++, Ada, Pascal and other languages that support pass-by-reference, you can actually change the variable that was passed.
 - Java is by value for built-in types, and by value of the pointer for object types.
 - however, primitive types are not changed by the method.
-the eight primitive data types supported by the Java programming language: byte, short, boolean, char, double, int, long, float. 
+- my take: Java is a pass-by-address(or primitive) language.
 
--byte: 8-bit signed two's complement integer. min -128 max 127 (incl).
+
+#Numbers#
+- the eight primitive data types supported by the Java programming language: byte, short, boolean, char, double, int, long, float. 
+
+- byte: 8-bit signed two's complement integer. min -128 max 127 (incl).
 
 - short: a 16-bit signed two's complement integer.min -32,768 max 32,767 (inclusive).use a short to save memory in large arrays, in situations where the memory savings actually matters.
 
-- int: By default, the int data type is a 32-bit signed two's complement integer, which has a minimum value of -231 and a maximum value of 231-1. In Java SE 8 and later, you can use the int data type to represent an unsigned 32-bit integer, which has a minimum value of 0 and a maximum value of 232-1. Use the Integer class to use int data type as an unsigned integer. compareUnsigned, divideUnsigned etc have been added to the Integer class to support the arithmetic operations for unsigned integers.
+- int: 32-bit signed two's complement integer, min -2,147,483,648 max 2,147,483,647  (-2 to the 31 and a maximum value of 2 tt 31-1). In Java SE 8 and later, you can use the int data type to represent an unsigned 32-bit integer, which has a minimum value of 0 and a maximum value of 232-1. Use the Integer class to use int data type as an unsigned integer. compareUnsigned, divideUnsigned etc have been added to the Integer class to support the arithmetic operations for unsigned integers.
 
-- long: 64-bit two's complement integer. signed min -263 max 263-1. Java SE 8 an unsigned 64-bit long:min 0 and a max 264-1. Use this data type when you need a range of values wider than those provided by int. Also compareUnsigned, divideUnsigned etc
+- long: 64-bit two's complement integer. signed min -2 tt 63 max 2 tt 63-1. Java SE 8 an unsigned 64-bit long:min 0 and a max 264-1. Use this data type when you need a range of values wider than those provided by int. Also compareUnsigned, divideUnsigned etc
 
 - float: single-precision 32-bit IEEE 754 floating point. range specified in the Floating-Point Types, Formats, and Values section of the Java Language Spec. As with the recommendations for byte and short, use a float (instead of double) if you need to save memory in large arrays of floating point numbers. not for precise values, such as currency. For that, use the java.math.BigDecimal
 
@@ -72,15 +106,27 @@ the eight primitive data types supported by the Java programming language: byte,
 
 - boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.
 
-char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
+- char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
 
-(Static Fields) A class variable is any field declared with the static modifier; this tells the compiler that there is exactly one copy of this variable in existence, regardless of how many times the class has been instantiated. 
-The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
-A type's fields, methods, and nested types are collectively called its members.
+-  System.out is a PrintStream object, so you can invoke PrintStream where you have been using print or println. For example,
+System.out.format(String format, Object... args);
+- The format string contains plain text as well as format specifiers (begin with a percent sign (%) and end with a converter. The converter indicating the type of argument to be formatted. In between the percent sign (%) and the converter you can have optional flags and specifiers), which are special characters that format the arguments of Object... args
+- format(Locale l, String format, Object... args)
+- Math.E, the base of natural logarithms
+- double abs(double d)
+- float abs(float f) or int, - long Returns the absolute value of the argument.
+- double ceil(double d)   Returns the smallest integer that is greater than or equal to the argument. Returned as a double.
+- double floor(double d)  Returns the largest integer that is less than or equal to the argument. Returned as a double.
+- double rint(double d)   Returns the integer that is closest in value to the argument. Returned as a double.
+- long round(double d) or int round(float f)  Returns the closest long or int, as indicated by the method's return type, to the argument.
+- double min(double arg1, double arg2) works with float int long  Returns the smaller of the two arguments.
+- double max(double arg1, double arg2) also float int long  Returns the larger of the two arguments.
+- pseudo-randomly selected number includes 0.0 but not 1.0. 
+- 0.0 <= Math.random() < 1.0
 
 #Operators#
 Consider the following code snippet:
-arrayOfInts[j] > arrayOfInts[j+1]
+    arrayOfInts[j] > arrayOfInts[j+1]
 Question: What operators does the code contain?
 Answer: >, +
 Consider the following code snippet:

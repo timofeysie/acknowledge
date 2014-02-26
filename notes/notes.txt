@@ -23,12 +23,31 @@ Well, like Democratic politics, that's what happens when you try to please every
 
 
 To do
+-  The toString() method provides a canonical representation of a BigDecimal.
+- As a corollary of computing the exact result, the rounding mode setting of a MathContext object with a precision setting of 0 is not used and thus irrelevant.
+- corollary: 
+1.Mathematics . a proposition that is incidentally proved in proving another proposition.
+2.an immediate consequence or easily drawn conclusion.
+3.a natural consequence or resul
 - when is NaN false:
     double var = 1000;
     if (var == Double.NaN) 
 If you can only use that method on a double?
 - Can we get an example of a Initializer blocks copied into a constructor?
 - how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?  Indeed it does change without being a member variable.
+It's amazing how I have been using Java for over ten years but didn't understand some very fundamental things about it.  For one that it's a pass-by-value language.  The answer to my question posed a few months ago about what I called a live variable, is that the reference to the ArrayList is what is passed to the method, so that any changes to the list will persist becaucse the reference from the calling method is the same reference.  So then you might think that Java is actually a pass-by-reference languae.  And many people would argue about that, like they did here: 
+http://stackoverflow.com/questions/40480/is-java-pass-by-reference
+It's a greate discussion.  Noticing the aversion for the word pointer.  Then someone pointing out (pun intended) that the main error we get is called a NullPointerException.  My take is that Java is a pass-by-address(or primitive) language, but Ganash pointed out that this is the definition of a reference, so maybe I still can't explain this clearly even after reading all the answers on that page.  Althought Ganash's answer didn't get much support... 
+A primitive passed into a method will not persist any changes that happen to it in the method.  Also, a String that is immutable will not change, but a StringBuffer will, as pointed out by Kukudas.
+What is amazing about that link above is this: asked 5 years ago, viewed
+314888 times, active 5 days ago.
+To think of all the times I returned objects from a method when the simple fact is I didn't need to.  Or when I created a vector of objects to return because only one object can be returned from a method when actually I didn't need to.  Even if the method is in a different class!  See the class ByValue.java in the java directory for proof of this.
+Some good quotes from the discussion link above:
+
+If a Java object "behaves" like it is being passed by reference, that is a property of mutability and has absolutely nothing to do with passing mechanisms.  I am not sure why this is so confusing, perhaps because so many Java "programmers" are not formally trained, and thus do not understand what is really going on in memory?  by Rusty Shackleford
+
+Some might say the "value" of the address, and some say it's just a reference to the object. This is the genesis of the holy war between "reference" and "value" proponents... C++ programmers would call this a pointer, but some Java developers are racist against the word "pointer". Whatever. Just know that the address of the object goes in the stack.  by cutmancometh
+
 - @SuppressWarnings("unchecked") add to catechis
 - GenericAlgorithm
 ..cannot be applied to given type;

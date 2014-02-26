@@ -17,5 +17,9 @@ public class TestValueCircle
 		test_circle.moveCircle(myCircle, 23, 56, 5);
 		System.out.println("Is the circle broken? "+myCircle.getX()+" rad = "+rad);
 		// rad is still 0, but myCircle has been changed.
+		SimpleCircle sc = new SimpleCircle(3,3);
+		sc.x = 2;
+		sc.y = 2;
+		sc.toString();
 	}
 }
