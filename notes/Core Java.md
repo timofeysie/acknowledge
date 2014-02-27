@@ -48,7 +48,8 @@ instance variable = non-static field.
 - A variable declared within the opening and closing parenthesis of a method is called a parameter.
 - Parameters refers to the list of variables in a method declaration. 
 - Arguments are the actual values that are passed in when the method is invoked.
-
+- compile-time constant: a primitive type or a string is defined as a constant and the value is known at compile time, the compiler replaces the constant name everywhere in the code with its value.
+ 
 #Return from a method#
 - Any method declared void doesn't need to return a value, but it may do so to branch out of a control flow block and exit the method.
 - When a method uses a class name as its return type, such as whosFastest does, the class of the type of the returned object must be either a subclass of, or the exact class of, the return type. 
@@ -265,24 +266,20 @@ notify, notifyAll, and wait
 
 
 #Methods#
-Overriding Instance Methods - An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.  
+- Overriding Instance Methods: An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.  
 - the version of the hidden static method that gets invoked is the one in the superclass
 - the version of the overridden instance method that gets invoked is the one in the subclass.
-
-Hidden Static Methods - If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass.
-
-Interface Methods - Default methods and abstract methods in interfaces are inherited like instance methods. 
+- Hidden Static Methods: If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass.
+- Interface Methods: Default methods and abstract methods in interfaces are inherited like instance methods. 
 ** What the hell is a default method?***
-
-However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
-- Instance methods are preferred over interface default methods.  Pegasus.identifyMyself returns the string "I am a horse."
-
-- Methods that are already overridden by other candidates are ignored. Dragon.identifyMyself returns the string "I am able to lay eggs."
-
-This circumstance can arise when supertypes share a common ancestor.
+- However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
+- Instance methods are preferred over interface default methods.  Pegasus.identifyMyself() returns the string "I am a horse."
+- Methods that are already overridden by other candidates are ignored. Dragon.identifyMyself() returns the string "I am able to lay eggs."
+  This circumstance can arise when supertypes share a common ancestor.
 You could invoke any of the of the default implementations with the super keyword.
 You can use the super keyword to invoke a default method in both classes and interfaces.
 Inherited instance methods from classes can override abstract interface methods. 
+- Class methods cannot access instance variables or instance methods directly—they must use an object reference. Also, class methods cannot use the this keyword as there is no instance for this to refer to.
 
 #Modifiers#
 - an overriding method can allow more, but not less, access than the overridden method. ie: a protected instance method in the superclass can be made public, but not private, in the subclass.
