@@ -11,6 +11,11 @@ public class TestFormat {
   }
     
     public static void main(String[] args) {
+
+        String it = "123";
+        int len = it.length();
+        System.out.println(it+" length "+len);
+        
       System.out.println("byte "+Byte.MIN_VALUE+" "+Byte.MAX_VALUE);
       System.out.format("short %,8d "+" %,8d%n ", Short.MIN_VALUE, Short.MAX_VALUE);
       System.out.format("int %,8d "+" %,8d%n ", Integer.MIN_VALUE, Integer.MAX_VALUE);
