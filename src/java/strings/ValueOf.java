@@ -1,5 +1,16 @@
-public class ValueOf {
-    public static void main(String[] args) {
+public class ValueOf 
+{
+    public static void main(String[] args) 
+    {
+        System.out.println("int i = 10;");
+        System.out.println("int n = i++%5;");
+        int i = 10;
+        int n = i++%5;
+        System.out.println("i "+i+" n "+n);
+        System.out.println("int n = ++i%5;");
+        i = 10;
+        n = ++i%5;
+        System.out.println("i "+i+" n "+n);
         // this program requires two 
         // arguments on the command line 
         if (args.length == 2) {

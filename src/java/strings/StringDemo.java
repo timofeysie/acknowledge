@@ -16,6 +16,42 @@ public class StringDemo
 
     public static void main(String[] args) 
     {
+        String anotherPalindrome = "Niagara. O roar again!"; 
+        System.out.println(anotherPalindrome+" length "+anotherPalindrome.length());
+        String regex = ". O ";
+        int limit = 1; // limit the size of the returned array
+        String[] array_1 = anotherPalindrome.split(regex);
+        // The limit makes the last array element the remaining
+        // part of the string
+        String data = "Tim, Dave, Jeff, Frank, Laura";
+        regex = ",";
+        String[] array_2 = anotherPalindrome.split(regex, limit);
+        System.out.println("array_1 "+array_1.length);
+        for (String s:array_1)
+            System.out.println(s);
+        System.out.println("array_2 "+array_2.length);
+        for (String s:array_2)
+            System.out.println(s);
+        String [] dat = data.split(",", 3);
+        System.out.println("data "+dat.length);
+        for (String s:dat)
+            System.out.println(s.trim());
+
+        String comp1 = "Apple";
+        String comp2 = "Able";
+        //int compare = anotherPalindrome.compareTo(data); // -6
+        int compare1 = comp1.compareTo(comp2); 
+        System.out.println(comp1+" compareTo "+comp2+" = "+compare1);
+        int compare2 = comp2.compareTo(comp1); 
+        System.out.println(comp2+" compareTo "+comp1+" = "+compare2);
+
+
+        int beginIndex = 5;
+        int endIndex = 9;
+        CharSequence seq = data.subSequence(beginIndex, endIndex);
+        //  Returns a new character sequence constructed from beginIndex index up until endIndex - 1.
+        System.out.println("character sequence: "+seq);
+
         float floatVar = 1.1f; 
         int intVar = 1; 
         String stringVar = "first";

@@ -1,34 +1,40 @@
 Core Java
 
-- Enhancements in Java 5: Generics, Enhanced for loop, Auto(un)boxing, Typesafe Enums, Varargs, Annotations
-- Enhancements in Java 6: Collections framework, Webstart, Drag and drop, Instrumentation, i18n, I/O support, jar files, JDBC4
-- Constant Interface Antipattern: putting static memebers into an interface and inherting that to leave of the class name of static methos.  So we have the static import.
-- varags (variable arguments) are the elipses (...) part indicates that an array or a sequence of arguments may be used in its place.  It must be in the final argument position or a method signature.
-- the compiler translates the varargs formal parameter into an array. 
-- for each in example.  (Vector v) for (String s:v) {print(s);}
-
 #TOC#
-Objects
-Variables
-Return from a method
-Controlling Access
-Pass by Value
-Numbers
-Operators
-Expressions, Statements, and Blocks
-Control Flow Statements
-Initialization
-Nested Classes
-Enums
-Inheritance
-Object class
-Abstract & Interface
-Methods
-Modifiers
-Numbers
-Packages
-Regular Expressionses
+Shadowing
+Objects  
+Variables  
+Return from a method  
+Controlling Access  
+Pass by Value  
+Numbers  
+Operators  
+Expressions, Statements, and Blocks  
+Control Flow Statements  
+Initialization  
+Nested Classes  
+Enums  
+Inheritance  
+Object class  
+Abstract & Interface  
+Methods  
+Modifiers  
+Numbers  
+Packages  
+Regular Expressionses  
 
+#Shadowing#
+```
+public class ShadowTest {
+    public int x = 0;  
+    class FirstLevel {
+        public int x = 1;  // member variable of the inner class
+        void methodInFirstLevel(int x) {
+            ("parameter   x "+x      +" shadows all other xs");
+            ("inner class x "+this.x+" shadows outer class x"); 
+            ("Outer class x "+ShadowTest.this.x              );
+        }
+```
 
 #Objects#
 Real-world objects contain state and behavior.
@@ -126,6 +132,8 @@ System.out.format(String format, Object... args);
 - 0.0 <= Math.random() < 1.0
 
 #Operators#
+- remainder operator (modulus, modula) 10 % 3 is 1 because 10 divided by 3 leaves a remainder of 1.
+
 Consider the following code snippet:
     arrayOfInts[j] > arrayOfInts[j+1]
 Question: What operators does the code contain?
@@ -139,7 +147,7 @@ int n = i++%5;
     Answer: i is 11, and n is 1.
 logical complement operator "!".
 result = result - 1; same as result -= 1;
-%       remainder operator
+%       remainder operator (modulus, modula)
 // result is now 10
         result = result % 7; // result is now 3
 Same as

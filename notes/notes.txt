@@ -1,5 +1,20 @@
+#Table of Contents#
+Quotes  
+To Do  
+Terms  
+Qustions  
+Pass by Value Discussion  
+Unicode  
+Parsing Wikitionary  
+xAPI Notes  
+Happiness  
+Settings File  
+
+
+#Introduction#
 These are random notes as we get ready for the Programmer Level I Exam (associated with the "Oracle Certified Associate, Java SE 7 Programmer"), as well as getting to know generics for the Level II Exam, along with learning Groovy and some Scala, and the beginnings of Java 8.
 
+#Quotes#
 "an anonymous class seems a bit excessive and cumbersome."  (From 'Learning the Java Language' Trail)
 So Java 8 contains closures as well.  The above is admiting that Java has been excessive and cumbersome for the past 20 years.  But maybe there is hope.  It would be nice if the docs admitted their inspiration.
 They could say, "Thanks to efforts by the creators of Groovy, Scala and Clojur to simplify the Java language.  We have answered their calls after 10 years on JCP and introduced functions like lambda expressions (closures)."  They could even qualify this with "After all, they are riding on our coat-tails/bytcode platform".
@@ -21,20 +36,52 @@ Well, like Democratic politics, that's what happens when you try to please every
 - Clojure is designed around a few core engineering principles, such as Software Transactional Memory
 -  imperative language
 
+- Scratch 
+Catastrophic Backtracking.
+I need to be sheilded from your sheilding.
 
-To do
+
+#To do#
 -  The toString() method provides a canonical representation of a BigDecimal.
-- As a corollary of computing the exact result, the rounding mode setting of a MathContext object with a precision setting of 0 is not used and thus irrelevant.
-- corollary: 
+- @SuppressWarnings("unchecked") add to catechis
+- GenericAlgorithm
+..cannot be applied to given type;
+required T[],T
+found: Integer[],Integer
+reason: inferred type does not conform to declared bound(s)
+inferred: Integer
+ bound(s): Comparable<Integer>
+ where T is a type-variable
+http://docs.oracle.com/javase/tutorial/java/generics/methods.html
+print table from
+C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
+- Got this error running AllTests:
+Failed to create Script instance for class: MultiplierTest.  Reason: java.lang.InstantiationException:  MultiplierTest.
+But if we run MultiplierTest by itself, there is no output at all.
+
+
+
+#Terms#
+- corollary: as a result
 1.Mathematics . a proposition that is incidentally proved in proving another proposition.
 2.an immediate consequence or easily drawn conclusion.
-3.a natural consequence or resul
+3.a natural consequence or result
+- "As a corollary of computing the exact result, the rounding mode setting of a MathContext object with a precision setting of 0 is not used and thus irrelevant."
+
+- lexicographic or lexicographical order (also known as lexical order, dictionary order, alphabetical order or lexicographic(al) product)
+
+- a Cartesian product is a mathematical operation which returns a set (or product set) from multiple sets. That is, for sets A and B, the Cartesian product A × B is the set of all ordered pairs (a, b) where a ∈ A and b ∈ B.
+
+
+#Questions#
 - when is NaN false:
     double var = 1000;
     if (var == Double.NaN) 
 If you can only use that method on a double?
 - Can we get an example of a Initializer blocks copied into a constructor?
 - how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?  Indeed it does change without being a member variable.
+
+#Pass by Value Discussion#
 It's amazing how I have been using Java for over ten years but didn't understand some very fundamental things about it.  For one that it's a pass-by-value language.  The answer to my question posed a few months ago about what I called a live variable, is that the reference to the ArrayList is what is passed to the method, so that any changes to the list will persist becaucse the reference from the calling method is the same reference.  So then you might think that Java is actually a pass-by-reference languae.  And many people would argue about that, like they did here: 
 http://stackoverflow.com/questions/40480/is-java-pass-by-reference
 It's a greate discussion.  Noticing the aversion for the word pointer.  Then someone pointing out (pun intended) that the main error we get is called a NullPointerException.  My take is that Java is a pass-by-address(or primitive) language, but Ganash pointed out that this is the definition of a reference, so maybe I still can't explain this clearly even after reading all the answers on that page.  Althought Ganash's answer didn't get much support... 
@@ -48,16 +95,6 @@ If a Java object "behaves" like it is being passed by reference, that is a prope
 
 Some might say the "value" of the address, and some say it's just a reference to the object. This is the genesis of the holy war between "reference" and "value" proponents... C++ programmers would call this a pointer, but some Java developers are racist against the word "pointer". Whatever. Just know that the address of the object goes in the stack.  by cutmancometh
 
-- @SuppressWarnings("unchecked") add to catechis
-- GenericAlgorithm
-..cannot be applied to given type;
-required T[],T
-found: Integer[],Integer
-reason: inferred type does not conform to declared bound(s)
-inferred: Integer
- bound(s): Comparable<Integer>
- where T is a type-variable
-http://docs.oracle.com/javase/tutorial/java/generics/methods.html
 - Groovy failure in MultpilierTest
 2 
 http://groovy.codehaus.org/Advanced+OO
@@ -67,21 +104,10 @@ http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
 http://www.tutorialspoint.com/java/
 
 
-print table from
-C:\Documents and Settings\Administrator\My Documents\Downloads\groovy\core\overriding\Overriding and Hiding Methods (The Java™ Tutorials   Learning the Java Language   Interfaces and Inheritance).htm
-
-Got this error running AllTests:
-Failed to create Script instance for class: MultiplierTest.  Reason: java.lang.InstantiationException:  MultiplierTest.
-But if we run MultiplierTest by itself, there is no output at all.
-
-
-Java
 
 
 
-
-
-Unicode
+#Unicode#
 
 \p{prop} specifies a unicode block
 \p{InMongolian}  for the Mongolian language.
@@ -92,9 +118,7 @@ The category names are those defined in the Standard, both normative and informa
 
 
 
-
-
-Parsing Wikitionary
+#Parsing Wikitionary#
 
 korean_wiki = http://ko.wiktionary.org/wiki/
 english_wkik = http://en.wiktionary.org/wiki/
@@ -111,7 +135,7 @@ search for other definitions and create associations/
 
 
 
-xAPI Notes
+#xAPI Notes#
 
 Activity: An Activity is a type of Object making up the “this” in I did “this”; it is something with which an Actor interacted. It can be a unit of instruction
 THe first output from our TinCanJava test:
@@ -131,13 +155,9 @@ Statement(
     version=null, 
     voided=null)
 
-Scratch 
-
-Catastrophic Backtracking.
-I need to be sheilded from your sheilding.
 
 
-Happiness
+#Happiness#
 - to do
 - manage happiness folders.
 - put number of happy and sad images created in creation studio.
