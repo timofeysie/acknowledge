@@ -2,7 +2,7 @@ Acknowledge
 ============
 
 This is a general code deposite for the homeless.
-Current code being added is Groovy code from the user guide, and Java core review code.
+Current code being added is Groovy code from the user guide, notes and code from the Java trail.
 
 Below is general usage examples for the markdown format:
 
@@ -20,6 +20,9 @@ http://images.google.com/images?num=30&amp;q=larry+bird
 - if you write: AT&T Markdown = AT&amp;T
 - 4 < 5 Markdown = 4 &lt; 5
 - When you do want to insert a <br /> break tag using Markdown, you end a line with two or more spaces, then type return.
+#one hash#
+##two hashes##
+###three hashes#
 - Headers: Setext
 This is an H1: Setext-style headers
 ==========================
