@@ -29,13 +29,14 @@ This is an H1: Setext-style headers
 This is an H2: second-level headers
 ---------------------------------------------------
 - Atx-style headers:1-6 hash characters at the start of the line, corresponding to header levels 1-6. For example, open or closed styles supported:
-# This is an H1
-## This is an H2
-###### This is an H6
-# This is an H1 #
-## This is an H2 ##
-### This is an H3 ######
-- Blockquotes
+
+# This is an H1  
+## This is an H2  
+###### This is an H6  
+# This is an H1 #  
+## This is an H2 ##  
+### This is an H3 ######  
+- Blockquotes  
 > Markdown uses email-style
 > characters for blockquoting
 - Unordered lists use asterisks, pluses, and hyphens — interchangably — as list markers:
