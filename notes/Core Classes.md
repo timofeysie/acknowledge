@@ -1,12 +1,9 @@
  TOC
 
-Shadowing
-
-The StringBuilder Class
-
-The Character Class
-
-The String Class
+Shadowing  
+The StringBuilder Class  
+The Character Class  
+The String Class  
 
 #Shadowing#
 ```
@@ -21,8 +18,13 @@ public class ShadowTest {
         }
 ```
 #The StringBuilder Class#
--  same as StringBuffer whos methods are synchronized thus thread-safe.
+- like String objects but can be modified(append(),insert())
+- same as StringBuffer whos methods are synchronized thus thread-safe.
 - StringBuilder methods:
+- StringBuilder() Creates an empty string builder with capacity of 16 
+- void ensureCapacity(int minCapacity) Ensures that the capacity is at least equal to the specified minimum.
+- void setLength(int newLength) turcates or adds null chars.
+- append(), insert(), setLength() greater than the current capacity(), the capacity is automatically increased.
 - append(boolean b) or (char c, char[] str, char[] str, int offset, int len, double, float, int , long,  obj, String).
 - delete(int start, int end)
 - deleteCharAt(int index)

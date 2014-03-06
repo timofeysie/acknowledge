@@ -40,6 +40,13 @@ Well, like Democratic politics, that's what happens when you try to please every
 Catastrophic Backtracking.
 I need to be sheilded from your sheilding.
 
+#Collections#
+- Hashtable:  We have used this class extensively in the past, since we started learning Java 1.2.  In a professional environment, this is not acceptable.  We need to know all the types intimately so that the best solution can be used in the right place.  We read this last night when we started to fall back on the old hashtable: "Hashtable is a legacy collection which was replaced by Java 1.2 collections in 1998. I suggest you avoid it, along with Vector and Enumeration." (Peter Lawrey reputation 207k)
+- Needed a reverse/backwards enumeration, it seems there isn't one.
+- List Iterator one of the sub interface can traverse backwards also which enumeration can’t do.
+- Iterator has a remove() method while Enumeration doesn’t. 
+- Enumeration acts as Read-only interface, because it has the methods only to traverse and fetch the objects, where as using Iterator we can manipulate the objects also like adding and removing the objects.
+
 
 #To do#
 -  The toString() method provides a canonical representation of a BigDecimal.
