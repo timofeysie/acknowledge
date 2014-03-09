@@ -27,7 +27,7 @@ public class TestFormat {
       System.out.format("%d%n", n);      //  -->  "461012"
       System.out.printf("%08d%n", n);    //  -->  "00461012"
       System.out.format("%+8d%n", n);    //  -->  " +461012"
-      System.out.format("%,8d%n", n);    // -->  " 461,012"
+      System.out.format("Comma separated: %,8d%n", n);    // -->  " 461,012"
       System.out.format("%+,8d%n%n", n); //  -->  "+461,012"
 
       float f = 123456.789f;
@@ -57,13 +57,14 @@ public class TestFormat {
         double a = -191.635;
         double b = 43.74;
         int c = 16, d = 45;
-        System.out.println("Basic Math Methods");
+        System.out.println("Basic Math Methods ---");
         System.out.printf("The absolute value " + "of %.3f is %.3f%n", 
                           a, Math.abs(a));
         System.out.printf("The ceiling of " + "%.2f is %.0f%n", 
                           b, Math.ceil(b));
         System.out.printf("The floor of " + "%.2f is %.0f%n", 
                           b, Math.floor(b));
+        // rint = Return integer closest to arg
         System.out.printf("The rint of %.2f " + "is %.0f%n", 
                           b, Math.rint(b));
         System.out.printf("The max of %d and " + "%d is %d%n",
@@ -74,7 +75,7 @@ public class TestFormat {
 
     private static void logarithmicMethods()
     {
-        System.out.println("logarithmic methods");
+        System.out.println("logarithmic methods ---");
         double x = 11.635;
         double y = 2.76;
         System.out.printf("The value of " + "E is %.4f%n",
@@ -94,7 +95,7 @@ public class TestFormat {
     {
         double degrees = 45.0;
         double radians = Math.toRadians(degrees);
-        System.out.println("Trigonomic funtions");
+        System.out.println("Trigonomic funtions ---");
         System.out.format("The value of pi " + "is %.4f%n",
                            Math.PI);
         System.out.format("The sine of %.1f " + "degrees is %.4f%n",

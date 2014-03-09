@@ -1,0 +1,18 @@
+Sample Questions
+
+Consider the following code snippet:
+    arrayOfInts[j] > arrayOfInts[j+1]
+Question: What operators does the code contain?
+Answer: >, +
+Consider the following code snippet:
+int i = 10;
+int n = i++%5;
+    Question: What are the values of i and n after the code is executed?
+    Answer: i is 11, and n is 0.
+    Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
+    Answer: i is 11, and n is 1.
+
+Questions and Exercises: Inheritance
+1.a and c incorrect.  How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
+http://docs.oracle.com/javase/tutorial/java/IandI/override.html
+

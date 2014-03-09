@@ -1,6 +1,6 @@
-Core Java
+#Core Java#
 
-#TOC#
+###TOC###
 Shadowing
 Objects  
 Variables  
@@ -8,6 +8,8 @@ Return from a method
 Controlling Access  
 Pass by Value  
 Numbers  
+PrintStream  
+Math  
 Operators  
 Expressions, Statements, and Blocks  
 Control Flow Statements  
@@ -23,7 +25,7 @@ Numbers
 Packages  
 Regular Expressionses  
 
-#Shadowing#
+###Shadowing###
 ```
 public class ShadowTest {
     public int x = 0;  
@@ -33,30 +35,30 @@ public class ShadowTest {
             ("parameter   x "+x      +" shadows all other xs");
             ("inner class x "+this.x+" shadows outer class x"); 
             ("Outer class x "+ShadowTest.this.x              );
-        }
+    }
+}
 ```
 
-#Objects#
+###Objects###
 Real-world objects contain state and behavior.
 A software object's state is stored in fields.
 A blueprint for a software object is called a class.
 Common behavior can be defined in a superclass and inherited into a subclass using the extends keyword.
 A collection of methods with no implementation is called an interface.
 
-#Variables#
+###Variables###
 - Instance Variables (Non-Static Fields) 
 - Class Variables (Static Fields) static modifier; one copy regardless of how many times the class has been instantiated. 
 - Local Variables declared in braces of a method. only visible to the methods in which they are declared;
 - Parameters classified as "variables" not "fields". other parameter-accepting constructs as well (constructors and exception handlers)
 - A type's fields, methods, and nested types are collectively called its members.
-class variable = static field.
-instance variable = non-static field.
 - A variable declared within the opening and closing parenthesis of a method is called a parameter.
 - Parameters refers to the list of variables in a method declaration. 
 - Arguments are the actual values that are passed in when the method is invoked.
 - compile-time constant: a primitive type or a string is defined as a constant and the value is known at compile time, the compiler replaces the constant name everywhere in the code with its value.
- 
-#Return from a method#
+- The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
+
+###Return from a method###
 - Any method declared void doesn't need to return a value, but it may do so to branch out of a control flow block and exit the method.
 - When a method uses a class name as its return type, such as whosFastest does, the class of the type of the returned object must be either a subclass of, or the exact class of, the return type. 
 - covariant return type, means that the return type is allowed to vary in the same direction as the subclass when You override a method and define it to return a subclass of the original method,
@@ -65,27 +67,27 @@ instance variable = non-static field.
 - explicit constructor invocation From within a constructor, you can also use the this keyword to call another constructor in the same class.
 
 - (Static Fields) A class variable is any field declared with the static modifier; this tells the compiler that there is exactly one copy of this variable in existence, regardless of how many times the class has been instantiated. 
-- The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
-A type's fields, methods, and nested types are collectively called its members. 
 
-#Controlling Access#
+###Controlling Access###
 - package-private: when a class (or member) has no explicit public(private/protected) modifyer.
 - The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package.
 - Public fields tend to link you to a particular implementation and limit your flexibility in changing your code.
 Access Levels
-Modifier    Class   Package Subclass World
-public      Y       Y       Y        Y
-protected   Y       Y       Y        N
-no modifier Y       Y       N        N
-private     Y       N       N        N
+Modifier    Class   Package Subclass World  
+public      Y       Y       Y        Y  
+protected   Y       Y       Y        N  
+no modifier Y       Y       N        N  
+private     Y       N       N        N  
 
 
-#Pass by Value#
+###Pass by Value###
 - Reference data type parameters (objects) are passed into methods by value. However, the values of the object's fields can be changed in the method (see RelatableCircle.java in the innards directory)
 - for example:
+```
         ValueCircle myCircle = new ValueCircle(5,5);
         TestValueCircle test_circle = new TestValueCircle();
         test_circle.moveCircle(myCircle, 23, 56);
+```
 Even thought myCircle is not returned from the moveCircle method, the changes that happen in that method are reflected in the reference.
 - if moveCircle changes the values, they are changed in the calling method as well.  However, if it creates a new object, that object loses its reference after the method returns.
 - The difficult thing can be to understand that Java passes objects as references and those references are passed by value.  object references are passed by value. "call by value where the value is a reference" (Barbara Liskov re CLU language 1974), "call by sharing" (sometimes called "call by object-sharing or simply call by object")
@@ -96,30 +98,42 @@ Even thought myCircle is not returned from the moveCircle method, the changes th
 - my take: Java is a pass-by-address(or primitive) language.
 
 
-#Numbers#
-- the eight primitive data types supported by the Java programming language: byte, short, boolean, char, double, int, long, float. 
+###Numbers###
+- the eight primitive data types supported by the Java programming language: boolean, 
+byte, char, short, int, float, long, double, float. 
+
+- boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.
 
 - byte: 8-bit signed two's complement integer. min -128 max 127 (incl).
+
+- char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
 
 - short: a 16-bit signed two's complement integer.min -32,768 max 32,767 (inclusive).use a short to save memory in large arrays, in situations where the memory savings actually matters.
 
 - int: 32-bit signed two's complement integer, min -2,147,483,648 max 2,147,483,647  (-2 to the 31 and a maximum value of 2 tt 31-1). In Java SE 8 and later, you can use the int data type to represent an unsigned 32-bit integer, which has a minimum value of 0 and a maximum value of 232-1. Use the Integer class to use int data type as an unsigned integer. compareUnsigned, divideUnsigned etc have been added to the Integer class to support the arithmetic operations for unsigned integers.
 
-- long: 64-bit two's complement integer. signed min -2 tt 63 max 2 tt 63-1. Java SE 8 an unsigned 64-bit long:min 0 and a max 264-1. Use this data type when you need a range of values wider than those provided by int. Also compareUnsigned, divideUnsigned etc
-
 - float: single-precision 32-bit IEEE 754 floating point. range specified in the Floating-Point Types, Formats, and Values section of the Java Language Spec. As with the recommendations for byte and short, use a float (instead of double) if you need to save memory in large arrays of floating point numbers. not for precise values, such as currency. For that, use the java.math.BigDecimal
+
+- long: 64-bit two's complement integer. signed min -2 tt 63 max 2 tt 63-1. Java SE 8 an unsigned 64-bit long:min 0 and a max 264-1. Use this data type when you need a range of values wider than those provided by int. Also compareUnsigned, divideUnsigned etc
 
 - double: double-precision 64-bit IEEE 754 floating point. (Range in Java Spec). decimal default choice. should never be used for precise values
 
-- boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.
+- A 64-bit register can store 2tt64 (over 18 quintillion or 1.8×10 to the 19th power) different values. Hence, a processor with 64-bit memory addresses can directly access 264 bytes (=16 exbibytes) of byte-addressable memory.
 
-- char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
 
--  System.out is a PrintStream object, so you can invoke PrintStream where you have been using print or println. For example,
+###PrintStream###
+- System.out is a PrintStream object, so you can invoke PrintStream where you have been using print or println. For example,
 System.out.format(String format, Object... args);
 - The format string contains plain text as well as format specifiers (begin with a percent sign (%) and end with a converter. The converter indicating the type of argument to be formatted. In between the percent sign (%) and the converter you can have optional flags and specifiers), which are special characters that format the arguments of Object... args
 - format(Locale l, String format, Object... args)
-- Math.E, the base of natural logarithms
+```
+long n = 461012;
+System.out.format("Comma separated: %,8d%n", n);    
+// -->  "Comma separated 461,012"
+```
+
+###Math###
+Math.E, the base of natural logarithms  
 - double abs(double d)
 - float abs(float f) or int, - long Returns the absolute value of the argument.
 - double ceil(double d)   Returns the smallest integer that is greater than or equal to the argument. Returned as a double.
@@ -131,122 +145,120 @@ System.out.format(String format, Object... args);
 - pseudo-randomly selected number includes 0.0 but not 1.0. 
 - 0.0 <= Math.random() < 1.0
 
-#Operators#
+###Operators###
 - remainder operator (modulus, modula) 10 % 3 is 1 because 10 divided by 3 leaves a remainder of 1.
+- logical complement operator "!".
 
-Consider the following code snippet:
-    arrayOfInts[j] > arrayOfInts[j+1]
-Question: What operators does the code contain?
-Answer: >, +
-Consider the following code snippet:
-int i = 10;
-int n = i++%5;
-    Question: What are the values of i and n after the code is executed?
-    Answer: i is 11, and n is 0.
-    Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
-    Answer: i is 11, and n is 1.
-logical complement operator "!".
+```
 result = result - 1; same as result -= 1;
-%       remainder operator (modulus, modula)
+// % remainder operator (modulus, modula)  
 // result is now 10
-        result = result % 7; // result is now 3
-Same as
+result = result % 7; // result is now 3
+//Same as
 // result is now 10
-        result %= 7; // result is now 3
+result %= 7; // result is now 3
 // result is now 10
-   result = result + 8;
-        // result is now 3
-        result = result % 7;
-?:      Ternary (shorthand for 
-        if-then-else statement)
-~       Unary bitwise complement
-<<      Signed left shift
->>      Signed right shift
->>>     Unsigned right shift
-&       Bitwise AND
-^       Bitwise exclusive OR
-|       Bitwise inclusive OR
+result = result + 8;
+// result is now 3
+result = result % 7;
+```
 
-When operators of equal precedence appear in the same expression, a rule must govern which is evaluated first. All binary operators except for the assignment operators are evaluated from left to right; assignment operators are evaluated right to left.
+?:      Ternary (shorthand for if-then-else statement)  
+~       Unary bitwise complement  
+<<      Signed left shift  
+>>      Signed right shift  
+>>>     Unsigned right shift  
+&       Bitwise AND  
+^       Bitwise exclusive OR  
+|       Bitwise inclusive OR  
 
-- Operators     Precedence
-postfix         expr++ expr--
-unary           ++expr --expr +expr -expr ~ !
-multiplicative  * / %
-additive        + -
-shift           << >> >>>
-relational      < > <= >= instanceof
-equality        == !=
-bitwise AND     &
-bitwise exclusive OR    ^
-bitwise inclusive OR    |
-logical AND     &&
-logical OR      ||
-ternary         ? :
-assignment      = += -= *= /= %= &= ^= |= <<= >>= >>>=
+- When operators of equal precedence appear in the same expression, a rule must govern which is evaluated first. All binary operators except for the assignment operators are evaluated from left to right; assignment operators are evaluated right to left.
 
-#Expressions, Statements, and Blocks#
+- Operators     Precedence  
+postfix         expr++ expr--  
+unary           ++expr --expr +expr -expr ~ !  
+multiplicative  * / %  
+additive        + -  
+shift           << >> >>>  
+relational      < > <= >= instanceof  
+equality        == !=  
+bitwise AND     &  
+bitwise exclusive OR    ^  
+bitwise inclusive OR    |  
+logical AND     &&  
+logical OR      ||  
+ternary         ? :  
+assignment      = += -= *= /= %= &= ^= |= <<= >>= >>>=  
+
+###Expressions, Statements, and Blocks###
+```
 aValue = 8933.234; // assignment statement
-System.out.println("Hello World!"); // method invocation statement
-Operators may be used in building expressions, which compute values.
-Expressions are the core components of statements.
-Statements may be grouped into blocks.
-a compound expression 1 * 2 * 3
+System.out.println("Acknowledge!"); // method invocation statement
+```
+- Operators may be used in building expressions, which compute values.
+- Expressions are the core components of statements.
+- Statements may be grouped into blocks.
+- a compound expression 1 * 2 * 3
 
-#Control Flow Statements#
-The do-while statement is similar to the while statement, but evaluates its expression at the bottom of the loop.
+###Control Flow Statements###
+- The do-while statement is similar to the while statement, but evaluates its expression at the bottom of the loop.
+```
 for ( ; ; ) {} // an infinite loop using the for statement
 while (true) {} //  an infinite loop using the while statement
-enhanced for statement for iteration through Collections and arrays:
+// enhanced for statement for iteration through Collections and arrays:
 int[] numbers =   {1,2,3,4,5,6,7,8,9,10};
 for (int item : numbers) 
 {
-             System.out.println("Count is: " + item);
+    System.out.println("Count is: " + item);
 }
+```
 
-
-#Initialization#
+###Initialization###
 - static initialization blocks are normal block of code enclosed in braces, { }, and preceded by the static keyword.  They are called in the order that they appear in the source code.
 - private static method defined in a class:
+```
     public static varType myVar = initializeClassVariable();
-    private static varType initializeClassVariable() {
+    private static varType initializeClassVariable() 
+    {
         // initialization code goes here
     }
+```
 - can be reused later if you need to reinitialize the class variable.
 - Initializer blocks for instance variables look just like static initializer blocks, but without the static keyword:
 - The compiler copies initializer blocks into every constructor. can be used to share a block of code between multiple constructors.
 - final method cannot be overridden in a subclass. 
 - The method is final because calling non-final methods during instance initialization can cause problems.
 
-#Nested Classes#
+###Nested Classes###
 - There are Static nested classes, but Non-static nested classes are called inner classes.
-A nested class can be declared private, public, protected, or package private. 
-- cannot refer directly to instance variables or methods defined in its enclosing 
+- A nested class can be declared private, public, protected, or package private. 
+- cannot refer directly to instance variables or methods defined in its enclosing. 
 - Just like any other top-level class.
-- have access to other members of the enclosing class, even if they are declared private.
+- has access to other members of the enclosing class, even if they are declared private.
 - cannot define any static members itself.
 - To instantiate an inner class, you must first instantiate the outer class. 
 - two kinds of inner classes: local classes and anonymous classes.
 
-#Enums#
+###Enums###
 All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extend anything else.
 An interface name can be used anywhere a type can be used.
 
-#Inheritance#
-Questions and Exercises: Inheritance
-1.a and c incorrect.  How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
-http://docs.oracle.com/javase/tutorial/java/IandI/override.html
+###Inheritance###
 - overriding: instance method in the subclass that has the same signature as the one in the superclass
 - hiding: a static method in the subclass that has the same signature as the one in the superclass
 - A subclass does not inherit the private members of its parent class. However, if the superclass has public or protected methods for accessing its private fields, these can also be used by the subclass.
-- implicit casting:
-    Object obj = new MountainBike();
-- explicit casting:
-    MountainBike myBike = (MountainBike)obj; // error without the cast
-    if (obj instanceof MountainBike) {
+```
+    Object obj = new MountainBike(); // implicit casting
+    MountainBike myBike = (MountainBike)obj; // explicit casting
+    // the above causes an error without the cast
+    if (obj instanceof MountainBike) 
+    {
         MountainBike myBike = (MountainBike)obj;
     }
+```
 - virtual method invocation, an aspect of polymorphism, is when the jvm calls the appropriate method for the object that is referred to in each variable, not the method that is defined by the variable's type
+"The JVM specifically utilizes a virtual method table for virtual method dispatch:  An object's dispatch table will contain the addresses of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's dispatch table. The dispatch table is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings in an inheritance hierarchy) will have dispatch tables with the same layout: the address of a given method will appear at the same offset for all type-compatible classes. Thus, fetching the method's address from a given dispatch table offset will get the method corresponding to the object's actual class." (Andrew Hare)
+
 - The compiler automatically provides a no-argument, default constructor for any class without constructors. This default constructor will call the no-argument constructor of the superclass.
 - constructor chaining: If a constructor does not explicitly invoke a superclass constructor, the Java compiler automatically inserts a call to the no-argument constructor of the superclass. If the super class does not have a no-argument constructor, you will get a compile-time error.   But Oject has one.  there will be a whole chain of constructors called, all the way back to the constructor of Object.
 - Methods called from constructors should generally be declared final. If a constructor calls a non-final method, a subclass may redefine that method with surprising or undesirable results.
