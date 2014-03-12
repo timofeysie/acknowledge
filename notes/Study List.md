@@ -31,3 +31,14 @@ class C(){public static void main(String [] args)
 	a.toString(); // prints B
 }
 ```
+
+Operators make expressions.
+Expressions make statements.
+Statements make blocks.
+
+
+Things to do:  
+overriding clone() example  
+finish inner class notes  
+
+

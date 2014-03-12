@@ -4,6 +4,7 @@ Consider the following code snippet:
     arrayOfInts[j] > arrayOfInts[j+1]
 Question: What operators does the code contain?
 Answer: >, +
+
 Consider the following code snippet:
 int i = 10;
 int n = i++%5;
@@ -15,4 +16,8 @@ int n = i++%5;
 Questions and Exercises: Inheritance
 1.a and c incorrect.  How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
 http://docs.oracle.com/javase/tutorial/java/IandI/override.html
+
+- What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
+
+- What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 
