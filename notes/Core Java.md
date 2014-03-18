@@ -22,6 +22,7 @@ Inheritance
 Object class
 Clone  
 Abstract & Interface  
+Switch  
 Methods  
 Modifiers  
 Packages  
@@ -87,7 +88,8 @@ A collection of methods with no implementation is called an interface.
 - package-private: when a class (or member) has no explicit public(private/protected) modifyer.
 - The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package.
 - Public fields tend to link you to a particular implementation and limit your flexibility in changing your code.
-Access Levels
+
+Access Levels  
 Modifier    Class   Package Subclass World  
 public      Y       Y       Y        Y  
 protected   Y       Y       Y        N  
@@ -114,8 +116,8 @@ Even thought myCircle is not returned from the moveCircle method, the changes th
 
 
 ###Numbers###
-- the eight primitive data types supported by the Java programming language: boolean, 
-byte, char, short, int, float, long, double, float. 
+The eight primitive data types supported by the Java programming language: boolean, byte, char, short, int, float, long, double. 
+
 - boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.
 - byte: 8-bit signed two's complement integer. min -128 max 127 (incl).
 - char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
@@ -124,12 +126,17 @@ byte, char, short, int, float, long, double, float.
 - float: single-precision 32-bit IEEE 754 floating point. range specified in the Floating-Point Types, Formats, and Values section of the Java Language Spec. As with the recommendations for byte and short, use a float (instead of double) if you need to save memory in large arrays of floating point numbers. not for precise values, such as currency. For that, use the java.math.BigDecimal
 - long: 64-bit two's complement integer. signed min -2 tt 63 max 2 tt 63-1. Java SE 8 has an unsigned 64-bit long:min 0 and a max 2 tt 64-1. Use this data type when you need a range of values wider than those provided by int. Also compareUnsigned, divideUnsigned etc
 - double: double-precision 64-bit IEEE 754 floating point. (Range in Java Spec). decimal default choice. should never be used for precise values
-- A 64-bit register can store 2tt64 (over 18 quintillion or 1.8×10 to the 19th power) different values. Hence, a processor with 64-bit memory addresses can directly access 264 bytes (=16 exbibytes) of byte-addressable memory.
-- Decimal numbers (for example 1.3) are of type double by default. To make them of type float they must be followed by F (say, 1.3F).
-- integral type negative numbers are generated using the following three step process -
-1.Convert18 to binary 0001 0010
+
+A 64-bit register can store 2tt64 (over 18 quintillion or 1.8×10 to the 19th power) different values. Hence, a processor with 64-bit memory addresses can directly access 264 bytes (=16 exbibytes) of byte-addressable memory.
+
+Decimal numbers (for example 1.3) are of type double by default. To make them of type float they must be followed by F (say, 1.3F).
+
+Integral type negative numbers are generated using the following three step process:
+
+1.Convert 18 to binary 0001 0010
 2. Interchanging 0s and 1s 1110 1101
 3. Adding 1 -- 1110 11
+
 ```
 0000 0000 0
 0000 0001 1
@@ -179,7 +186,6 @@ Unboxing is Converting an object of a wrapper type (Integer) to its correspondin
 - Assigned to a variable of the corresponding primitive type.
 
 
-
 ###PrintStream###
 - System.out is a PrintStream object, so you can invoke PrintStream where you have been using print or println. For example,
 System.out.format(String format, Object... args);
@@ -204,10 +210,11 @@ Math.E, the base of natural logarithms
 - pseudo-randomly selected number includes 0.0 but not 1.0. 
 - 0.0 <= Math.random() < 1.0
 - static double ceil(double(d)) : returns the smallest double value equal to a mathematical integer, that is not less than the argument. 
-    ceil(3.4) returns 4.0
-    ceil(-2.3) returns -2.0
-    ceil(3.0) returns 3.0
-
+```
+    ceil(3.4) // returns 4.0
+    ceil(-2.3) // returns -2.0
+    ceil(3.0) // returns 3.0
+```
 
 ###Operators###
 - remainder operator (modulus, modula) 10 % 3 is 1 because 10 divided by 3 leaves a remainder of 1.
@@ -282,7 +289,7 @@ b = b >> 2; // 1111 1101 (2's complement of -3)
 ```
 The new value of b becomes -3.
 
-###assignments###
+###Assignments###
 - Implicit widening; assigning an int to a long.
 - Explicit casting when source is of larger size than destination is required. In this case, if no casting is provided then the program does not compile.
 - defailt init value for.
@@ -297,7 +304,6 @@ String str3 = "first";
 boolean test1 = (str1 == str2); f
 boolean test2 = (str1 == str3); t
 ```
-
 
 
 ###Expressions, Statements, and Blocks###
@@ -382,15 +388,17 @@ class C {public static void main(String [] args)
 - Methods called from constructors should generally be declared final. If a constructor calls a non-final method, a subclass may redefine that method with surprising or undesirable results.
 - final classes cannot be subclassed, useful when creating an immutable class like the String class.
 
-#Object#
+###Object###
+```
 protected Object clone() throws CloneNotSupportedException  
 public boolean equals(Object obj)  
 protected void finalize() throws Throwable  
-public final Class getClass()  
+public final Class getClass()  // cannot be overridden
 public int hashCode()  
 public String toString()  
 notify, notifyAll, and wait   
-- If an object contains a reference to an external object, you may need to override clone() to get correct behavior. Otherwise, a change in ObjExternal made by one object will be visible in its clone also. This means that the original object and its clone are not independent—to decouple them, you must override clone() so that it clones the object and ObjExternal. Then the original object references ObjExternal and the clone references a clone of ObjExternal, so that the object and its clone are truly independent.
+```
+- If an object contains a reference to an external object, override clone() to decouple them so that it clones the object and ObjExternal, Otherwise a change in ObjExternal made by one object will be visible in its clone also as the original object and its clone are not independent, so that the object and its clone are truly independent.
 - If you override equals(), you must override hashCode() as well.
 - A hash code is the object's memory address in hexadecimal.
 - if two objects are equal, their hash code must also be equal. If you override the equals() method, you change the way two objects are equated
@@ -399,19 +407,27 @@ notify, notifyAll, and wait
 - getClass().getSimpleName()
 - getClass().getSuperclass() // its superclass 
 - getClass().getInterfaces() // interfaces it implements
-- getFields() getMethods() // other methods (of 50) in Class.class
+- getFields().getMethods() // other methods (of 50) in Class.class
 
-#Clone#
+###Clone###
 - create an object with similar state as the original object.
-
+- use
+```
+protected Object clone() throws CloneNotSupportedException
+```
+or:
+```
+public Object clone() throws CloneNotSupportedException
+```
+if you are going to write a clone() method to override the one in Object.
+- If an object contains a reference to an external object, a change in ObjExternal made by one object will be visible in its clone also. 
+— to decouple them, you must override clone() so that it clones the object and ObjExternal. Then the original object references ObjExternal and the clone references a clone of ObjExternal, so that the object and its clone are truly independent
 
 #Abstract & Interface#
-- Java does not permit multiple inheritance but interfaces provide an alternative because you can implement more than one interface.
-- an interface can extend any number of interfaces. 
+- Java does not permit multiple inheritance(can only extend one class) but interfaces provide an alternative because you can implement more than one interface (an interface can extend any number of interfaces).  
 - If a class includes abstract methods, the class itself must be declared abstract
 - All methods declared in an interface are implicitly public, so the public modifier can be omitted.
 - All constant values defined in an interface are implicitly public, static, and final and these can be omitted.
-
 
 - if an abstract class is subclassed and contians unimplemented methods, it must also be declared abstract.
 - All of the methods in an interface are implicitly abstract, so the abstract modifier is not used. (it could be—it's just not necessary).
@@ -423,8 +439,26 @@ notify, notifyAll, and wait
 - You can define an abstract class that does not implement all of an interface method.
 - An abstract class may have static fields and static methods that can be used with a class reference—for: AbstractClass.staticMethod()—as with any other class.
 
+###Switch###  
+Works with
+- byte and Byte
+- short and Short
+- char and Character
+- int & Integer
+- enum
+- String  
+ 
+ the switch block can be labeled with one or more case or default labels. The switch statement evaluates its expression, then executes all statements that follow the matching case label.
 
-#Methods#
+break statements are necessary because without them, statements in switch blocks fall through: All statements after the matching case label are executed in sequence, regardless of the expression of subsequent case labels, until a break statement is encountered.
+
+The String in the switch expression is compared with the expressions associated with each case label as if the String.equals() method were being used
+
+
+
+
+
+###Methods###
 - Overriding Instance Methods: An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.  
 - the version of the hidden static method that gets invoked is the one in the superclass
 - the version of the overridden instance method that gets invoked is the one in the subclass.
@@ -450,9 +484,10 @@ You can prevent a class or method from being subclassed by using the final keywo
 #Packages#
 - package private are All the top-level, non-public types in the same file as a pulic class.
 - Importing java.awt.* imports all of the types in the java.awt package, but it does not import java.awt.color, java.awt.font, etc...  To import more, do this:
+```
     import java.awt.*;
     import java.awt.color.*;
-
+```
 
 #Regular Expressionses#
 

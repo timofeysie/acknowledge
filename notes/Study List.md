@@ -36,9 +36,36 @@ Operators make expressions.
 Expressions make statements.
 Statements make blocks.
 
+- All constant values defined in an interface are implicitly public, static, and final and these can be omitted.
 
 Things to do:  
 overriding clone() example  
-finish inner class notes  
+finish inner c
+```
+// Compile error cannot be referenced from a static context
+Animal.testClassMethod()      - static Animal
+Animal.testInstanceMethod()   - compile error
+myAnimal.testClassMethod()    - static Animal Hidden
+myAnimal.testInstanceMethod() - instance Cat
+Cat.testClassMethod()         - static Cat
+Cat.testInstanceMethod        - compile error
+myCat.testClassMethod         - static Cat
+myCat.testInstanceMethod      - instance Cat overriding
+
+Animal.testClassMethod()      - static Animal
+myAnimal.testClassMethod()    - static Animal Hidden
+Cat.testClassMethod()         - static Cat
+myCat.testClassMethod         - static Cat
+
+Animal.testInstanceMethod()   - compile error
+myAnimal.testInstanceMethod() - instance Cat
+Cat.testInstanceMethod        - compile error
+myCat.testInstanceMethod      - instance Cat overriding
+
+            Class           Instance
+Animal      Animal          x
+myAnimal    Animal Hidden   Cat
+Cat         Cat             x
+myCat       Cat             Cat Overriding
 
 
