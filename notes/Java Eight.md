@@ -12,3 +12,7 @@ Nested Classes
 
 - captured variable: a local class can only access local variables that are declared final.
 - in Java SE 8, a local class can access local variables and parameters of the enclosing block that are final or effectively final. A variable or parameter whose value is never changed after it is initialized is effectively final.
+Starting in Java SE 8, if you declare the local class in a method, it can access the method's parameters.
+Starting in Java SE 8, a local class can access local variables and parameters of the enclosing block that are final or effectively final. 
+
+

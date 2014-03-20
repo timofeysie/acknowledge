@@ -340,17 +340,80 @@ for (int item : numbers)
 - The method is final because calling non-final methods during instance initialization can cause problems.
 
 ###Nested Classes###
-- Two types:
-- Static nested classes
-- Non-static nested classes (inner classes(local/anonymous))
+Logical grouping of classes — Nesting such "helper classes" makes their package more streamlined.
+
+Increased encapsulation — Outer class members can be declared private.
+
+More readable, maintainable code - places the code closer to where it is used.
+
+- Two types:  
+1 Static nested classes
+2 Non-static nested classes (inner classes(local/anonymous))
+
+Static Nested Classes   
+- do not have access to other members of the enclosing class. 
 - A nested class can be declared private, public, protected, or package private. 
 - cannot refer directly to instance variables or methods defined in its enclosing. 
 - Just like any other top-level class.
+- accessed using the enclosing class name:
+```
+Outer.StaticNested nestedObj = new Outer.StaticNested();
+```
+
+Inner Classes  
 - has access to other members of the enclosing class, even if they are declared private.
 - cannot define any static members itself.
 - To instantiate an inner class, you must first instantiate the outer class. 
-- two kinds of inner classes: local classes and anonymous classes.
-(unifinished)
+- Objects that are instances of an inner class exist within an instance of the outer class.
+```
+OuterClass.InnerClass innerObject = outerObject.new InnerClass();
+```
+- two kinds of inner classes:
+1. local classes
+2. anonymous classes.
+
+Local classes  
+- defined in a block (between balanced braces)
+- usually defined in the body of a method
+- also in a for loop, or an if clause.
+- a local class can only access local variables that are declared final.
+- Declarations of a type (such as a variable) in a local class shadow declarations in the enclosing scope that have the same name.
+- Local classes are like inner classes because they cannot define or declare any static members.
+ Local classes are non-static because they have access to instance members of the enclosing block. Consequently, they cannot contain most kinds of static declarations.
+- You cannot declare an interface inside a block; interfaces are inherently static. 
+- You cannot declare static initializers or member interfaces in a local class.
+
+
+LocalClassExample.java creates a local class like this:
+```
+PhoneNumber myNumber1 = new PhoneNumber(phoneNumber1);
+```
+
+- A local class can have static members provided that they are constant variables. (A constant variable A variable is a variable of primitive type or type String that is declared final and initialized with a compile-time constant expression. 
+
+Anonymous classes   
+- more concise code. 
+- declare and instantiate a class at the same time.
+- like local classes except that they do not have a name. 
+- Use if you need to use a local class only once.
+- anonymous classes are expressions, which means you define the class in another expression
+
+Anonymous classes have the same access to local variables of the enclosing scope as local classes:
+- has access to the members of its enclosing class.
+- cannot access local variables in its enclosing scope that are not declared as final or effectively final
+- Like nested classes, declarations of a type (such as a variable) in an anonymous class shadow declarations in the enclosing scope that have the same name.
+
+Anonymous classes also have the same restrictions as local classes with respect to their members:
+- You cannot declare static initializers or member interfaces in an anonymous class.
+- An anonymous class can have static members provided that they are constant variables.
+
+Note that you can declare the following in anonymous classes:
+- Fields
+- Extra methods (even if they do not implement any methods of the supertype)
+- Instance initializers
+- Local classes
+- However, you cannot declare constructors in an anonymous class.
+
 
 ###Enums###
 - All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extend anything else.

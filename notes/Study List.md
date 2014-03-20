@@ -32,13 +32,45 @@ class C(){public static void main(String [] args)
 }
 ```
 
-Operators make expressions.
+perators make expressions.
 Expressions make statements.
 Statements make blocks.
+Operators -> Expressions -> Statements -> Blocks
+
+```
+Set<String> s = new HashSet<String>();
+```
+Referring to collections only by their interface prevents you from 
+using any nonstandard operations.
+
+nondestructive idioms, first copy:
+Set<Type> union/inter/diff = new HashSet<Type>(s1);
+union.addAll(s2);
+intersection.retainAll(s2);
+difference.removeAll(s2);
 
 
 Things to do:  
 overriding clone() example  
 finish inner class notes  
+TreeSet stores its elements in a red-black tree
 
+Add to Core Java
+
+###Branching Statements###
+- An unlabeled break statement terminates the innermost switch, for, while, or do-while statement
+- A labeled break terminates an outer statement.
+- A continue statement skips the current iteration of a for, while , or do-while loop. 
+- The unlabeled form skips to the end of the innermost loop's body and evaluates the boolean expression that controls the loop.
+- A labeled continue statement skips the current iteration of an outer loop marked with the given label. 
+- The return statement exits from the current method, and control flow returns to where the method was invoked. 
+- The return statement has two forms: one that returns a value, and one that doesn't. 
+- To return a value, put the value (or an expression that calculates the value) after the return keyword.
+- When a method is declared void, use the form of return that doesn't return a value.
+
+
+Add to inheritance
+- If the subclass is in the same package as its parent, it also inherits the package-private members of the parent. 
+You can use the inherited members as is, replace them, hide them, or supplement them with new members:
+- A nested class has access to all the private members of its enclosing class—both fields and methods. Therefore, a public or protected nested class inherited by a subclass has indirect access to all of the private members of the superclass.
 
