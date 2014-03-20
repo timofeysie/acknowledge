@@ -7,7 +7,12 @@
 * on whether it is invoked from the superclass or the subclass.
 *
 * The Cat class overrides the instance method in Animal and 
-* hides the static method in Animal. 
+* hides the static method in Animal.
+            Class           Instance
+Animal      Animal          x
+myAnimal    Animal Hidden   Cat
+Cat         Cat             x
+myCat       Cat             Cat Overriding
 */
 public class Cat extends Animal 
 {

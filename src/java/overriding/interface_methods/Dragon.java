@@ -1,5 +1,3 @@
-package overriding.interface_methods;
-
 /**
 * when the supertypes of a class or interface provide multiple default 
 * methods with the same signature, the Java compiler follows inheritance 
@@ -12,7 +10,7 @@ public interface Animal
 {
     default public String identifyMyself() 
     {
-        return "I am an animal.";
+        return "interface_animal";
     }
 }
 
@@ -20,11 +18,17 @@ public interface EggLayer extends Animal
 {
     default public String identifyMyself() 
     {
-        return "I am able to lay eggs.";
+        return "lay_eggs_extends_animal";
     }
 }
 
-public interface FireBreather extends Animal { }
+public interface FireBreather extends Animal 
+{ 
+    default public String identifyMyself() 
+    {
+        return "fire_breather_extends_animal";
+    }
+}
 
 /**
 * The method Dragon.identifyMyself returns the string 

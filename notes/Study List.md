@@ -49,25 +49,38 @@ union.addAll(s2);
 intersection.retainAll(s2);
 difference.removeAll(s2);
 
+- All constant values defined in an interface are implicitly public, static, and final and these can be omitted.
 
 Things to do:  
 overriding clone() example  
-finish inner class notes  
 TreeSet stores its elements in a red-black tree
 
-Add to Core Java
+```
+// Compile error cannot be referenced from a static context
+Animal.testClassMethod()      - static Animal
+Animal.testInstanceMethod()   - compile error
+myAnimal.testClassMethod()    - static Animal Hidden
+myAnimal.testInstanceMethod() - instance Cat
+Cat.testClassMethod()         - static Cat
+Cat.testInstanceMethod        - compile error
+myCat.testClassMethod         - static Cat
+myCat.testInstanceMethod      - instance Cat overriding
 
-###Branching Statements###
-- An unlabeled break statement terminates the innermost switch, for, while, or do-while statement
-- A labeled break terminates an outer statement.
-- A continue statement skips the current iteration of a for, while , or do-while loop. 
-- The unlabeled form skips to the end of the innermost loop's body and evaluates the boolean expression that controls the loop.
-- A labeled continue statement skips the current iteration of an outer loop marked with the given label. 
-- The return statement exits from the current method, and control flow returns to where the method was invoked. 
-- The return statement has two forms: one that returns a value, and one that doesn't. 
-- To return a value, put the value (or an expression that calculates the value) after the return keyword.
-- When a method is declared void, use the form of return that doesn't return a value.
+Animal.testClassMethod()      - static Animal
+myAnimal.testClassMethod()    - static Animal Hidden
+Cat.testClassMethod()         - static Cat
+myCat.testClassMethod         - static Cat
 
+Animal.testInstanceMethod()   - compile error
+myAnimal.testInstanceMethod() - instance Cat
+Cat.testInstanceMethod        - compile error
+myCat.testInstanceMethod      - instance Cat overriding
+
+            Class           Instance
+Animal      Animal          x
+myAnimal    Animal Hidden   Cat
+Cat         Cat             x
+myCat       Cat             Cat Overriding
 
 Add to inheritance
 - If the subclass is in the same package as its parent, it also inherits the package-private members of the parent. 
