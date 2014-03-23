@@ -123,4 +123,9 @@ public class TestFormat {
                           Math.toDegrees(Math.atan(Math.tan(radians))));
     }
 
+    public enum Sex 
+    {
+        MALE, FEMALE
+    }
+
 }

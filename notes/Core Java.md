@@ -28,7 +28,7 @@ Methods
 Modifiers  
 Packages  
 Regular Expressionses  
-
+Exceptions
 
 Where does this note go?  It was in enums...
 - An interface name can be used anywhere a type can be used.
@@ -55,6 +55,11 @@ public class ShadowTest {
     }
 }
 ```
+- Same for a local variable:
+void methodInFirstLevel2() 
+{
+    int x = 2;
+- prints out 2(or parameter), 1, 0.
 
 ###Objects###
 Real-world objects contain state and behavior.
@@ -83,8 +88,6 @@ A collection of methods with no implementation is called an interface.
 
 - explicit constructor invocation From within a constructor, you can also use the this keyword to call another constructor in the same class.
 
-- (Static Fields) A class variable is any field declared with the static modifier; this tells the compiler that there is exactly one copy of this variable in existence, regardless of how many times the class has been instantiated. 
-
 ###Branching Statements###
 - An unlabeled break statement terminates the innermost switch, for, while, or do-while statement
 - A labeled break terminates an outer statement.
@@ -103,11 +106,11 @@ A collection of methods with no implementation is called an interface.
 - Public fields tend to link you to a particular implementation and limit your flexibility in changing your code.
 
 Access Levels  
-Modifier    Class   Package Subclass World  
-public      Y       Y       Y        Y  
-protected   Y       Y       Y        N  
-no modifier Y       Y       N        N  
-private     Y       N       N        N  
+Modifier....Class...Package.Subclass.World  
+public......Y.......Y.......Y........Y  
+protected...Y.......Y.......Y........N  
+no modifier.Y.......Y.......N........N  
+private.....Y.......N.......N........N  
 
 
 ###Pass by Value###
@@ -130,7 +133,7 @@ Even thought myCircle is not returned from the moveCircle method, the changes th
 
 ###Numbers###
 The eight primitive data types supported by the Java programming language: boolean, byte, char, short, int, float, long, double. 
-
+"If you bite a char short inthe float it's long in the double"
 - boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.
 - byte: 8-bit signed two's complement integer. min -128 max 127 (incl).
 - char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
@@ -146,11 +149,22 @@ Decimal numbers (for example 1.3) are of type double by default. To make them of
 
 Integral type negative numbers are generated using the following three step process:
 
-1.Convert 18 to binary 0001 0010
+1. Convert 18 to binary 0001 0010
 2. Interchanging 0s and 1s 1110 1101
 3. Adding 1 -- 1110 11
 
 ```
+    Integer.toBinaryString(18);
+    bin = ~bin;
+    bin+=1;
+
+                    00000 10010 = 18
+bin = ~bin;         11111 01101 = -19
+bin+=1;             11111 01110 = -18
+bin = bin>>1;       11111 10111 = -9
+bin = bin << 1;     11111 01110 = -18
+bin = bin >>> 1;    11111 10111 = 2147483639
+
 0000 0000 0
 0000 0001 1
 0000 0010 2
@@ -208,7 +222,15 @@ System.out.format(String format, Object... args);
 long n = 461012;
 System.out.format("Comma separated: %,8d%n", n);    
 // -->  "Comma separated: 461,012" (newline)
+      Calendar c = Calendar.getInstance();
+      System.out.format("%tB %te, %tY%n", c, c, c); // -->  "May 29, 2006"
+      System.out.format("%tl:%tM %tp%n", c, c, c);  // -->  "2:34 am"
+      System.out.format("%tD%n", c);    // -->  "05/29/06"
 ```
+Or in a catch block:
+```
+System.err.format("IOException: %s%n", x);
+``
 
 ###Math###
 Math.E, the base of natural logarithms  
@@ -250,8 +272,8 @@ result = result % 7;
 ?:      Ternary (shorthand for if-then-else statement)  
 ~       Unary bitwise complement  
 <<      Signed left shift  
->>      Signed right shift  
->>>     Unsigned right shift  
+>_>      Signed right shift  
+>_>_>     Unsigned right shift  
 &       Bitwise AND  
 ^       Bitwise exclusive OR  
 |       Bitwise inclusive OR  
@@ -285,39 +307,45 @@ int i = 13; // 0000 1101
 i = i << 2; // 0011 0100 
 i is 52 (i × 4) 
 ```
->>> Zero fill shift right fills the leftmost bits by zeros. So the result of applying the operator >>> is always positive.
+>_>_> Zero fill shift right fills the leftmost bits by zeros. So the result of applying the operator >>> is always positive.
 ```
 int b = 13; // 0000 1101
-b = b >>> 2; //0000 0011  = 3
+b = b >_>_> 2; //0000 0011  = 3
 int b = -11; // 1111 0101 
-b = b >>> 2; // 1111 1101
+b = b >_>_> 2; // 1111 1101
 ```
 So the result of applying zero fill right shift operator with operand two on -11 is 1073741821.
->> Signed right shift operator fills the left most bit by the sign bit.- For positive numbers >>> is the same as >>.  
+>_> Signed right shift operator fills the left most bit by the sign bit.- For positive numbers >_>_> is the same as >_>.  
 - For negative numbers;
 ```
 int b = -11; // 1111 0101 
-b = b >> 2; // 1111 1101 (2's complement of -3) 
+b = b >_> 2; // 1111 1101 (2's complement of -3) 
 // Here the sign bit 1 gets filled in the two most significant bits.
 ```
 The new value of b becomes -3.
 
 ###Assignments###
-- Implicit widening; assigning an int to a long.
-- Explicit casting when source is of larger size than destination is required. In this case, if no casting is provided then the program does not compile.
+**Implicit widening** assigning an int to a long.  
+**Explicit casting** when source is of larger size than destination is required. In this case, if no casting is provided then the program does not compile.
 - defailt init value for.
 char \u0000
 int 0
 - Variable defined inside a method are not implicitly initialized, where as array elements are implicitly initialized.
 ```
 string (obj) null
-String str1 = "first string";
+String str1 = "first";
 String str2 = new String("first");
 String str3 = "first";
-boolean test1 = (str1 == str2); f
-boolean test2 = (str1 == str3); t
-```
+boolean test1 = (str1 == str2); false
+boolean test2 = (str1 == str3); true
 
+    ValueObject obj1 = new ValueObject(); obj1.value = "first";
+    ValueObject obj2 = new ValueObject(); obj2.value = "first";
+    ValueObject obj3 = obj1;
+    boolean test1 = (obj1.value == obj2.value); //true
+    boolean test2 = (obj1.value == obj3.value); //true
+```
+(note: object comparrison coming soon)
 
 ###Expressions, Statements, and Blocks###
 ```
@@ -328,6 +356,7 @@ System.out.println("Acknowledge!"); // method invocation statement
 - Expressions are the core components of statements.
 - Statements may be grouped into blocks.
 - a compound expression 1 * 2 * 3
+Operators -> expressions compute values -> statements -> blocks.
 
 ###Control Flow Statements###
 - The do-while statement is similar to the while statement, but evaluates its expression at the bottom of the loop.
@@ -357,19 +386,30 @@ for (int item : numbers)
 - The compiler copies initializer blocks into every constructor. can be used to share a block of code between multiple constructors.
 - final method cannot be overridden in a subclass. 
 - The method is final because calling non-final methods during instance initialization can cause problems.
+```
+class A {public A(){System.out.println("a");}
+    public String toString(){return("A");}}
+class B extends A {public B(){System.out.println("b");}
+    public String toString(){return("B");}}
+class C extends B {public C(){System.out.println("c");}
+    public String toString(){return("C");}}
+class D {public static void main(String [] args)
+{A a = new B();System.out.print(a.toString());
+ C c = new C();System.out.print(c.toString());}}
+```
+Output: a b Ba b c C
 
-###Nested Classes###
-Logical grouping of classes — Nesting such "helper classes" makes their package more streamlined.
 
-Increased encapsulation — Outer class members can be declared private.
-
-More readable, maintainable code - places the code closer to where it is used.
+###Nested Classes###  
+- Logical grouping of classes — Nesting such "helper classes" makes a package more streamlined.
+- Increased encapsulation — Outer class members can be declared private.
+- More readable, maintainable code - places the code closer to where it is used.
 
 - Two types:  
-1 Static nested classes
-2 Non-static nested classes (inner classes(local/anonymous))
+1. Static nested classes
+2. Non-static nested classes (inner classes(local/anonymous))
 
-Static Nested Classes   
+1. Static Nested Classes   
 - do not have access to other members of the enclosing class. 
 - A nested class can be declared private, public, protected, or package private. 
 - cannot refer directly to instance variables or methods defined in its enclosing. 
@@ -379,7 +419,7 @@ Static Nested Classes
 Outer.StaticNested nestedObj = new Outer.StaticNested();
 ```
 
-Inner Classes  
+2. Inner Classes  
 - has access to other members of the enclosing class, even if they are declared private.
 - cannot define any static members itself.
 - To instantiate an inner class, you must first instantiate the outer class. 
@@ -388,10 +428,10 @@ Inner Classes
 OuterClass.InnerClass innerObject = outerObject.new InnerClass();
 ```
 - two kinds of inner classes:
-1. local classes
-2. anonymous classes.
+A. local classes
+B. anonymous classes.
 
-Local classes  
+A. Local classes  
 - defined in a block (between balanced braces)
 - usually defined in the body of a method
 - also in a for loop, or an if clause.
@@ -410,7 +450,7 @@ PhoneNumber myNumber1 = new PhoneNumber(phoneNumber1);
 
 - A local class can have static members provided that they are constant variables. (A constant variable A variable is a variable of primitive type or type String that is declared final and initialized with a compile-time constant expression. 
 
-Anonymous classes   
+B. Anonymous classes   
 - more concise code. 
 - declare and instantiate a class at the same time.
 - like local classes except that they do not have a name. 
@@ -436,6 +476,12 @@ Note that you can declare the following in anonymous classes:
 
 ###Enums###
 - All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extend anything else.
+```
+public enum Sex 
+{
+    MALE, FEMALE
+}
+```
 
 ###Inheritance###
 - overriding: instance method in the subclass that has the same signature as the one in the superclass
@@ -450,9 +496,10 @@ Note that you can declare the following in anonymous classes:
         MountainBike myBike = (MountainBike)obj;
     }
 ```
-- virtual method invocation, an aspect of polymorphism, is when the jvm calls the appropriate method for the object that is referred to in each variable, not the method that is defined by the variable's type
+**virtual method invocation** an aspect of polymorphism, is when the jvm calls the appropriate method for the object that is referred to in each variable, not the method that is defined by the variable's type
 "The JVM specifically utilizes a virtual method table for virtual method dispatch:  An object's dispatch table will contain the addresses of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's dispatch table. The dispatch table is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings in an inheritance hierarchy) will have dispatch tables with the same layout: the address of a given method will appear at the same offset for all type-compatible classes. Thus, fetching the method's address from a given dispatch table offset will get the method corresponding to the object's actual class." (Andrew Hare)
 ```
+// virtual method invocation
 class A {public String toString(){return("A");}}
 class B extends A {public String toString(){return("B");}}
 class C {public static void main(String [] args)
@@ -543,7 +590,99 @@ The String in the switch expression is compared with the expressions associated 
 ** What the hell is a default method?***
 - However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
 - Instance methods are preferred over interface default methods.  Pegasus.identifyMyself() returns the string "I am a horse."
+```
+package overriding.interface_methods;
+
+/**
+* When the supertypes of a class or interface provide multiple 
+* default methods with the same signature, the Java compiler follows 
+* inheritance rules to resolve the name conflict. 
+* These rules are driven by the following two principles:
+* Rule # 1:
+* Instance methods are preferred over interface default methods.
+* The method Pegasus.identifyMyself returns the string I am a horse.
+*/
+public class Pegasus extends Horse implements Flyer, Mythical 
+{
+    public static void main(String... args) 
+    {
+        Pegasus myApp = new Pegasus();
+        System.out.println(myApp.identifyMyself());
+    }
+}
+
+public class Horse 
+{
+    public String identifyMyself() 
+    {
+        return "I am a horse.";
+    }
+
+}
+
+public interface Flyer 
+{
+    default public String identifyMyself() 
+    {
+        return "I am able to fly.";
+    }
+}
+
+public interface Mythical 
+{
+    default public String identifyMyself() 
+    {
+        return "I am a mythical creature.";
+    }
+}
+```
 - Methods that are already overridden by other candidates are ignored. Dragon.identifyMyself() returns the string "I am able to lay eggs."
+```
+/**
+* when the supertypes of a class or interface provide multiple default 
+* methods with the same signature, the Java compiler follows inheritance 
+* rules to resolve the name conflict.
+* Rule # 2:
+* Methods that are already overridden by other candidates are ignored. 
+* This circumstance can arise when supertypes share a common ancestor.
+*/
+public interface Animal 
+{
+    default public String identifyMyself() 
+    {
+        return "interface_animal";
+    }
+}
+
+public interface EggLayer extends Animal 
+{
+    default public String identifyMyself() 
+    {
+        return "lay_eggs_extends_animal";
+    }
+}
+
+public interface FireBreather extends Animal 
+{ 
+    default public String identifyMyself() 
+    {
+        return "fire_breather_extends_animal";
+    }
+}
+
+/**
+* The method Dragon.identifyMyself returns the string 
+* "I am able to lay eggs.""
+*/
+public class Dragon implements EggLayer, FireBreather 
+{
+    public static void main (String... args) 
+    {
+        Dragon myApp = new Dragon();
+        System.out.println(myApp.identifyMyself());
+    }
+}
+```
   This circumstance can arise when supertypes share a common ancestor.
 You could invoke any of the of the default implementations with the super keyword.
 You can use the super keyword to invoke a default method in both classes and interfaces.
@@ -568,3 +707,139 @@ You can prevent a class or method from being subclassed by using the final keywo
 #Regular Expressionses#
 
 Instances of the Pattern class are immutable and are safe for use by multiple concurrent threads. Instances of the Matcher class are not safe for such use.
+
+
+###Exceptions###  
+The **Catch or Specify Requirement**: code that might throw certain exceptions must be enclosed by either of the following:
+- A try statement that catches the exception. The try must provide a handler for the exception
+- A method that specifies that it can throw the exception. The method must provide a throws clause that lists the exception
+
+**Exception handler**  
+- The runtime system searches the call stack for a method that contains a block of code that can handle the exception. This block of code is called an exception handler.
+- An exception handler is considered appropriate if the type of the exception object thrown matches the type that can be handled by the handler.
+- If the runtime system searches all the methods on the call stack without finding an appropriate exception handler the runtime system (program) terminates.
+
+**The Three Kinds of Exceptions**  
+1. checked exception  
+2. error  
+3. runtime exception  
+- Checked exceptions are subject to the Catch or Specify Requirement. All exceptions are checked exceptioSns, except for those indicated by Error, RuntimeException, and their subclasses.
+- errors are exceptional conditions that are external to the application, and that the application usually cannot anticipate or recover from. Errors are not subject to the Catch or Specify Requirement.  Thrown when a dynamic linking failure or other hard failure in the Java virtual machine occurs.
+- runtime exceptions are exceptional conditions that are internal to the application, and that the application usually cannot anticipate or recover from. These usually indicate programming bugs, such as logic errors or improper use of an API.  not subject to the Catch or Specify Requirement.  Exception subclass, RuntimeException, is reserved for exceptions that indicate incorrect use of an API. Ie: NullPointerException, which occurs when a method tries to access a member of an object through a null reference.
+
+Try & Catch
+- A try statement does not have to have a catch block if it has a finally block.
+- a single catch block can handle more than one type of exception (Java 7) to reduce code duplication and lessen the temptation to catch an overly broad exception.
+- specify exceptions and separate each with a vertical bar (|):
+```
+catch (IOException|SQLException ex) {
+    logger.log(ex);
+    throw ex;
+}
+```
+- If a catch block handles more than one exception type, then the catch parameter is implicitly final. In this example, the catch parameter ex is final and therefore you cannot assign any values to it within the catch block.
+- The runtime system always executes the statements within the finally block regardless of what happens within the try block. 
+- The try-with-resources statement declares one or more resources.   Any object that implements java.lang.AutoCloseable, which includes all objects which implement java.io.Closeable, can be used as a resource.
+```
+try (
+        java.util.zip.ZipFile zf =
+             new java.util.zip.ZipFile(zipFileName);
+        java.io.BufferedWriter writer = 
+            java.nio.file.Files.newBufferedWriter(outputFilePath, charset)
+    ) { ...
+```
+- the close methods of resources are called in the opposite order of their creation.
+- an exception can be thrown from the try block, and up to two exceptions can be thrown from the try-with-resources statement when it tries to close the ZipFile and BufferedWriter objects.
+- If an exception is thrown from the try block and one or more exceptions are thrown from the try-with-resources statement, then those exceptions thrown from the try-with-resources statement are suppressed
+- the exception thrown by the block is the one that is thrown by the writeToFileZipFileContents method. 
+- You can retrieve these suppressed exceptions by calling the Throwable.getSuppressed method from the exception thrown by the try block.
+
+```
+try (Statement stmt = con.createStatement()) 
+{
+    ResultSet rs = stmt.executeQuery(query);
+    while (rs.next()) 
+    {
+        String coffeeName = rs.getString("COF_NAME");
+        int supplierID = rs.getInt("SUP_ID");
+        float price = rs.getFloat("PRICE");
+        int sales = rs.getInt("SALES");
+        int total = rs.getInt("TOTAL");
+        System.out.println(coffeeName + ", " + supplierID + ", " + 
+           price + ", " + sales + ", " + total);
+    }
+} catch (SQLException e) 
+{
+    JDBCTutorialUtilities.printSQLException(e);
+}
+```
+- JDBC 4.1 and later API.
+- any catch or finally block is run after the resources declared have been closed.
+- The Closeable interface extends the AutoCloseable interface. 
+- The close method of the Closeable interface throws exceptions of type IOException while the close method of the AutoCloseable interface throws exceptions of type Exception. 
+- subclasses of the AutoCloseable interface can override this behavior of the close method to throw specialized exceptions, such as IOException, or no exception at all.
+
+The runtime system checks handlers in the order in which they appear after the try statemen until its matches the type of exception that was thrown, and if found the runtime system ends its search for an appropriate exception handler. 
+
+After the exception handler executes, the runtime system passes control to the finally block. Code in the finally block executes regardless of the exception caught above it.
+
+To specify that a method can throw exceptions, add a throws clause to the method declaration followed by a comma-separated list of all the exceptions thrown by that method.  ie:
+```
+public void writeList() throws IOException {
+```
+- you can throw only objects that inherit from the java.lang.Throwable class.
+- a method does not have to contain a throws clause for EmptyStackException (or to state that it might occur) because it is not a checked exception.
+
+**Chained Exceptions** help you know when one exception causes another, when apps responds to an exception by throwing another exception (one causes the other).
+```
+Throwable that support chained exceptions.
+
+Throwable getCause()
+Throwable initCause(Throwable)
+Throwable(String, Throwable)
+Throwable(Throwable)
+```
+The Throwable argument to initCause and the Throwable constructors is the exception that caused the current exception. getCause returns the exception that caused the current exception, and initCause sets the current exception's cause.  
+ex:
+```
+try {...} catch (IOException e) 
+{ throw new SampleException("Other IOException", e); }
+```
+-  how to call the getStackTrace method on the exception object.
+```
+catch (Exception cause) {
+    StackTraceElement elements[] = cause.getStackTrace();
+    for (int i = 0, n = elements.length; i < n; i++) {       
+        System.err.println(elements[i].getFileName()
+            + ":" + elements[i].getLineNumber() 
+            + ">> "
+            + elements[i].getMethodName() + "()");
+    }
+}
+```
+- sends the output to a file using the logging facility in the java.util.logging package.
+```
+try 
+{
+    Handler handler = new FileHandler("OutFile.log");
+    Logger.getLogger("").addHandler(handler);    
+} catch (IOException e) 
+{
+    Logger logger = Logger.getLogger("package.name"); 
+    StackTraceElement elements[] = e.getStackTrace();
+    for (int i = 0, n = elements.length; i < n; i++) 
+    {
+        logger.log(Level.WARNING, elements[i].getMethodName());
+    }
+}
+```
+
+You should write your own exception classes if you answer yes to any of the following questions; 
+- Do you need an exception type that isn't represented by those in the Java platform?
+- Would it help users if they could differentiate your exceptions from those thrown by classes written by other vendors?
+- Does your code throw more than one related exception?
+- If you use someone else's exceptions, will users have access to those exceptions?
+- or should your package be independent and self-contained?
+
+ If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
+

@@ -21,3 +21,41 @@ http://docs.oracle.com/javase/tutorial/java/IandI/override.html
 
 - What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 
+###gocertify###
+1. E
+int []a = {1,2,3,4,5,6};
+ini i = a.length -1;
+while(i>=0)
+{System.out.println(a[i]);i--}
+Result 654321
+a len is 6. go from 5 to 0
+-2. ?
+3. Must extend an abstract class
+4. An interface cant extend a class
+An interface can extend multiple interfaces
+5. Arrays are objects, so
+int a[] = {1,2,3,4}
+print(a instanceof Object) prints true.
+-6. Indexing of array elemtns begins with zero, 43 = o53 (octal)
+7. anonymous arrays.  assigned two one dimensional int arrays to the two dinmensiaonal array a.  So the code compiles and poroduces 2.
+int a[][] = new int[3][];
+a[1]=new int[]{1,2,3};
+a[2]=new int[]{4,5};
+print(a[1][1]);
+-8. b,d,e
+-9. e
+-10. e
+11. wrong pass by reference nightmare
+-12
+13. 
+String s = "Java";
+s.concat(" SE 6");
+s.replace('6','7');
+print(s) // Java (the two calls are abandoned instantly)
+14.
+line 3, two more objects created, 'SE 6', and 'Java SE 6'
+line 5 'java'
+3. String s = "Java"; 1
+4. s.concat(" SE 6"); 2,3
+5. s.toLowerCase();   4
+15

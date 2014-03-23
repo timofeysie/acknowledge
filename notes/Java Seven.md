@@ -9,7 +9,10 @@ Random Notes
 - Special non-capturing contructs like (?<=X) mean X, via zero-width positive lookbehind.
 - Enhancements in Java 5: Generics, Enhanced for loop, Auto(un)boxing, Typesafe Enums, Varargs, Annotations
 - Enhancements in Java 6: Collections framework, Webstart, Drag and drop, Instrumentation, i18n, I/O support, jar files, JDBC4
-- Constant Interface Antipattern: putting static memebers into an interface and inherting that to leave of the class name of static methos.  So we have the static import.
+- Constant Interface Antipattern: putting static memebers into an interface and inherting that to leave of the class name of static methods.  So we have the static import.
 - varags (variable arguments) are the elipses (...) part indicates that an array or a sequence of arguments may be used in its place.  It must be in the final argument position or a method signature.
 - the compiler translates the varargs formal parameter into an array. 
 - for each in example.  (Vector v) for (String s:v) {print(s);}
+- a single catch block can handle more than one type of exception (Java 7) to reduce code duplication and lessen the temptation to catch an overly broad exception.
+- The try-with-resources statement is a try statement that declares one or more resources.
+- you can retrieve suppressed exceptions;
