@@ -56,7 +56,7 @@ private void test()
 	ValueObject obj1 = new ValueObject(); obj1.value = "first";
 	ValueObject obj2 = new ValueObject(); obj2.value = "first";
 	ValueObject obj3 = obj1;
-	boolean test1 = (obj1.value == obj2.value); //false
+	boolean test1 = (obj1.value == obj2.value); //true
 	boolean test2 = (obj1.value == obj3.value); //true
 	System.out.printf(test1+" "+test2);
 

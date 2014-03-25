@@ -38,8 +38,8 @@ Set implementations:
 - LinkedHashSet. 
 
 HashSet, which 
-- stores its elements in a hash table, is 
-- the best-performing implementation; however it makes 
+- stores its elements in a hash table
+- the best-performing implementation
 - no guarantees concerning the order of iteration. 
 
 TreeSet, which 
@@ -118,11 +118,22 @@ symmetricDiff.removeAll(tmp);
 
 /*
 List Implementations
+- an ordered Collection (sometimes called a sequence). Lists may contain duplicate elements. In addition to the operations inherited from Collection, the List interface includes operations for the following:
+
+Positional access — manipulates elements based on their numerical position in the list
+    E get(int index);
+Search — searches for a specified object in the list and returns its numerical position
+    int indexOf(Object o);
+    int lastIndexOf(Object o);
+Iteration — extends Iterator semantics to take advantage of the list's sequential nature
+    ListIterator<E> listIterator();
+    ListIterator<E> listIterator(int index);
+Range-view — performs arbitrary range operations on the list.
+    List<E> subList(int from, int to);
 
 1. general-purpose and 2. special-purpose.
 
-1. General-Purpose
-
+1. General-Purpose  
 - ArrayList
 - LinkedList. 
 ArrayList offers 
@@ -178,4 +189,15 @@ search:
                 }
             }
         }
-        
+
+public interface ListIterator<E> extends Iterator<E> {
+    boolean hasNext();
+    E next();
+    boolean hasPrevious();
+    E previous();
+    int nextIndex();
+    int previousIndex();
+    void remove(); //optional
+    void set(E e); //optional
+    void add(E e); //optional
+}        

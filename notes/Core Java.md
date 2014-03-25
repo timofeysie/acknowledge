@@ -29,9 +29,11 @@ Modifiers
 Packages  
 Regular Expressionses  
 Exceptions
-
-Where does this note go?  It was in enums...
-- An interface name can be used anywhere a type can be used.
+Collection Interface
+Set Interface & Implementations
+List Interface
+List Iterator Interface
+List Implementations
 
 
 ###Identifiers###
@@ -62,11 +64,11 @@ void methodInFirstLevel2()
 - prints out 2(or parameter), 1, 0.
 
 ###Objects###
-Real-world objects contain state and behavior.
-A software object's state is stored in fields.
-A blueprint for a software object is called a class.
-Common behavior can be defined in a superclass and inherited into a subclass using the extends keyword.
-A collection of methods with no implementation is called an interface.
+Real-world objects contain state and behavior.  
+A software object's state is stored in fields.  
+A blueprint for a software object is called a class.  
+Common behavior can be defined in a superclass and inherited into a subclass using the extends keyword.  
+A collection of methods with no implementation is called an interface.  
 
 ###Variables###
 - Instance Variables (Non-Static Fields) 
@@ -77,23 +79,52 @@ A collection of methods with no implementation is called an interface.
 - A variable declared within the opening and closing parenthesis of a method is called a parameter.
 - Parameters refers to the list of variables in a method declaration. 
 - Arguments are the actual values that are passed in when the method is invoked.
-- compile-time constant: a primitive type or a string is defined as a constant and the value is known at compile time, the compiler replaces the constant name everywhere in the code with its value.
+**compile-time constant** a primitive type or a string is defined as a constant and the value is known at compile time, the compiler replaces the constant name everywhere in the code with its value.
 - The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
 
 ###Return from a method###
 - Any method declared void doesn't need to return a value, but it may do so to branch out of a control flow block and exit the method.
 - When a method uses a class name as its return type, such as whosFastest does, the class of the type of the returned object must be either a subclass of, or the exact class of, the return type. 
-- covariant return type, means that the return type is allowed to vary in the same direction as the subclass when You override a method and define it to return a subclass of the original method,
+**covariant return type** means that the return type is allowed to vary in the same direction as the subclass when You override a method and define it to return a subclass of the original method,
 - when you use an interface as a return type the object returned must implement the specified interface.
-
-- explicit constructor invocation From within a constructor, you can also use the this keyword to call another constructor in the same class.
+**explicit constructor invocation** From within a constructor, you can also use the 'this' keyword to call another constructor in the same class.
 
 ###Branching Statements###
 - An unlabeled break statement terminates the innermost switch, for, while, or do-while statement
 - A labeled break terminates an outer statement.
+```
+search:
+        for (i = 0; i < arrayOfInts.length; i++) 
+        {
+            for (j = 0; j < arrayOfInts[i].length;j++) 
+            {
+                if (arrayOfInts[i][j] == searchfor) 
+                {
+                    foundIt = true;
+                    break search;
+                }
+            }
+        }
+```
 - A continue statement skips the current iteration of a for, while , or do-while loop. 
 - The unlabeled form skips to the end of the innermost loop's body and evaluates the boolean expression that controls the loop.
 - A labeled continue statement skips the current iteration of an outer loop marked with the given label. 
+```
+test:
+        for (int i = 0; i <= max; i++) {
+            int n = substring.length();
+            int j = i;
+            int k = 0;
+            while (n-- != 0) {
+                if (searchMe.charAt(j++) != substring.charAt(k++)) {
+                    continue test;
+                }
+            }
+            foundIt = true;
+                break test;
+        }
+        System.out.println(foundIt ? "Found it" : "Didn't find it");
+```
 - The return statement exits from the current method, and control flow returns to where the method was invoked. 
 - The return statement has two forms: one that returns a value, and one that doesn't. 
 - To return a value, put the value (or an expression that calculates the value) after the return keyword.
@@ -186,6 +217,14 @@ bin = bin >>> 1;    11111 10111 = 2147483639
 0001 0010 18
 0001 0011 19
 0001 0100 20
+
+00000100 4  100
+00001000 8  1,000
+00010000 16 10,000
+00100000 32 100,000
+01000000 64 1,000,000
+10000000 128 10,000,000
+
 ```
 - most significant bit (MSB, high-order bit, left-most bit) highest # to the left or the sign bit of a signed binary number in one's or two's complement notation, 1 = - and 0 = +
 Assignment Operators: C /= A is equivalent to C = C / A
@@ -295,6 +334,15 @@ logical AND     &&
 logical OR      ||  
 ternary         ? :  
 assignment      = += -= *= /= %= &= ^= |= <<= >>= >>>=  
+
+**bitwise exclusive OR**
+^ for booleans is the same as !=  
+XOR   
+27 = 11011  
+14 = 01110  
+----------  
+21 = 10101  
+if bits are the same, 0, different 1.
 
 - logical && and || are short-circuited.  (left operand is evaluated before the right operator. If the result of the operation can be evaluated after computing the left operand, then the right side is not computed). different from bit-wise counterparts - bit-wise (&) and bit-wise (|). The bit-wise operators are not short-circuited.
 
@@ -547,12 +595,14 @@ if you are going to write a clone() method to override the one in Object.
 — to decouple them, you must override clone() so that it clones the object and ObjExternal. Then the original object references ObjExternal and the clone references a clone of ObjExternal, so that the object and its clone are truly independent
 
 #Abstract & Interface#
-- Java does not permit multiple inheritance(can only extend one class) but interfaces provide an alternative because you can implement more than one interface (an interface can extend any number of interfaces).  
+- Java does not permit multiple inheritance(can only extend one class) but interfaces provide an alternative because you can implement more than one interface (an interface can extend any number of interfaces). 
+- An interface name can be used anywhere a type can be used. 
 - If a class includes abstract methods, the class itself must be declared abstract
 - All methods declared in an interface are implicitly public, so the public modifier can be omitted.
 - All constant values defined in an interface are implicitly public, static, and final and these can be omitted.
+- method definitions inside interfaces cannot be private or protected.
 
-- if an abstract class is subclassed and contians unimplemented methods, it must also be declared abstract.
+If an abstract class is subclassed and contians unimplemented methods, it must also be declared abstract.
 - All of the methods in an interface are implicitly abstract, so the abstract modifier is not used. (it could be—it's just not necessary).
 - Unlike interfaces, abstract classes can contain fields that are not static and final, and they can contain implemented methods. 
 - Such abstract classes are similar to interfaces, except that they provide a partial implementation, leaving it to subclasses to complete the implementation. 
@@ -571,37 +621,101 @@ Works with
 - enum
 - String  
  
- the switch block can be labeled with one or more case or default labels. The switch statement evaluates its expression, then executes all statements that follow the matching case label.
+ the switch block can be labeled with one or more case or default labels. The switch statement evaluates its expression, then executes all statements that follow the matching case label. (until a break?)
 
 break statements are necessary because without them, statements in switch blocks fall through: All statements after the matching case label are executed in sequence, regardless of the expression of subsequent case labels, until a break statement is encountered.
-
+```
+        int j =2;
+        switch (j)
+        {
+            case 1:System.out.println("1");
+            case 2:System.out.println("2");
+            case 3:System.out.println("3");
+            case 4:System.out.println("4");
+                break;
+            case 5:System.out.println("5");
+        }
+```
+Output: 2,3,4
 The String in the switch expression is compared with the expressions associated with each case label as if the String.equals() method were being used
 
 
-
-
-
 ###Methods###
-- Overriding Instance Methods: An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.  
-- the version of the hidden static method that gets invoked is the one in the superclass
+- Overriding Instance Methods: An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.
+**covariant return type** when an overridden method returns a subtype of the method in the superclass.  
+
+An overriding method can also return a subtype of the type returned by the overridden method.   
+- the version of the hidden static method that gets invoked is the one in the superclass (doesnt this depend if it's called from the static Class or an instance of the class? See our notes below)
 - the version of the overridden instance method that gets invoked is the one in the subclass.
 - Hidden Static Methods: If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass.
-- Interface Methods: Default methods and abstract methods in interfaces are inherited like instance methods. 
+```
+Animal.testClassMethod()      - static Animal
+myAnimal.testClassMethod()    - static Animal Hidden
+Cat.testClassMethod()         - static Cat
+myCat.testClassMethod         - static Cat
+
+Animal.testInstanceMethod()   - compile error
+myAnimal.testInstanceMethod() - instance Cat
+Cat.testInstanceMethod        - compile error
+myCat.testInstanceMethod      - instance Cat overriding
+```
+A smaller chart showing the calls to testClass/Instance methods:
+            Class           Instance  
+Animal      Animal          x  
+myAnimal    Animal Hidden   Cat  
+Cat         Cat             x  
+myCat       Cat             Cat Overriding    
+
+Here is the original code:
+```
+class Animal {
+    static void testClassMethod() {print("class method in Animal");}
+    void testInstanceMethod() {print("instance method in Animal");}
+}
+class Cat extends Animal {
+    static void testClassMethod() {print("class method in Cat");}
+    void testInstanceMethod() {print("instance method in Cat");}
+
+    public static void main(String[] args) {
+        Cat myCat = new Cat();
+        Animal myAnimal = myCat;
+        Animal.testClassMethod();      // #1. class method in Animal
+        myAnimal.testInstanceMethod(); // #2. instance method in Cat
+    }
+}
+```
+As promised, the version of the hidden method that gets invoked is the one in the superclass, and the version of the overridden method that gets invoked is the one in the subclass.
+(Isn't this the opposite of what happens in virtual method invocation?)
+And what about this test question?:
+```
+class Parent
+{
+    private void method1(){System.out.println("Parent1");}
+    public void method2(){System.out.println("Parent2"); method1();}
+}
+class Child extends Parent
+{
+    public void method1(){System.out.println("Child1");}
+     public static void main(String args[])
+     {
+        Parent p = new Child();
+        p.method2();
+    }
+}
+```
+Output:  
+Parent2  
+Parent1  
+Because the method1 in Chile is private, the method1 in Parent is called.  If it was package private, protected or public, the Child method would be called.
+
+StackOverflow: over-riding supports late binding, so which method is called is decided at run time.  (run-time polymorphism) #2
+Hiding is for all others (static methods, instance members, static members) and is based on early binding (compile time) #1
+
+Interface Methods: Default methods and abstract methods in interfaces are inherited like instance methods. 
 ** What the hell is a default method?***
 - However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
-- Instance methods are preferred over interface default methods.  Pegasus.identifyMyself() returns the string "I am a horse."
+Rule # 1: Instance methods are preferred over interface default methods.  Pegasus.identifyMyself() returns the string "I am a horse."
 ```
-package overriding.interface_methods;
-
-/**
-* When the supertypes of a class or interface provide multiple 
-* default methods with the same signature, the Java compiler follows 
-* inheritance rules to resolve the name conflict. 
-* These rules are driven by the following two principles:
-* Rule # 1:
-* Instance methods are preferred over interface default methods.
-* The method Pegasus.identifyMyself returns the string I am a horse.
-*/
 public class Pegasus extends Horse implements Flyer, Mythical 
 {
     public static void main(String... args) 
@@ -610,24 +724,14 @@ public class Pegasus extends Horse implements Flyer, Mythical
         System.out.println(myApp.identifyMyself());
     }
 }
-
-public class Horse 
-{
-    public String identifyMyself() 
-    {
-        return "I am a horse.";
-    }
-
-}
-
-public interface Flyer 
+class Horse{public String identifyMyself(){return "I am a horse.";}}
+interface Flyer 
 {
     default public String identifyMyself() 
     {
         return "I am able to fly.";
     }
 }
-
 public interface Mythical 
 {
     default public String identifyMyself() 
@@ -636,16 +740,8 @@ public interface Mythical
     }
 }
 ```
-- Methods that are already overridden by other candidates are ignored. Dragon.identifyMyself() returns the string "I am able to lay eggs."
+Rule # 2: Methods that are already overridden by other candidates are ignored. Dragon.identifyMyself() returns the string "I am able to lay eggs."
 ```
-/**
-* when the supertypes of a class or interface provide multiple default 
-* methods with the same signature, the Java compiler follows inheritance 
-* rules to resolve the name conflict.
-* Rule # 2:
-* Methods that are already overridden by other candidates are ignored. 
-* This circumstance can arise when supertypes share a common ancestor.
-*/
 public interface Animal 
 {
     default public String identifyMyself() 
@@ -653,27 +749,20 @@ public interface Animal
         return "interface_animal";
     }
 }
-
 public interface EggLayer extends Animal 
 {
     default public String identifyMyself() 
     {
-        return "lay_eggs_extends_animal";
+        return "I am able to lay eggs.";
     }
 }
-
 public interface FireBreather extends Animal 
 { 
     default public String identifyMyself() 
     {
-        return "fire_breather_extends_animal";
+        return "I am able to breathe fire.";
     }
 }
-
-/**
-* The method Dragon.identifyMyself returns the string 
-* "I am able to lay eggs.""
-*/
 public class Dragon implements EggLayer, FireBreather 
 {
     public static void main (String... args) 
@@ -689,30 +778,26 @@ You can use the super keyword to invoke a default method in both classes and int
 Inherited instance methods from classes can override abstract interface methods. 
 - Class methods cannot access instance variables or instance methods directly—they must use an object reference. Also, class methods cannot use the this keyword as there is no instance for this to refer to.
 
-#Modifiers#
+###Modifiers###
 - an overriding method can allow more, but not less, access than the overridden method. ie: a protected instance method in the superclass can be made public, but not private, in the subclass.
+Order: public, protected, (no modifier), private
 - change an instance method in the superclass to a static method in the subclass, or vice versa = compile-time error.
 
 You can prevent a class or method from being subclassed by using the final keyword.
 
-
-#Packages#
-- package private are All the top-level, non-public types in the same file as a pulic class.
+###Packages###
+- package private are All the top-level, non-public types in the same file as a public class.
 - Importing java.awt.* imports all of the types in the java.awt package, but it does not import java.awt.color, java.awt.font, etc...  To import more, do this:
 ```
     import java.awt.*;
     import java.awt.color.*;
+    import java.awt.font.*;
 ```
 
-#Regular Expressionses#
-
-Instances of the Pattern class are immutable and are safe for use by multiple concurrent threads. Instances of the Matcher class are not safe for such use.
-
-
 ###Exceptions###  
-The **Catch or Specify Requirement**: code that might throw certain exceptions must be enclosed by either of the following:
-- A try statement that catches the exception. The try must provide a handler for the exception
-- A method that specifies that it can throw the exception. The method must provide a throws clause that lists the exception
+**The Catch or Specify Requirement** code that might throw certain exceptions must be enclosed by either of the following:
+- A try statement that catches the exception. The try must provide a handler for the exception (catch block)
+- A method that specifies that it can throw the exception. The method must provide a throws clause that lists the exception in its method declaration
 
 **Exception handler**  
 - The runtime system searches the call stack for a method that contains a block of code that can handle the exception. This block of code is called an exception handler.
@@ -723,9 +808,12 @@ The **Catch or Specify Requirement**: code that might throw certain exceptions m
 1. checked exception  
 2. error  
 3. runtime exception  
-- Checked exceptions are subject to the Catch or Specify Requirement. All exceptions are checked exceptioSns, except for those indicated by Error, RuntimeException, and their subclasses.
-- errors are exceptional conditions that are external to the application, and that the application usually cannot anticipate or recover from. Errors are not subject to the Catch or Specify Requirement.  Thrown when a dynamic linking failure or other hard failure in the Java virtual machine occurs.
-- runtime exceptions are exceptional conditions that are internal to the application, and that the application usually cannot anticipate or recover from. These usually indicate programming bugs, such as logic errors or improper use of an API.  not subject to the Catch or Specify Requirement.  Exception subclass, RuntimeException, is reserved for exceptions that indicate incorrect use of an API. Ie: NullPointerException, which occurs when a method tries to access a member of an object through a null reference.
+
+1- Checked exceptions are subject to the Catch or Specify Requirement. All exceptions are checked exceptioSns, except for those indicated by Error, RuntimeException, and their subclasses.
+
+2 - errors are exceptional conditions that are external to the application, and that the application usually cannot anticipate or recover from. Errors are not subject to the Catch or Specify Requirement.  Thrown when a dynamic linking failure or other hard failure in the Java virtual machine occurs.
+
+3 - runtime exceptions are exceptional conditions that are internal to the application, and that the application usually cannot anticipate or recover from. These usually indicate programming bugs, such as logic errors or improper use of an API.  not subject to the Catch or Specify Requirement.  Exception subclass, RuntimeException, is reserved for exceptions that indicate incorrect use of an API. Ie: NullPointerException, which occurs when a method tries to access a member of an object through a null reference.
 
 Try & Catch
 - A try statement does not have to have a catch block if it has a finally block.
@@ -752,7 +840,7 @@ try (
 - an exception can be thrown from the try block, and up to two exceptions can be thrown from the try-with-resources statement when it tries to close the ZipFile and BufferedWriter objects.
 - If an exception is thrown from the try block and one or more exceptions are thrown from the try-with-resources statement, then those exceptions thrown from the try-with-resources statement are suppressed
 - the exception thrown by the block is the one that is thrown by the writeToFileZipFileContents method. 
-- You can retrieve these suppressed exceptions by calling the Throwable.getSuppressed method from the exception thrown by the try block.
+- You can retrieve these suppressed exceptions by calling the Throwable.getSuppressed() method from the exception thrown by the try block.
 
 ```
 try (Statement stmt = con.createStatement()) 
@@ -843,3 +931,137 @@ You should write your own exception classes if you answer yes to any of the foll
 
  If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
 
+###Collection Interface###
+```
+public interface Collection<E> extends Iterable<E> {
+    int size(); // cardinality
+    boolean isEmpty();
+    boolean contains(Object element);
+    boolean add(E element);
+    boolean remove(Object element);
+    Iterator<E> iterator();
+    boolean containsAll(Collection<?> c); // true if c is subset
+    boolean addAll(Collection<? extends E> c); // union
+    boolean removeAll(Collection<?> c); // transforms set into the (asymmetric) set difference
+    boolean retainAll(Collection<?> c); // intersection of two sets
+    void clear();
+    Object[] toArray();
+    <T> T[] toArray(T[] a);
+}
+
+public interface Iterator<E> {
+    boolean hasNext();
+    E next();
+    void remove(); //optional
+}
+```
+
+###Set Interface & Implementations###
+Set: cannot contain duplicate elements.  
+Has only methods inherited from Collection  
+Two Set instances are equal if they contain the same elements.
+Set implementations:  
+- HashSet: unordered
+- TreeSet: orders elements based on their values ABC...
+- LinkedHashSet: orders elements based insertion-order 
+```
+Set<String> s = new HashSet<String>();
+```
+The code refers to the Collection by its interface type (Set) rather than by its implementation type (HashSet).  
+Can change implementations by changing the constructor.
+This prevents you from using any nonstandard operations.
+If you want the program to print the word list in alphabetical order, 
+change the Set's implementation type from HashSet to TreeSet.
+
+To nondestructively find union, intersection, or set difference of two sets, copy one set before calling the appropriate bulk 
+operation:
+```
+Set<Type> union = new HashSet<Type>(s1);
+union.addAll(s2);
+Set<Type> intersection = new HashSet<Type>(s1);
+intersection.retainAll(s2);
+Set<Type> difference = new HashSet<Type>(s1);
+difference.removeAll(s2);
+```
+
+###List Interface###
+An ordered Collection (sequence).
+May contain duplicate elements.
+Equal if they contain the same elements in the same order.
+Same Collection methods plus the following:
+```
+    E get(int index);
+    int indexOf(Object o);
+    int lastIndexOf(Object o);
+    ListIterator<E> listIterator();
+    ListIterator<E> listIterator(int index);
+    List<E> subList(int from, int to); // range
+```
+- The set and remove operations (from Collections) return the old value that is being overwritten or removed
+- half-open range: subList, returns a List view of the portion of this list whose indices range from fromIndex, inclusive, to toIndex, exclusive. (mirrors the typical for loop)
+- use the List returned by subList only as a transient object — to perform one or a sequence of range operations on the backing List. 
+
+###List Iterator Interface###
+```
+public interface ListIterator<E> extends Iterator<E> {
+    boolean hasNext();
+    E next();
+    boolean hasPrevious();
+    E previous();
+    int nextIndex();
+    int previousIndex();
+    void remove(); //optional
+    void set(E e); //optional
+    void add(E e); //optional
+}
+```
+- The first call to previous returns the same element as the last call to next. Similarly, the first call to next after a sequence of calls to previous returns the same element as the last call to previous.
+
+- the behavior of the two boundary cases: (1) a call to previousIndex when the cursor is before the initial element returns -1 and (2) a call to nextIndex when the cursor is after the final element returns list.size()
+- remove() the last element returned by next or previous.
+- set() overwrites the last element returned by next or previous with the specified element.
+
+###List Implementations###
+1. general-purpose and 2. special-purpose.
+
+1. General-Purpose  
+- ArrayList
+- LinkedList. 
+ArrayList offers 
+- constant-time positional access
+- fast
+- does not have to allocate a node object for each element in the List, 
+- can take advantage of System.arraycopy when it has to move multiple
+ elements at the same time. 
+- a Vector without the synchronization overhead.
+- tuning parameter: the initial capacity
+(the number of elements the ArrayList can hold before it has to grow)
+
+LinkedList
+- If you frequently add elements to the beginning of the List
+- iterate over the List to delete elements from its interior
+- Positional access requires linear-time in a LinkedList
+- constant-time in an ArrayList
+- the constant factor for LinkedList is much worse.
+- no tuning parameters and seven 
+
+optional operations 
+- clone
+- addFirst
+- getFirst
+- removeFirst
+- addLast
+- getLast
+- removeLast  
+(LinkedList also implements the Queue interface)
+
+2. Special-purpose
+
+CopyOnWriteArrayList 
+- backed up by a copy-on-write array
+- similar in nature to CopyOnWriteArraySet. 
+- No synchronization is necessary, even during iteration, 
+- iterators are guaranteed never to throw ConcurrentModificationException. 
+- well suited to maintaining event-handler lists, in which 
+change is infrequent, and 
+traversal is frequent and potentially time-consuming.
