@@ -1,6 +1,10 @@
 package seven.one.initialization;
 
+import org.apache.log4j.Logger;
+
 class SuperSequence extends SuperSuper
 {
-	SuperSequence(){System.out.println("s: super constructor");}
+	static Logger log = Logger.getLogger(SuperSequence.class);
+	
+	SuperSequence(){log.info("s: super constructor");}
 }

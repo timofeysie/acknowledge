@@ -1,6 +1,10 @@
 package seven.one.initialization;
 
+import org.apache.log4j.Logger;
+
 class SuperSuper
 {
-	SuperSuper(){System.out.println("S: super super constructor");}
+	static Logger log = Logger.getLogger(SuperSuper.class);
+	
+	SuperSuper(){log.info("S: super super constructor");}
 }

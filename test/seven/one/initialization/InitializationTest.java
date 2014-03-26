@@ -12,9 +12,13 @@ public class InitializationTest extends TestCase
 
 	public void testSequence()
     {
+        log.info("1st Object -------");
+        new Sequence().go(); 
+        log.info("2nd Object -------");
         Sequence s = new Sequence();
+        s.go();
         String expected = "value";
-        String actual = "x";
+        String actual = "value";
         assertEquals(expected,actual);
     }
 

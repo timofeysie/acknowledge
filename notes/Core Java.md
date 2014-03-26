@@ -420,7 +420,28 @@ for (int item : numbers)
 ```
 
 ###Initialization###
-- static initialization blocks are normal block of code enclosed in braces, { }, and preceded by the static keyword.  They are called in the order that they appear in the source code.
+- static initialization blocks are normal block of code enclosed in braces, { }, and preceded by the static keyword.  
+- They are called in the order that they appear in the source code.
+- First static blocks, then constructors, then normal init blocks.
+```
+1st Object -------
+w: static init block
+x: static init block
+S: super super constructor
+s: super constructor
+y: normal init block
+z: normal init block
+c: constructor
+g: go method
+2nd Object -------
+S: super super constructor
+s: super constructor
+y: normal init block
+z: normal init block
+c: constructor
+g: go method
+```
+- Note, if the above program were run from the main method inside Sequence.java, the two static init blocks would be called before the 1st Object.
 - private static method defined in a class:
 ```
     public static varType myVar = initializeClassVariable();
@@ -987,15 +1008,15 @@ difference.removeAll(s2);
 ###List Interface###
 An ordered Collection (sequence).
 May contain duplicate elements.
-Equal if they contain the same elements in the same order.
+Equal if they contain the ss elements in the same order.
 Same Collection methods plus the following:
 ```
-    E get(int index);
-    int indexOf(Object o);
+    E get(int index);                         // Positional accesser
+    int indexOf(Object o);                    // Searches
     int lastIndexOf(Object o);
-    ListIterator<E> listIterator();
+    ListIterator<E> listIterator();           // Iterations
     ListIterator<E> listIterator(int index);
-    List<E> subList(int from, int to); // range
+    List<E> subList(int from, int to);        // Range-view
 ```
 - The set and remove operations (from Collections) return the old value that is being overwritten or removed
 - half-open range: subList, returns a List view of the portion of this list whose indices range from fromIndex, inclusive, to toIndex, exclusive. (mirrors the typical for loop)
