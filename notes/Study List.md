@@ -344,6 +344,39 @@ traversal is frequent and potentially time-consuming.
 01000000 64 1,000,000
 10000000 128 10,000,000
 
+###Trick Questions###
+```
+interface Rideable 
+{
+	String getGait();
+}
+public class Camel implements Rideable 
+{
+	int weight = 2;
+	public static void main(String[] args) 
+	{
+		new Camel().go(8);
+	}
+	void go(int speed) 
+	{
+		++speed;
+		weight++;
+		int walkrate = speed * weight;
+		System.out.print(walkrate + getGait());
+	}
+	String getGait() 
+	{
+		return " mph, lope";
+	}
+}
+```
+error: getGait() in Camel cannot implement getGait() in Rideable
+attempting to assign weaker access privileges; was public
+- This happens becuase "methods in an interface are implicitly public, so the public modifier can be omitted." but the default for a class is package private.
+
+A a = new B() output: B
+B b = new A() compile error- incompatible types: required: A found: B 
+
 
 Things to do:   
 - TreeSet stores its elements in a red-black tree

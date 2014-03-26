@@ -575,6 +575,14 @@ class C {public static void main(String [] args)
 {A a = new B();System.out.print(a.toString());}}
 // prints B because the jvm calls the appropriate method 
 ```
+- HOWEVER if you try:
+```
+B b = new A();
+```
+the class will not compile: error, incompatible types:   
+required: A  
+found:    B  
+
 - The compiler automatically provides a no-argument, default constructor for any class without constructors. This default constructor will call the no-argument constructor of the superclass.
 - constructor chaining: If a constructor does not explicitly invoke a superclass constructor, the Java compiler automatically inserts a call to the no-argument constructor of the superclass. If the super class does not have a no-argument constructor, you will get a compile-time error.   But Oject has one.  there will be a whole chain of constructors called, all the way back to the constructor of Object.
 - Methods called from constructors should generally be declared final. If a constructor calls a non-final method, a subclass may redefine that method with surprising or undesirable results.

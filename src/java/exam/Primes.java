@@ -8,7 +8,9 @@ public class Primes
 		p.add(2);
 		p.add(5);
 		p.add(2);
-		// p.sort(); no such method!
+		// p.sort(); no such method in ArrayList!
+		// method is in the Collections implementation:
+		Collections.sort(p);
 		System.out.println(p);
 	}
 }
