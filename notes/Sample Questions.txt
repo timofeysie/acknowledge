@@ -91,7 +91,7 @@ line 5 'java'
 5. s.toLowerCase();   4
 15
 
-Test 2.
+Test http://www.gocertify.com/quizzes/java/scjp1/
 1-3 OK
 2. Any string other than 'true' of 'false' as a Boolean constructor will result in a value of false;
 4. 
@@ -115,7 +115,7 @@ public class Outer {
 		}
 	}
 }
-X5..  d is not final so not visible
+a, b, c and e are correct. Since inner is not a static inner class, it has a reference to an enclosing object and all the variables of that object are accessible. Therefore A and B are correct even if b is private. Variables in the enclosing method are only accessible when they are marked as final, hence c is accessible but not d. E is obviously correct as it is a parameter to the method containing line 12 itself.  d is not final so not visible.
 X6. - an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
 7.OK
 

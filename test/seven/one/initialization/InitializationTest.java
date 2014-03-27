@@ -12,6 +12,8 @@ public class InitializationTest extends TestCase
 
 	public void testSequence()
     {
+        log.info("");
+        log.info(this.getClass().getSimpleName());
         log.info("1st Object -------");
         new Sequence().go(); 
         log.info("2nd Object -------");

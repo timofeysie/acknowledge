@@ -15,8 +15,10 @@ public class PolyTest extends TestCase
     static Logger log = Logger.getLogger(PolyTest.class);
 
 
-	public void testSequence()
+	public void testPolymorphism()
     {
+        log.info("");
+        log.info(this.getClass().getSimpleName());
         A a_b = new B();log.info("A a = new B() output: "+a_b.toString()+" var "+a_b.var+" str "+a_b.str);
         log.info("B b = new A() error- incompatible types: required: A found: B ");
         B b_c = new C();log.info("B b = new C() output: "+b_c.toString()+" var "+b_c.var+" str "+b_c.str);

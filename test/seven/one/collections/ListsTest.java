@@ -17,6 +17,8 @@ public class ListsTest extends TestCase
 
 	public void testSequence()
     {
+        log.info("");
+        log.info(this.getClass().getSimpleName());
         Set<String> hash = new HashSet<String>();
         Set<String> tree = new TreeSet<String>();
         Set<String> link = new LinkedHashSet<String>();
