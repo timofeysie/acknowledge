@@ -12,7 +12,7 @@
 
    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
       <param name="append" value="false"/>
-      <param name="file" value="build/vanda.log"/>
+      <param name="file" value="notes/generated notes.md"/>
       <layout class="org.apache.log4j.PatternLayout">
          <param name="ConversionPattern" value="%m%n"/>
       </layout>
