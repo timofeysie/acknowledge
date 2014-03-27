@@ -1,9 +1,18 @@
 package seven.one.polymorphism;
-class A {public A(){/*System.out.print("a");*/}
+class A {
+	int var = 1;
+	String str = "a";
+	public A(){/*System.out.print("a");*/}
     public String toString(){return("A");}}
-class B extends A {public B(){/*System.out.print("b");*/}
+class B extends A {
+	int var = 2;
+	String str = "b";
+	public B(){/*System.out.print("b");*/}
     public String toString(){return("B");}}
-class C extends B {public C(){/*System.out.print("c");*/}
+class C extends B {
+	int var = 3;
+	String str = "c";
+	public C(){/*System.out.print("c");*/}
     public String toString(){return("C");}}
 class D {public static void main(String [] args)
 {A a_b = new B();System.out.print(a_b.toString());

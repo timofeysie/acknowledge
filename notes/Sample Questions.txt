@@ -36,7 +36,7 @@ An interface can extend multiple interfaces
 5. Arrays are objects, so
 int a[] = {1,2,3,4}
 print(a instanceof Object) prints true.
--6. Indexing of array elemtns begins with zero, 43 = o53 (octal)
+-6. Indexing of array elemnts begins with zero, 43 = o53 (octal)
 7. anonymous arrays.  assigned two one dimensional int arrays to the two dinmensiaonal array a.  So the code compiles and poroduces 2.
 int a[][] = new int[3][];
 a[1]=new int[]{1,2,3};
@@ -52,7 +52,7 @@ class Base
 	int i = 99;
 	public void amethod()
 	{
-		System.put.println("Base.amethod");
+		System.out.println("Base.amethod");
 	}
 	Base()
 	{
@@ -77,7 +77,7 @@ Output:
 Derived.amethod()
 99
 Derived.amethod()
-It creates an instance of the Derived class but assigns it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.  But note that if the amethod() was not present in the base class, then compilation error would be reported  as at compile ime.  When the compiler sees the statement like b.amethod(), it checks if the method is present in the ase class or not.  Only at the run time it decides to call the method from the derived class.
+It creates an instance of the Derived class but assigns it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.  But note that if the amethod() was not present in the base class, then compilation error would be reported at compile time.  When the compiler sees the statement like b.amethod(), it checks if the method is present in the Base class or not.  Only at the run time it decides to call the method from the derived class.
 13. 
 String s = "Java";
 s.concat(" SE 6");
@@ -93,6 +93,7 @@ line 5 'java'
 
 Test 2.
 1-3 OK
+2. Any string other than 'true' of 'false' as a Boolean constructor will result in a value of false;
 4. 
 int a = 5;
 print("Value is - "+((a < 5) ? 9.9 : 9));

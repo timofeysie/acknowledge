@@ -17,8 +17,9 @@ public class PolyTest extends TestCase
 
 	public void testSequence()
     {
-        A a_b = new B();log.info("A a = new B() output: "+a_b.toString());
-        log.info("B b = new A() compile error- incompatible types: required: A found: B ");
+        A a_b = new B();log.info("A a = new B() output: "+a_b.toString()+" var "+a_b.var+" str "+a_b.str);
+        log.info("B b = new A() error- incompatible types: required: A found: B ");
+        B b_c = new C();log.info("B b = new C() output: "+b_c.toString()+" var "+b_c.var+" str "+b_c.str);
         String expected = "value2";
         String actual = "value";
         assertEquals(expected,actual);

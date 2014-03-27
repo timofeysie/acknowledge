@@ -1,6 +1,7 @@
 #Core Java#
 
 ###TOC###
+Assert
 Identifiers   
 Shadowing   
 Objects  
@@ -35,6 +36,33 @@ List Interface
 List Iterator Interface
 List Implementations
 
+###Assert###  
+"Exceptions address the robustness of your application (things that might happen) while assertions address the correctness of your application (something that should never happen."
+- contains a boolean expression that you believe will be true when the assertion executes. If it is not true, the system will throw an error. 
+When to use the assert keyword:  
+- pre-conditions (in private methods only) - the requirements which a method requires its caller to fulfill
+- post-conditions - verify the promises made by a method to its caller
+- class invariants - validate object state
+- unreachable-at-runtime code - parts of your program which you expect to be unreachable, but which cannot be verified as such at compile-time (often else clauses and default cases in switch statements)
+```
+assert Expression1;
+```
+- Expression1: a boolean expression, if it is false throws an AssertionError with no detail message.
+```
+assert Expression1 : Expression2 ;
+```
+Expression2 - cannot be an invocation of a method that is declared void.)
+- provides a message for the AssertionError as the error's detail message.  
+Examples:
+```
+    assert fLength > oldLength; //post-condition: length has increased
+    //check the class invariant
+    assert hasValidState(): "Construction failed - not valid state.";
+    assert hasValidState(): this; // //check the class invariant
+```
+- assertions enabled using an argument -enableassertions, or -ea at runtime or -disableassertions, or -da to disable (packageName or className for granularity)
+- use assertions to provide feedback to yourself or your developer team
+(state things that you (supposedly) know to be true).
 
 ###Identifiers###
 - names of variables, functions, classes etc. 
@@ -292,6 +320,7 @@ Math.E, the base of natural logarithms
 
 ###Operators###
 - remainder operator (modulus, modula) 10 % 3 is 1 because 10 divided by 3 leaves a remainder of 1.
+- the % operator is not a true modulus operator, but computes the remainder, which may be negative (-13 % 64 = -13)
 - logical complement operator "!".
 
 ```
