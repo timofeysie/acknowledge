@@ -41,10 +41,17 @@ class OuterClass
 
 	public void createAnonymousSubclassOfSomeClass()
 	{
-		SomeClass anonymous = new SomeClass() {
-  			public void someClassMethod() {log.info("anonymous method call");}};
+		SomeClass anonymous = new SomeClass() 
+		{
+  			public void someClassMethod() {log.info("anonymous method call");}
+  			public void anonymousSubclassMethod(){log.info("extended class metod only");}
+  		};
+  		// regular declaration
+		SomeClass some_class = new SomeClass();
 
-		SomeClass some_class = new SomeClass();	
+		anonymous.someClassMethod();	
+		//anonymous.anonymousSubclassMethod(); // no no no
+		// can only call methods in the super class
 	}
 
 	public static void main(String[] args) 

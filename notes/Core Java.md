@@ -36,7 +36,7 @@ List Interface
 List Iterator Interface
 List Implementations
 
-###Assert###  
+###Assert###
 "Exceptions address the robustness of your application (things that might happen) while assertions address the correctness of your application (something that should never happen."
 - contains a boolean expression that you believe will be true when the assertion executes. If it is not true, the system will throw an error. 
 When to use the assert keyword:  

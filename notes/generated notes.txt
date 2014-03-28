@@ -4,7 +4,7 @@ HashSet         [3, 2, 10, 1, 0, 7, 6, 5, 4, 9, 8] unordered
 TreeSet         [0, 1, 10, 2, 3, 4, 5, 6, 7, 8, 9] ordered
 LinkedHashSet   [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 10] insertion order
 Arrays          [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 10] sequence
-Random list     [8, 6, 3, 0, 5, 10, 1, 4, 2, 7, 9]
+Random list     [3, 5, 9, 8, 1, 2, 4, 10, 7, 0, 6]
 ArrayList       [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 10] insertion order?
 swap(list,0,10) [10, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9]
 replace(l,0,z)  [10, 8, 7, 6, 5, 4, 3, 2, 1, z, 9]
@@ -28,7 +28,45 @@ z: normal init block
 c: constructor
 g: go method
 
-OuterClassTest
+###FormatTest###
+Basic Math Methods ---
+Absolute: Returns the absolute value of the argument.
+Math.abs(-191.635) = 191.635
+
+Ceiling Returns the smallest integer that is greater than or equal to the argument.
+ Returned as a double.
+Math.ceil(-191.64) = -191
+
+Math.ceil(43.74) = 44
+
+Math.ceil(43.32) = 44
+
+Returns the largest integer that is less than or equal to the argument.
+ Returned as a double.
+The floor of 43.74 is 43
+
+R-Integer: Returns the integer that is closest in value to the argument.
+Returned as a double.
+Math.rint(43.74) = 44
+
+Math.rint(43.32) = 43
+
+Math.max(16,45) = 45
+
+Math.min(16,45) = 16
+
+The value of E is 2.7183
+
+exp(11.635) is 112983.831
+
+log(11.635) is 2.454
+
+pow(11.635, 2.760) is 874.008
+
+sqrt(11.635) is 3.411
+
+
+###OuterClassTest###
 Another class could only run the code if it has access to our outer class  
 becuase it has default, or package access so any class within the same  
 package as OuterClass will be able to run the code below without any issues.  
@@ -47,21 +85,6 @@ Nestic Class Method:
 non-static variables cannot be accessed from a static context
 outer.outerClassMethod(); // but does not compile
 This has private access in OuterClass
-
-Creating an instance of a subclass of SomeClass where
-methods are being defined at the same time that an instance of a class is created.
-It's anonymous because the subclass has no name
-SomeClass anonymous = new SomeClass() {
-    public void someClassMethod() {log.info(anonymous method call);}};
-
-This would create an instance of the Anonymous class:
-SomeClass some_class = new SomeClass();
-outer.createAnonymousSubclassOfSomeClass();
-the implications of an anonymous inner class using polymorphism are that
-using the anonymous inner class reference variable type you can only call methods
-that are defined inside the type (the class) of the reference variable. 
-Using our example, this means that with anonymous reference we can only call methods
-that are defined inside SomeClass.
 
 PolyTest
 A a = new B() output: B var 1 str a
