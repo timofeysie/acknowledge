@@ -259,6 +259,7 @@ Assignment Operators: C /= A is equivalent to C = C / A
 - The byteValue, shortValue, and similar methods of the Number class convert one numeric type to another. The valueOf method converts a string to a number, and the toString method converts a number to a string.
 - To format a string containing numbers for output, you can use the printf() or format() methods in the PrintStream class. 
 - Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes
+
 ```
 List<Integer> li = new ArrayList<>();
 for (int i = 1; i < 50; i += 2)
@@ -340,8 +341,8 @@ result = result % 7;
 ?:      Ternary (shorthand for if-then-else statement)  
 ~       Unary bitwise complement  
 <<      Signed left shift  
->_>      Signed right shift  
->_>_>     Unsigned right shift  
+\>>      Signed right shift  
+\>>>     Unsigned right shift  
 &       Bitwise AND  
 ^       Bitwise exclusive OR  
 |       Bitwise inclusive OR  
@@ -384,7 +385,7 @@ int i = 13; // 0000 1101
 i = i << 2; // 0011 0100 
 i is 52 (i × 4) 
 ```
->_>_> Zero fill shift right fills the leftmost bits by zeros. So the result of applying the operator >>> is always positive.
+\>>> Zero fill shift right fills the leftmost bits by zeros. So the result of applying the operator >>> is always positive.
 ```
 int b = 13; // 0000 1101
 b = b >_>_> 2; //0000 0011  = 3
@@ -392,7 +393,7 @@ int b = -11; // 1111 0101
 b = b >_>_> 2; // 1111 1101
 ```
 So the result of applying zero fill right shift operator with operand two on -11 is 1073741821.
->_> Signed right shift operator fills the left most bit by the sign bit.- For positive numbers >_>_> is the same as >_>.  
+\>> Signed right shift operator fills the left most bit by the sign bit.- For positive numbers >_>_> is the same as \>>  
 - For negative numbers;
 ```
 int b = -11; // 1111 0101 
@@ -408,6 +409,7 @@ The new value of b becomes -3.
 char \u0000
 int 0
 - Variable defined inside a method are not implicitly initialized, where as array elements are implicitly initialized.
+
 ```
 string (obj) null
 String str1 = "first";
@@ -437,6 +439,7 @@ Operators -> expressions compute values -> statements -> blocks.
 
 ###Control Flow Statements###
 - The do-while statement is similar to the while statement, but evaluates its expression at the bottom of the loop.
+
 ```
 for ( ; ; ) {} // an infinite loop using the for statement
 while (true) {} //  an infinite loop using the while statement
@@ -452,6 +455,7 @@ for (int item : numbers)
 - static initialization blocks are normal block of code enclosed in braces, { }, and preceded by the static keyword.  
 - They are called in the order that they appear in the source code.
 - First static blocks, then constructors, then normal init blocks.
+
 ```
 1st Object -------
 w: static init block
@@ -472,6 +476,7 @@ g: go method
 ```
 - Note, if the above program were run from the main method inside Sequence.java, the two static init blocks would be called before the 1st Object.
 - private static method defined in a class:
+
 ```
     public static varType myVar = initializeClassVariable();
     private static varType initializeClassVariable() 
@@ -484,6 +489,7 @@ g: go method
 - The compiler copies initializer blocks into every constructor. can be used to share a block of code between multiple constructors.
 - final method cannot be overridden in a subclass. 
 - The method is final because calling non-final methods during instance initialization can cause problems.
+
 ```
 class A {public A(){System.out.println("a");}
     public String toString(){return("A");}}
@@ -513,6 +519,7 @@ Output: a b Ba b c C
 - cannot refer directly to instance variables or methods defined in its enclosing. 
 - Just like any other top-level class.
 - accessed using the enclosing class name:
+
 ```
 Outer.StaticNested nestedObj = new Outer.StaticNested();
 ```
@@ -522,6 +529,7 @@ Outer.StaticNested nestedObj = new Outer.StaticNested();
 - cannot define any static members itself.
 - To instantiate an inner class, you must first instantiate the outer class. 
 - Objects that are instances of an inner class exist within an instance of the outer class.
+
 ```
 OuterClass.InnerClass innerObject = outerObject.new InnerClass();
 ```
@@ -542,6 +550,7 @@ A. Local classes
 
 
 LocalClassExample.java creates a local class like this:
+
 ```
 PhoneNumber myNumber1 = new PhoneNumber(phoneNumber1);
 ```
@@ -574,6 +583,7 @@ Note that you can declare the following in anonymous classes:
 
 ###Enums###
 - All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extend anything else.
+
 ```
 public enum Sex 
 {
@@ -585,6 +595,7 @@ public enum Sex
 - overriding: instance method in the subclass that has the same signature as the one in the superclass
 - hiding: a static method in the subclass that has the same signature as the one in the superclass
 - A subclass does not inherit the private members of its parent class. However, if the superclass has public or protected methods for accessing its private fields, these can also be used by the subclass.
+
 ```
     Object obj = new MountainBike(); // implicit casting
     MountainBike myBike = (MountainBike)obj; // explicit casting
@@ -594,8 +605,10 @@ public enum Sex
         MountainBike myBike = (MountainBike)obj;
     }
 ```
+
 **virtual method invocation** an aspect of polymorphism, is when the jvm calls the appropriate method for the object that is referred to in each variable, not the method that is defined by the variable's type
 "The JVM specifically utilizes a virtual method table for virtual method dispatch:  An object's dispatch table will contain the addresses of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's dispatch table. The dispatch table is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings in an inheritance hierarchy) will have dispatch tables with the same layout: the address of a given method will appear at the same offset for all type-compatible classes. Thus, fetching the method's address from a given dispatch table offset will get the method corresponding to the object's actual class." (Andrew Hare)
+
 ```
 // virtual method invocation
 class A {public String toString(){return("A");}}
@@ -605,6 +618,7 @@ class C {public static void main(String [] args)
 // prints B because the jvm calls the appropriate method 
 ```
 - HOWEVER if you try:
+
 ```
 B b = new A();
 ```
@@ -641,13 +655,17 @@ notify, notifyAll, and wait
 ###Clone###
 - create an object with similar state as the original object.
 - use
+
 ```
 protected Object clone() throws CloneNotSupportedException
 ```
+
 or:
+
 ```
 public Object clone() throws CloneNotSupportedException
 ```
+
 if you are going to write a clone() method to override the one in Object.
 - If an object contains a reference to an external object, a change in ObjExternal made by one object will be visible in its clone also. 
 — to decouple them, you must override clone() so that it clones the object and ObjExternal. Then the original object references ObjExternal and the clone references a clone of ObjExternal, so that the object and its clone are truly independent
@@ -706,6 +724,7 @@ An overriding method can also return a subtype of the type returned by the overr
 - the version of the hidden static method that gets invoked is the one in the superclass (doesnt this depend if it's called from the static Class or an instance of the class? See our notes below)
 - the version of the overridden instance method that gets invoked is the one in the subclass.
 - Hidden Static Methods: If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass.
+
 ```
 Animal.testClassMethod()      - static Animal
 myAnimal.testClassMethod()    - static Animal Hidden
@@ -773,6 +792,7 @@ Interface Methods: Default methods and abstract methods in interfaces are inheri
 ** What the hell is a default method?***
 - However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
 Rule # 1: Instance methods are preferred over interface default methods.  Pegasus.identifyMyself() returns the string "I am a horse."
+
 ```
 public class Pegasus extends Horse implements Flyer, Mythical 
 {
@@ -846,6 +866,7 @@ You can prevent a class or method from being subclassed by using the final keywo
 ###Packages###
 - package private are All the top-level, non-public types in the same file as a public class.
 - Importing java.awt.* imports all of the types in the java.awt package, but it does not import java.awt.color, java.awt.font, etc...  To import more, do this:
+
 ```
     import java.awt.*;
     import java.awt.color.*;
@@ -877,6 +898,7 @@ Try & Catch
 - A try statement does not have to have a catch block if it has a finally block.
 - a single catch block can handle more than one type of exception (Java 7) to reduce code duplication and lessen the temptation to catch an overly broad exception.
 - specify exceptions and separate each with a vertical bar (|):
+
 ```
 catch (IOException|SQLException ex) {
     logger.log(ex);
@@ -886,6 +908,7 @@ catch (IOException|SQLException ex) {
 - If a catch block handles more than one exception type, then the catch parameter is implicitly final. In this example, the catch parameter ex is final and therefore you cannot assign any values to it within the catch block.
 - The runtime system always executes the statements within the finally block regardless of what happens within the try block. 
 - The try-with-resources statement declares one or more resources.   Any object that implements java.lang.AutoCloseable, which includes all objects which implement java.io.Closeable, can be used as a resource.
+
 ```
 try (
         java.util.zip.ZipFile zf =
@@ -952,6 +975,7 @@ try {...} catch (IOException e)
 { throw new SampleException("Other IOException", e); }
 ```
 -  how to call the getStackTrace method on the exception object.
+
 ```
 catch (Exception cause) {
     StackTraceElement elements[] = cause.getStackTrace();
@@ -964,6 +988,7 @@ catch (Exception cause) {
 }
 ```
 - sends the output to a file using the logging facility in the java.util.logging package.
+
 ```
 try 
 {
@@ -1022,6 +1047,7 @@ Set implementations:
 - HashSet: unordered
 - TreeSet: orders elements based on their values ABC...
 - LinkedHashSet: orders elements based insertion-order 
+
 ```
 Set<String> s = new HashSet<String>();
 ```
