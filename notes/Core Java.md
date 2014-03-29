@@ -6,7 +6,7 @@ Identifiers
 Shadowing   
 Objects  
 Variables  
-Return from a method  
+Return from a Method  
 Branching Statements
 Controlling Access  
 Pass by Value  
@@ -14,14 +14,14 @@ Numbers
 PrintStream  
 Math  
 Operators  
-Shift operators
+Shift Operators
 Expressions, Statements, and Blocks  
 Control Flow Statements  
 Initialization  
 Nested Classes  
 Enums  
 Inheritance  
-Object class
+Object Class  
 Clone  
 Abstract & Interface  
 Switch  
@@ -29,12 +29,12 @@ Methods
 Modifiers  
 Packages  
 Regular Expressionses  
-Exceptions
-Collection Interface
-Set Interface & Implementations
-List Interface
-List Iterator Interface
-List Implementations
+Exceptions  
+Collection Interface  
+Set Interface & Implementations  
+List Interface  
+List Iterator Interface  
+List Implementations  
 
 ###Assert###
 "Exceptions address the robustness of your application (things that might happen) while assertions address the correctness of your application (something that should never happen."
@@ -271,7 +271,7 @@ for (int i = 1; i < 50; i += 2)
     li.add(Integer.valueOf(i));
 ```
 
-Autoboxing happens when a primitive value is:
+**Autoboxing a Primitive** happens when a primitive value is:
 - Passed as a parameter to a method that expects an object of the corresponding wrapper class.
 - Assigned to a variable of the corresponding wrapper class.
 
@@ -297,7 +297,7 @@ System.out.format("Comma separated: %,8d%n", n);
 Or in a catch block:
 ```
 System.err.format("IOException: %s%n", x);
-``
+```
 
 ###Math###
 Math.E, the base of natural logarithms  
