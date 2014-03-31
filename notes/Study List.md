@@ -391,6 +391,28 @@ if (a && (b = c))
 assigned, hence (b = c) evaluates to true and subsequently a 
 (b = c) evaluates to true
 
+```
+float x = 0.1f;
+while (x != 1.1) {
+System.out.printf("x = %f%n", x);
+x = x + 0.1f;
+}
+```
+The number 0.1 cannot be stored precisely in base two in the same way that the
+decimal equivalent of the fraction 1/3 cannot be represented exactly (0.333333…).
+The result of adding this number repeatedly to x will result in a number that is not
+quite 1.1. The comparison, x != 1.1, will return true and the loop will never end.
+The output of the printf statement does not show this difference:
+```
+…
+x = 0.900000
+x = 1.000000
+x = 1.100000
+x = 1.200000
+x = 1.300000
+...
+```
+
 Things to do:   
 - TreeSet stores its elements in a red-black tree
 - Questions and Exercises: Nested Classes

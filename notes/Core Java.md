@@ -1,7 +1,8 @@
 #Core Java#
 
 ###TOC###
-Assert
+Arrays  
+Assert  
 Identifiers   
 Shadowing   
 Objects  
@@ -35,6 +36,40 @@ Set Interface & Implementations
 List Interface  
 List Iterator Interface  
 List Implementations  
+
+###Arrays###
+```
+int[] arr1, arr2;
+```
+Both arr1 and arr2 are declared as arrays.
+Data type           Default value (for fields)
+boolean             false
+byte                0
+char                '\u0000'
+short               0
+int                 0
+long                0L
+float               0.0f
+double              0.0d
+String (or obj)     null
+
+```
+int grades[][] = new int[ROWS][COLS];
+```
+we could have created the same grades array as:
+```
+grades = new int[ROWS][];
+grades[0] = new int[COLS];
+grades[1] = new int[COLS];
+```
+- an array with different row lengths. Arrays of
+this type are called ragged arrays.
+```
+grades[0] = new int[4];
+grades[1] = new int[2];
+```
+
+
 
 ###Assert###
 "Exceptions address the robustness of your application (things that might happen) while assertions address the correctness of your application (something that should never happen."
@@ -457,7 +492,7 @@ int b = -11; // 1111 0101
 b = b >_>_> 2; // 1111 1101
 ```
 So the result of applying zero fill right shift operator with operand two on -11 is 1073741821.
-\>> Signed right shift operator fills the left most bit by the sign bit.- For positive numbers >_>_> is the same as \>>  
+\>> Signed right shift operator fills the left most bit by the sign bit.- For positive numbers >_>_> is the same as \>> 
 - For negative numbers;
 ```
 int b = -11; // 1111 0101 

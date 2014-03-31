@@ -49,11 +49,36 @@ if (a == true)  // line 4
 		System.out.println("Hey this won't compile"); // 9
 }
 
-public static void main(String[] args) 
+private void StringBuilderQuestion()
+{
+	StringBuilder sb = new StringBuilder();
+	//Which of the following are valid uses of the sb variable?
+	sb.append(34.5);
+	//sb.deleteCharAt(34.5);
+	//c. sb.toInteger(3);
+	sb.toString();
+	int i = 5;
+	int j = 10;
+	while((i = 12)!=5) {break;};  // how does this work?  ahh, (12 != 5)
+	//Given the following declaration of an array, which statement will display
+	//each element of the array?
+	int arr[] = {1,2,3,4,5};
+	//for(int n : arr[]) { System.out.println(n); }System.out.println(n);
+	System.out.println("b.");
+	for(int n : arr) { System.out.print(n); }
+		System.out.println();
+	System.out.println("c.");
+	for(int n=1; n < 6; n++) { System.out.println(arr[n]);}
+	System.out.print("d.");	
+	for(int n=1; n <= 5; n++) { System.out.println(arr[n]);}
+}
+
+public static void main(String args[]) 
 {
 	ExamQuestions qs = new ExamQuestions();
 	qs.trueOrFalse();	
-	qs.trueOrFalse2();	
+	qs.trueOrFalse2();
+	qs.StringBuilderQuestion();	
 }
 
- }
+}
