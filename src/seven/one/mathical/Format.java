@@ -71,38 +71,49 @@ public class Format{
         double a = -191.635;
         double b = 43.74;
         double e = 43.32;
+        double f = -4.5;
         int c = 16, d = 45;
         log.info("Basic Math Methods ---");
         log.info("Absolute: Returns the absolute value of the argument.");
-        log.info(String.format("Math.abs(%.3f) = %.3f%n", 
-                          a, Math.abs(a)));
-
-        log.info("Ceiling Returns the smallest integer that is greater than or equal to the argument.");
+        log.info(String.format("Math.abs(%.3f) = %.3f%n",a,Math.abs(a)));
+        log.info(String.format("Math.abs(%.3f) = %.3f%n",f,Math.abs(f)));
+        log.info("Ceiling: Returns the smallest integer that is greater than or equal to the argument.");
         log.info(" Returned as a double.");
-        log.info(String.format("Math.ceil(%.2f) = %.0f%n", 
-                          a, Math.ceil(a)));
-        log.info(String.format("Math.ceil(%.2f) = %.0f%n", 
-                          b, Math.ceil(b)));
-        log.info(String.format("Math.ceil(%.2f) = %.0f%n", 
-                          e, Math.ceil(e)));
-        log.info("Returns the largest integer that is less than or equal to the argument.");
+        log.info(String.format("Math.ceil(%.2f) = %.0f%n",b,Math.ceil(b)));
+        log.info(String.format("Math.ceil(%.2f) = %.0f%n",e,Math.ceil(e)));
+        log.info(String.format("Math.ceil(%.2f) = %.0f%n",f,Math.ceil(f)));
+        log.info("Floor: Returns the largest integer that is less than or equal to the argument.");
         log.info(" Returned as a double.");
-        log.info(String.format("The floor of " + "%.2f is %.0f%n", 
-                          b, Math.floor(b)));
-
-        log.info("R-Integer: Returns the integer that is closest in value to the argument.");
+        log.info(String.format("Math.floor(%.2f) = %.0f%n",b,Math.floor(b)));
+        log.info(String.format("Math.floor(%.2f) = %.0f%n",f,Math.floor(f)));
+        log.info("R(Rounded)Integer: Returns the integer that is closest in value to the argument.");
         log.info("Returned as a double.");
-        // rint = Return integer closest to arg
-        log.info(String.format("Math.rint(%.2f) = %.0f%n", 
-                          b, Math.rint(b)));
-        log.info(String.format("Math.rint(%.2f) = %.0f%n", 
-                          e, Math.rint(e)));
-        
-        log.info(String.format("Math.max(%d,%d) = %d%n",
-                          c, d, Math.max(c, d)));
-        log.info(String.format("Math.min(%d,%d) = %d%n",
-                          c, d, Math.min(c, d)));
-    }
+        log.info(String.format("Math.rint(%.2f) = %.0f%n",b,Math.rint(b)));
+        log.info(String.format("Math.rint(%.2f) = %.0f%n",e,Math.rint(e)));
+        log.info("Min and Max of two numbers:");
+        log.info(String.format("Math.max(%d,%d) = %d%n",c,d,Math.max(c, d)));
+        log.info(String.format("Math.min(%d,%d) = %d%n",c,d,Math.min(c, d)));
+        log.info("long round(double d) or int round(float f)");
+        log.info("Returns the closest long or int, as indicated by the method's return type, to the argument:");
+        //log.info(String.format("Math.round(%.2f) = %.0f%n",b,Math.round(b)));
+        //log.info(String.format("Math.round(%.2f) = %.0f%n",e,Math.round(e)));
+        double a1 = -1.5;
+        log.info("Math.round("+b+") = "+Math.round(b));
+        log.info("Math.round("+e+") = "+Math.round(e));
+        log.info("Math.round("+a1+") = "+Math.round(a1));
+        log.info("Math.rint("+a1+") = "+Math.rint(a1));
+        /*
+        double d1 = 100.675;
+      double e1 = 100.500;
+      float f1 = 100;
+      float g1 = 90f;
+
+      System.out.println(Math.round(d1));
+      System.out.println(Math.round(e1)); 
+      System.out.println(Math.round(f1)); 
+      System.out.println(Math.round(g1)); 
+      */
+      }
 
     private static void logarithmicMethods()
     {

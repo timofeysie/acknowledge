@@ -60,7 +60,7 @@ Examples:
     assert hasValidState(): "Construction failed - not valid state.";
     assert hasValidState(): this; // //check the class invariant
 ```
-- assertions enabled using an argument -enableassertions, or -ea at runtime or -disableassertions, or -da to disable (packageName or className for granularity)
+- assertions are enabled using a javac argument -enableassertions, or -ea at runtime or -disableassertions, or -da to disable (packageName or className for granularity)
 - use assertions to provide feedback to yourself or your developer team
 (state things that you (supposedly) know to be true).
 
@@ -71,19 +71,19 @@ Examples:
 - No reserved words; goto, strictfp, const, transient, native, synchronized
 
 
-
 ###Shadowing###
 ```
 public class ShadowTest {
-    public int x = 0;  
+    public int x = 1;  
     class FirstLevel {
-        public int x = 1;  // member variable of the inner class
+        public int x = 2;  // member variable of the inner class
         void methodInFirstLevel(int x) {
             ("parameter   x "+x      +" shadows all other xs");
             ("inner class x "+this.x+" shadows outer class x"); 
             ("Outer class x "+ShadowTest.this.x              );
     }
 }
+Output: 3 2 1 (with 3 as the parameter passed into the method)
 ```
 - Same for a local variable:
 void methodInFirstLevel2() 
@@ -102,11 +102,12 @@ A collection of methods with no implementation is called an interface.
 - Instance Variables (Non-Static Fields) 
 - Class Variables (Static Fields) static modifier; one copy regardless of how many times the class has been instantiated. 
 - Local Variables declared in braces of a method. only visible to the methods in which they are declared;
-- Parameters classified as "variables" not "fields". other parameter-accepting constructs as well (constructors and exception handlers)
 - A type's fields, methods, and nested types are collectively called its members.
 - A variable declared within the opening and closing parenthesis of a method is called a parameter.
 - Parameters refers to the list of variables in a method declaration. 
 - Arguments are the actual values that are passed in when the method is invoked.
+- Parameters classified as "variables" not "fields". other parameter-accepting constructs as well (constructors and exception handlers)
+
 **compile-time constant** a primitive type or a string is defined as a constant and the value is known at compile time, the compiler replaces the constant name everywhere in the code with its value.
 - The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
 
@@ -302,13 +303,73 @@ System.err.format("IOException: %s%n", x);
 ###Math###
 Math.E, the base of natural logarithms  
 - double abs(double d)
-- float abs(float f) or int, - long Returns the absolute value of the argument.
+- float abs(float f) or int, - long Returns the absolute value of the argument.  
+```
+Math.abs(-191.635) = 191.635  
+Math.abs(-4.500) = 4.500  
+```
+
 - double ceil(double d)   Returns the smallest integer that is greater than or equal to the argument. Returned as a double.
+```
+Math.ceil(43.74) = 44  
+Math.ceil(43.32) = 44  
+Math.ceil(-4.50) = -4  
+```
+
 - double floor(double d)  Returns the largest integer that is less than or equal to the argument. Returned as a double.
+```
+Math.floor(43.74) = 43
+Math.floor(-4.50) = -5
+```
+
 - double rint(double d)   Returns the integer that is closest in value to the argument. Returned as a double.
+```
+Math.rint(43.74) = 44
+Math.rint(43.32) = 43
+```
+
 - long round(double d) or int round(float f)  Returns the closest long or int, as indicated by the method's return type, to the argument.
+```
+Math.round(43.74) = 44
+Math.round(43.32) = 43
+```
+
+**The difference between rint and round**
+rint:  
+-  If two double values that are mathematical integers are equally close to the value of the argument, the result is the integer value that is even. Special cases: 
+- If the argument value is already equal to a mathematical integer, then the result is the same as the argument. 
+If the argument is NaN or an infinity or positive zero or negative zero, then the result is the same as the argument.
+round:  
+- The result is rounded to an integer by adding 1/2, taking the floor of the result, and casting the result to type int.
+- In other words, the result is equal to the value of the expression: 
+(int)Math.floor(a + 0.5f)
+Special cases:  
+- If the argument is NaN, the result is 0. 
+- If the argument is negative infinity or any value less than or equal to the value of Integer.MIN_VALUE, the result is equal to the value of Integer.MIN_VALUE. 
+- If the argument is positive infinity or any value greater than or equal to the value of Integer.MAX_VALUE, the result is equal to the value of Integer.MAX_VALUE.
+```
+Math.round(-1.5) = -1
+Math.rint(-1.5) = -2.0
+```
+
+**NaN**
+- 0.0 divided by 0.0 is arithmetically undefined. 
+- Taking the square root of a negative number is also undefined.
+```
+System.out.println(0.0f / 0.0f);       // NaN
+System.out.println(Math.sqrt(-1.0f));  // NaN
+if (Float.isNaN(value)) // true if it's non a number
+Float.isInfinite()  // similar to finind infinity
+Double.isInfinite()
+```
+
 - double min(double arg1, double arg2) works with float int long  Returns the smaller of the two arguments.
 - double max(double arg1, double arg2) also float int long  Returns the larger of the two arguments.
+```
+Math.max(16,45) = 45
+Math.min(16,45) = 16
+```
+
 - pseudo-randomly selected number includes 0.0 but not 1.0. 
 - 0.0 <= Math.random() < 1.0
 - static double ceil(double(d)) : returns the smallest double value equal to a mathematical integer, that is not less than the argument. 
@@ -317,6 +378,9 @@ Math.E, the base of natural logarithms
     ceil(-2.3) // returns -2.0
     ceil(3.0) // returns 3.0
 ```
+
+
+
 
 ###Operators###
 - remainder operator (modulus, modula) 10 % 3 is 1 because 10 divided by 3 leaves a remainder of 1.

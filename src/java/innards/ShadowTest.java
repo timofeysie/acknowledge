@@ -1,9 +1,9 @@
 public class ShadowTest 
 {
-    public int x = 0;  
+    public int x = 1;  
     class FirstLevel 
     {
-        public int x = 1;  // the member variable of the inner class FirstLevel called x
+        public int x = 2;  // the member variable of the inner class FirstLevel called x
         /**
         * The parameter in the method methodInFirstLevel is also called x
         * It shadows the variable of the inner class FirstLevel x.
@@ -30,7 +30,7 @@ public class ShadowTest
     {
         ShadowTest st = new ShadowTest();
         ShadowTest.FirstLevel fl = st.new FirstLevel();
-        fl.methodInFirstLevel(23);
-        fl.methodInFirstLevel2();
+        fl.methodInFirstLevel(3);
+        //fl.methodInFirstLevel2();
     }
 }

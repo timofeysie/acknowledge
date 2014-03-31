@@ -373,10 +373,23 @@ public class Camel implements Rideable
 error: getGait() in Camel cannot implement getGait() in Rideable
 attempting to assign weaker access privileges; was public
 - This happens becuase "methods in an interface are implicitly public, so the public modifier can be omitted." but the default for a class is package private.
-
-A a = new B() output: B
+class A.  class B extends A.
+A a = new B().go() output: B
 B b = new A() compile error- incompatible types: required: A found: B 
 
+Arrays are objects, so
+int a[] = {1,2,3,4}
+print(a instanceof Object) prints true.
+
+```
+boolean a = true;
+boolean b = false;
+boolean c = true;
+if (a && (b = c)) 
+```
+- an assignment statement also has a value equal to the value being 
+assigned, hence (b = c) evaluates to true and subsequently a 
+(b = c) evaluates to true
 
 Things to do:   
 - TreeSet stores its elements in a red-black tree

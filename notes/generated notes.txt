@@ -4,7 +4,7 @@ HashSet         [3, 2, 10, 1, 0, 7, 6, 5, 4, 9, 8] unordered
 TreeSet         [0, 1, 10, 2, 3, 4, 5, 6, 7, 8, 9] ordered
 LinkedHashSet   [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 10] insertion order
 Arrays          [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 10] sequence
-Random list     [3, 5, 9, 8, 1, 2, 4, 10, 7, 0, 6]
+Random list     [8, 5, 4, 3, 6, 2, 7, 1, 10, 0, 9]
 ArrayList       [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 10] insertion order?
 swap(list,0,10) [10, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9]
 replace(l,0,z)  [10, 8, 7, 6, 5, 4, 3, 2, 1, z, 9]
@@ -33,28 +33,39 @@ Basic Math Methods ---
 Absolute: Returns the absolute value of the argument.
 Math.abs(-191.635) = 191.635
 
-Ceiling Returns the smallest integer that is greater than or equal to the argument.
- Returned as a double.
-Math.ceil(-191.64) = -191
+Math.abs(-4.500) = 4.500
 
+Ceiling: Returns the smallest integer that is greater than or equal to the argument.
+ Returned as a double.
 Math.ceil(43.74) = 44
 
 Math.ceil(43.32) = 44
 
-Returns the largest integer that is less than or equal to the argument.
- Returned as a double.
-The floor of 43.74 is 43
+Math.ceil(-4.50) = -4
 
-R-Integer: Returns the integer that is closest in value to the argument.
+Floor: Returns the largest integer that is less than or equal to the argument.
+ Returned as a double.
+Math.floor(43.74) = 43
+
+Math.floor(-4.50) = -5
+
+R(Rounded)Integer: Returns the integer that is closest in value to the argument.
 Returned as a double.
 Math.rint(43.74) = 44
 
 Math.rint(43.32) = 43
 
+Min and Max of two numbers:
 Math.max(16,45) = 45
 
 Math.min(16,45) = 16
 
+long round(double d) or int round(float f)
+Returns the closest long or int, as indicated by the method's return type, to the argument:
+Math.round(43.74) = 44
+Math.round(43.32) = 43
+Math.round(-1.5) = -1
+Math.rint(-1.5) = -2.0
 The value of E is 2.7183
 
 exp(11.635) is 112983.831
@@ -87,6 +98,6 @@ outer.outerClassMethod(); // but does not compile
 This has private access in OuterClass
 
 PolyTest
-A a = new B() output: B var 1 str a
+A a = new B() output: B B2 var 1 str a
 B b = new A() error- incompatible types: required: A found: B 
 B b = new C() output: C var 2 str b
