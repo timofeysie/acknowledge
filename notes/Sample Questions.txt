@@ -201,3 +201,23 @@ x47.b - d
 -49.f
 -50.d,c
 29 out of 48 is 60%.  Not good enough.  Need to get at least 80.
+
+PDF Questions:
+
+PDF
+Test you knowledge:
+p.37
+O1.a
+O2.a.b.d.
+p.76
+X3.a.
+X4.a.b.c.e
+p.114
+p.151
+p.179 pitfalls
+p.183
+p.216
+p.246
+p.275
+p.297 answers
+
