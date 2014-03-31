@@ -2,6 +2,7 @@
 
 ###TOC###
 Arrays  
+PDF Collections
 Assert  
 Identifiers   
 Shadowing   
@@ -69,6 +70,233 @@ grades[0] = new int[4];
 grades[1] = new int[2];
 ```
 
+Comparing Arrays  
+```
+println(arr1 == arr2); //Displays false
+```
+- arr1 and arr2 which are array reference variables
+and not the arrays.
+```
+println(arr1.equals(arr2)); // Displays false
+```
+- Object equivalency refers to the comparison of two object reference variables
+- Object value equivalency refers to the condition where two distinct objects are considered to be equivalent because their internal values are the same.
+```
+out.println(Arrays.equals(arr1,arr2)); // Displays true
+```
+- the so called deepEquals method.
+```
+static final int ROWS = 2;
+static final int COLS = 3;
+int grades[][] = new int[ROWS][COLS];
+grades = new int[ROWS][]; // same as
+grades[0] = new int[COLS]; // this
+grades[1] = new int[COLS]; // and this
+grades[0][0] = 0;
+grades[0][1] = 1;
+grades[0][2] = 2;
+grades[1][0] = 3;
+grades[1][1] = 4;
+grades[1][2] = 5;
+int grades2[][];
+
+grades2 = new int[ROWS][];
+grades2[0] = new int[COLS];
+grades2[1] = new int[COLS];
+grades2[0][0] = 0;
+grades2[0][1] = 1;
+grades2[0][2] = 2;
+grades2[1][0] = 3;
+grades2[1][1] = 4;
+grades2[1][2] = 5;
+System.out.println(grades == grades2); // false
+System.out.println(grades.equals(grades2)); // false
+System.out.println(Arrays.equals(grades, grades2)); // false
+System.out.println(Arrays.deepEquals(grades, grades2)); // true
+```
+Using the equality operator only works properly if the two
+reference variables reference the same object.
+Using the array's equals method ditto.
+Using the Array's class equals method This will work for one-dimensional arrays.
+Using the Array's class deepEquals method performs a deeper comparison using
+the object's equals method.
+
+Copying Arrays  
+```
+int arr1[] = new int[5];
+int arr2[] = new int[5];
+for(int i = 0; i < arr1.length; i++) {
+arr1[i] = i; }
+```
+**Simple element-by-element copy**:
+```
+for(int i = 0; i < arr1.length; i++) {
+arr2[i] = arr1[i]; }
+```
+**the System.arraycopy** method attempts to copy all, or part, of one array to
+another. Provide the beginning positions and the number of elements to copy.
+```
+System.arraycopy(arr1, 0, arr2, 0, 5);
+```
+(To copy the first three elements of arr1 to the last three elements
+of arr2: System.arraycopy(arr1, 0, arr2, 2, 3); // 0 0 0 1 2)
+
+```
+StringBuilder arr3[] = new StringBuilder[4];
+arr3[0] = new StringBuilder("Pine");
+arr3[1] = new StringBuilder("Oak");
+arr3[2] = new StringBuilder("Maple");
+arr3[3] = new StringBuilder("Walnut");
+StringBuilder arr4[] = new StringBuilder[4];
+System.arraycopy(arr3, 0, arr4, 0, 4);
+```
+However, arr4 contains the same object reference variables used by arr3. The
+corresponding element of both arrays reference the same object. The creation of an identical array with references to distinct strings is achieved with the following code:
+```
+for (int i = 0; i < arr3.length; i++) {
+arr4[i] = new StringBuilder(arr3[i]); }
+```
+- We created a new StringBuilder object for-each element of the destination array.  This approach is necessary if a deep copy is needed.
+
+**the Arrays.copyOf method** creates a new array based on an existing array.
+The arguments are the original array and how many elements to copy.
+```
+arr2 = Arrays.copyOf(arr1, 3); // 0 1 2
+```
+The new array can be larger than the original array as illustrated with the
+following code:
+```
+arr2 = Arrays.copyOf(arr1, 10); // 0 1 2 3 4 0 0 0 0 0
+```
+The last five elements of arr2 will be padded with zeros.  If the array is an array of objects, a copy of the original object is assigned to the new array.
+
+**the Arrays.copyOfRange method** creates a new array based on a subrange
+of elements in an existing array. The arguments are the original, the beginning index and the ending index exclusive.
+```
+arr2 = Arrays.copyOfRange(arr1, 3, 5); // 3 4
+```
+(Notice that the last argument is not a valid index for the arr1 array. This works here because the last argument is exclusive. It does not include that element.)
+```
+arr2 = Arrays.copyOfRange(arr1, 3, 8); // 3 4 0 0 0
+```
+- the new array is padded with zeros:
+
+**the clone method** creates a copy of an array:
+```
+arr2 = arr1.clone();
+```
+However, this only makes a shallow copy of the original object. With an array of primitives such as the above integer array, this is not a problem. With an array of references to objects, both arrays will reference the same objects.
+
+- "passing a reference" to the arr2 array "by value". if we modify the arr parameter, the original arr2 variable is not modified.
+```
+System.out.println("Length of arr2: " + arr2.length); // 5
+changeArray(arr2);                                    // 100
+System.out.println("Length of arr2: " + arr2.length); // 5
+...
+private static void changeArray(int arr[]) {
+arr = new int[100];
+System.out.println("Length of arr: " + arr.length); }
+```
+
+The java.util.Arrays class  
+```
+int arr1[] = new int[5];
+ArrayList list = new ArrayList();
+list.add("item 1");
+list.add("item 2");
+Object arr2[] = {"item 3", new Integer(5), list};
+String arr3[] = {"Pine", "Oak", "Maple", "Walnut"};
+```
+Next, we will fill the integer array with the number 5 using the fill method:
+```
+Arrays.fill(arr1,5);
+```
+The asList, toString, and deepToString methods are then used against these
+arrays, shown as follows:
+```
+println(Arrays.asList(arr3)); // [Pine, Oak, Maple, Walnut]
+println(Arrays.toString(arr1)); // [5, 5, 5, 5, 5]
+println(Arrays.deepToString(arr2)); // [item 3, 5, [item 1, item 2]]
+```
+- the asList() method takes its array argument and returns a java.util.List. If either the array or the list is modified, their corresponding elements are modified. This is demonstrated in the following example:
+```
+List list2 = Arrays.asList(arr3);
+list2.set(0, "Birch");
+println(Arrays.toString(arr3)); // [Birch, Oak, Maple, Walnut]
+```
+
+Arrays provide **Locality of reference** results in faster read and write operations (important for virtual operating systems) faster than accessing elements of a linked list when the linked list is spread across the memory.
+
+
+###PDF Collections###
+The remove method is an optional Iterator method. If an attempt is made to use
+this method and the implementation of the interface does not support this method, then an UnsupportedOperationException exception is thrown.
+The ListIterator interface, when available, is an alternative to the Iterator
+interface. It uses the same methods and provides additional capabilities including:
+• Traversal of the list in either direction
+• Modification of its elements
+• Access to the element's position
+Iterator interface
+• next: 
+• hasNext:
+• remove:
+ListIterator interface
+• previous:
+• hasPrevious
+• nextIndex: 
+• previousIndex:
+• add: 
+
+ArrayList
+• Access is performed in constant time
+• Insertion/deletion is performed in linear time
+
+not synchronized. When an iterator is obtained for a ArrayList object, it is susceptible to possible simultaneous overwrites with loss of data if modified in a concurrent fashion. When multiple threads access the same object, it is possible that they may all write to the object at the same time, that is, concurrently. When this simultaneous overwrite occurs, a ConcurrentModificationException exception is thrown.
+
+- The initial capacity of a ArrayList created with its default
+constructor is 10.
+
+```
+ArrayList<String> creatures = new ArrayList<String>();
+creatures.add("Mutant");
+creatures.add("Alien");
+creatures.add("Zombie");
+println(creatures); // [Mutant, Alien, Zombie]
+creatures.add(1,"Godzilla");
+println(creatures); //[Mutant, Godzilla, Alien, Zombie]
+ArrayList<String> cuddles = new ArrayList<String>();
+cuddles.add("Tribbles");
+cuddles.add("Ewoks");
+creatures.addAll(2, cuddles);
+System.out.println(creatures);
+// [Mutant, Godzilla, Tribbles, Ewoks, Alien, Zombie]
+String element = creatures.get(2); // Tribbles
+System.out.println(creatures.indexOf("Tribbles")); // 2
+Iterator<String> iterator = creatures.iterator();
+while(iterator.hasNext()) {
+    System.out.print(iterator.next() + " ");
+}
+System.out.println();
+
+ListIterator<String> listIterator = creatures.listIterator();
+while(listIterator.hasNext()) {
+    System.out.print(listIterator.next() + " ");
+}
+System.out.println();
+
+while(listIterator.hasPrevious()) {
+    System.out.print(listIterator.previous() + " ");
+}
+System.out.println();
+
+Collections.sort(creatures);
+System.out.println(creatures);
+// [Alien, Ewoks, Godzilla, Mutant, Tribbles, Zombie]
+creatures.set(0,"Ghoul");
+System.out.println(creatures);
+// [Ghoul, Godzilla, Tribbles, Ewoks, Alien, Zombie]
+```
+- Traverse with for statement, for-each statement, Iterator, or ListIterator
 
 
 ###Assert###

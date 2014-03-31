@@ -404,5 +404,7 @@ Chapter 5: Looping Constructs p.183 (4/5)
 Chapter 6: Classes, Constructors, and Methods p.216 (3/7)
 Chapter 7: Inheritance & Polymorphism (1/6) 
 Chapter 8: Handling Exceptions in an Application p.275 (3/5)
+23 out of 39 is 58%.  We need to score above 70% to pass, and advice said we should be scoring above 80% on mock exams before attempting the test.  
+So no time to waste.
 
-
+ssh://5315fef74382ecdb7b000089@indoct-englishglue.rhcloud.com/~/git/indoct.git/
