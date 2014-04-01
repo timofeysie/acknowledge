@@ -42,27 +42,30 @@ List Implementations
 ```
 int[] arr1, arr2;
 ```
-Both arr1 and arr2 are declared as arrays.
-Data type           Default value (for fields)
-boolean             false
-byte                0
-char                '\u0000'
-short               0
-int                 0
-long                0L
-float               0.0f
-double              0.0d
-String (or obj)     null
+
+Both arr1 and arr2 are declared as arrays.  
+Data type ---------- Default value (for fields)  
+boolean ------------ false  
+byte ---------------- 0  
+char --------------- '\u0000'  
+short --------------- 0  
+int ------------------ 0  
+long --------------- 0L  
+float --------------- 0.0f  
+double ------------- 0.0d  
+String (or obj) ---- null  
 
 ```
 int grades[][] = new int[ROWS][COLS];
 ```
+
 we could have created the same grades array as:
 ```
 grades = new int[ROWS][];
 grades[0] = new int[COLS];
 grades[1] = new int[COLS];
 ```
+
 - an array with different row lengths. Arrays of
 this type are called ragged arrays.
 ```
@@ -70,86 +73,99 @@ grades[0] = new int[4];
 grades[1] = new int[2];
 ```
 
-Comparing Arrays  
+###Comparing Arrays  
 ```
 println(arr1 == arr2); //Displays false
 ```
-- arr1 and arr2 which are array reference variables
+
+arr1 and arr2 which are array reference variables
 and not the arrays.
 ```
 println(arr1.equals(arr2)); // Displays false
 ```
-- Object equivalency refers to the comparison of two object reference variables
-- Object value equivalency refers to the condition where two distinct objects are considered to be equivalent because their internal values are the same.
+
+Object equivalency refers to the comparison of two object reference variables
+Object value equivalency refers to the condition where two distinct objects are 
+
+considered to be equivalent because their internal values are the same.
+
 ```
 out.println(Arrays.equals(arr1,arr2)); // Displays true
 ```
-- the so called deepEquals method.
-```
-static final int ROWS = 2;
-static final int COLS = 3;
-int grades[][] = new int[ROWS][COLS];
-grades = new int[ROWS][]; // same as
-grades[0] = new int[COLS]; // this
-grades[1] = new int[COLS]; // and this
-grades[0][0] = 0;
-grades[0][1] = 1;
-grades[0][2] = 2;
-grades[1][0] = 3;
-grades[1][1] = 4;
-grades[1][2] = 5;
-int grades2[][];
 
-grades2 = new int[ROWS][];
-grades2[0] = new int[COLS];
-grades2[1] = new int[COLS];
-grades2[0][0] = 0;
-grades2[0][1] = 1;
-grades2[0][2] = 2;
-grades2[1][0] = 3;
-grades2[1][1] = 4;
-grades2[1][2] = 5;
-System.out.println(grades == grades2); // false
-System.out.println(grades.equals(grades2)); // false
-System.out.println(Arrays.equals(grades, grades2)); // false
-System.out.println(Arrays.deepEquals(grades, grades2)); // true
+the so called **deepEquals** method.  
 ```
-Using the equality operator only works properly if the two
-reference variables reference the same object.
+static final int ROWS = 2;  
+static final int COLS = 3;  
+int grades[][] = new int[ROWS][COLS];  
+grades = new int[ROWS][]; // same as  
+grades[0] = new int[COLS]; // this  
+grades[1] = new int[COLS]; // and this  
+grades[0][0] = 0;  
+grades[0][1] = 1;  
+grades[0][2] = 2;  
+grades[1][0] = 3;  
+grades[1][1] = 4;  
+grades[1][2] = 5;  
+int grades2[][];  
+   
+grades2 = new int[ROWS][];   
+grades2[0] = new int[COLS];  
+grades2[1] = new int[COLS];  
+grades2[0][0] = 0;  
+grades2[0][1] = 1;  
+grades2[0][2] = 2;  
+grades2[1][0] = 3;  
+grades2[1][1] = 4;  
+grades2[1][2] = 5;  
+System.out.println(grades == grades2); // false  
+System.out.println(grades.equals(grades2)); // false  
+System.out.println(Arrays.equals(grades, grades2)); // false   
+System.out.println(Arrays.deepEquals(grades, grades2)); // true  
+```
+
+Using the equality operator only works properly if the two reference variables reference the same object.  
 Using the array's equals method ditto.
 Using the Array's class equals method This will work for one-dimensional arrays.
 Using the Array's class deepEquals method performs a deeper comparison using
 the object's equals method.
 
-Copying Arrays  
+###Copying Arrays  
+
 ```
-int arr1[] = new int[5];
-int arr2[] = new int[5];
-for(int i = 0; i < arr1.length; i++) {
-arr1[i] = i; }
+
+int arr1[] = new int[5];   
+int arr2[] = new int[5];    
+for(int i = 0; i < arr1.length; i++) {    
+arr1[i] = i; }    
+
 ```
-**Simple element-by-element copy**:
+
+**Simple element-by-element copy**:  
+```   
+for(int i = 0; i < arr1.length; i++) {  
+arr2[i] = arr1[i]; }  
 ```
-for(int i = 0; i < arr1.length; i++) {
-arr2[i] = arr1[i]; }
-```
+
 **the System.arraycopy** method attempts to copy all, or part, of one array to
 another. Provide the beginning positions and the number of elements to copy.
 ```
 System.arraycopy(arr1, 0, arr2, 0, 5);
 ```
+
 (To copy the first three elements of arr1 to the last three elements
 of arr2: System.arraycopy(arr1, 0, arr2, 2, 3); // 0 0 0 1 2)
 
 ```
-StringBuilder arr3[] = new StringBuilder[4];
-arr3[0] = new StringBuilder("Pine");
-arr3[1] = new StringBuilder("Oak");
-arr3[2] = new StringBuilder("Maple");
-arr3[3] = new StringBuilder("Walnut");
-StringBuilder arr4[] = new StringBuilder[4];
-System.arraycopy(arr3, 0, arr4, 0, 4);
+StringBuilder arr3[] = new StringBuilder[4];   
+arr3[0] = new StringBuilder("Pine");    
+arr3[1] = new StringBuilder("Oak");    
+arr3[2] = new StringBuilder("Maple");    
+arr3[3] = new StringBuilder("Walnut");    
+StringBuilder arr4[] = new StringBuilder[4];    
+System.arraycopy(arr3, 0, arr4, 0, 4);    
 ```
+
 However, arr4 contains the same object reference variables used by arr3. The
 corresponding element of both arrays reference the same object. The creation of an identical array with references to distinct strings is achieved with the following code:
 ```
@@ -159,36 +175,36 @@ arr4[i] = new StringBuilder(arr3[i]); }
 - We created a new StringBuilder object for-each element of the destination array.  This approach is necessary if a deep copy is needed.
 
 **the Arrays.copyOf method** creates a new array based on an existing array.
-The arguments are the original array and how many elements to copy.
+The arguments are the original array and how many elements to copy.  
 ```
 arr2 = Arrays.copyOf(arr1, 3); // 0 1 2
-```
+```  
 The new array can be larger than the original array as illustrated with the
-following code:
+following code:  
 ```
 arr2 = Arrays.copyOf(arr1, 10); // 0 1 2 3 4 0 0 0 0 0
-```
+```  
 The last five elements of arr2 will be padded with zeros.  If the array is an array of objects, a copy of the original object is assigned to the new array.
 
 **the Arrays.copyOfRange method** creates a new array based on a subrange
 of elements in an existing array. The arguments are the original, the beginning index and the ending index exclusive.
 ```
 arr2 = Arrays.copyOfRange(arr1, 3, 5); // 3 4
-```
+```  
 (Notice that the last argument is not a valid index for the arr1 array. This works here because the last argument is exclusive. It does not include that element.)
 ```
 arr2 = Arrays.copyOfRange(arr1, 3, 8); // 3 4 0 0 0
-```
+```  
 - the new array is padded with zeros:
 
-**the clone method** creates a copy of an array:
+**the clone method** creates a copy of an array:  
 ```
 arr2 = arr1.clone();
-```
+```    
 However, this only makes a shallow copy of the original object. With an array of primitives such as the above integer array, this is not a problem. With an array of references to objects, both arrays will reference the same objects.
 
-- "passing a reference" to the arr2 array "by value". if we modify the arr parameter, the original arr2 variable is not modified.
-```
+- "passing a reference" to the arr2 array "by value". if we modify the arr parameter, the original arr2 variable is not modified.  
+```  
 System.out.println("Length of arr2: " + arr2.length); // 5
 changeArray(arr2);                                    // 100
 System.out.println("Length of arr2: " + arr2.length); // 5
@@ -196,9 +212,9 @@ System.out.println("Length of arr2: " + arr2.length); // 5
 private static void changeArray(int arr[]) {
 arr = new int[100];
 System.out.println("Length of arr: " + arr.length); }
-```
+```  
 
-The java.util.Arrays class  
+### The java.util.Arrays class 
 ```
 int arr1[] = new int[5];
 ArrayList list = new ArrayList();
@@ -206,24 +222,24 @@ list.add("item 1");
 list.add("item 2");
 Object arr2[] = {"item 3", new Integer(5), list};
 String arr3[] = {"Pine", "Oak", "Maple", "Walnut"};
-```
+```  
 Next, we will fill the integer array with the number 5 using the fill method:
 ```
 Arrays.fill(arr1,5);
-```
+```   
 The asList, toString, and deepToString methods are then used against these
 arrays, shown as follows:
 ```
 println(Arrays.asList(arr3)); // [Pine, Oak, Maple, Walnut]
 println(Arrays.toString(arr1)); // [5, 5, 5, 5, 5]
 println(Arrays.deepToString(arr2)); // [item 3, 5, [item 1, item 2]]
-```
+```  
 - the asList() method takes its array argument and returns a java.util.List. If either the array or the list is modified, their corresponding elements are modified. This is demonstrated in the following example:
 ```
 List list2 = Arrays.asList(arr3);
 list2.set(0, "Birch");
 println(Arrays.toString(arr3)); // [Birch, Oak, Maple, Walnut]
-```
+```  
 
 Arrays provide **Locality of reference** results in faster read and write operations (important for virtual operating systems) faster than accessing elements of a linked list when the linked list is spread across the memory.
 
@@ -232,75 +248,138 @@ Arrays provide **Locality of reference** results in faster read and write operat
 The remove method is an optional Iterator method. If an attempt is made to use
 this method and the implementation of the interface does not support this method, then an UnsupportedOperationException exception is thrown.
 The ListIterator interface, when available, is an alternative to the Iterator
-interface. It uses the same methods and provides additional capabilities including:
-• Traversal of the list in either direction
-• Modification of its elements
-• Access to the element's position
-Iterator interface
-• next: 
-• hasNext:
-• remove:
-ListIterator interface
-• previous:
-• hasPrevious
-• nextIndex: 
-• previousIndex:
-• add: 
+interface. It uses the same methods and provides additional capabilities including:    
+• Traversal of the list in either direction  
+• Modification of its elements  
+• Access to the element's position  
+Iterator interface    
+• next:   
+• hasNext:  
+• remove:  
+ListIterator interface    
+• previous:  
+• hasPrevious  
+• nextIndex:   
+• previousIndex:  
+• add:   
 
-ArrayList
-• Access is performed in constant time
-• Insertion/deletion is performed in linear time
+ArrayList   
+• Access is performed in constant time  
+• Insertion/deletion is performed in linear time  
 
 not synchronized. When an iterator is obtained for a ArrayList object, it is susceptible to possible simultaneous overwrites with loss of data if modified in a concurrent fashion. When multiple threads access the same object, it is possible that they may all write to the object at the same time, that is, concurrently. When this simultaneous overwrite occurs, a ConcurrentModificationException exception is thrown.
 
 - The initial capacity of a ArrayList created with its default
-constructor is 10.
+constructor is 10.  
 
 ```
-ArrayList<String> creatures = new ArrayList<String>();
-creatures.add("Mutant");
-creatures.add("Alien");
-creatures.add("Zombie");
-println(creatures); // [Mutant, Alien, Zombie]
-creatures.add(1,"Godzilla");
-println(creatures); //[Mutant, Godzilla, Alien, Zombie]
-ArrayList<String> cuddles = new ArrayList<String>();
-cuddles.add("Tribbles");
-cuddles.add("Ewoks");
-creatures.addAll(2, cuddles);
-System.out.println(creatures);
-// [Mutant, Godzilla, Tribbles, Ewoks, Alien, Zombie]
-String element = creatures.get(2); // Tribbles
-System.out.println(creatures.indexOf("Tribbles")); // 2
-Iterator<String> iterator = creatures.iterator();
-while(iterator.hasNext()) {
-    System.out.print(iterator.next() + " ");
-}
-System.out.println();
+ArrayList<String> creatures = new ArrayList<String>();  
+creatures.add("Mutant");  
+creatures.add("Alien");  
+creatures.add("Zombie");  
+println(creatures); // [Mutant, Alien, Zombie]  
+creatures.add(1,"Godzilla");  
+println(creatures); //[Mutant, Godzilla, Alien, Zombie]  
+ArrayList<String> cuddles = new ArrayList<String>();  
+cuddles.add("Tribbles");  
+cuddles.add("Ewoks");  
+creatures.addAll(2, cuddles);  
+System.out.println(creatures);  
+// [Mutant, Godzilla, Tribbles, Ewoks, Alien, Zombie]  
+String element = creatures.get(2); // Tribbles  
+System.out.println(creatures.indexOf("Tribbles")); // 2  
+Iterator<String> iterator = creatures.iterator();  
+while(iterator.hasNext()) {  
+    System.out.print(iterator.next() + " ");  
+}  
+System.out.println();  
+  
+ListIterator<String> listIterator = creatures.listIterator();  
+while(listIterator.hasNext()) {  
+    System.out.print(listIterator.next() + " ");  
+}  
+System.out.println();  
 
-ListIterator<String> listIterator = creatures.listIterator();
-while(listIterator.hasNext()) {
-    System.out.print(listIterator.next() + " ");
-}
-System.out.println();
+while(listIterator.hasPrevious()) {  
+    System.out.print(listIterator.previous() + " ");  
+}  
+System.out.println();  
 
-while(listIterator.hasPrevious()) {
-    System.out.print(listIterator.previous() + " ");
-}
-System.out.println();
-
-Collections.sort(creatures);
-System.out.println(creatures);
-// [Alien, Ewoks, Godzilla, Mutant, Tribbles, Zombie]
-creatures.set(0,"Ghoul");
-System.out.println(creatures);
-// [Ghoul, Godzilla, Tribbles, Ewoks, Alien, Zombie]
+Collections.sort(creatures);  
+System.out.println(creatures);  
+// [Alien, Ewoks, Godzilla, Mutant, Tribbles, Zombie]  
+creatures.set(0,"Ghoul");  
+System.out.println(creatures);  
+// [Ghoul, Godzilla, Tribbles, Ewoks, Alien, Zombie]  
 ```
+
 - Traverse with for statement, for-each statement, Iterator, or ListIterator
+
+Encapsulating collections
+- When using a collection within a class, hide the collection
+
+
+Classes (p.185)  
+To create an immutable object:  
+• Make the class final which means that it cannot be extended (covered in the Using the final keyword with classes section in Chapter 7, Inheritance and Polymorphism)  
+• Keep the fields of the class private and ideally final  
+• Do not provide any methods that modify the state of the object, that is do not provide setter or similar methods  
+• Do not allow mutable field objects to be changed  
+```
+public Date getDate() {
+return new Date(date.getTime());
+}
+```  
+the getDate method created a new Date object based on the header's
+date field. Any Date object is mutable, so by returning a copy of the date as opposed to a reference to the current date, the user is unable to access and otherwise modify the private field.
+
+Default Constructor  
+If the programmer adds a constructor to the class, then the class will no longer have a default constructor added automatically. The programmer must explicitly add a default constructor for the class to have one.  Imagine this constructor is the only one in the class:
+```
+public Employee(String name) { }
+```  
+If we try to create an object using the default constructor, as shown in the following code snippet, then we will get a syntax error:
+```
+Employee employee1 = new Employee();
+```  
+The error message that is generated is as follows:
+no suitable constructor found for Employee()
+-If a "constructor" has a return type, it is actually a method that happens to have the same name as the class. This is true even if the return type is void, as illustrated in the following code snippet:
+```
+public void Employee(String name) {
+}
+Employee employee = new Employee();
+employee.Employee("Calling a method");
+```  
+- While this is legal, it is not good style  
+
+initialization sequence is a bit more complex  
+than described here. However, the general order is as follows:  
+1. The zeroing of fields performed when the object is instantiated  
+2. The initialization of final and static variables  
+3. The assignment of instance variables initializers  
+4. The execution of initialization blocks  
+5. The code within a constructor  
+
+Both the method calls in the following code snippet will invoke the same method:
+```
+Employee employee = new Employee();
+employee.setEntityCode(42);
+Employee.setEntityCode(42);
+```  
+However, it is not good practice to use a reference variable to invoke a static method.  Instead, always use the classname. Attempts to use an object will result in the following syntax warning:
+```
+Accessing static method setEntityCode
+```  
+
+Fields that have private or non-existent setters (mutator methods) are referred to as read-only fields. Fields that have private or non-existent getters are referred to as write-only (accessor) fields, but are not as common.
+
+(TO Ch 6 summary)
 
 
 ###Assert###
-"Exceptions address the robustness of your application (things that might happen) while assertions address the correctness of your application (something that should never happen."
+"Exceptions address the robustness of your application (things that might happen) while assertions adOrder Number :3BMNGNE-BF3CF9, Email ID:timofeyc@hotmail.com, Quantity:1
+dress the correctness of your application (something that should never happen."
 - contains a boolean expression that you believe will be true when the assertion executes. If it is not true, the system will throw an error. 
 When to use the assert keyword:  
 - pre-conditions (in private methods only) - the requirements which a method requires its caller to fulfill
@@ -309,20 +388,23 @@ When to use the assert keyword:
 - unreachable-at-runtime code - parts of your program which you expect to be unreachable, but which cannot be verified as such at compile-time (often else clauses and default cases in switch statements)
 ```
 assert Expression1;
-```
-- Expression1: a boolean expression, if it is false throws an AssertionError with no detail message.
+```  
+- Expression1: a boolean expression, if it is false throws an AssertionError with no detail message.  
 ```
 assert Expression1 : Expression2 ;
-```
+```  
 Expression2 - cannot be an invocation of a method that is declared void.)
 - provides a message for the AssertionError as the error's detail message.  
 Examples:
+
 ```
-    assert fLength > oldLength; //post-condition: length has increased
-    //check the class invariant
-    assert hasValidState(): "Construction failed - not valid state.";
-    assert hasValidState(): this; // //check the class invariant
-```
+
+    assert fLength > oldLength; //post-condition: length has increased    
+    //check the class invariant  
+    assert hasValidState(): "Construction failed - not valid state.";  
+    assert hasValidState(): this; // //check the class invariant  
+```  
+
 - assertions are enabled using a javac argument -enableassertions, or -ea at runtime or -disableassertions, or -da to disable (packageName or className for granularity)
 - use assertions to provide feedback to yourself or your developer team
 (state things that you (supposedly) know to be true).
@@ -336,7 +418,9 @@ Examples:
 
 ###Shadowing###
 ```
-public class ShadowTest {
+public class ShadowTest 
+{  
+
     public int x = 1;  
     class FirstLevel {
         public int x = 2;  // member variable of the inner class
@@ -346,8 +430,10 @@ public class ShadowTest {
             ("Outer class x "+ShadowTest.this.x              );
     }
 }
+```     
 Output: 3 2 1 (with 3 as the parameter passed into the method)
-```
+
+
 - Same for a local variable:
 void methodInFirstLevel2() 
 {
@@ -454,13 +540,14 @@ Even thought myCircle is not returned from the moveCircle method, the changes th
 - my take: Java is a pass-by-address(or primitive) language.
 
 
-###Numbers###
-The eight primitive data types supported by the Java programming language: boolean, byte, char, short, int, float, long, double. 
-"If you bite a char short inthe float it's long in the double"
-- boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.
-- byte: 8-bit signed two's complement integer. min -128 max 127 (incl).
-- char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).
-- short: a 16-bit signed two's complement integer.min -32,768 max 32,767 (inclusive).use a short to save memory in large arrays, in situations where the memory savings actually matters.
+###Numbers
+The eight primitive data types supported by the Java programming language: boolean, byte, char, short, int, float, long, double.   
+"If you bite a char short inthe float it's long in the double"   
+
+- boolean: true/false. one bit of information, but its "size" isn't something that's precisely defined.  
+- byte: 8-bit signed two's complement integer. min -128 max 127 (incl).  
+- char: single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).  
+- short: a 16-bit signed two's complement integer.min -32,768 max 32,767 (inclusive).use a short to save memory in large arrays, in situations where the memory savings actually matters.  
 - int: 32-bit signed two's complement integer, min -2,147,483,648 max 2,147,483,647  (-2 to the 31 and a maximum value of 2 tt 31-1). In Java SE 8 and later, you can use unsigned 32-bit integer, min 0 max 2 tt 32-1. Use the Integer methods compareUnsigned, divideUnsigned etc to support the arithmetic operations for unsigned integers.
 - float: single-precision 32-bit IEEE 754 floating point. range specified in the Floating-Point Types, Formats, and Values section of the Java Language Spec. As with the recommendations for byte and short, use a float (instead of double) if you need to save memory in large arrays of floating point numbers. not for precise values, such as currency. For that, use the java.math.BigDecimal
 - long: 64-bit two's complement integer. signed min -2 tt 63 max 2 tt 63-1. Java SE 8 has an unsigned 64-bit long:min 0 and a max 2 tt 64-1. Use this data type when you need a range of values wider than those provided by int. Also compareUnsigned, divideUnsigned etc

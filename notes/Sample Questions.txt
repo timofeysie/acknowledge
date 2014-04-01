@@ -407,4 +407,54 @@ Chapter 8: Handling Exceptions in an Application p.275 (3/5)
 23 out of 39 is 58%.  We need to score above 70% to pass, and advice said we should be scoring above 80% on mock exams before attempting the test.  
 So no time to waste.
 
-ssh://5315fef74382ecdb7b000089@indoct-englishglue.rhcloud.com/~/git/indoct.git/
+
+
+EPractice Test Product
+
+BufferedReader reader = null;      
+try {         URL url = new URL("http://www.epractizelabs.com/serverdate.html");         reader = new BufferedReader(new InputStreamReader(url.openStream()));         String line = reader.readLine();         SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");         Date date = format.parse(line);     } catch (MalformedURLException exception) {          // handle wrong URL     } catch (IOException exception) {          // handle I/O errors     } catch (ParseException exception) {          // handle date parse problems.     } finally {          if (reader != null) {             try {                 reader.close();             } catch (IOException ex) {                 ex.printStackTrace();             }          }     }
+
+Question : Which of the following Java SE 7 code replaces above code?
+
+Select one. 
+Choice A: 
+try {     BufferedReader reader = new BufferedReader(new InputStreamReader( new                                                          URL("http://www.epractizelabs.com/serverdate.html").openStream()));     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
+
+Choice B: (Chosen)
+try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL                                                            ("http://www.epractizelabs.com/serverdate.html").openStream()))) {     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
+
+Choice C: 
+try (@BufferedReader reader) {     reader = new BufferedReader(new InputStreamReader( new URL                                    ("http://www.epractizelabs.com/serverdate.html").openStream()));     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
+
+Pre Measurement 
+Date : 01/04/2014 
+ 
+Passing score : 77%                                    Your score : 75%                                    Test status : Fail
+
+Total No. of question(s) : 16                                                     Correct answered question(s) : 12
+
+Objective 
+Score
+Java Basics
+50%
+Working With Java Data Types
+33%
+Using Operators and Decision Constructs
+100%
+Creating and Using Arrays
+0%
+Using Loop Constructs
+100%
+Working with Methods and Encapsulation
+100%
+Working with Inheritance
+100%
+Handling Exceptions
+100%
+
+
+Which are List objects?
+ArrayList
+Vector
+Stack
+
