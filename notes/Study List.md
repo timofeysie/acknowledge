@@ -420,4 +420,6 @@ Things to do:
 Does it include IO and Concurrency?  Platfrom Environment or RegExps?
 IO and COncurrency are definately on the Level II exam, but platform and regexp?  OK, Section 5, Item 2 has regexps.
 - gocertify.com test 2 questions 4:  What are the "the rules of promotion for binary operands"?
+- FileInputStreams
+- Serializable
 

@@ -458,3 +458,18 @@ ArrayList
 Vector
 Stack
 
+What is true about local inner classes?
+It can access only final variables.
+
+A static method can only be hidden by another static method.  A static variable may be hidden by an instance variable.
+
+The combination of 'abstract' and 'synchronized' modifiers are not allowed.
+
+According to the JavaBean naming standards, if the boolean property is named 'x', the accessor method is of the form boolean isX() and the mutator method is of the form void setX(boolean newValue)
+
+variable arguments allows a method to be called with ZERO or more arguments.
+
+A variable from an interface is by default final so cannot be changed in a subclass.
+
+Still need to do Basic Sessions - Exams.
+Up to Advanced Sessions - Exam, next Working with methods & encapsulation

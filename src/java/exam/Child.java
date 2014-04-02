@@ -1,5 +1,6 @@
 class Parent
 {
+    int i;
     /*
     The code will compile without any error and also will not give any 
     run time error. The variable p refers to the Child class object. 
@@ -32,5 +33,7 @@ class Child extends Parent
     {
         Parent p = new Child();
         p.method2();
+        p.i = 1;
+        System.out.println("i is "+p.i);
     }
 }

@@ -68,9 +68,18 @@ private void StringBuilderQuestion()
 	for(int n : arr) { System.out.print(n); }
 		System.out.println();
 	System.out.println("c.");
-	for(int n=1; n < 6; n++) { System.out.println(arr[n]);}
-	System.out.print("d.");	
-	for(int n=1; n <= 5; n++) { System.out.println(arr[n]);}
+	//for(int n=1; n < 6; n++) { System.out.println(arr[n]);}
+	//System.out.print("d.");	
+	//for(int n=1; n <= 5; n++) { System.out.println(arr[n]);}
+}
+
+
+private void testLoop()
+{
+	int i = 1;
+	do {
+		System.out.println(i);
+	} while (i>10);
 }
 
 public static void main(String args[]) 
@@ -79,6 +88,7 @@ public static void main(String args[])
 	qs.trueOrFalse();	
 	qs.trueOrFalse2();
 	qs.StringBuilderQuestion();	
+	qs.testLoop();
 }
 
 }

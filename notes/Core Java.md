@@ -2,6 +2,7 @@
 
 ###TOC###
 Arrays  
+Serializable
 PDF Collections
 Assert  
 Identifiers   
@@ -242,6 +243,27 @@ println(Arrays.toString(arr3)); // [Birch, Oak, Maple, Walnut]
 ```  
 
 Arrays provide **Locality of reference** results in faster read and write operations (important for virtual operating systems) faster than accessing elements of a linked list when the linked list is spread across the memory.
+
+
+###Serializable###
+If a class or any of its superclasses implements either 
+- the java.io.Serializable   
+interface or its subinterface (like java.awt.Button), 
+- java.io.Externalizable.
+
+ the class's definition ("class file") itself is not recorded.
+ - the system responsible for deserializing and to determine how to locate and load the necessary class files. ie:a JAR file or load the class definitions by using information stored in the directory  
+```
+// Create the object to be bound  
+Button b = new Button("Push me");  
+// Perform the bind  
+ctx.bind("cn=Button", b);  
+// You can then read the object back using Context.lookup  
+// Check that it is bound  
+Button b2 = (Button)ctx.lookup("cn=Button");  
+System.out.println(b2);  
+```  
+
 
 
 ###PDF Collections###
