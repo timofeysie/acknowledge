@@ -82,6 +82,30 @@ private void testLoop()
 	} while (i>10);
 }
 
+private void initDataTypes()
+{
+	boolean bo1 = true;
+	Boolean bo2 = new Boolean("true");  
+byte by1 = 1;
+Byte by2 = new Byte("1");  
+char ch1 = '\u0001';
+Character ch2 = new Character('1');  
+short sh1 = (short)1;
+Short sh2 = new Short((short)1);  
+long lo1 = 1L;
+Long lo2 = new Long(1l);  
+float fl1 = 1.1f;
+Float fl2 = new Float(1.1f);  
+double do1 = 1.1d;
+Double do2 = new Double(1.1d);  
+String str = "1";
+System.out.println("byte  "+by1+" "+by2);
+System.out.println("char  "+ch1+" "+ch2);
+System.out.println("short "+sh1+" "+sh2);
+System.out.println("float "+fl1+" "+fl2); 
+System.out.println("doubl "+do1+" "+do2);
+}
+
 public static void main(String args[]) 
 {
 	ExamQuestions qs = new ExamQuestions();
@@ -89,6 +113,7 @@ public static void main(String args[])
 	qs.trueOrFalse2();
 	qs.StringBuilderQuestion();	
 	qs.testLoop();
+	qs.initDataTypes();
 }
 
 }

@@ -471,5 +471,23 @@ variable arguments allows a method to be called with ZERO or more arguments.
 
 A variable from an interface is by default final so cannot be changed in a subclass.
 
-Still need to do Basic Sessions - Exams.
+
+Class members cannot use the this keywords as there is no this to refer to.
+
+False: Member inner classes are the static class.
+
+Finalize will always run before an object is garbage collected.
+
+Questions: When using the writeObject method to store the state of an object, how can you protect sensitive data from being acessed in the stored object?
+Answer: declare the sensitive fields as private transient.
+
+Question: Which of the following keyword is used when a constructor calls an overload constructor in the same class.
+Answer: this
+
+
+Status:
+Basic Sessions - Exams.
+Working with Java Datatypes: 86%
+Loops 6: 100%
+Working with Methods & Encapsulation 12:
 Up to Advanced Sessions - Exam, next Working with methods & encapsulation

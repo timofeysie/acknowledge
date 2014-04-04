@@ -1,4 +1,9 @@
-#Core Java#
+#Duration:  150 minutes#  
+#Number of Questions: 90#  
+22 minutes x 4  
+1.6 minutes a question   
+22 questions/37 minutes a quarter    
+45 questions/75 minutes a half  
 
 ###TOC###
 Arrays  
@@ -262,8 +267,18 @@ ctx.bind("cn=Button", b);
 // Check that it is bound  
 Button b2 = (Button)ctx.lookup("cn=Button");  
 System.out.println(b2);  
-```  
 
+public final void writeObject(Object x) throws IOException
+```
+The above method serializes an Object and sends it to the output stream. Similarly, the ObjectInputStream class contains the following method for deserializing an object:
+```
+public final Object readObject() throws IOException, 
+                                 ClassNotFoundException
+```
+
+To be serialized successfully, two conditions must be met:
+- The class must implement the java.io.Serializable interface.
+- All of the fields in the class must be serializable. If a field is not serializable, it must be marked transient. 
 
 
 ###PDF Collections###
@@ -1450,6 +1465,30 @@ You should write your own exception classes if you answer yes to any of the foll
 
  If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
 
+###ClassNotFoundException###
+Occurs in the following cases:
+1) When we try to load a class by using Class.forName() method and .class file or binary of class is not available in classpath.
+2) When Classloader try to load a class by using findSystemClass () method.
+3) While using loadClass() method of class ClassLoader in Java.
+
+
+- Checked Exceptions  
+ClassNotFoundException          cnfe  
+IOException                     ioe  
+IerruptedException                
+NoSuchMethodException  
+
+- Un-Checked Exceptions    
+ArithmeticException  
+ArrayIndexOutOfBoundsException  aioobe  
+IllegalArgumentException          
+NullPointerException            npe  
+NumberFormatException           nfe  
+  
+
+Read more: http://javarevisited.blogspot.com/2011/08/classnotfoundexception-in-java-example.html#ixzz2xqdcUdwm
+
+-------------------------
 ###Collection Interface###
 ```
 public interface Collection<E> extends Iterable<E> {
@@ -1459,10 +1498,10 @@ public interface Collection<E> extends Iterable<E> {
     boolean add(E element);
     boolean remove(Object element);
     Iterator<E> iterator();
-    boolean containsAll(Collection<?> c); // true if c is subset
-    boolean addAll(Collection<? extends E> c); // union
-    boolean removeAll(Collection<?> c); // transforms set into the (asymmetric) set difference
-    boolean retainAll(Collection<?> c); // intersection of two sets
+    boolean containsAll(Collection< ? > c); // true if c is subset
+    boolean addAll(Collection< ? extends E> c); // union
+    boolean removeAll(Collection< ? > c); // transforms set into the (asymmetric) set difference
+    boolean retainAll(Collection< ? > c); // intersection of two sets
     void clear();
     Object[] toArray();
     <T> T[] toArray(T[] a);
@@ -1474,6 +1513,8 @@ public interface Iterator<E> {
     void remove(); //optional
 }
 ```
+
+
 
 ###Set Interface & Implementations###
 Set: cannot contain duplicate elements.  

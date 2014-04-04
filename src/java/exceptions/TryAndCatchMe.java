@@ -61,5 +61,14 @@ public class TryAndCatchMe
         }       
         tacm.writeList(vector);
         Object popper = pop();
+        try
+        {
+            // code
+            //System.exit();
+
+        } catch (java.lang.Exception e)
+        {
+             //
+        }
     }
 }
