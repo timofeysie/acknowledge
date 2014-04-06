@@ -106,6 +106,49 @@ System.out.println("float "+fl1+" "+fl2);
 System.out.println("doubl "+do1+" "+do2);
 }
 
+private static void testEquals()
+{
+	Integer n1 = new Integer(0);
+	Byte n2 = new Byte((byte)0);
+	System.out.println("Integer: "+n1);
+	System.out.println("Byte: "+n2);
+	System.out.println("n1.equals(n2)?");
+	System.out.println(n1.equals(n2));
+
+	StringBuffer s1 = new StringBuffer("JAVA".toLowerCase());
+	StringBuffer s2 = new StringBuffer("java");
+	System.out.println(s1+".equals("+s2+")?");
+	System.out.println(s1.equals(s2));
+	StringBuilder sb1 = new StringBuilder("JAVA".toLowerCase());
+	StringBuilder sb2 = new StringBuilder("java");
+	System.out.println("StringBuilder: "+sb1+".equals("+sb2+")?"+sb1.equals(sb2));
+	System.out.println("The StringBuffer equals method returns true only for two reference variables referring to the same StringBuffer object as it uses mutable strings");
+	String s3 = "java";
+	String s4 = "java";
+	System.out.println("For Strings: "+s3+".equals("+s4+") "+s3.equals(s4));
+	System.out.println("smaller than byte");
+	Integer i1 = 1;
+	Integer i2 = 1;
+	if (i1 == i2) System.out.println("same");
+	if (i1 != i2) System.out.println("not same");
+	System.out.println("larger than byte");
+	Integer i3 = 128;
+	Integer i4 = 128;
+	if (i3 == i4) System.out.println("same");
+	if (i3 != i4) System.out.println("not same");
+}
+
+private static void testBitwise()
+{
+	boolean b1 = true;
+	boolean b2 = false;
+	boolean b3 = false;
+	boolean b4 = true;
+	System.out.println(b1+"^"+b2+" = "+(b1^b2));
+	System.out.println(b2+"^"+b3+" = "+(b2^b3));
+	System.out.println(b1+"^"+b4+" = "+(b1^b4));
+}
+
 public static void main(String args[]) 
 {
 	ExamQuestions qs = new ExamQuestions();
@@ -114,6 +157,8 @@ public static void main(String args[])
 	qs.StringBuilderQuestion();	
 	qs.testLoop();
 	qs.initDataTypes();
+	testEquals();
+	testBitwise();
 }
 
 }

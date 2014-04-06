@@ -1,9 +1,15 @@
  TOC
 
+Object  
 Shadowing  
 The StringBuilder Class  
 The Character Class  
 The String Class  
+
+
+###Object###
+int hashCode();
+
 
 #Shadowing#
 ```
@@ -34,6 +40,7 @@ public class ShadowTest {
 - replace(int start, int end, String s)
 - setCharAt(int index, char c)
 - reverse()
+- The StringBuffer/Builder equals method returns true only for two reference variables referring to the same StringBuffer object as it uses mutable strings
 
 #The Character Class#
 - Character ch = new Character('a');
@@ -47,13 +54,12 @@ public class ShadowTest {
 \'  single quote character
 \"  double quote character
 
-#The String Class#
+###The String Class###
 - boolean ends/startsWith(String su/prefix)
 - boolean startsWith(String prefix, int offset) 
 - int compareTo/IgnoreCase(String anotherString) Compares two strings lexicographically. Returns an integer indicating whether this string is greater than (result is > 0), equal to (result is = 0), or less than (result is < 0) the argument.
 - boolean equals/IgnoreCase(String anotherString)  
-- boolean regionMatches(int toffset, String other, int ooffset, int len)  Tests whether the specified region of this string matches the specified region of the String argument.
-Region is of length len and begins at the index toffset for this string and ooffset for the other string.
+- boolean regionMatches(int toffset, String other, int ooffset, int len)  Tests whether the specified region of this string matches the specified region of the String argument. Region is of length len and begins at the index toffset for this string and ooffset for the other string.
 - boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len) if true, case is ignored when comparing characters
 - boolean matches(String regex) Tests whether this string matches the specified regular expression.
 - string literal: a series of characters enclosed in double quotes.
@@ -75,15 +81,28 @@ Region is of length len and begins at the index toffset for this string and ooff
 - "Abcde".compareTo("Aacde") = 1
 - Apple vs Banana = -1 & Banana vs Apple = 1
 - Apple vs Able = 14
-int compareToIgnoreCase(String str)	Compares two strings lexicographically, ignoring differences in case. Returns an integer indicating whether this string is greater than (result is > 0), equal to (result is = 0), or less than (result is < 0) the argument.
-boolean equals(Object anObject)	Returns true if and only if the argument is a String object that represents the same sequence of characters as this object.
-boolean equalsIgnoreCase(String anotherString)	Returns true if and only if the argument is a String object that represents the same sequence of characters as this object, ignoring differences in case.
-boolean regionMatches(int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.
-Region is of length len and begins at the index toffset for this string and ooffset for the other string.
+- int compareToIgnoreCase(String str)	Compares two strings lexicographically, ignoring differences in case. Returns an integer indicating whether this string is greater than (result is > 0), equal to (result is = 0), or less than (result is < 0) the argument.
+- boolean equals(Object anObject)	Returns true if and only if the argument is a String object that represents the same sequence of characters as this object.
+- boolean equalsIgnoreCase(String anotherString)	Returns true if and only if the argument is a String object that represents the same sequence of characters as this object, ignoring differences in case.
+- boolean regionMatches(int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.  Region is of length len and begins at the index toffset for this string and ooffset for the other string.
+- boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.  Region is of length len and begins at the index toffset for this string and ooffset for the other string. The boolean argument indicates whether case should be ignored; if true, case is ignored when comparing characters.
+- boolean matches(String regex)	Tests whether this string matches the specified regular expression.
 
-boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.
-Region is of length len and begins at the index toffset for this string and ooffset for the other string.
+###CharSequence###
+- char charAt(int index)
+- int length() 
+- CharSequence subSequence(int start, int end) 
+- String toString() 
 
-The boolean argument indicates whether case should be ignored; if true, case is ignored when comparing characters.
+###Pattern###
+- static Pattern compile(String regex): Compiles the given regular expression into a pattern.
+- static Pattern compile(String regex, int flags): Compiles the given regular expression into a pattern with the given flags.
+- int flags(): Returns this pattern's match flags. 
+- Matcher matcher(CharSequence input): Creates a matcher that will match the given input against this pattern.
+- static boolean matches(String regex, CharSequence input): Compiles the given regular expression and attempts to match the given input against it.
+- String pattern(): Returns the regular expression from which this pattern was compiled.
+- static String quote(String s): Returns a literal pattern String for the specified String.
+- String[] split(CharSequence input): Splits the given input sequence around matches of this pattern.
+- String[] split(CharSequence input, int limit): Splits the given input sequence around matches of this pattern.
+String toString(): Returns the string representation of this pattern.
 
-boolean matches(String regex)	Tests whether this string matches the specified regular expression. Regular expressions are discussed in the lesson titled "Regular Expressions."

@@ -798,6 +798,7 @@ result = result % 7;
 ^       Bitwise exclusive OR  
 |       Bitwise inclusive OR  
 
+- & and | can be used in logical AND bitwise operations
 - When operators of equal precedence appear in the same expression, a rule must govern which is evaluated first. All binary operators except for the assignment operators are evaluated from left to right; assignment operators are evaluated right to left.
 
 - Operators     Precedence  
@@ -1138,6 +1139,8 @@ If an abstract class is subclassed and contians unimplemented methods, it must a
 - By comparison, abstract classes are most commonly subclassed to share pieces of implementation. A single abstract class is subclassed by similar classes that have a lot in common (the implemented parts of the abstract class), but also have some differences (the abstract methods).
 - You can define an abstract class that does not implement all of an interface method.
 - An abstract class may have static fields and static methods that can be used with a class reference—for: AbstractClass.staticMethod()—as with any other class.
+- The combination of 'abstract' and 'synchronized' modifiers is not allowed.
+
 
 ###Switch###  
 Works with

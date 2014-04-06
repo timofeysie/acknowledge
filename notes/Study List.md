@@ -187,10 +187,10 @@ public interface Collection<E> extends Iterable<E> {
     boolean add(E element);
     boolean remove(Object element);
     Iterator<E> iterator();
-    boolean containsAll(Collection<?> c); // true if c is subset
-    boolean addAll(Collection<? extends E> c); // union
-    boolean removeAll(Collection<?> c); // transforms set into the (asymmetric) set difference
-    boolean retainAll(Collection<?> c); // intersection of two sets
+    boolean containsAll(Collection< ? > c); // true if c is subset
+    boolean addAll(Collection< ? extends E> c); // union
+    boolean removeAll(Collection< ? > c); // transforms set into the (asymmetric) set difference
+    boolean retainAll(Collection< ? > c); // intersection of two sets
     void clear();
     Object[] toArray();
     <T> T[] toArray(T[] a);
@@ -413,6 +413,38 @@ x = 1.300000
 ...
 ```
 
+-0.0 == 0.0 is true.
+
+
+###The String Class###
+- boolean ends/startsWith(String su/prefix)
+- boolean startsWith(String prefix, int offset) 
+- int compareTo/IgnoreCase(String anotherString)
+- boolean equals/IgnoreCase(String anotherString)  
+- boolean regionMatches(int toffset, String other, int ooffset, int len) 
+- boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)
+- boolean matches(String regex)
+- int length()
+- string1.concat(string2)
+- String substring(int beginIndex)
+- String[] split(String regex)
+- String[] split(String regex, int limit)
+- CharSequence subSequence(int beginIndex, int endIndex)
+- String replace(char oldChar, char newChar)
+- String replace(CharSequence target, CharSequence replacement)	
+- String replaceAll(String regex, String replacement)
+- String replaceFirst(String regex, String replacement)
+- boolean ends/startsWith(String suf/prefix)
+- boolean startsWith(String prefix, int offset)
+- int compareTo(String anotherString)
+- int compareToIgnoreCase(String str)
+- boolean equals(Object anObject)
+- boolean equalsIgnoreCase(String anotherString)
+- boolean regionMatches(int toffset, String other, int ooffset, int len)
+- boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)
+- boolean matches(String regex)
+
+
 Things to do:   
 - TreeSet stores its elements in a red-black tree
 - Questions and Exercises: Nested Classes
@@ -422,4 +454,4 @@ IO and COncurrency are definately on the Level II exam, but platform and regexp?
 - gocertify.com test 2 questions 4:  What are the "the rules of promotion for binary operands"?
 - FileInputStreams
 - Serializable
-
+- Constructor class?

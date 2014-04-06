@@ -484,6 +484,24 @@ Answer: declare the sensitive fields as private transient.
 Question: Which of the following keyword is used when a constructor calls an overload constructor in the same class.
 Answer: this
 
+Integer n1 = new Integer(0);
+Byte n2 = new Byte((byte)0);
+System.out.println(n1.equals(n2)); false!!!
+
+- abstract classes cannot be instantiated
+
+- super() must be the first statement in a subclass contructor.
+
+quote(String s) returns a literal patter tring for the specified String.  This method produces a String that can be used to create a Pattern that would match the String s as if it were a literal pattern.  Meta characters or escape sequences in the input sequence will be given no special meaning.
+
+- Number is the super class for many wrapper classes, but not Boolean and Character
+
+- Nested (inner) classes can be declared abstract or final, private, public, or protected to restrict access to the class.
+
+- The split() and matches() methods are present in both String and Pattern class.
+
+
+
 
 Status:
 Basic Sessions - Exams.

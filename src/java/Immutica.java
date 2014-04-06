@@ -1,4 +1,7 @@
-/* Immutica
+/* Immutical.
+What does this mean?
+"Watch for Math class being an option for immutable classes."
+An immutable class is final.
 To make an immutable object:
 1. In your constructor for your own immutable object, 
 	primitives and other immutable objects can be accepted without 
@@ -14,6 +17,14 @@ To make an immutable object:
 6. For non-immutable fields, if you have any getters, you must return 
 	a copy of the field so that the caller gets a reference to their 
 	own copy and can't possibly change your copy.
+*/
+
+/**
+* This class is imutable.  The objects are copied and stored and new copies
+* are returned with getters.
+* Usage:
+* Immutica i = new Immutica(String);
+* i.getFixed();
 */
 final class Immutica
 {
