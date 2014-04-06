@@ -497,9 +497,48 @@ quote(String s) returns a literal patter tring for the specified String.  This m
 - Number is the super class for many wrapper classes, but not Boolean and Character
 
 - Nested (inner) classes can be declared abstract or final, private, public, or protected to restrict access to the class.
+class Bank
+{
+	String bankName;
+	public String getBranchName()
+	{
+		return bankName;
+	}
+}
+public class BankBranch extends Bank
+{
+	public static void main(String[] argv)
+	{}
+	public String getBranchName() throws Exception 
+	{
+		return bankName;
+	}
+}
+Does not compile getBranchName() cannot over
+
 
 - The split() and matches() methods are present in both String and Pattern class.
 
+class Bank
+{
+	String bankName;
+	public String getBranchName()
+	{
+		return bankName;
+	}
+}
+public class BankBranch extends Bank
+{
+	public static void main(String[] argv)
+	{}
+	public String getBranchName() throws Exception 
+	{
+		return bankName;
+	}
+}
+Does not compile getBranchName() cannot override the method in Bank.  Overridden method does not throw Exception.
+
+- checked exceptions represent invalid conditions in areas outside the immediate control of the program.
 
 
 

@@ -138,6 +138,8 @@ private static void testEquals()
 	if (i3 != i4) System.out.println("not same");
 }
 
+
+
 private static void testBitwise()
 {
 	boolean b1 = true;
