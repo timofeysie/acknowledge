@@ -1327,6 +1327,16 @@ You can prevent a class or method from being subclassed by using the final keywo
     import java.awt.font.*;
 ```
 
+###Regular Expressions2###
+Where did the original notes go?  Starting over...
+\d  A digit: [0-9]
+\D  A non-digit: [^0-9]
+\s  A whitespace character: [ \t\n\x0B\f\r]
+\S  A non-whitespace character: [^\s]
+\w  A word character: [a-zA-Z_0-9]
+\W  A non-word character: [^\w]
+
+
 ###Exceptions###  
 **The Catch or Specify Requirement** code that might throw certain exceptions must be enclosed by either of the following:
 - A try statement that catches the exception. The try must provide a handler for the exception (catch block)
