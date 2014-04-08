@@ -252,9 +252,8 @@ Arrays provide **Locality of reference** results in faster read and write operat
 
 ###Serializable###
 If a class or any of its superclasses implements either 
-- the java.io.Serializable   
-interface or its subinterface (like java.awt.Button), 
-- java.io.Externalizable.
+- the java.io.Serializable interface or its subinterface (like java.awt.Button), 
+- java.io.Externalizable.  
 
  the class's definition ("class file") itself is not recorded.
  - the system responsible for deserializing and to determine how to locate and load the necessary class files. ie:a JAR file or load the class definitions by using information stored in the directory  

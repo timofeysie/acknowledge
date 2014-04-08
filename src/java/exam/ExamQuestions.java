@@ -1,3 +1,5 @@
+import java.lang.StringBuffer;
+
 public class ExamQuestions
 {
 
@@ -161,6 +163,26 @@ public static void main(String args[])
 	qs.initDataTypes();
 	testEquals();
 	testBitwise();
+	Number Float = 99.455f;
+	System.out.println("Float "+Float);
+	/* This causese the error" ';' expected 
+	with an arrow pointing between the Float 
+	and the num_flo variable:
+	Number Float num_flo = 99.455f;
+	So then how can this value be assigned to a value?
+	float is a reserved word, Float and other class names are not.
+	*/
+	Number f = 99.455f;
+	Number Object = 99.455f;
+	/* Here there is no coloring on the Float word.*/
+
+	String str = "10"; 
+	Integer a = 10;
+	//boolean b=str==a; Incomparable types: String and Integer 
+
+	Integer number = 145;
+	//StringBuffer sb = "buff";
+	// Not OK because it reuqires a constructor.
 }
 
 }

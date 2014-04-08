@@ -27,7 +27,7 @@ public class ShadowTest {
 - like String objects but can be modified(append(),insert())
 - same as StringBuffer whos methods are synchronized thus thread-safe.
 - StringBuilder methods:
-- StringBuilder() Creates an empty string builder with capacity of 16 
+- StringBuilder() Creates an empty string builder with capacity of 16 but if the contructor below is used, it is created with the specified capacity.
 - void ensureCapacity(int minCapacity) Ensures that the capacity is at least equal to the specified minimum.
 - void setLength(int newLength) turcates or adds null chars.
 - append(), insert(), setLength() greater than the current capacity(), the capacity is automatically increased.
