@@ -6,6 +6,7 @@
 45 questions/75 minutes a half  
 
 ###TOC###
+Rules of Promotion
 Arrays  
 Serializable
 PDF Collections
@@ -43,6 +44,47 @@ Set Interface & Implementations
 List Interface  
 List Iterator Interface  
 List Implementations  
+
+
+###Rules of Promotion###
+The operand of a numeric operator such as + or *. The conversion process for such operands is called numeric promotion. Promotion is special in that, in the case of binary operators, the conversion chosen for one operand may depend in part on the type of the other operand expression.  
+
+The rules of promotion for binary operands:  When an operator applies binary numeric promotion to a pair of operands, each of which must denote a value that is convertible to a numeric type, the following rules apply, in order, using widening conversion (§5.1.2) to convert operands as necessary:
+- If any of the operands is of a reference type, unboxing conversion (§5.1.8) is performed. Then:
+- If either operand is of type double, the other is converted to double.
+- Otherwise, if either operand is of type float, the other is converted to float.
+- Otherwise, if either operand is of type long, the other is converted to long.
+- Otherwise, both operands are converted to type int.
+
+The order:  
+Reference Type - unboxing  
+double  
+float  
+long    
+int  
+
+- compound assignment operators behave as they have an implicit type case. Example:  
+```
+byte b1 = 1;
+byte b2 = 2;
+b1 = b1 + b2; // compilation fails
+b1 += b2; // compilation successful
+```
+- There's no + operator for byte. Instead, both operands are promoted to int, which then fails because there's no implicit conversion from int to byte. You need to cast:
+```
+byte a = 1;
+byte b = 2;
+byte c = (byte) (a + b); // succeeds
+```
+Or another method:
+```
+final byte b1 = 1;
+final byte b2 = 2;
+int b3 = b1 + b2;  // succeeds
+```
+- constant expression, value resolved at compile time
+b1 and b2 are final variables and values will be resolved at compile time so compilation won't fail.
+
 
 ###Arrays###
 ```
@@ -1570,7 +1612,7 @@ Occurs in the following cases:
 - Checked Exceptions  
 ClassNotFoundException          cnfe  
 IOException                     ioe  
-IerruptedException                
+InterruptedException                
 NoSuchMethodException  
 
 - Un-Checked Exceptions    

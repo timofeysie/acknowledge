@@ -446,6 +446,19 @@ x = 1.300000
 - boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)
 - boolean matches(String regex)
 
+###Pattern###
+- static Pattern compile(String regex)
+- static Pattern compile(String regex, int flags)
+- int flags()
+- Matcher matcher(CharSequence input)
+- static boolean matches(String regex, CharSequence input)
+- String pattern()
+- static String quote(String s)
+- String[] split(CharSequence input)
+- String[] split(CharSequence input, int limit)
+- String toString()
+
+
 
 Things to do:   
 - TreeSet stores its elements in a red-black tree

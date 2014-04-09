@@ -23,7 +23,8 @@ int result = Integer.valueOf(base5String, 5);
 static Integer	valueOf(String s, int radix): Returns an Integer object holding the value extracted from the specified String when parsed with the radix given by the second argument.
 
 
-- What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
+Question: What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
+Answer: isNaN()
 
 ###gocertify###
 1. E
@@ -33,7 +34,7 @@ while(i>=0)
 {System.out.println(a[i]);i--}
 Result 654321
 a len is 6. go from 5 to 0
--2. ?
+
 3. Must extend an abstract class
 4. An interface cant extend a class
 An interface can extend multiple interfaces
@@ -45,10 +46,8 @@ print(a instanceof Object) prints true.
 int a[][] = new int[3][];
 a[1]=new int[]{1,2,3};
 a[2]=new int[]{4,5};
-print(a[1][1]);
--8. b,d,e
--9. e
--10. e
+print(a[1][1]); = 2
+
 11. wrong pass by reference nightmare
 -12
 class Base
@@ -103,8 +102,7 @@ boolean a = new Boolean("tRuE"); will allocate a Boolean object representing tru
 4. 
 int a = 5;
 print("Value is - "+((a < 5) ? 9.9 : 9));
-The result of a ternary operator must be determined at the compile time, and here the type chosen using the rules of promotion for binary operands is double.  Since the result is a double the output value is
-printed in a floating point.  The choice of which value to be printed is made on the basis of the result of the comparison "a < 5" which results in false, hence the variable "a" takes the second of the two possible values, which is 9, but because the result type is promoted to double the output value is actuallu written as 9.0 rather than the more obvious 9.
+The result of a ternary operator must be determined at compile time, and here the type chosen using the rules of promotion for binary operands is double.  Since the result is a double the output value is printed in a floating point.  The choice of which value to be printed is made on the basis of the result of the comparison "a < 5" which results in false, hence the variable "a" takes the second of the two possible values, which is 9, but because the result type is promoted to double the output value is actuallu written as 9.0 rather than the more obvious 9.
 5. a,c,d,e (Ouch, no d! and b is ok too..)
 public class Outer {
 	public int a = 1;
@@ -117,13 +115,14 @@ public class Outer {
 			private void iMethod(int e)
 			{
 				// which variables may be referenced here?
+				// a,b,c, ,e
 			}
 		}
 	}
 }
 a, b, c and e are correct. Since inner is not a static inner class, it has a reference to an enclosing object and all the variables of that object are accessible. Therefore A and B are correct even if b is private. Variables in the enclosing method are only accessible when they are marked as final, hence c is accessible but not d. E is obviously correct as it is a parameter to the method containing line 12 itself.  d is not final so not visible.
+
 X6. - an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
-7.OK
 
 X16.
 class Parent
@@ -141,9 +140,12 @@ class Child extends Parent
 Output: 
 Parent2
 Parent1
+If method1 in parent were not private, the output would be:
+Parent2
+Child1
+
 
 Javaprepare Mock exam 1 for SCJP 6
-7:37 -17
 
 x2.c,g - bcf
 x5. 0005 0x05
@@ -241,8 +243,7 @@ No, they aren't!  only b is correct. c  misses the first element, and d causes a
 
 Chapter 6: Classes, Constructors, and Methods p.216 (3/7) -------
 X1.b
-Which of the following declares a method that takes a float and an integer
-returns an array of integers?
+Which of the following declares a method that takes a float and an integer and returns an array of integers?
 a. public int[] someMethod(int i, float f)
 { return new int[5];}
 b. public int[] someMethod(int i, float f)
@@ -252,16 +253,7 @@ c. public int[] someMethod(int i, float f)
 d. public int []someMethod(int i, float f)
 { return new int[5];}
 a, c, and d Option b fails to initialize the array properly.
-But on p.151:
-Which of the following statements will compile without an error?
-a. int arr[];
-b. int arr[5];
-c. int arr[5] = {1,2,3,4,5};
-d. int arr[] = {1,2,3,4,5};
-a and d The number of elements in an array declaration is not used in
-the declaration. However, we can use the following:
-int arr[] = new int[5];
-???
+
 
 X3.b
 Which of the following statements about overloaded methods are true?
@@ -272,6 +264,7 @@ d. An overloaded method cannot throw exceptions.
 a The return value is not considered when overloading a method.
 (isnt that what our answer said?)
 Yes, we did get this right.  b is the correct answer.
+
 X4.a
 Given the following code, which of the following statements are true?
 public class SomeClass {
@@ -283,9 +276,9 @@ a. error will occur cause void cannot be used with a constructor.
 b. error will occur cause the first two constructors are not unique.
 c. The class does not have a default constructor.
 d. No syntax errors will be generated.
-c and d The last line is a method that happens to have the same name
-as the constructor. As there are constructors defined but no
+c and d The last line is a method that happens to have the same name as the constructor. As there are constructors defined but no
 default constructor, the class has no default constructor.
+
 X5.d
 Which of the following keywords cannot be used when declaring a class?
 a. public  OK
@@ -293,45 +286,150 @@ b. private OK
 c. protected x
 d. package   x
 a and b Only the private and public keywords can be used when
-declaring a class and
+declaring a class and the private keyword can only be used
+with inner classes.
+
 X6.a,c,d
 Assuming that the following classes are in the same package, which
 statements are true?
-class SomeClass {
-void method1() { }
-public void method2( { }
-private void method3( { }
-protected void method4() { }}
-class demo {
-public void someMethod(String[] parameters) {
-SomeClass sc = new SomeClass();
-sc.method1();
-sc.method2();
-sc.method3(); only protected methods are not visible.
-sc.method41();}}
+class SomeClass 
+{
+	void method1() { }
+	public void method2( { }
+	private void method3( { }
+	protected void method4() { }}
+	class demo 
+	{
+		public void someMethod(String[] parameters) 
+		{
+			SomeClass sc = new SomeClass();
+			sc.method1();
+			sc.method2();
+			sc.method3(); only protected methods are not visible.
+			sc.method41();}}
 a. sc.method1() will generate a syntax error.
-b. sc.method2() will generate a syntax error.
+b. sc.method2() will generate a s0yntax error.
 c. sc.method3() will generate a syntax error.
 d. sc.method4() will generate a syntax error.
 e. No syntax errors will be generated.
-c As the classes are on the same package and all of the methods
+c As the classes are in the same package and all of the methods
 are visible except for the private method.
 
 Chapter 7: Inheritance & Polymorphism (1/6) ---------p.246
 X1.c,d
+Which set of statements result in ClassB and ClassC being derived
+from ClassA?
+a. class ClassB extends ClassA {}
+b. class ClassB extends ClassC {}
+c. class ClassA extends ClassB {}
+d. class ClassC extends ClassB {}
+e. No combination will work
+a, d (second time around answer is correct!)
+Answer: a and d This results in ClassC being the "grandchild" of ClassA.
+
 X2.a,b,c?
+Which of the following must be true for a method to support polymorphism?
+a. The method must override a base class method
+b. The method must overload a base class method
+c. The method's class must extend a base class that has the
+overridden method
+d. The method must execute against a base class reference variable
+a,c (second time around also wrong)
+Answer: a and d.  Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior.
+
 X3.c
+What method is used to determine the type of an object?
+a. isType
+b. typeOf
+c. instanceof
+d. instanceOf
+a
+Answer: d The other methods do not exist.
+We beg to differ.  instanceof is an operator.  The method would be getClass and then use instancof?  Pretty sure they mean c., which then makes the question's use of the word 'method' wrong.
+
 X4.a,b,c
+Which of the following are valid casts?
+a. num1 = num2;
+b. num1 = (int)num2;
+c. num1 = (float)num2;
+d. num1(int) = num2;
+a,b,c
+Answer: b.  The others will generate syntax errors.
+
 X5.d
+Given the following class definitions:
+public class ClassA 
+{
+	public ClassA() 
+	{
+		System.out.println("ClassA constructor");
+	}
+	public void someMethod() 
+	{
+		System.out.println("ClassA someMethod");
+	}
+}
+class ClassB extends ClassA 
+{
+	public ClassB() 
+	{
+		System.out.println("ClassB constructor");
+	}
+	public void someMethod() 
+	{
+		// comment
+		System.out.println("ClassB someMethod");
+	}
+	public static void main(String args[]) 
+	{
+		ClassB b = new ClassB();
+		b.someMethod();
+	}
+}
+
+What statement is needed at the comment line to generate the
+following output:
+ClassA constructor
+ClassB constructor
+ClassA someMethod
+ClassB someMethod
+a. super();
+b. super().someMethod;
+c. super.someMethod();
+d. someMethod();
+e. None of the above
+c (second time lucky!)
+c The first answer is used only as the first statement of a
+constructor. The second answer generates a syntax error. The
+fourth option results in unbounded recursion.
 
 Chapter 8: Handling Exceptions in an Application p.275 (3/5)
 x1.a,c,d
-o2.b,c
-O3.d
-O4.a,d
-X5.b,d
+1. Which of the following implement checked exceptions?
+a. Class A extends RuntimeException
+b. Class A extends Throwable
+c. Class A extends Exception
+d. Class A extends IOException
+d (second time wrong.  This time we ignored the implment part of the question)
+Answer: c and d Checked exceptions are those classes that extend the Exception class but not the RuntimeException class.
 
-p.297 answers
+X5.b,d
+What exceptions may the following code generate at runtime?
+String s;
+int i = 5;
+try{
+	i = i/0;
+	s += "next";
+}
+a. ArithmeticException
+b. DivisionByZeroException
+c. FileNotFoundException
+d. NullPointerException
+b,d
+Answer: a and d DivisionByZeroException does not exist. No file
+operations are performed here.
+
+(p.297 answers)
 
 ====================
 
@@ -352,7 +450,11 @@ EPractize Test Product ---------
 
 BufferedReader reader = null;      
 try {         
-		URL url = new URL("http://www.epractizelabs.com/serverdate.html");         reader = new BufferedReader(new InputStreamReader(url.openStream()));         String line = reader.readLine();         SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");         Date date = format.parse(line);     
+		URL url = new URL("http://www.epractizelabs.com/serverdate.html");         
+		reader = new BufferedReader(new InputStreamReader(url.openStream()));         
+		String line = reader.readLine();         
+		SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");         
+		Date date = format.parse(line);     
 	  } catch (MalformedURLException exception) 
 	  {          // handle wrong URL     
 	  } catch (IOException exception) 
@@ -377,7 +479,11 @@ Question : Which of the following Java SE 7 code replaces above code?
 
 Select one. 
 Choice A: 
-try {     BufferedReader reader = new BufferedReader(new InputStreamReader( new                                                          URL("http://www.epractizelabs.com/serverdate.html").openStream()));     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
+try {     
+	BufferedReader reader = new BufferedReader(new InputStreamReader( new URL("http://www.epractizelabs.com/serverdate.html").openStream()));     
+	String line = reader.readLine();     
+	SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");    
+	Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
 
 Choice B: (Chosen)
 try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL                                                            ("http://www.epractizelabs.com/serverdate.html").openStream()))) {     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
@@ -418,7 +524,8 @@ According to the JavaBean naming standards, if the boolean property is named 'x'
 variable arguments allows a method to be called with ZERO or more arguments.
 
 A variable from an interface is by default final so cannot be changed in a subclass.
-
+- Interfaces only describe behaviour, not state.
+- they're only to be used as constants. Hence static and final. 
 
 Class members cannot use the this keywords as there is no this to refer to.
 
@@ -426,10 +533,10 @@ False: Member inner classes are the static class.
 
 Finalize will always run before an object is garbage collected.
 
-Questions: When using the writeObject method to store the state of an object, how can you protect sensitive data from being acessed in the stored object?
+Questions: When using the writeObject method to store (serialize) the state of an object, how can you protect sensitive data from being acessed in the stored object?
 Answer: declare the sensitive fields as private transient.
 
-Question: Which of the following keyword is used when a constructor calls an overload constructor in the same class.
+Question: Which of the following keywords is used when a constructor calls an overload constructor in the same class.
 Answer: this
 
 Integer n1 = new Integer(0);
@@ -440,7 +547,7 @@ System.out.println(n1.equals(n2)); false!!!
 
 - super() must be the first statement in a subclass contructor.
 
-quote(String s) returns a literal patter tring for the specified String.  This method produces a String that can be used to create a Pattern that would match the String s as if it were a literal pattern.  Meta characters or escape sequences in the input sequence will be given no special meaning.
+quote(String s) returns a literal pattern string for the specified String.  This method produces a String that can be used to create a Pattern that would match the String s as if it were a literal pattern.  Meta characters or escape sequences in the input sequence will be given no special meaning.
 
 - Number is the super class for many wrapper classes, but not Boolean and Character
 
@@ -455,41 +562,20 @@ class Bank
 }
 public class BankBranch extends Bank
 {
-	public static void main(String[] argv)
-	{}
+	public static void main(String[] argv) {}
 	public String getBranchName() throws Exception 
 	{
 		return bankName;
 	}
 }
-Does not compile getBranchName() cannot over
-
+Does not compile: getBranchName() cannot override the superclass method.  The overridden method does not throw an exception.
 
 - The split() and matches() methods are present in both String and Pattern class.
-
-class Bank
-{
-	String bankName;
-	public String getBranchName()
-	{
-		return bankName;
-	}
-}
-public class BankBranch extends Bank
-{
-	public static void main(String[] argv)
-	{}
-	public String getBranchName() throws Exception 
-	{
-		return bankName;
-	}
-}
-Does not compile getBranchName() cannot override the method in Bank.  Overridden method does not throw Exception.
 
 - checked exceptions represent invalid conditions in areas outside the immediate control of the program.
 
 String str = "10";
-int a =new Integer(10);
+int a = new Integer(10);
 boolean b = str==a;
 The comparison is not legal, as only the + operator performs the implicit conversion to a String object.
 ie: b = str==a+""
@@ -522,13 +608,15 @@ Incomparable types: String and Integer
 String num = "0";
 num = null;
 if (num instanceof Object) ... false!
-null compared with a string is not equal.
+- null compared with a string is not equal.
 
 Integer number = 145; // autoboxing is ok.
 
 Vector<String> set = new Vector<String>();
 String[] arr = set.toArray();
-The toArray() method returns Object[], so to compile, the set must be cast to String.
+- The toArray() method returns Object[], so to compile, the set must be cast to String.  You can fix it like this:
+String[] arr = (String [])set.toArray();
+
 
 The size of the array cannot be specified in the following examples:
 		int i[] = new int[2] {1,2};
@@ -572,7 +660,11 @@ class Test3
 	Either Test3 has to implement Comparable, or you need to provide a comparator when creating the TreeSet.
 	 */
 }
-
+To fix this:
+class Test3 implements Comparable {
+ 	@Override
+    public int compareTo(Test3 test)
+    { /* Custom test */ }
 
 Writer w = new BufferedWriter(new FileWriter());
 This will cause an IOException.

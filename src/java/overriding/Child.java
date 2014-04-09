@@ -12,7 +12,7 @@ would be called.
 */
 class Parent
 {
-	void method1(){System.out.println("Parent1");}
+	private void method1(){System.out.println("Parent1");}
 	public void method2(){System.out.println("Parent2"); method1();}
 }
 class Child extends Parent
@@ -22,5 +22,6 @@ class Child extends Parent
 	 {
 	 	Parent p = new Child();
 	 	p.method2();
+	 	// p.method1(); method1 has private access in Parent.
 	 }
 }
