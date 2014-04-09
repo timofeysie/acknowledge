@@ -18,6 +18,10 @@ Questions and Exercises: Inheritance
 http://docs.oracle.com/javase/tutorial/java/IandI/override.html
 
 - What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
+String base5String = "230";
+int result = Integer.valueOf(base5String, 5);
+static Integer	valueOf(String s, int radix): Returns an Integer object holding the value extracted from the specified String when parsed with the radix given by the second argument.
+
 
 - What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 
@@ -398,6 +402,7 @@ Handling Exceptions 100%
 
 Which are List objects?
 - ArrayList
+- LinkedList
 - Vector
 - Stack
 
@@ -521,3 +526,59 @@ null compared with a string is not equal.
 
 Integer number = 145; // autoboxing is ok.
 
+Vector<String> set = new Vector<String>();
+String[] arr = set.toArray();
+The toArray() method returns Object[], so to compile, the set must be cast to String.
+
+The size of the array cannot be specified in the following examples:
+		int i[] = new int[2] {1,2};
+		int j[4] = {1,2,3,4};
+The size is given implicitly by the initialization code (instance), never in the declaration of an array (reference).
+
+void aMethod(Object ob) { //1 }
+void aMethod(Float ob) {  //2 }
+...
+test.aMethod(0.0);  // autoboxed to Double object.
+
+- An overriding method must not throw any checked exceptions that were not declared in the original method.
+
+- constructors are not inherited
+
+A a = new A();
+B b = new B(); // A extends B
+
+b=a 	x
+b=(A)a; x
+a=b;
+a=(A)b;
+a=(B)b;
+
+
+class Test3
+{
+	public String toString() {
+		return "Test3";
+	}
+
+	public static void main(String[] args) {
+		Set<Test3> s = new TreeSet<Test3>();
+		s.add(new Test3()); // Test3 cannot be cast to Comparable.
+		s.add(new Test3());
+		s.add(new Test3());
+		for (Test3 out: s)
+			System.out.println(out);
+	}
+	/**
+	Either Test3 has to implement Comparable, or you need to provide a comparator when creating the TreeSet.
+	 */
+}
+
+
+Writer w = new BufferedWriter(new FileWriter());
+This will cause an IOException.
+If the named file exists but is a directory rather than a file, an IOException will be thrown.
+Writer w = new BufferedWriter(new FileWriter("name.txt"));
+If the file doesnt exist it will be created.
+
+
+When you call System.exit() inside a finally block, the system will exit.

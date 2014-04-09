@@ -270,7 +270,6 @@ public interface ListIterator<E> extends Iterator<E> {
 
 ###List Implementations###
 1. general-purpose and 2. special-purpose.
-
 1. General-Purpose  
 - ArrayList
 - LinkedList. 
@@ -313,6 +312,9 @@ CopyOnWriteArrayList
 change is infrequent, and 
 traversal is frequent and potentially time-consuming.
 
+Other List implementations include
+- Vector
+- Stack: (LIFO), extends class Vector with push, pop, peek, empty, and search
 
 ~       Unary bitwise complement: reverses 0s and 1s  
 <<      Signed left shift fills the right bits by zero.

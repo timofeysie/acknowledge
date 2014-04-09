@@ -355,7 +355,8 @@ Encapsulating collections
 - When using a collection within a class, hide the collection
 
 
-Classes (p.185)  
+###Classes### 
+- (p.185)  
 To create an immutable object:  
 • Make the class final which means that it cannot be extended (covered in the Using the final keyword with classes section in Chapter 7, Inheritance and Polymorphism)  
 • Keep the fields of the class private and ideally final  
@@ -369,7 +370,7 @@ return new Date(date.getTime());
 the getDate method created a new Date object based on the header's
 date field. Any Date object is mutable, so by returning a copy of the date as opposed to a reference to the current date, the user is unable to access and otherwise modify the private field.
 
-Default Constructor  
+###Default Constructor###    
 If the programmer adds a constructor to the class, then the class will no longer have a default constructor added automatically. The programmer must explicitly add a default constructor for the class to have one.  Imagine this constructor is the only one in the class:
 ```
 public Employee(String name) { }
@@ -1034,18 +1035,99 @@ Note that you can declare the following in anonymous classes:
 
 ###Enums###
 - All enums implicitly extend java.lang.Enum.  Since Java does not support multiple inheritance, an enum cannot extend anything else.
-
+- Enum constants are implicitly static and final 
+- implicitly implement both Serializable and Comparable 
 ```
 public enum Sex 
 {
     MALE, FEMALE
 }
 ```
+The enum declaration defines a class (called an enum type). The enum class body can include methods and other fields. 
+- a static values method returns an array containing all of the values of the enum in the order they are declared. i.e: with the for-each construct
+```
+for (Planet p : Planet.values()) {
+    System.out.printf("Your weight on %s is %f%n",
+                      p, p.surfaceWeight(mass));
+}
+```
+Another example:
+```
+public enum Planet {
+    MERCURY (3.303e+23, 2.4397e6),
+    VENUS   (4.869e+24, 6.0518e6),
+    EARTH   (5.976e+24, 6.37814e6),
+    MARS    (6.421e+23, 3.3972e6),
+    JUPITER (1.9e+27,   7.1492e7),
+    SATURN  (5.688e+26, 6.0268e7),
+    URANUS  (8.686e+25, 2.5559e7),
+    NEPTUNE (1.024e+26, 2.4746e7);
+}
+```
+- type-safe and has there own name-space. It means your enum will have a type for example "Currency" in below example and you can not assign any value other than specified in Enum Constants.
+```  
+public enum Currency {PENNY, NICKLE, DIME, QUARTER};
+Currency coin = Currency.PENNY;
+coin = 1; //compilation error
+```
+- you need to define a member variable and a constructor because PENNY (1) is actually calling a constructor which accepts int value , see below example.
+```
+public enum Currency 
+{
+        PENNY(1), NICKLE(5), DIME(10), QUARTER(25);
+        private int value;
+        private Currency(int value) {this.value = value;}
+        @Override
+        public String toString() 
+        {
+            switch (this) 
+            {
+            case PENNY:
+              System.out.println("Penny: " + value);break;
+            case NICKLE:
+              System.out.println("Nickle: " + value);break;
+            case DIME:
+              System.out.println("Dime: " + value);break;
+            case QUARTER:
+              System.out.println("Quarter: " + value);
+            }  
+            return super.toString();
+        }
+} 
+```
+- Constructors must be private else a compilation error.
+- since constants are final you can safely compare them using "==" 
+```
+Currency usCoin = Currency.DIME;
+if(usCoin == Currency.DIME) // true
+```
+- can define abstract methods inside Enum in Java and can also provide different implementation for different instances of enum in java.  Let’s see an example of using abstract method inside enum in java
+```
+public enum Currency implements Runnable{
+          PENNY(1) {
+                  @Override
+                  public String color() {
+                          return "copper";
+                  }
+          }, NICKLE(5) {
+                  @Override
+                  public String color() {
+                          return "bronze";
+                  } 
+    ...
+    private int value;
+    public abstract String color();
+    ...
+```
+
+
+
 
 ###Inheritance###
 - overriding: instance method in the subclass that has the same signature as the one in the superclass
-- hiding: a static method in the subclass that has the same signature as the one in the superclass
+- hiding: a static method in the subclass that has the same signature as the one in the superclass. 
 - A subclass does not inherit the private members of its parent class. However, if the superclass has public or protected methods for accessing its private fields, these can also be used by the subclass.
+- static methods cannot be overridden since they are invoked on the class itself, not the obj.
 
 ```
     Object obj = new MountainBike(); // implicit casting
@@ -1056,6 +1138,7 @@ public enum Sex
         MountainBike myBike = (MountainBike)obj;
     }
 ```
+- implicit casting is not allowed in all types of transformations
 
 **virtual method invocation** an aspect of polymorphism, is when the jvm calls the appropriate method for the object that is referred to in each variable, not the method that is defined by the variable's type
 "The JVM specifically utilizes a virtual method table for virtual method dispatch:  An object's dispatch table will contain the addresses of the object's dynamically bound methods. Method calls are performed by fetching the method's address from the object's dispatch table. The dispatch table is the same for all objects belonging to the same class, and is therefore typically shared between them. Objects belonging to type-compatible classes (for example siblings in an inheritance hierarchy) will have dispatch tables with the same layout: the address of a given method will appear at the same offset for all type-compatible classes. Thus, fetching the method's address from a given dispatch table offset will get the method corresponding to the object's actual class." (Andrew Hare)
@@ -1638,3 +1721,33 @@ CopyOnWriteArrayList
 - well suited to maintaining event-handler lists, in which 
 change is infrequent, and 
 traversal is frequent and potentially time-consuming.
+
+###Map Interface Map###
+An object that maps keys to values. 
+- A map cannot contain duplicate keys; each key can map to at most one value.
+- three collection views
+1. a set of keys, 
+2. a collection of values
+3. a set of key-value mappings. 
+- The order defined by iterators
+- TreeMap class, make specific guarantees as to their order
+- HashMap class, do not.
+
+models the mathematical function abstraction
+- put 
+- get
+- remove
+- containsKey
+- containsValue
+- size
+- empty
+- putAll 
+- clear 
+- keySet
+- entrySet 
+- values
+
+Three general-purpose Map implementations (and their set analogies): 
+HashMap         (HashSet)          unordered
+TreeMap         (TreeSet)          ordered   
+LinkedHashMap   (LinkedHashSet)    insertion order

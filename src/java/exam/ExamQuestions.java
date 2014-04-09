@@ -1,4 +1,5 @@
 import java.lang.StringBuffer;
+import java.util.Vector;
 
 public class ExamQuestions
 {
@@ -183,6 +184,11 @@ public static void main(String args[])
 	Integer number = 145;
 	//StringBuffer sb = "buff";
 	// Not OK because it reuqires a constructor.
+
+	// the toArray method returns an Object[], 
+	// which in this case must be cast to a String[]
+	Vector<String> set = new Vector<String>();
+	String[] arr = (String[])set.toArray();
 }
 
 }
