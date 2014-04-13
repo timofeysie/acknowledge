@@ -156,6 +156,13 @@ public class StringDemo
 
         System.out.println("Using our method: "+findMatchingRegion(search_me, find_me));
 
+        System.out.println();
+        StringBuffer sbuf = new StringBuffer("Tim");
+        StringBuilder sbui = new StringBuilder("Tim");
+        if (sbuf.equals(sbui))
+        {
+            System.out.println("equal");
+        }
     }
 
     /**

@@ -58,6 +58,15 @@ public class TestFormat {
       basicMathMethod();
       logarithmicMethods();
       trigonometricFunctions();
+
+      double d_num = 999.3568;
+      System.out.printf("% .2f", d_num);
+
+      Object obj = 99;
+      System.out.println();
+      System.out.println("\n"+obj.toString()+" "+obj.hashCode());
+      // cannot call this methods obj.intValue());
+      System.out.println("class "+obj.getClass().getSimpleName());
     }
 
     private static void basicMathMethod()

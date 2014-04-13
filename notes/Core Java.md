@@ -1291,8 +1291,8 @@ break statements are necessary because without them, statements in switch blocks
         }
 ```
 Output: 2,3,4
-The String in the switch expression is compared with the expressions associated with each case label as if the String.equals() method were being used
-
+The String in the switch expression is compared with the expressions associated with each case label as if the String.equals() method were being used  
+- case labels only accept constant expressions.
 
 ###Methods###
 - Overriding Instance Methods: An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.

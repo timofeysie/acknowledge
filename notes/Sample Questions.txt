@@ -674,3 +674,42 @@ If the file doesnt exist it will be created.
 
 
 When you call System.exit() inside a finally block, the system will exit.
+
+Mock Exam 2
+
+int num = -50;
+System.out.println(num % 25.0)
+output -0.0
+We suppose that any expression containing a negative will give a negative answer, as well as follow the rules of promotion.
+
+- j2ee-struts is not a valid identifier because it has a SLASH!!!
+
+java Test x7+y8+z9=4P [4789][+-=]
+Test class main has this expression:
+System.out.println((args[0].split(args[1])).length);
+
+- classes cannot extend interfaces, they must implement them.
+
+- the equals() method will return false if the objects are not the same class.
+
+String c = new String("1234567890");
+StringBuffer sb = new StringBuffer(c);
+- The capacity for sb is not 10+16 = 26
+
+line 10:	Integer e;
+1ine 11:	System.out.println(e); 
+// compile time error at line 11, not in the previous line!
+
+      double d_num = 999.3568;
+      System.out.printf("% .2f", d_num);
+Output: 999.36
+
+      Object obj = 99;
+      System.out.println(obj);
+This looks odd but it compiles.  However, there would be no output.
+By autoboxing, 99 int primitive value will be automatically converted to Integer object and assigned to the variable obj.
+
+Character obj = 65;
+char c = 65;
+if c==obj ... TRUE
+

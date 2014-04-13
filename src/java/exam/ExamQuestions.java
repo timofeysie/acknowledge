@@ -188,7 +188,10 @@ public static void main(String args[])
 	// the toArray method returns an Object[], 
 	// which in this case must be cast to a String[]
 	Vector<String> set = new Vector<String>();
-	String[] arr = (String[])set.toArray();
+	//String[] arr = (String[])set.toArray();
+
+	Integer e;
+	System.out.println(e);
 }
 
 }

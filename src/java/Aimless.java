@@ -11,16 +11,17 @@ public class Aimless
     * in to this method.  Currently we get this compile time error:
     * Unexpected type.  required: class  found: type parameter V
     * Where V is a type-variable.
-    */
+    *
     private static <V extends Number> V getMinimumValue(V <? extends Number> input)
     {
         return input.MIN_VALUE;
     }
+    */
 
 	public static void main(String[] args) 
 	{
 
-        System.out.println("inter min "+getMinimumValue(new Integer("7")));
+        //System.out.println("inter min "+getMinimumValue(new Integer("7")));
 
 		int a = 1;
 		int b = 3;
@@ -58,6 +59,31 @@ public class Aimless
         i = 5;
         n = i%10;
         System.out.println(i+"%10 = "+n);
+        //String j2ee-struts = "j2ee-struts";
+        desultory.switchDemo();
+    }
+
+    private void switchDemo()
+    {
+        final Integer int_num = 0;
+        final char char_num = 1;
+        final byte byte_num = 2;
+        final long long_num = 3;
+        switch (int_num)
+        {
+        case 0:
+            System.out.println("int");
+            break;
+        case 1:
+            System.out.println("char");
+            break;
+        case 2:
+            System.out.println("byte");
+            break;
+        case 3:
+            System.out.println("long");
+            break;
+        }
     }
 
     private void bitwise()
