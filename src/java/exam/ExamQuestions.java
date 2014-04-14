@@ -1,5 +1,7 @@
 import java.lang.StringBuffer;
 import java.util.Vector;
+import java.util.Map;
+import java.util.HashMap;
 
 public class ExamQuestions
 {
@@ -154,6 +156,20 @@ private static void testBitwise()
 	System.out.println(b1+"^"+b4+" = "+(b1^b4));
 }
 
+int subTotal;
+static int total;
+public void calculate()
+{
+	int local;
+	local = this.total;
+	local = this.subTotal;
+	this.total = total;
+	//this.local = 4; Cannot find symbol
+	//this = new ExamQuestions();
+	// cannot assing a value to a final veriable this
+	
+}
+
 public static void main(String args[]) 
 {
 	ExamQuestions qs = new ExamQuestions();
@@ -191,7 +207,45 @@ public static void main(String args[])
 	//String[] arr = (String[])set.toArray();
 
 	Integer e;
-	System.out.println(e);
+	//System.out.println(e); // compile time error is here not in the previous line.
+
+	Integer num1 = 0;
+	Float num2 = -0.0F;
+	if (num1.intValue() == num2)
+	{
+		System.out.println("0 == -0.0F returns true");
+	}
+
+	Boolean b1 = new Boolean("TRUE");
+	boolean b2 = true;
+	if (b1==b2)
+	{
+		System.out.println("b1==b2");
+	}
+	if (b1.equals(b2))
+	{
+		System.out.println("b1.equals(b2)");
+	}
+	if (b1.booleanValue()==b2)
+	{
+		System.out.println("b1.booleanValue()==b2");
+	}
+
+	Vector <String>v = new Vector<>();
+	v.add("A");
+	for (String s:v)
+	{
+		System.out.println(s);
+	}
+
+	Map <String,String> m = new HashMap<>();
+	m.put("B","b");
+	for(Map.Entry<String, String> entry : m.entrySet())
+	{
+    	System.out.println(entry.getKey() + ": "+entry.getValue());
+	}
+ 
+
 }
 
 }

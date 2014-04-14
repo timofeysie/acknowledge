@@ -713,3 +713,90 @@ Character obj = 65;
 char c = 65;
 if c==obj ... TRUE
 
+- case labels only accept constant expressions.
+
+The so-called "hashing algorithm" implemented by class Test1 will always retrn the same value, 42, which is legal but will place all of the hash table entries into a single bucket, the most inefficient setup possible.
+A **hash function** is any algorithm that maps data of arbitrary length to data of a fixed length. The values returned by a hash function are called hash values, hash codes, hash sums, checksums or simply hashes. 
+- every class implicitly or explicitly provides a hashCode() method, which digests the data stored in an instance of the class into a single hash value (a 32-bit signed integer). This hash is used by other code when storing or manipulating the instance – the values are intended to be evenly distributed for varied inputs in order to use in clustering. This property is important to the performance of hash tables and other data structures that store objects in groups ("buckets") based on their computed hash values. Technically, in Java, hashCode() by default is a native method, meaning, it has the modifier 'native', as it is implemented directly in the native code in the JVM.
+- a hash table (also hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the correct value can be found.
+
+Boolean b1 = new Boolean("TRUE");
+boolean b2 = true;
+if (b1==b2) // true
+if (b1.equals(b2)) // true
+if (b1.booleanValue()==b2) // true
+
+		// question 20
+		Integer arr[] = {2,1,0};
+		print(arr);
+		...
+		public static void print(int...arr)
+- Though Integer can be boxed into int type,
+Integer[] cannot be boxed to int[], so
+print(int...arr) cannot be applied to print(Integer[])
+
+		List list2 = new ArrayList<String>();
+		list2.add(new StringBuilder("123"));
+This will compile because list2 is a raw type variable,
+and no checking is done at compile time.
+
+class Test {
+	public void Test(String a){print(a);}
+	public void Test(int b){rint(b);}
+	public void Test(){print("None");}
+}
+Question:  What is prented when you call new Test();?
+Answer: Nothing, those are not constructors because of the void return type modifier.
+
+// question 25
+int subTotal;
+static int total;
+public void calculate()
+{
+	int local;
+	local = this.total; //1
+	local = this.subTotal; //2
+	this.total = total; //3
+	//this.local = 4; Cannot find symbol
+	//this = new ExamQuestions(); // 5
+-  Non-static mehods have an implicit this object reference.  The this reference cannot be changed. 
+- The this reference can be used in a non-static context to refer to both instance and static members.
+- It cannot be used to refer to locl variables. (see 4)
+
+- Questions 27
+public class TestInterface
+{
+	public abstract class InnerTest
+	{
+		abstract void f();
+	}
+
+	public static void main(String[] args) {
+		TestInterface t = new TestInterface();
+		//t.f(); // cannot be found
+		TestInterface.InnerTest test = t.new InnerTest()
+		{
+			public void f() 
+			{ 
+				System.out.println("Inner f");
+			}
+		};
+		test.f(); // works fine
+	}
+}
+
+Protected variables or methods will not be accessable by a sub-class from their parent classes which are in different packages.  For example:
+package packages;
+public class Account { protected String number = "123"; }
+import packages.*;
+public class SilverAccount extends Account
+{
+	public static void main(String[] args) {
+		Account gold = new Account();
+		SilverAccount silver = new SilverAccount();
+		// System.out.println(gold.number); <- protected access!
+		System.out.println(silver.number); }	
+}
+
+
+

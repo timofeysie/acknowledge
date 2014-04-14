@@ -1250,10 +1250,14 @@ if you are going to write a clone() method to override the one in Object.
 - Java does not permit multiple inheritance(can only extend one class) but interfaces provide an alternative because you can implement more than one interface (an interface can extend any number of interfaces). 
 - An interface name can be used anywhere a type can be used. 
 - If a class includes abstract methods, the class itself must be declared abstract
-- All methods declared in an interface are implicitly public, so the public modifier can be omitted.
+- All methods declared in an interface are implicitly public and non-static, so the public modifier can be omitted.
 - All constant values defined in an interface are implicitly public, static, and final and these can be omitted.
 - method definitions inside interfaces cannot be private or protected.
-
+```
+interface BasicInterface {
+    public static final int constant = 1;
+    public abstract void method(); }
+```
 If an abstract class is subclassed and contians unimplemented methods, it must also be declared abstract.
 - All of the methods in an interface are implicitly abstract, so the abstract modifier is not used. (it could be—it's just not necessary).
 - Unlike interfaces, abstract classes can contain fields that are not static and final, and they can contain implemented methods. 
@@ -1264,7 +1268,13 @@ If an abstract class is subclassed and contians unimplemented methods, it must a
 - You can define an abstract class that does not implement all of an interface method.
 - An abstract class may have static fields and static methods that can be used with a class reference—for: AbstractClass.staticMethod()—as with any other class.
 - The combination of 'abstract' and 'synchronized' modifiers is not allowed.
-
+```
+abstract class BasicAbstract implements BasicInterface {
+    private int constant2; // not implicitly static or final!
+    //public void method() { /** done **/ }  // doesn't need to implement it!
+    abstract void method2(); // more interfeaces or implemented methods allowed!
+    // abstract synchronized not allowed! }
+```
 
 ###Switch###  
 Works with
@@ -1789,7 +1799,20 @@ models the mathematical function abstraction
 - entrySet 
 - values
 
+- enhanced for loop with Map:
+```
+    Map <String,String> m = new HashMap<>();
+    m.put("B","b");
+    for(Map.Entry<String, String> entry : m.entrySet())
+    {
+        System.out.println(entry.getKey() + ": "+entry.getValue());
+    }
+```
+
+
+
 Three general-purpose Map implementations (and their set analogies): 
 HashMap         (HashSet)          unordered
 TreeMap         (TreeSet)          ordered   
 LinkedHashMap   (LinkedHashSet)    insertion order
+ArrayList, LinkedList, Vector all insertion order

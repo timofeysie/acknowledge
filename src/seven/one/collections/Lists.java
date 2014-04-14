@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.HashSet;
 import java.util.TreeSet;
 import java.util.LinkedHashSet;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Lists 
 {
@@ -26,6 +27,24 @@ public class Lists
         log.info("HashSet       " +hash+" unordered");
         log.info("TreeSet       " +tree+" ordered");
         log.info("LinkedHashSet " +link+" insertion order");
+
+        List<String> array = new ArrayList<>();
+        List<String> linke = new LinkedList<>();
+        List<String> vecto = new Vector<>();
+        List<String> copyo = new CopyOnWriteArrayList<>();
+
+        for (String a : args)
+        {
+            array.add(a);
+            linke.add(a);
+            vecto.add(a);
+            copyo.add(a);
+        }
+
+        log.info("ArrayList       " +array+" unordered");
+        log.info("LinkedList      " +linke+" ordered");
+        log.info("Vector          " +vecto+" insertion order");
+        log.info("CopyOnWriteArrayList "+copyo+" ?");
 
         List<String> list = Arrays.asList(args);
         log.info("Arrays        " +link+" sequence");
