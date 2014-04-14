@@ -785,7 +785,9 @@ public class TestInterface
 	}
 }
 
+- Questions 28 & 29
 Protected variables or methods will not be accessable by a sub-class from their parent classes which are in different packages.  For example:
+
 package packages;
 public class Account { protected String number = "123"; }
 import packages.*;
@@ -793,10 +795,41 @@ public class SilverAccount extends Account
 {
 	public static void main(String[] args) {
 		Account gold = new Account();
-		SilverAccount silver = new SilverAccount();
 		// System.out.println(gold.number); <- protected access!
-		System.out.println(silver.number); }	
+		SilverAccount silver = new SilverAccount();
+		System.out.println(silver.number); } // works with the subclass.	
 }
+
+- abstract methods cannot define a method body.
+public abstract void method(){}
+final abstract int method(){}
+- both are illegal.  it should be like this:
+public abstract void method();
+
+Integer num_123 = Integer.parseInt("123L");
+- this method accepts digits only and causes a runtime exception
+Integer num_123 = Integer.parseInt(123L);
+- compile time error: no suitable method.
+parseInt(long)
+Integer num_123L = Integer.parseInt(123);
+- same error, no method parseInt(int)
+
+- Question 32
+static void aMethod() throws RuntimeException
+{
+	throw new NullPointerException(); // Exception cannot go here.
+}
+...
+	try
+	{
+		aMethod();
+	} catch (ClassCastException cce)
+	{
+		System.out.println("cce");
+	} finally
+	{
+		System.out.println("finally");
+	}
 
 
 

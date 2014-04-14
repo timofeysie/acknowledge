@@ -167,7 +167,12 @@ public void calculate()
 	//this.local = 4; Cannot find symbol
 	//this = new ExamQuestions();
 	// cannot assing a value to a final veriable this
-	
+
+}
+
+static void aMethod() throws RuntimeException
+{
+	throw new NullPointerException();
 }
 
 public static void main(String args[]) 
@@ -244,8 +249,21 @@ public static void main(String args[])
 	{
     	System.out.println(entry.getKey() + ": "+entry.getValue());
 	}
- 
+	
+	//Integer num_123L = Integer.parseInt(123);
+	//Integer num_123S = Integer.parseInt("123L");
+	//System.out.println("num_123 "+num_123S);
 
+	try
+	{
+		aMethod();
+	} catch (ClassCastException cce)
+	{
+		System.out.println("cce");
+	} finally
+	{
+		System.out.println("finally");
+	}
 }
 
 }
