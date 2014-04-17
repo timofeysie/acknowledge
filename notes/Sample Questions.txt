@@ -670,7 +670,7 @@ Writer w = new BufferedWriter(new FileWriter());
 This will cause an IOException.
 If the named file exists but is a directory rather than a file, an IOException will be thrown.
 Writer w = new BufferedWriter(new FileWriter("name.txt"));
-If the file doesnt exist it will be created.
+***If the file doesnt exist it will be created.***
 
 
 When you call System.exit() inside a finally block, the system will exit.
@@ -832,4 +832,65 @@ static void aMethod() throws RuntimeException
 	}
 
 
+Class A {
+	int a =200;
+	A(int b) {
+		this.a=b;
+	}
+}
+Class Test {
+	static void a1(int a) {
+		a=-1;
+	}
+	static void a1(A a) {
+	a.a=-1;
+	}
+	public static void main(String as[]) {
+	int a=100;
+	a1(a);
+	A b = new A(400);
+	a1(b);
+	System.out.print(a+" "+b.a);
+	}
+}
 
+100 -1
+
+Mock Exam 1 Retest
+Boolean string1=new Boolean("TrUe");
+boolean character1=true;
+assert string1.booleanValue()==character1;
+assert string1==character1;
+assert string1.equals(character1);
+//assert !string1.booleanValue()=="true";
+assert !string1.equals("true");
+//assert !character1=="true";
+
+Vector<String> set = new Vector<String>();
+String[]arr=set.toArray();
+toArray() returns Object[].  The return type needs to be cast to String[] to compile.
+(See repeat question above for answer)
+
+- It is possible to loop an enum with for:
+enum Direction {
+   NORTH,
+   EAST,
+   SOUTH,
+   WEST
+}
+for (Direction dir : Direction.values()) {
+  // do what you want
+}
+
+Exam 2 re-rest:
+
+interface IAccount { String getAccoundNumber();}
+abstract class Account implements IAccount{}
+The class Account is valid as it is declared abstract and therefore doesn't  have to implement all the methods of the superclass.
+
+System.out.println(new Integer(0).booleanValue());
+There is no such method in the Integer class.
+
+By contract, if two objects are equivalent according to the equals() method, the  the hashCode() method must evaulate them to be ==.  
+if (x3.equals(x4))
+x3.hashCode() == x4.hashCode();

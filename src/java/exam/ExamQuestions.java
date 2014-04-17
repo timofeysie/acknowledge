@@ -175,6 +175,13 @@ static void aMethod() throws RuntimeException
 	throw new NullPointerException();
 }
 
+static void unorthadoxUnary()
+{
+	int x = 2; 
+	x += x++ * x++ * x++;
+	System.out.println("Unary test 1: "+x);
+}
+
 public static void main(String args[]) 
 {
 	ExamQuestions qs = new ExamQuestions();
@@ -256,7 +263,7 @@ public static void main(String args[])
 
 	try
 	{
-		aMethod();
+		//aMethod();
 	} catch (ClassCastException cce)
 	{
 		System.out.println("cce");
@@ -264,6 +271,39 @@ public static void main(String args[])
 	{
 		System.out.println("finally");
 	}
+
+	byte b1a = ~5+1;
+	int b2a = +b1a;
+	System.out.println(b1a);
+	System.out.println(b2a);
+
+	System.out.println(4<5 && true);
+	System.out.println(6<5 && false);	
+
+Boolean string1=new Boolean("TrUe");
+boolean character1=true;
+assert string1.booleanValue()==character1;
+assert string1==character1;
+assert string1.equals(character1);
+//assert !string1.booleanValue()=="true";
+assert !string1.equals("true");
+//assert !character1=="true";
+
+	unorthadoxUnary();
+	System.out.println(new Integer(0).booleanValue());
+	Character ch1 = 65;
+	char ch2 = 65;
+	System.out.println(ch2 == ch1);
+
+	Float value1 = 39.0F;
+	float value2 = (float)39.0;
+	//System.out.println(value2.equals(value1)); // float caoonot be dereferenced
+
 }
+
+	private static void defualtValue()
+	{
+
+	}
 
 }

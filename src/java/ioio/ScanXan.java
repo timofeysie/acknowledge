@@ -17,5 +17,7 @@ public class ScanXan
                 s.close();
             }
         }
+
+        Writer w = new BufferedWriter(new FileWriter());
     }
 }

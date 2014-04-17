@@ -141,7 +141,7 @@ considered to be equivalent because their internal values are the same.
 out.println(Arrays.equals(arr1,arr2)); // Displays true
 ```
 
-the so called **deepEquals** method.  
+the **deepEquals** method is the equals method for multi dimension arrays.  
 ```
 static final int ROWS = 2;  
 static final int COLS = 3;  
@@ -494,6 +494,13 @@ Examples:
 - 1st cannot be a digit.
 - No reserved words; goto, strictfp, const, transient, native, synchronized
 
+###native###
+native modifier means that the method can have no body.
+- can be applied only to methods—not classes, not variables
+```
+public native int meth() ;
+```
+After you declare a native method, you must write the native method and follow a rather complex series of steps to link it with your Java code.  Most native methods are written in C. The mechanism used to integrate C code with a Java program is called the Java Native Interface (JNI). 
 
 ###Shadowing###
 ```
@@ -788,11 +795,18 @@ Math.rint(-1.5) = -2.0
 ```
 System.out.println(0.0f / 0.0f);       // NaN
 System.out.println(Math.sqrt(-1.0f));  // NaN
-if (Float.isNaN(value)) // true if it's non a number
-Float.isInfinite()  // similar to finind infinity
-Double.isInfinite()
-```
+if (Float.isNaN(value)); // true if it's non a number
+Float.isInfinite();  // similar to finind infinity
+Double.isInfinite();
 
+    Double d1 = new Double(-1.0/0.0);
+    Double d2 = new Double(0.0/0.0);
+     // returns true if this Double value is a Not-a-Number (NaN) 
+     System.out.println(d1 + " = " + d1.isNaN()); // infinity = false
+     System.out.println(d2 + " = " + d2.isNaN()); // NaN = true
+
+```
+The second example works for Floats also.
 - double min(double arg1, double arg2) works with float int long  Returns the smaller of the two arguments.
 - double max(double arg1, double arg2) also float int long  Returns the larger of the two arguments.
 ```

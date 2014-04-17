@@ -1,6 +1,7 @@
-import java.util.Vector;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Arraying
 {
@@ -77,6 +78,47 @@ public class Arraying
 		}
 	}
 
+	public static void equalsTest()
+	{
+		// initializing three integer arrays
+    	int[] arr1 = new int[] { 10, 12, 5, 6 };
+    	int[] arr2 = new int[] { 10, 12, 5, 6 };
+    	int[] arr3 = new int[] { 10, 5, 6, 12 };
+    
+    	// comparing arr1 and arr2
+    	boolean retval=Arrays.equals(arr1, arr2);
+    	System.out.println("arr1 and arr2 equal: " + retval);
+
+    	// deepEquals method
+    	int ROWS = 2;  
+		int COLS = 3;  
+		int grades[][] = new int[ROWS][COLS];  
+		grades = new int[ROWS][]; // same as  
+		grades[0] = new int[COLS]; // this  
+		grades[1] = new int[COLS]; // and this  
+		grades[0][0] = 0;  
+		grades[0][1] = 1;  
+		grades[0][2] = 2;  
+		grades[1][0] = 3;  
+		grades[1][1] = 4;  
+		grades[1][2] = 5;  
+		int grades2[][];  
+	   
+		grades2 = new int[ROWS][];   
+		grades2[0] = new int[COLS];  
+		grades2[1] = new int[COLS];  
+		grades2[0][0] = 0;  
+		grades2[0][1] = 1;  
+		grades2[0][2] = 2;  
+		grades2[1][0] = 3;  
+		grades2[1][1] = 4;  
+		grades2[1][2] = 5;  
+		System.out.println(grades == grades2); // false  
+		System.out.println(grades.equals(grades2)); // false  
+		System.out.println(Arrays.equals(grades, grades2)); // false   
+		System.out.println(Arrays.deepEquals(grades, grades2)); // true  		
+	}
+
 	public static void main(String[] args) 
 	{
 		decrementTest();
@@ -84,6 +126,7 @@ public class Arraying
 		System.out.println("~5 = "+(~5)+" + 1 = "+(~5+1));
 		whatWorks();//?
 		EpractizeQuestions();
+		equalsTest();
 	}
 
 	private static void nonWorking()

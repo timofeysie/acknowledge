@@ -2,7 +2,6 @@
 Quotes  
 To Do  
 Terms  
-Qustions  
 Pass by Value Discussion  
 Unicode  
 Parsing Wikitionary  
@@ -79,14 +78,6 @@ But if we run MultiplierTest by itself, there is no output at all.
 
 - a Cartesian product is a mathematical operation which returns a set (or product set) from multiple sets. That is, for sets A and B, the Cartesian product A × B is the set of all ordered pairs (a, b) where a ∈ A and b ∈ B.
 
-
-#Questions#
-- when is NaN false:
-    double var = 1000;
-    if (var == Double.NaN) 
-If you can only use that method on a double?
-- Can we get an example of a Initializer blocks copied into a constructor?
-- how does BoxDemo use the ArrayList when it is not returned after being operated on.  Is ArrayList a live class that will act like a memeber variable without being declared as such?  Indeed it does change without being a member variable.
 
 #Pass by Value Discussion#
 It's amazing how I have been using Java for over ten years but didn't understand some very fundamental things about it.  For one that it's a pass-by-value language.  The answer to my question posed a few months ago about what I called a live variable, is that the reference to the ArrayList is what is passed to the method, so that any changes to the list will persist becaucse the reference from the calling method is the same reference.  So then you might think that Java is actually a pass-by-reference languae.  And many people would argue about that, like they did here: 
@@ -180,7 +171,7 @@ Statement(
 - statistics tracking: send to e-mail.
 - statistics: happy presses, sad presses. sad presses could g
 
-Features
+Features  
 - webiste for upload and download of happiesive you compassion points.  package folder into a zip utility for up/download
 - when sadness has a reason.
 - art therapy or measure/check youre happiness/mood/feelings
@@ -212,5 +203,95 @@ For this we need a settings file in each user created folder
 - affection humility, compassion.
 - blank faces. non-exclusive
 - professions.  non-exclusive.  can lead to an idication of what job would be good for someone.
+
+Agile: a set of values and principles made by leading figures in 2001.  
+Scrum: a concrete software development methodology (1995) by two signatories of Agile Manifesto. Scrum supports Agile values.
+“waterfall model” define, plan, organise, execute and then close. (one stage follows another) which started to leak. Obviously, in actual practise, the estimates and other plans have to be tweaked right through the execution phase which gave birth to a string of complex yet not very meaningful methods as Earned Value Management.
+The fundamental principles to tackle product development complexity:
+- The project is organised as a number of small iterations through the classic project stages (definition, planning, organisation, execution and closure).
+- Each iteration aims at a relatively small yet semantically complete increment in product functionality or non-functional characteristics.
+- Strong end-user involvement throughout the project.
+
+
+
+Building: Ant, Maven, Continuum, Jelly, Ivy, Gradle, Jenkins
+Code repo: SVN, CVS, Git, ....
+Continuous Integration: Hudsonx2, Cruise Control, Luntbuild, Bamboox2, TeamCityx2
+Testing: Junit, easymock (+ PowerMock), XmlUnit, HtmlUnit, Mockitox2, JMock
+Reporting/Static Analysis: Coberturax2, Emmax2, FindBugsx2, JavaDoc, Checkstyle, PMD, Clover
+Project management: XPlanner, GreenHopper, JIRA, ....
+Documentation: Confluencex2, XWikix2, JavaDoc
+Code Review: Review Board, Crucible (+ Fisheye), SmartBear
+QA Dashboard: Sonar
+Estimation Tool: Planning Poker
+
+Mylen Mylyn: task and application life cycle management (ALM) for eclipse.
+Greenhopper (Jira plugin)
+P4
+Yoxel PCM
+
+Build Automation Tools
+- Maven
+- Apache Continuum, a continuous integration server which integrates tightly with Maven
+- Apache Jelly, a tool for turning XML into executable code
+- Apache Ivy, alternative dependency management tool for Java
+- Gradle, a build tool based on convention over configuration
+- Jenkins
+
+Testing
+
+http://www.javaranch.com/unit-testing.jsp
+
+Unit Test:
+
+The smallest amount of testable code. Often a single method/function, sans the use of other methods or classes. Fast! Thousands of unit tests can run in ten seconds or less! A unit test NEVER uses:
+a database
+an app server (or server of any kind)
+file/network I/O or file system;
+another application;
+the console (System.out, System.err, etc.)
+logging
+most other classes (exceptions include DTO's, String, Integer, mocks and maybe a few others).
+Unit tests are almost always part of a regression suite.
+
+Regression Suite:
+
+A collection of tests that can be run all at once. An example would be that all tests put in a certain directory would all be run by JUnit. A developer could run a unit test regression suite 20 times per day. Or, they might run a functional test regression suite twice a month.
+
+Functional Test:
+
+Bigger than a unit and smaller than a full component test. Usually exercising several methods/functions/classes working together. Permitted to take its sweet time: hundreds of tests could take hours to run. Most functional tests are part of a functional test regression suite. Usually run from JUnit.
+
+Integration Test:
+
+Testing two or more components working together. Sometimes part of a regression suite.
+
+Component Test:
+
+Running one component by itself. Frequently done by QA, managers, XP customers, etc. This sort of test is not part of a regression suite and it is not run by JUnit.
+
+Component Acceptance Test (C.A.T.):
+
+A component test run in front of a crowd of people as part of a formal process. The people in the room collectively decide if the component has met required criteria.
+
+System Test:
+
+All components being run together.
+
+System Acceptance Test (S.A.T.):
+
+A system test run in front of a crowd of people as part of a formal process. The people in the room collectively decide if the system has met required criteria.
+
+Stress Tests:
+
+Another program loads a component, some components, or possibly the entire system. I have seen some small stress tests worked into some regression functional tests - a pretty smart way to test some concurrency code!
+
+Mock:
+
+A brain dead piece of code used in unit and functional tests to make sure that a piece of code you are attempting to test does not use some other bit of production code. A Mock class typically overrides all of the public methods in a production class and is inserted somewhere that might try to use the production class. Sometimes a Mock class implements an interface and replaces production code that implements the same interface.
+
+Shunt:
+
+Kinda like a mock class that extends production code, only the purpose is NOT to override ALL of the methods, but just enough so you can exercise some production methods, while mocking the rest of the production methods. Especially useful if you want to test a class that might try to use I/O. Your shunt can override the I/O methods while testing the non I/O methods.
 
 

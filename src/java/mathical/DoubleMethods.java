@@ -8,9 +8,13 @@ public class DoubleMethods {
      Double d2 = new Double(0.0/0.0);
   
      // returns true if this Double value is a Not-a-Number (NaN) 
-     System.out.println(d1 + " = " + d1.isNaN());
+     System.out.println(d1 + " = " + d1.isNaN()); // false
   
      // returns false for other cases
-     System.out.println(d2 + " = " + d2.isNaN());
+     System.out.println(d2 + " = " + d2.isNaN()); // true
+
+     	double var = 0; // false
+    	System.out.println(var+" is Not a Number? "+(var == Double.NaN));
+
    }
 }  

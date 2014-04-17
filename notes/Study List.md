@@ -458,15 +458,15 @@ x = 1.300000
 - String[] split(CharSequence input, int limit)
 - String toString()
 
+NaN	
+	Double d1 = new Double(-1.0/0.0);
+	Double d2 = new Double(0.0/0.0);
+     // returns true if this Double value is a Not-a-Number (NaN) 
+     System.out.println(d1 + " = " + d1.isNaN()); // false
+     System.out.println(d2 + " = " + d2.isNaN()); // true
 
 
 Things to do:   
 - TreeSet stores its elements in a red-black tree
-- Questions and Exercises: Nested Classes
-- www.javapepare.com this site is for tests 5 and 6.  We need test 7!
-Does it include IO and Concurrency?  Platfrom Environment or RegExps?
-IO and COncurrency are definately on the Level II exam, but platform and regexp?  OK, Section 5, Item 2 has regexps.
-- gocertify.com test 2 questions 4:  What are the "the rules of promotion for binary operands"?
-- FileInputStreams
-- Serializable
 - Constructor class?
+
