@@ -1,9 +1,10 @@
-#Duration:  150 minutes#  
-#Number of Questions: 90#  
-22 minutes x 4  
-1.6 minutes a question   
-22 questions/37 minutes a quarter    
-45 questions/75 minutes a half  
+###OCAJ7###
+- Duration:  150 minutes 
+- Number of Questions: 90  
+22 minutes x 4    
+1.6 minutes a question  
+22 questions a quarter    
+45 questions a 75 minutes a half  
 
 ###TOC###
 Rules of Promotion
@@ -12,6 +13,8 @@ Serializable
 PDF Collections
 Assert  
 Identifiers   
+Native
+Strictftp
 Shadowing   
 Objects  
 Variables  
@@ -30,7 +33,8 @@ Initialization
 Nested Classes  
 Enums  
 Inheritance  
-Object Class  
+Overriding or Hiding
+The Object Class  
 Clone  
 Abstract & Interface  
 Switch  
@@ -501,6 +505,33 @@ native modifier means that the method can have no body.
 public native int meth() ;
 ```
 After you declare a native method, you must write the native method and follow a rather complex series of steps to link it with your Java code.  Most native methods are written in C. The mechanism used to integrate C code with a Java program is called the Java Native Interface (JNI). 
+```
+public class NativeDemo {
+    int i;
+    public static void main(String args[]) {
+        NativeDemo ob = new NativeDemo();
+        ob.i = 10;
+        System.out.println("This is ob.i before the native method:" + ob.i);
+        ob.test(); // call a native method   
+        System.out.println("This is ob.i after the native method:" + ob.i);
+    }
+    // declare native method
+    public native void test();
+    // load DLL that contains static method
+    static {
+        System.loadLibrary("NativeDemo");
+    }
+}
+```
+
+###strictfp###
+A non-access modifier like final or abstract.  You can apply strictfp keyword only to classes or methods (not to variables).
+- defines floating-point support, including single-precision and double-precision numbers using strictfp keyword.
+- IEEE-754 double precision and rounding is the Java standard arithmetic model, but for performance reasons Java implementations are not constrained to using this standard by default.  Some processors (Intel Pentium) perform floating point operations in (non-IEEE-754-standard) extended-precision.
+- all the methods in the class are also modified automatically.
+```
+strictfp class MyClass { //...}
+```
 
 ###Shadowing###
 ```
@@ -640,6 +671,21 @@ The eight primitive data types supported by the Java programming language: boole
 - double: double-precision 64-bit IEEE 754 floating point. (Range in Java Spec). decimal default choice. should never be used for precise values
 
 A 64-bit register can store 2tt64 (over 18 quintillion or 1.8×10 to the 19th power) different values. Hence, a processor with 64-bit memory addresses can directly access 264 bytes (=16 exbibytes) of byte-addressable memory.
+
+An integer literal may be expressed in (base) - prefix  
+decimal (base 10)  
+hexadecimal (base 16) - 0x or 0X
+octal (base 8) - 0 followed by one or more of the ASCII digits 0 through 7
+binary (base 2) - 0b or 0B followed by one or more of the ASCII digits 0 or 1
+
+The largest positive hexadecimal, octal, and binary literals of type int - each of which represents the decimal value 2147483647 (2 to the power of 31 - 1) - are respectively:  
+0x7fff_ffff   
+0177_7777_7777  
+0b0111_1111_1111_1111_1111_1111_1111_1111  
+The most negative:  
+0x8000_0000   
+0200_0000_0000     
+0b1000_0000_0000_0000_0000_0000_0000_0000  
 
 Decimal numbers (for example 1.3) are of type double by default. To make them of type float they must be followed by F (say, 1.3F).
 
@@ -1221,7 +1267,34 @@ found:    B
 - Methods called from constructors should generally be declared final. If a constructor calls a non-final method, a subclass may redefine that method with surprising or undesirable results.
 - final classes cannot be subclassed, useful when creating an immutable class like the String class.
 
-###Object###
+###Overriding or Hiding###
+If a method declararation overrides a method in the super class, there will be a compile time error when:
+- they have different return types
+- one is void and the other has a return type
+- one throws clause that conflicts with that of any other method that it overrides or hides
+However, it can throw unchecked exceptions (RuntimeExceptions)  
+Given this:
+```
+public class Customer
+{
+    double calculate(int num) { /* */ }
+}
+```
+You can do this:
+```
+double calculate(int num)
+public double calculate(int num)
+protected double calculate(int num)
+double calculate(int num) throws RuntimeException
+```
+You cannot do these:
+```
+double calculate(int num) throws Exception
+private double calculate(int num)
+```
+
+
+###The Object Class###
 ```
 protected Object clone() throws CloneNotSupportedException  
 public boolean equals(Object obj)  
@@ -1822,8 +1895,6 @@ models the mathematical function abstraction
         System.out.println(entry.getKey() + ": "+entry.getValue());
     }
 ```
-
-
 
 Three general-purpose Map implementations (and their set analogies): 
 HashMap         (HashSet)          unordered

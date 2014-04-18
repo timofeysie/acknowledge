@@ -551,7 +551,8 @@ quote(String s) returns a literal pattern string for the specified String.  This
 
 - Number is the super class for many wrapper classes, but not Boolean and Character
 
-- Nested (inner) classes can be declared abstract or final, private, public, or protected to restrict access to the class.
+- Nested (inner) classes can be declared abstract, final, private, public, or protected to restrict access to the class.
+
 class Bank
 {
 	String bankName;
@@ -568,7 +569,7 @@ public class BankBranch extends Bank
 		return bankName;
 	}
 }
-Does not compile: getBranchName() cannot override the superclass method.  The overridden method does not throw an exception.
+Does not compile: getBranchName() cannot override the superclass method.  The overridden method does not throw an exception.  (But it could if it were a runtime exception, right?  Or is that only checked exceptions?)
 
 - The split() and matches() methods are present in both String and Pattern class.
 
@@ -886,7 +887,7 @@ Exam 2 re-rest:
 
 interface IAccount { String getAccoundNumber();}
 abstract class Account implements IAccount{}
-The class Account is valid as it is declared abstract and therefore doesn't  have to implement all the methods of the superclass.
+The class Account is valid as it is declared abstract and therefore doesn't have to implement all the methods of the superclass.
 
 System.out.println(new Integer(0).booleanValue());
 There is no such method in the Integer class.
@@ -894,3 +895,117 @@ There is no such method in the Integer class.
 By contract, if two objects are equivalent according to the equals() method, the  the hashCode() method must evaulate them to be ==.  
 if (x3.equals(x4))
 x3.hashCode() == x4.hashCode();
+
+If a method declararation overrides a method in the super class, there will be a compile time error when:
+- there are different return types
+- one is void and the other has a return type
+- one throws clause that conflicts with that of any other method that it overrides or hides
+However, it can throw unchecked exceptions (RuntimeExceptions)  
+Given this:
+	public class Customer
+	{
+    	double calculate(int num) { /* */ }
+	}
+You can do this:
+	double calculate(int num)
+	public double calculate(int num)
+	protected double calculate(int num)
+	double calculate(int num) throws RuntimeException
+You cannot do these:
+	double calculate(int num) throws Exception
+	private double calculate(int num)
+
+Throwable
+Exception
+ClassNotFoundException
+CloneNoteSupportedException
+IllegalAccessException
+IntantiationException
+InterruptedException
+NoSUchMethodExcption
+RuntimeException
+
+RuntimeException
+ArithmethicException
+ArrayStoreException
+ClassCastException
+IllegalArgumentException (nfe)
+IllegalMonitorStateException
+IndexOutOfBoundsException (aioobe)
+NegativeArraySizeException
+NullPointerException
+SecurityException
+
+The 'this' reference can be used in a non-static context to refer to botth instance and static members.  However, it cannot be used to refer to local variables
+class Mine
+{
+	int subTotal;
+	static int total;
+
+	public calculate()
+	{
+		int local;
+		// what can go here?
+	}
+}
+valid:
+local = this.total;
+local = this.subTotal;
+this.total = total
+not valid:
+this.local = 4;
+- 'this' cannot be used to refer to local variables
+
+class Test6<Ob>
+{
+	static Ob getOb()
+	{
+		// error: non-static type variable On 
+		// cannot be referenced from a static
+		// context.
+		return null;
+	}
+}
+
+Interger.parseInt("123l"); will throw a NumberFormatException as the method only accepts digits.
+
+- review checked and unchecked errors and their heirarchy
+- review how to create nested classes and their access restrictions.
+- remember, abstract methods do not have a body!
+abstract void f();
+
+String str = "10";
+int a = new Integer(10);
+boolean b = str == a;
+// incomparable types: String and int
+//only the + operator performs implicit conversion to a String object.
+
+- finalize will always run before an object is garbage collected.
+
+- Member inner classes are the static class
+
+- priavte synchronized int e; is an invalid class level (nonlocal) variable declaration.
+
+class A {A() {System.out.print("Super ");}}
+public class Main extends A {
+    public static void main(String [] args) {
+        new Main(1L).Main();
+    }
+    public Main(int x) {
+        this();
+        System.out.print(" " + (x * 2));
+    }
+    public Main(long x) {
+        this((int) x);
+        System.out.print(" " + x);
+    }
+    public Main() {
+        super(); 
+        System.out.print("No arg Sub");
+    }
+    void Main() {
+        System.out.print(" method "); 
+    }
+}
+
+- Watch out!!! You cannot assign a value to a variable declared in an interface even when the class at hand implements that interface, as all interface variables are implicitly final!

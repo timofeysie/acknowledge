@@ -290,7 +290,7 @@ assert !string1.equals("true");
 //assert !character1=="true";
 
 	unorthadoxUnary();
-	System.out.println(new Integer(0).booleanValue());
+	//System.out.println(new Integer(0).booleanValue());
 	Character ch1 = 65;
 	char ch2 = 65;
 	System.out.println(ch2 == ch1);
@@ -298,12 +298,23 @@ assert !string1.equals("true");
 	Float value1 = 39.0F;
 	float value2 = (float)39.0;
 	//System.out.println(value2.equals(value1)); // float caoonot be dereferenced
-
+	basicFailedQuestions();
 }
 
 	private static void defualtValue()
 	{
 
+	}
+
+	private static void basicFailedQuestions()
+	{
+		String str = "10";
+		int a = new Integer(10);
+		//boolean b = str == a;
+		String one = Integer.toBinaryString(010)+"";
+		String two = ""+Integer.toBinaryString(4);
+		System.out.println(one+"|"+two);
+		//System.out.println(one|two);
 	}
 
 }
