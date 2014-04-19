@@ -669,9 +669,9 @@ class Test3 implements Comparable {
 
 Writer w = new BufferedWriter(new FileWriter());
 This will cause an IOException.
-If the named file exists but is a directory rather than a file, an IOException will be thrown.
+- If the named file exists but is a directory rather than a file, an IOException will be thrown.
 Writer w = new BufferedWriter(new FileWriter("name.txt"));
-***If the file doesnt exist it will be created.***
+- If the file doesnt exist it will be created.
 
 
 When you call System.exit() inside a finally block, the system will exit.
@@ -833,6 +833,9 @@ static void aMethod() throws RuntimeException
 	}
 
 
+Retesting -------------------------------------------------------
+
+
 Class A {
 	int a =200;
 	A(int b) {
@@ -899,8 +902,8 @@ x3.hashCode() == x4.hashCode();
 If a method declararation overrides a method in the super class, there will be a compile time error when:
 - there are different return types
 - one is void and the other has a return type
-- one throws clause that conflicts with that of any other method that it overrides or hides
-However, it can throw unchecked exceptions (RuntimeExceptions)  
+- one throws a clause that conflicts with that of any other method that it overrides or hides
+However, it can throw unchecked exceptions (RuntimeExceptions and it's descendants)  
 Given this:
 	public class Customer
 	{
@@ -1009,3 +1012,39 @@ public class Main extends A {
 }
 
 - Watch out!!! You cannot assign a value to a variable declared in an interface even when the class at hand implements that interface, as all interface variables are implicitly final!
+
+Methods shared by the String and the Pattern class:
+- split
+- matches
+
+- An inner class can be delcared public, final, abstract.
+- A local (ineer) class can have static members provided that they are constant variables.
+
+		double num1 = 0.2;
+		float num2 = 0.2f;
+		System.out.println(num1 == num2); // false
+		System.out.println(num1 == (double)num2); // false
+		System.out.println((float)num1 == num2); // true
+
+public static void main(String [] args) {}
+public void main(String ...arg){}
+- This class will not compile as the method signatures are the same.
+
+- casting from a child class to a parent class is called implicit casting.
+
+You can group parts of your regular expression. In your pattern you group elements with round brackets, e.g., (). This allows you to assign a repetition operator to a complete group.
+
+In addition these groups also create a backreference to the part of the regular expression. This captures the group. A backreference stores the part of the String which matched the group. This allows you to use this part in the replacement.
+
+Via the $ you can refer to a group. $1 is the first group, $2 the second, etc.
+
+Let's, for example, assume you want to replace all whitespace between a letter followed by a point or a comma. This would involve that the point or the comma is part of the pattern. Still it should be included in the result.
+
+// Removes whitespace between a word character and . or ,
+String pattern = "(\\w)(\\s+)([\\.,])";
+System.out.println(EXAMPLE_TEST.replaceAll(pattern, "$1$3")); 
+This example extracts the text between a title tag.
+
+// Extract the text between the two title elements
+pattern = "(?i)(<title.*?>)(.+?)(</title>)";
+String updated = EXAMPLE_TEST.replaceAll(pattern, "$2"); 

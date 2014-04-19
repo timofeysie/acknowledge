@@ -1,4 +1,5 @@
 ###OCAJ7###
+- 1Z0-803  Oracle Certified Associate (OCA) Java SE 7
 - Duration:  150 minutes 
 - Number of Questions: 90  
 22 minutes x 4    
@@ -51,15 +52,21 @@ List Implementations
 
 
 ###Rules of Promotion###
-The operand of a numeric operator such as + or *. The conversion process for such operands is called numeric promotion. Promotion is special in that, in the case of binary operators, the conversion chosen for one operand may depend in part on the type of the other operand expression.  
+For operands of a numeric operator such as + or *, the conversion process is called numeric promotion. In the case of binary operators, the conversion chosen for one operand may depend in part on the type of the other operand expression.  
 
-The rules of promotion for binary operands:  When an operator applies binary numeric promotion to a pair of operands, each of which must denote a value that is convertible to a numeric type, the following rules apply, in order, using widening conversion (§5.1.2) to convert operands as necessary:
-- If any of the operands is of a reference type, unboxing conversion (§5.1.8) is performed. Then:
+The rules of promotion for binary operands:  When an operator applies binary numeric promotion to a pair of operands, each of which must denote a value that is convertible to a numeric type, the following rules apply, in order, using widening conversion to convert operands as necessary:
+- If any of the operands is of a reference type, unboxing conversion is performed. Then:
 - If either operand is of type double, the other is converted to double.
 - Otherwise, if either operand is of type float, the other is converted to float.
 - Otherwise, if either operand is of type long, the other is converted to long.
 - Otherwise, both operands are converted to type int.
 
+An example, if you please:  
+```
+int i = 10;
+double d1 = 2.5;
+double d2 = d1 * i;
+```
 The order:  
 Reference Type - unboxing  
 double  
@@ -86,8 +93,7 @@ final byte b1 = 1;
 final byte b2 = 2;
 int b3 = b1 + b2;  // succeeds
 ```
-- constant expression, value resolved at compile time
-b1 and b2 are final variables and values will be resolved at compile time so compilation won't fail.
+- for constant expressions, the values are resolved at compile time.  So if b1 and b2 are final variables compilation won't fail.
 
 
 ###Arrays###
@@ -672,11 +678,11 @@ The eight primitive data types supported by the Java programming language: boole
 
 A 64-bit register can store 2tt64 (over 18 quintillion or 1.8×10 to the 19th power) different values. Hence, a processor with 64-bit memory addresses can directly access 264 bytes (=16 exbibytes) of byte-addressable memory.
 
-An integer literal may be expressed in (base) - prefix  
-decimal (base 10)  
-hexadecimal (base 16) - 0x or 0X
-octal (base 8) - 0 followed by one or more of the ASCII digits 0 through 7
-binary (base 2) - 0b or 0B followed by one or more of the ASCII digits 0 or 1
+An integer literal may be expressed in: (base) - prefix   
+decimal (base 10) - none  
+hexadecimal (base 16) - 0x or 0X  
+octal (base 8) - 0 followed by one or more of the ASCII digits 0 through 7  
+binary (base 2) - 0b or 0B followed by one or more of the ASCII digits 0 or 1  
 
 The largest positive hexadecimal, octal, and binary literals of type int - each of which represents the decimal value 2147483647 (2 to the power of 31 - 1) - are respectively:  
 0x7fff_ffff   
@@ -685,7 +691,7 @@ The largest positive hexadecimal, octal, and binary literals of type int - each 
 The most negative:  
 0x8000_0000   
 0200_0000_0000     
-0b1000_0000_0000_0000_0000_0000_0000_0000  
+0b1000_0000_0000_0000_0000_0000_0000_0000    
 
 Decimal numbers (for example 1.3) are of type double by default. To make them of type float they must be followed by F (say, 1.3F).
 
@@ -1109,7 +1115,7 @@ LocalClassExample.java creates a local class like this:
 PhoneNumber myNumber1 = new PhoneNumber(phoneNumber1);
 ```
 
-- A local class can have static members provided that they are constant variables. (A constant variable A variable is a variable of primitive type or type String that is declared final and initialized with a compile-time constant expression. 
+- A local class can have static members provided that they are constant variables. (A constant variable is a variable of primitive type or type String that is declared final and initialized with a compile-time constant expression. 
 
 B. Anonymous classes   
 - more concise code. 

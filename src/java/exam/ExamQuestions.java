@@ -315,6 +315,11 @@ assert !string1.equals("true");
 		String two = ""+Integer.toBinaryString(4);
 		System.out.println(one+"|"+two);
 		//System.out.println(one|two);
+		double num1 = 0.2;
+		float num2 = 0.2f;
+		System.out.println(num1 == num2); // false
+		System.out.println(num1 == (double)num2); // false
+		System.out.println((float)num1 == num2); // true
 	}
 
 }
