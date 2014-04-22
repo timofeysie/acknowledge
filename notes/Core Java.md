@@ -775,6 +775,46 @@ Unboxing is Converting an object of a wrapper type (Integer) to its correspondin
 System.out.format(String format, Object... args);
 - The format string contains plain text as well as format specifiers (begin with a percent sign (%) and end with a converter. The converter indicating the type of argument to be formatted. In between the percent sign (%) and the converter you can have optional flags and specifiers), which are special characters that format the arguments of Object... args
 - format(Locale l, String format, Object... args)
+
+%c  character
+%d  decimal (integer) number (base 10)
+%e  exponential floating-point number
+%f  floating-point number
+%i  integer (base 10)
+%o  octal number (base 8)
+%s  a string of characters
+%u  unsigned decimal (integer) number
+%x  number in hexadecimal (base 16)
+%%  print a percent sign
+\%  print a percent sign
+%-15s - fifteen characters left-justified.  
+%.2f limit a floating number to 2 decimal places.
+%3d  a minimum width of three spaces, which, by default, will be right-justified. 
+%-3d left justify
+printf("%03d", 1);  = 001 
+printf("'%-5d'", 10);        At least five-wide, left-justified =  '10   '
+printf("'%.1f'", 10.3456);  '10.3'  Print 1 position after the decimal
+printf("'%.2f'", 10.3456);  '10.35' positions after the decimal
+printf("'%8.2f'", 10.3456);  8-wide, 2 positions after the decimal'   10.35' 
+8-wide, 2 positions after the decimal    printf("'%8.4f'", 10.3456); ' 10.3456'
+8-wide, 2 positions after the decimal, zero-filled    printf("'%08.2f'", 10.3456);    '00010.35'
+Eight-wide, two positions after the decimal, left-justified printf("'%-8.2f'", 10.3456);    '10.35   '
+Minimum length, left-justified  printf("'%-10s'", "Hello"); 'Hello     '
+
+special printf characters
+\a  audible alert
+\b  backspace
+\f  form feed
+\n  newline, or linefeed
+\r  carriage return
+\t  tab
+\v  vertical tab
+\\  backslash
+
+Insert a tab character in a string  printf("Hello\tworld"); Hello world
+
+
+Other examples  
 ```
 long n = 461012;
 System.out.format("Comma separated: %,8d%n", n);    
@@ -787,6 +827,20 @@ System.out.format("Comma separated: %,8d%n", n);
 Or in a catch block:
 ```
 System.err.format("IOException: %s%n", x);
+```
+
+Dates  
+```
+String[] user = {"world", "Adam", "Eve", "Bill"};
+for (int i=0; i < user.length; i++)
+    Format.printf("Hello %s!\n", new Parameters(user[i]));
+```
+
+Also note that rounding occurs in this situation:
+```
+    double d_num = 999.3568;
+    System.out.printf("%.2f", d_num);
+Output: 999.36
 ```
 
 ###Math###
@@ -1232,7 +1286,7 @@ public enum Currency implements Runnable{
 
 
 ###Inheritance###
-- overriding: instance method in the subclass that has the same signature as the one in the superclass
+- overriding: an instance method in the subclass that has the same signature as the one in the superclass
 - hiding: a static method in the subclass that has the same signature as the one in the superclass. 
 - A subclass does not inherit the private members of its parent class. However, if the superclass has public or protected methods for accessing its private fields, these can also be used by the subclass.
 - static methods cannot be overridden since they are invoked on the class itself, not the obj.
@@ -1555,13 +1609,59 @@ You can prevent a class or method from being subclassed by using the final keywo
 ```
 
 ###Regular Expressions2###
-Where did the original notes go?  Starting over...
+
+meta characters
+.         Matches any character
+^regex    Finds regex that must match at the beginning of the line.
+regex$    Finds regex that must match at the end of the line.
+[abc]     Set definition, can match the letter a or b or c.
+[abc][vz] Set definition, can match a or b or c followed by either v or z.
+[^abc]    When a caret appears as the first character inside square brackets, it negates the pattern.  This can match any character except a or b or c.
+[a-d1-7]  Ranges: matches a letter between a and d and figures from 1 to 7, but not d1.
+X|Z       Finds X or Z.
+XZ        Finds X directly followed by Z.
+$         Checks if a line end follows.
+
+metacharacters with a pre-defined meaning
 \d  A digit: [0-9]
 \D  A non-digit: [^0-9]
 \s  A whitespace character: [ \t\n\x0B\f\r]
 \S  A non-whitespace character: [^\s]
 \w  A word character: [a-zA-Z_0-9]
 \W  A non-word character: [^\w]
+\S+ Several non-whitespace characters
+\b  a word boundary where a word character is [a-zA-Z0-9_].
+
+quantifiers
+*       Occurs zero or more times, is short for {0,}
+.*      finds any character sequence
++       Occurs one or more times, is short for {1,} 
+X+ -    Finds one or several letter X
+?       Occurs no or one times, ? is short for {0,1}.   
+X?      finds no or exactly one letter X
+{X}     Occurs X number of times, {} describes the order of the preceding liberal   
+\d{3}   searches for three digits, 
+.{10}   for any character sequence of length 10.
+{X,Y}   Occurs between X and Y times,   
+\d{1,4} means \d must occur at least once and at a maximum of four.
+*?  ?   after a quantifier makes it a reluctant quantifier. It tries to find the smallest match.
+
+
+You can group parts of your regular expression.
+patterns group elements with (), you can assign a repetition operator to a complete group.
+- these create a backreference to the part of the regular expression. This captures the group. A backreference stores the part of the String which matched the group. This allows you to use this part in the replacement.
+
+Via the $ you can refer to a group. $1 is the first group, $2 the second, etc.
+
+- to replace all whitespace between a letter followed by a point or a comma. This would involve that the point or the comma is part of the pattern. Still it should be included in the result.
+
+// Removes whitespace between a word character and . or ,
+String pattern = "(\\w)(\\s+)([\\.,])";
+System.out.println(EXAMPLE_TEST.replaceAll(pattern, "$1$3")); 
+
+// Extract the text between the two title elements
+pattern = "(?i)(<title.*?>)(.+?)(</title>)";
+String updated = EXAMPLE_TEST.replaceAll(pattern, "$2"); 
 
 
 ###Exceptions###  

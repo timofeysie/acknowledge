@@ -685,9 +685,12 @@ We suppose that any expression containing a negative will give a negative answer
 
 - j2ee-struts is not a valid identifier because it has a SLASH!!!
 
+RegEx question:
 java Test x7+y8+z9=4P [4789][+-=]
 Test class main has this expression:
 System.out.println((args[0].split(args[1])).length);
+[abc][vz] Set definition, can match a or b or c followed by either v or z.
+
 
 - classes cannot extend interfaces, they must implement them.
 
@@ -695,7 +698,7 @@ System.out.println((args[0].split(args[1])).length);
 
 String c = new String("1234567890");
 StringBuffer sb = new StringBuffer(c);
-- The capacity for sb is not 10+16 = 26
+- The capacity for sb is now 10+16 = 26
 
 line 10:	Integer e;
 1ine 11:	System.out.println(e); 
@@ -707,14 +710,14 @@ Output: 999.36
 
       Object obj = 99;
       System.out.println(obj);
-This looks odd but it compiles.  However, there would be no output.
+This looks odd but it compiles.  However, there would be no output.  Not true, 99 will be printed!
 By autoboxing, 99 int primitive value will be automatically converted to Integer object and assigned to the variable obj.
 
 Character obj = 65;
 char c = 65;
 if c==obj ... TRUE
 
-- case labels only accept constant expressions.
+- case labels only accept constant (final) expressions.
 
 The so-called "hashing algorithm" implemented by class Test1 will always retrn the same value, 42, which is legal but will place all of the hash table entries into a single bucket, the most inefficient setup possible.
 A **hash function** is any algorithm that maps data of arbitrary length to data of a fixed length. The values returned by a hash function are called hash values, hash codes, hash sums, checksums or simply hashes. 
@@ -727,26 +730,28 @@ if (b1==b2) // true
 if (b1.equals(b2)) // true
 if (b1.booleanValue()==b2) // true
 
-		// question 20
+// question 20
 		Integer arr[] = {2,1,0};
 		print(arr);
 		...
 		public static void print(int...arr)
-- Though Integer can be boxed into int type,
-Integer[] cannot be boxed to int[], so
-print(int...arr) cannot be applied to print(Integer[])
+- Though Integer can be boxed into int type, Integer[] cannot be boxed to int[], so
+print(int...arr) cannot be applied to print(Integer[]). and causes a compiler error
 
 		List list2 = new ArrayList<String>();
 		list2.add(new StringBuilder("123"));
 This will compile because list2 is a raw type variable,
 and no checking is done at compile time.
+However, if you try this:
+String sbu = list2.get(0);
+You will get a runtime error: found Object, required String.
 
 class Test {
 	public void Test(String a){print(a);}
 	public void Test(int b){rint(b);}
 	public void Test(){print("None");}
 }
-Question:  What is prented when you call new Test();?
+Question:  What is printed when you call new Test();?
 Answer: Nothing, those are not constructors because of the void return type modifier.
 
 // question 25
@@ -760,8 +765,9 @@ public void calculate()
 	this.total = total; //3
 	//this.local = 4; Cannot find symbol
 	//this = new ExamQuestions(); // 5
--  Non-static mehods have an implicit this object reference.  The this reference cannot be changed. 
-- The this reference can be used in a non-static context to refer to both instance and static members.
+
+-  Non-static mehods have an implicit 'this' object reference.  The this reference cannot be changed.  (5)
+- The 'this' reference can be used in a non-static context to refer to both instance and static members.
 - It cannot be used to refer to locl variables. (see 4)
 
 - Questions 27
@@ -858,7 +864,7 @@ Class Test {
 	}
 }
 
-100 -1
+Output: 100 -1
 
 Mock Exam 1 Retest
 Boolean string1=new Boolean("TrUe");
@@ -875,7 +881,7 @@ String[]arr=set.toArray();
 toArray() returns Object[].  The return type needs to be cast to String[] to compile.
 (See repeat question above for answer)
 
-- It is possible to loop an enum with for:
+- It's possible to loop an enum with an enhanced for look using the values() method:
 enum Direction {
    NORTH,
    EAST,
@@ -921,12 +927,11 @@ You cannot do these:
 Throwable
 Exception
 ClassNotFoundException
-CloneNoteSupportedException
+CloneNotSupportedException
 IllegalAccessException
 IntantiationException
 InterruptedException
 NoSUchMethodExcption
-RuntimeException
 
 RuntimeException
 ArithmethicException
@@ -939,41 +944,17 @@ NegativeArraySizeException
 NullPointerException
 SecurityException
 
-The 'this' reference can be used in a non-static context to refer to botth instance and static members.  However, it cannot be used to refer to local variables
-class Mine
-{
-	int subTotal;
-	static int total;
-
-	public calculate()
-	{
-		int local;
-		// what can go here?
-	}
-}
-valid:
-local = this.total;
-local = this.subTotal;
-this.total = total
-not valid:
-this.local = 4;
-- 'this' cannot be used to refer to local variables
-
 class Test6<Ob>
 {
 	static Ob getOb()
 	{
-		// error: non-static type variable On 
+		// error: non-static type variable Ob 
 		// cannot be referenced from a static
 		// context.
 		return null;
 	}
 }
 
-Interger.parseInt("123l"); will throw a NumberFormatException as the method only accepts digits.
-
-- review checked and unchecked errors and their heirarchy
-- review how to create nested classes and their access restrictions.
 - remember, abstract methods do not have a body!
 abstract void f();
 
@@ -1025,6 +1006,17 @@ Methods shared by the String and the Pattern class:
 		System.out.println(num1 == num2); // false
 		System.out.println(num1 == (double)num2); // false
 		System.out.println((float)num1 == num2); // true
+		Integer num3 = 123;
+		float num4 = 123f;
+		double num5 = 123;
+		float num6 = 123;
+		Integer num7 = new Integer("123");
+		byte num8 = 123;
+		System.out.println("Integer == float "+(num3 == num3)); //true
+		System.out.println("double == float "+(num5 == num4));  // true
+		System.out.println("float == int "+(num6 == num7));     // true
+		System.out.println("int == byte? "+(num7 == num8));     // true
+
 
 public static void main(String [] args) {}
 public void main(String ...arg){}
@@ -1032,19 +1024,111 @@ public void main(String ...arg){}
 
 - casting from a child class to a parent class is called implicit casting.
 
-You can group parts of your regular expression. In your pattern you group elements with round brackets, e.g., (). This allows you to assign a repetition operator to a complete group.
+- Object references are passed by value. Additionally Strings are immutable.  Passing  a String to a method creates a new string object that the copy of the reference now points to. The original reference still points to the original string.
+It would be like creating a new String object.
+void foo( object o )
+{
+    o = new Object( );  // original reference still points to old value on the heap
+}
 
-In addition these groups also create a backreference to the part of the regular expression. This captures the group. A backreference stores the part of the String which matched the group. This allows you to use this part in the replacement.
+- There is a BIG difference between overriding and overloading methods!
 
-Via the $ you can refer to a group. $1 is the first group, $2 the second, etc.
 
-Let's, for example, assume you want to replace all whitespace between a letter followed by a point or a comma. This would involve that the point or the comma is part of the pattern. Still it should be included in the result.
+During serialization,
+- state is saved but methods are not.
+- transient and static variables are not.
+- objects that inerhit Externalizable are.
 
-// Removes whitespace between a word character and . or ,
-String pattern = "(\\w)(\\s+)([\\.,])";
-System.out.println(EXAMPLE_TEST.replaceAll(pattern, "$1$3")); 
-This example extracts the text between a title tag.
+by implementating java.io.Serializable, you get "automatic" serialization capability for objects of your class. No need to implement any other logic, it'll just work. The Java runtime will use reflection to figure out how to marshal and unmarshal your objects.
 
-// Extract the text between the two title elements
-pattern = "(?i)(<title.*?>)(.+?)(</title>)";
-String updated = EXAMPLE_TEST.replaceAll(pattern, "$2"); 
+In earlier version of Java, reflection was very slow, and so serializaing large object graphs (e.g. in client-server RMI applications) was a bit of a performance problem. To handle this situation, the java.io.Externalizable interface was provided, which is like java.io.Serializable but with custom-written mechanisms to perform the marshalling and unmarshalling functions (you need to implement readExternal and writeExternal methods on your class).
+
+- You can only implement interfaces:
+class Outside implements String // interface expected
+
+Integer numm1 = 0;
+Float numm2 = -0.0F;
+(numm1.intValue() == numm2)) true
+Float numm3 = 0.0F;
+(numm1.intValue() == numm3)) true
+
+
+4 + 5 * 6 / 3 will be treated as 
+4 + (5 * (6 / 3)) = ?
+
+When two operators share an operand then operator with the higher precedence gets evaluated first. However, if the operators  have the equal precedence in the same expression then that  expression will be evaluated from left to right except the assignment operators:
+a = b = c = 15 is treated as 
+a = (b = (c = 15))	
+
+int a = 6;
+int b = 5;
+int c = 10;
+rs = a + (++b)* ((c / a)* b);
+
+x = y = z = 17 
+right-to-left associativity
+s x = (y = (z = 17))
+
+72 / 2 / 3 
+the / operator has left-to-right associativity.
+(72 / 2) / 3
+
+int x = 5;
+int y = 10;
+int z = ++x * y--;
+z = 60
+
+System.out.println("1 + 2 = " + 1 + 2); = 12
+System.out.println("1 + 2 = " + (1 + 2)); = 3
+
+year % 4 == 0 && year % 100 != 0 || year % 400 == 0
+
+((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)
+
+System.out.println("abc" + 1 + 2); = abc12
+System.out.println(1 + 2 + "abc"); = 3abc!!!
+The + operator is left associative, whether it is string concatenation or arithmetic plus.
+
+int a = 1;         
+int x = ++a + a++;         
+System.out.print(x); // Prints 4 
+a becomes 2, even tho the a++ has a higher precedence.
+Precedence determines which operands bind to which operators.
+Precedence only comes into play if they compete over the same occurrence of an operand. For example: -a++; 
+Operator precedence only determines *what* is evaluated, not *when* it is evaluated.
+(from left to right) as -(a++) because post-increment has higher precedence than negation. 
+Precedence has to do with which operands bind to which operators. It has nothing to do with order of execution. Order of execution (evaluation) is *always* left-to-right in Java. 
+
+int x = 1;  
+int y = 1;  
+x += y += x += y;  
+
+1 += y += x += y; // evaluate x  
+1 += 1 += x += y; // evaluate y  
+1 += 1 += 1 += y; // evaluate x, x is still 1 cause no addition takes place yet  
+1 += 1 += 1 += 1; // evaluate y  
+1 += 1 += 2;      // x is now 2  
+1 += 3;           // y is now 3  
+4;                // x is now 4  
+
+int y = 1;
+y+ = ++y +y++; 
+y = y + ++y +y++;
+y = y + (++y + y++); ?
+y = y++ + (y + y++); ?
+y=1 + 2 + 2 
+
+int x = 5;  
+int z = ++x * x * x--; // Prints 216  
+
+	i = 10; a = 0;
+	int b, c, d; 
+	a = (b = i++) + (c = ++i) + (d = i--); 
+	//    10			12			12
+
+	int x = 5;  
+    int z = ++x * x--;  
+The output is 36 because x is incremented first.
+x = 5
+x++ * --x
+This is 25.

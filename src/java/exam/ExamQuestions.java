@@ -2,6 +2,7 @@ import java.lang.StringBuffer;
 import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.*;
 
 public class ExamQuestions
 {
@@ -62,6 +63,9 @@ private void StringBuilderQuestion()
 	//sb.deleteCharAt(34.5);
 	//c. sb.toInteger(3);
 	sb.toString();
+	System.out.println("String Builder");
+	StringBuilder sb11 = new StringBuilder("34.5");
+	assert sb11.equals(sb): "StringBuilders are not equal";
 	int i = 5;
 	int j = 10;
 	while((i = 12)!=5) {break;};  // how does this work?  ahh, (12 != 5)
@@ -161,9 +165,13 @@ static int total;
 public void calculate()
 {
 	int local;
-	local = this.total;
+	// local = this.total; 
+	// this is ok but unsafe: static var should be qualified by type name
+	// ExamQuestions instead of by an expression, as such:
+	local = ExamQuestions.total; // not local = this.total;
 	local = this.subTotal;
-	this.total = total;
+	// this.total = total; // same for this one.
+	ExamQuestions.total = total;  // not this.total = total;
 	//this.local = 4; Cannot find symbol
 	//this = new ExamQuestions();
 	// cannot assing a value to a final veriable this
@@ -317,9 +325,72 @@ assert !string1.equals("true");
 		//System.out.println(one|two);
 		double num1 = 0.2;
 		float num2 = 0.2f;
+		Integer num3 = 123;
+		float num4 = 123f;
+		double num5 = 123;
+		float num6 = 123;
+		Integer num7 = new Integer("123");
+		byte num8 = 123;
+		System.out.println("Integer == float "+(num3 == num4));
+		System.out.println("double == float "+(num5 == num4));
+		System.out.println("float == int "+(num6 == num7));
+		System.out.println("int == byte? "+(num7 == num8));
 		System.out.println(num1 == num2); // false
 		System.out.println(num1 == (double)num2); // false
 		System.out.println((float)num1 == num2); // true
+		Object obj = 99;
+		System.out.println(obj);
+		Character c = 65;
+		System.out.println("cha "+c);
+		Character obj1 = 65;
+		char c1 = 65;
+		System.out.println(c1==obj1);
+		// List list2 = new ArrayList<String>();
+		// list2.add(new StringBuilder("123"));
+		// the above is OK as long as list2 is of raw type.  If it were not, this
+		// would cause a compile time error:
+		// List<String> list2 = new ArrayList<String>();
+		// when we try to add the string builder.
+		//String sbu = list2.get(0);
+		//System.out.println(sbu);
+		String name = "Java Tiger";
+		System.out.println(name+" "+name.hashCode());
+		change(name);
+		System.out.println(name+" "+name.hashCode());
+		StringBuffer name2 = new StringBuffer("Java Tiger");
+		System.out.println("name1.equals(name2)? "+name.equals(name2));
+		System.out.println(name2+" "+name2.hashCode());
+		change(name2);
+		System.out.println(name2+" "+name2.hashCode());
+		
+		Integer numm1 = 0;
+		Float numm2 = -0.0F;
+		System.out.println("Integer.intvalue == - Float? "+(numm1.intValue() == numm2));
+		Float numm3 = 0.0F;
+		System.out.println("Integer.intvalue == Float? "+(numm1.intValue() == numm3));
+		double d = 123.45;  
+		d++;
+		System.out.println(d);  
 	}
 
+	public static void change(String in)
+	{
+		in = in.substring(0,in.length()-3);
+		System.out.println(in+" "+in.hashCode());
+	}
+
+	public static void change(StringBuffer in)
+	{
+		in = in.append(" Milk");
+		System.out.println(in+" "+in.hashCode());
+	}
+
+	public static void assertions()
+	{
+		assert(-0.0f == 0);
+		boolean a = true; 
+		boolean b = false;
+		boolean c = true; 
+		assert(a && (b = c));
+	}
 }

@@ -1,28 +1,23 @@
  TOC
 
 Object  
-Shadowing  
 The StringBuilder Class  
 The Character Class  
-The String Class  
-
+The String Class
+CharacterSequence  
+Pattern  
 
 ###Object###
-int hashCode();
+clone() 
+boolean equals(Object obj) 
+protected  void	finalize() 
+Class getClass() 
+int hashCode() 
+void notify() 
+void notifyAll() 
+String toString() 
+wait() 
 
-
-#Shadowing#
-```
-public class ShadowTest {
-    public int x = 0;  
-    class FirstLevel {
-        public int x = 1;  // member variable of the inner class
-        void methodInFirstLevel(int x) {
-            ("parameter   x "+x      +" shadows all other xs");
-            ("inner class x "+this.x+" shadows outer class x"); 
-            ("Outer class x "+ShadowTest.this.x              );
-        }
-```
 #The StringBuilder Class#
 - like String objects but can be modified(append(),insert())
 - same as StringBuffer whos methods are synchronized thus thread-safe.
@@ -41,6 +36,7 @@ public class ShadowTest {
 - setCharAt(int index, char c)
 - reverse()
 - The StringBuffer/Builder equals method returns true only for two reference variables referring to the same StringBuffer object as it uses mutable strings
+setLength(), append(), delete(), insert(), replace(), setCharAt(), reverse()
 
 #The Character Class#
 - Character ch = new Character('a');
@@ -88,6 +84,25 @@ public class ShadowTest {
 - boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.  Region is of length len and begins at the index toffset for this string and ooffset for the other string. The boolean argument indicates whether case should be ignored; if true, case is ignored when comparing characters.
 - boolean matches(String regex)	Tests whether this string matches the specified regular expression.
 
+===
+boolean endsWith
+boolean startsWith() 
+int compareTo
+int compareToIgnoreCase()
+boolean matches()
+boolean regionMatches()
+String substring()
+String[] split()
+CharSequence subSequence()
+String replace()
+String replaceAll()
+String replaceFirst()
+boolean equals()
+boolean equalsIgnoreCase()
+===
+
+
+
 ###CharSequence###
 - char charAt(int index)
 - int length() 
@@ -105,4 +120,14 @@ public class ShadowTest {
 - String[] split(CharSequence input): Splits the given input sequence around matches of this pattern.
 - String[] split(CharSequence input, int limit): Splits the given input sequence around matches of this pattern.
 String toString(): Returns the string representation of this pattern.
+
+===
+Pattern compile()
+int flags()
+Matcher matcher()
+boolean matches()
+String pattern()
+String quote()
+String[] split()
+===
 
