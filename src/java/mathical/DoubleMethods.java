@@ -15,6 +15,8 @@ public class DoubleMethods {
 
      	double var = 0; // false
     	System.out.println(var+" is Not a Number? "+(var == Double.NaN));
-
+    Double d3 = 20.5;
+    Float f1 = 20.5f;
+    assert d3.equals(f1): "Double Float equality";
    }
 }  

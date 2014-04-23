@@ -78,6 +78,10 @@ But if we run MultiplierTest by itself, there is no output at all.
 
 - a Cartesian product is a mathematical operation which returns a set (or product set) from multiple sets. That is, for sets A and B, the Cartesian product A × B is the set of all ordered pairs (a, b) where a ∈ A and b ∈ B.
 
+- A red–black tree is a data structure which is a type of self-balancing binary search tree.  A TreeSet stores its elements in a red-black tree.  Invented in 1972 by Rudolf Bayer and named "symmetric binary B-tree," acquired its modern name in a paper in 1978 by Leonidas J. Guibas and Robert Sedgewick entitled "A Dichromatic Framework for Balanced Trees".
+
+- Constructor class provides information about, and access to, a single constructor for a class.  Constructor permits widening conversions to occur when matching the actual parameters to newInstance() with the underlying constructor's formal parameters, but throws an IllegalArgumentException if a narrowing conversion would occur.
+
 
 #Pass by Value Discussion#
 It's amazing how I have been using Java for over ten years but didn't understand some very fundamental things about it.  For one that it's a pass-by-value language.  The answer to my question posed a few months ago about what I called a live variable, is that the reference to the ArrayList is what is passed to the method, so that any changes to the list will persist becaucse the reference from the calling method is the same reference.  So then you might think that Java is actually a pass-by-reference languae.  And many people would argue about that, like they did here: 
@@ -293,5 +297,3 @@ A brain dead piece of code used in unit and functional tests to make sure that a
 Shunt:
 
 Kinda like a mock class that extends production code, only the purpose is NOT to override ALL of the methods, but just enough so you can exercise some production methods, while mocking the rest of the production methods. Especially useful if you want to test a class that might try to use I/O. Your shunt can override the I/O methods while testing the non I/O methods.
-
-

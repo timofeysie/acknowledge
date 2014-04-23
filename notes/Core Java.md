@@ -18,6 +18,8 @@ Native
 Strictftp
 Shadowing   
 Objects  
+The Equals Method
+The == Operand
 Variables  
 Return from a Method  
 Branching Statements
@@ -104,12 +106,12 @@ int[] arr1, arr2;
 Both arr1 and arr2 are declared as arrays.  
 Data type ---------- Default value (for fields)  
 boolean ------------ false  
-byte ---------------- 0  
+byte --------------- 0  
 char --------------- '\u0000'  
-short --------------- 0  
-int ------------------ 0  
+short -------------- 0  
+int ---------------- 0  
 long --------------- 0L  
-float --------------- 0.0f  
+float -------------- 0.0f  
 double ------------- 0.0d  
 String (or obj) ---- null  
 
@@ -124,8 +126,7 @@ grades[0] = new int[COLS];
 grades[1] = new int[COLS];
 ```
 
-- an array with different row lengths. Arrays of
-this type are called ragged arrays.
+- an array with different row lengths. Arrays of this type are called ragged arrays.
 ```
 grades[0] = new int[4];
 grades[1] = new int[2];
@@ -133,7 +134,7 @@ grades[1] = new int[2];
 
 ###Comparing Arrays  
 ```
-println(arr1 == arr2); //Displays false
+println(arr1 == arr2); // false
 ```
 
 arr1 and arr2 which are array reference variables
@@ -143,9 +144,7 @@ println(arr1.equals(arr2)); // Displays false
 ```
 
 Object equivalency refers to the comparison of two object reference variables
-Object value equivalency refers to the condition where two distinct objects are 
-
-considered to be equivalent because their internal values are the same.
+Object value equivalency refers to the condition where two distinct objects are considered to be equivalent because their internal values are the same.
 
 ```
 out.println(Arrays.equals(arr1,arr2)); // Displays true
@@ -304,11 +303,9 @@ Arrays provide **Locality of reference** results in faster read and write operat
 
 ###Serializable###
 If a class or any of its superclasses implements either 
-- the java.io.Serializable interface or its subinterface (like java.awt.Button), 
-- java.io.Externalizable.  
-
- the class's definition ("class file") itself is not recorded.
- - the system responsible for deserializing and to determine how to locate and load the necessary class files. ie:a JAR file or load the class definitions by using information stored in the directory  
+- the java.io.Serializable interface or its subinterface (like java.awt.Button), java.io.Externalizable.  
+-  the class's definition ("class file") itself is not recorded.
+- the system responsible for deserializing and to determine how to locate and load the necessary class files. ie:a JAR file or load the class definitions by using information stored in the directory  
 ```
 // Create the object to be bound  
 Button b = new Button("Push me");  
@@ -427,7 +424,7 @@ If the programmer adds a constructor to the class, then the class will no longer
 ```
 public Employee(String name) { }
 ```  
-If we try to create an object using the default constructor, as shown in the following code snippet, then we will get a syntax error:
+If we try to create an object using the default constructor, as shown in the following code snippet, then we will get a compile time syntax error:
 ```
 Employee employee1 = new Employee();
 ```  
@@ -467,8 +464,7 @@ Fields that have private or non-existent setters (mutator methods) are referred 
 
 
 ###Assert###
-"Exceptions address the robustness of your application (things that might happen) while assertions adOrder Number :3BMNGNE-BF3CF9, Email ID:timofeyc@hotmail.com, Quantity:1
-dress the correctness of your application (something that should never happen."
+"Exceptions address the robustness of your application (things that might happen) while assertions address the correctness of your application (something that should never happen."
 - contains a boolean expression that you believe will be true when the assertion executes. If it is not true, the system will throw an error. 
 When to use the assert keyword:  
 - pre-conditions (in private methods only) - the requirements which a method requires its caller to fulfill
@@ -487,7 +483,6 @@ Expression2 - cannot be an invocation of a method that is declared void.)
 Examples:
 
 ```
-
     assert fLength > oldLength; //post-condition: length has increased    
     //check the class invariant  
     assert hasValidState(): "Construction failed - not valid state.";  
@@ -504,11 +499,11 @@ Examples:
 - 1st cannot be a digit.
 - No reserved words; goto, strictfp, const, transient, native, synchronized
 
-###native###
+###Native###
 native modifier means that the method can have no body.
 - can be applied only to methods—not classes, not variables
 ```
-public native int meth() ;
+public native int meth();
 ```
 After you declare a native method, you must write the native method and follow a rather complex series of steps to link it with your Java code.  Most native methods are written in C. The mechanism used to integrate C code with a Java program is called the Java Native Interface (JNI). 
 ```
@@ -536,7 +531,7 @@ A non-access modifier like final or abstract.  You can apply strictfp keyword on
 - IEEE-754 double precision and rounding is the Java standard arithmetic model, but for performance reasons Java implementations are not constrained to using this standard by default.  Some processors (Intel Pentium) perform floating point operations in (non-IEEE-754-standard) extended-precision.
 - all the methods in the class are also modified automatically.
 ```
-strictfp class MyClass { //...}
+strictfp class MyClass { //... }
 ```
 
 ###Shadowing###
@@ -555,7 +550,6 @@ public class ShadowTest
 }
 ```     
 Output: 3 2 1 (with 3 as the parameter passed into the method)
-
 
 - Same for a local variable:
 void methodInFirstLevel2() 
@@ -1375,18 +1369,61 @@ notify, notifyAll, and wait
 - getClass().getInterfaces() // interfaces it implements
 - getFields().getMethods() // other methods (of 50) in Class.class
 
+###The Equals Method###  
+The String method overrides the equals method to compare the contents of two strings.  For other wrapper classes, this is similar:
+```
+new Integer(10).equals(new Integer(10)); //true
+new Integer(10).equals(new Float(10)); //false
+new Integer(10).equals(new Integer(20)); //false
+```
+
+Here is the equals method for the Integer class:
+```
+    public boolean equals(Object obj) {  
+            if (obj instanceof Integer) {  
+              return value == ((Integer)obj).intValue();  
+           }  
+          return false;  
+      }  
+```
+As you can see, the object is cast to an Integer and then the intValue is called. 
+The API says: Determines whether this number object is equal to the argument.
+The methods return true if the argument is not null and is an object of the same type and with the same numeric value.  There are some extra requirements for Double and Float objects that are described in the Java API documentation.
+
+Using the String equals method will not work on different classes.
+```
+    String tim1 = "Tim";
+    StringBuffer tim2 = new StringBuffer("Tim");
+    assert !tim1.equals(tim2): "String and StringBuffer not equal";
+    assert tim1.contentEquals(tim2): "Contents are not equal";
+```
+- This also works for the StringBuilder class.
+
+###The == Operand###
+Squeezing infinitely many real numbers into a finite number of bits requires an approximate representation...
+```
+double dd = 3.5;          
+float ff = 3.5f;
+System.out.println(dd==ff);   // true
+double dd = 3.2;
+float ff = 3.2f;
+System.out.println(dd==ff);   // false
+```
+3.5 can be represented exactly in both float and double - whereas 3.2 can't.
+
+```
+        compare(127, 127);
+        compare(128, 128);
+```
+- Integers between -128 and 127 (inclusive) are cached.
+
+
 ###Clone###
 - create an object with similar state as the original object.
-- use
+- use:
 
 ```
-protected Object clone() throws CloneNotSupportedException
-```
-
-or:
-
-```
-public Object clone() throws CloneNotSupportedException
+protected/public Object clone() throws CloneNotSupportedException
 ```
 
 if you are going to write a clone() method to override the one in Object.
@@ -1406,7 +1443,7 @@ interface BasicInterface {
     public abstract void method(); }
 ```
 If an abstract class is subclassed and contians unimplemented methods, it must also be declared abstract.
-- All of the methods in an interface are implicitly abstract, so the abstract modifier is not used. (it could be—it's just not necessary).
+
 - Unlike interfaces, abstract classes can contain fields that are not static and final, and they can contain implemented methods. 
 - Such abstract classes are similar to interfaces, except that they provide a partial implementation, leaving it to subclasses to complete the implementation. 
 - If an abstract class contains only abstract method declarations, it should be declared as an interface instead.
@@ -1418,7 +1455,7 @@ If an abstract class is subclassed and contians unimplemented methods, it must a
 ```
 abstract class BasicAbstract implements BasicInterface {
     private int constant2; // not implicitly static or final!
-    //public void method() { /** done **/ }  // doesn't need to implement it!
+    //public void method() { /** done **/ }  // don't need to implement it!
     abstract void method2(); // more interfeaces or implemented methods allowed!
     // abstract synchronized not allowed! }
 ```
@@ -1454,8 +1491,6 @@ The String in the switch expression is compared with the expressions associated 
 ###Methods###
 - Overriding Instance Methods: An instance method in a subclass with the same signature overrides the superclass's method.  An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.
 **covariant return type** when an overridden method returns a subtype of the method in the superclass.  
-
-An overriding method can also return a subtype of the type returned by the overridden method.   
 - the version of the hidden static method that gets invoked is the one in the superclass (doesnt this depend if it's called from the static Class or an instance of the class? See our notes below)
 - the version of the overridden instance method that gets invoked is the one in the subclass.
 - Hidden Static Methods: If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass.
@@ -1476,7 +1511,7 @@ A smaller chart showing the calls to testClass/Instance methods:
 Animal      Animal          x  
 myAnimal    Animal Hidden   Cat  
 Cat         Cat             x  
-myCat       Cat             Cat Overriding    
+myCat       Cat             Cat Overridden   
 
 Here is the original code:
 ```
@@ -1518,78 +1553,11 @@ class Child extends Parent
 Output:  
 Parent2  
 Parent1  
-Because the method1 in Chile is private, the method1 in Parent is called.  If it was package private, protected or public, the Child method would be called.
+Because the method1 in Child is private, the method1 in Parent is called.  If it was package private, protected or public, the Child method would be called.
 
 StackOverflow: over-riding supports late binding, so which method is called is decided at run time.  (run-time polymorphism) #2
 Hiding is for all others (static methods, instance members, static members) and is based on early binding (compile time) #1
 
-Interface Methods: Default methods and abstract methods in interfaces are inherited like instance methods. 
-** What the hell is a default method?***
-- However, when the supertypes of a class or interface provide multiple default methods with the same signature, the Java compiler follows inheritance rules to resolve the name conflict. 
-Rule # 1: Instance methods are preferred over interface default methods.  Pegasus.identifyMyself() returns the string "I am a horse."
-
-```
-public class Pegasus extends Horse implements Flyer, Mythical 
-{
-    public static void main(String... args) 
-    {
-        Pegasus myApp = new Pegasus();
-        System.out.println(myApp.identifyMyself());
-    }
-}
-class Horse{public String identifyMyself(){return "I am a horse.";}}
-interface Flyer 
-{
-    default public String identifyMyself() 
-    {
-        return "I am able to fly.";
-    }
-}
-public interface Mythical 
-{
-    default public String identifyMyself() 
-    {
-        return "I am a mythical creature.";
-    }
-}
-```
-Rule # 2: Methods that are already overridden by other candidates are ignored. Dragon.identifyMyself() returns the string "I am able to lay eggs."
-```
-public interface Animal 
-{
-    default public String identifyMyself() 
-    {
-        return "interface_animal";
-    }
-}
-public interface EggLayer extends Animal 
-{
-    default public String identifyMyself() 
-    {
-        return "I am able to lay eggs.";
-    }
-}
-public interface FireBreather extends Animal 
-{ 
-    default public String identifyMyself() 
-    {
-        return "I am able to breathe fire.";
-    }
-}
-public class Dragon implements EggLayer, FireBreather 
-{
-    public static void main (String... args) 
-    {
-        Dragon myApp = new Dragon();
-        System.out.println(myApp.identifyMyself());
-    }
-}
-```
-  This circumstance can arise when supertypes share a common ancestor.
-You could invoke any of the of the default implementations with the super keyword.
-You can use the super keyword to invoke a default method in both classes and interfaces.
-Inherited instance methods from classes can override abstract interface methods. 
-- Class methods cannot access instance variables or instance methods directly—they must use an object reference. Also, class methods cannot use the this keyword as there is no instance for this to refer to.
 
 ###Modifiers###
 - an overriding method can allow more, but not less, access than the overridden method. ie: a protected instance method in the superclass can be made public, but not private, in the subclass.
@@ -1679,7 +1647,7 @@ String updated = EXAMPLE_TEST.replaceAll(pattern, "$2");
 2. error  
 3. runtime exception  
 
-1- Checked exceptions are subject to the Catch or Specify Requirement. All exceptions are checked exceptioSns, except for those indicated by Error, RuntimeException, and their subclasses.
+1- Checked exceptions are subject to the Catch or Specify Requirement. All exceptions are checked exceptions, except for those indicated by Error, RuntimeException, and their subclasses.
 
 2 - errors are exceptional conditions that are external to the application, and that the application usually cannot anticipate or recover from. Errors are not subject to the Catch or Specify Requirement.  Thrown when a dynamic linking failure or other hard failure in the Java virtual machine occurs.
 
@@ -1808,7 +1776,7 @@ You should write your own exception classes if you answer yes to any of the foll
 ###ClassNotFoundException###
 Occurs in the following cases:
 1) When we try to load a class by using Class.forName() method and .class file or binary of class is not available in classpath.
-2) When Classloader try to load a class by using findSystemClass () method.
+2) When Classloader tries to load a class by using findSystemClass () method.
 3) While using loadClass() method of class ClassLoader in Java.
 
 

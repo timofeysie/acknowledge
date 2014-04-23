@@ -27,5 +27,11 @@ public class ValueOf
             System.out.println("This program " +
                 "requires two command-line arguments.");
         }
+        String tim1 = "Tim";
+        StringBuffer tim2 = new StringBuffer("Tim");
+        StringBuilder tim3 = new StringBuilder("Tim");
+        assert !tim1.equals(tim2): "String and StringBuffer not equal";
+        assert tim1.contentEquals(tim2): "Contents are not equal";
+        assert tim1.contentEquals(tim3): "Builder contents are not equal";
     }
 }

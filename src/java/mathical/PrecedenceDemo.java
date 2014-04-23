@@ -3,7 +3,15 @@ class PrecedenceDemo
   public static void main(String[] args)
   {
 	//prePostTest();
-	test3();
+	test4();
+  }
+
+  private static void test4()
+  {
+  	int i = 1;
+	int j = 1;
+	int k = ++i * i++;
+	System.out.println("i "+i+" j "+j+" k "+k);
   }
 
   static boolean a, b, c; 

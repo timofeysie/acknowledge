@@ -6,7 +6,7 @@
 * Methods that are already overridden by other candidates are ignored. 
 * This circumstance can arise when supertypes share a common ancestor.
 */
-interface Animal 
+abstract class Animal 
 {
     public String identifyMyself() 
     {
@@ -14,7 +14,7 @@ interface Animal
     }
 }
 
-interface EggLayer extends Animal 
+abstract class EggLayer extends Animal 
 {
     public String identifyMyself() 
     {
@@ -22,7 +22,7 @@ interface EggLayer extends Animal
     }
 }
 
-interface FireBreather extends Animal 
+abstract class FireBreather extends Animal 
 { 
     public String identifyMyself() 
     {
@@ -34,11 +34,11 @@ interface FireBreather extends Animal
 * The method Dragon.identifyMyself returns the string 
 * "I am able to lay eggs.""
 */
-public class Dragon implements EggLayer, FireBreather 
+public class Dragon7 implements EggLayer, FireBreather 
 {
     public static void main (String... args) 
     {
-        Dragon dragon = new Dragon();
+        Dragon7 dragon = new Dragon7();
         System.out.println(dragon.identifyMyself());
     }
 }

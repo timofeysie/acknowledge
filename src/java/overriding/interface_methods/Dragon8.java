@@ -6,25 +6,25 @@
 * Methods that are already overridden by other candidates are ignored. 
 * This circumstance can arise when supertypes share a common ancestor.
 */
-interface Animal 
+public interface Animal 
 {
-    public String identifyMyself() 
+    default public String identifyMyself() 
     {
         return "interface_animal";
     }
 }
 
-interface EggLayer extends Animal 
+public interface EggLayer extends Animal 
 {
-    public String identifyMyself() 
+    default public String identifyMyself() 
     {
         return "lay_eggs_extends_animal";
     }
 }
 
-interface FireBreather extends Animal 
+public interface FireBreather extends Animal 
 { 
-    public String identifyMyself() 
+    default public String identifyMyself() 
     {
         return "fire_breather_extends_animal";
     }
@@ -38,7 +38,7 @@ public class Dragon implements EggLayer, FireBreather
 {
     public static void main (String... args) 
     {
-        Dragon dragon = new Dragon();
-        System.out.println(dragon.identifyMyself());
+        Dragon myApp = new Dragon();
+        System.out.println(myApp.identifyMyself());
     }
 }

@@ -6,6 +6,8 @@ The Character Class
 The String Class
 CharacterSequence  
 Pattern  
+Iterator
+ListIterator
 
 ###Object###
 clone() 
@@ -84,24 +86,6 @@ setLength(), append(), delete(), insert(), replace(), setCharAt(), reverse()
 - boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.  Region is of length len and begins at the index toffset for this string and ooffset for the other string. The boolean argument indicates whether case should be ignored; if true, case is ignored when comparing characters.
 - boolean matches(String regex)	Tests whether this string matches the specified regular expression.
 
-===
-boolean endsWith
-boolean startsWith() 
-int compareTo
-int compareToIgnoreCase()
-boolean matches()
-boolean regionMatches()
-String substring()
-String[] split()
-CharSequence subSequence()
-String replace()
-String replaceAll()
-String replaceFirst()
-boolean equals()
-boolean equalsIgnoreCase()
-===
-
-
 
 ###CharSequence###
 - char charAt(int index)
@@ -121,13 +105,14 @@ boolean equalsIgnoreCase()
 - String[] split(CharSequence input, int limit): Splits the given input sequence around matches of this pattern.
 String toString(): Returns the string representation of this pattern.
 
-===
-Pattern compile()
-int flags()
-Matcher matcher()
-boolean matches()
-String pattern()
-String quote()
-String[] split()
-===
+###Iterator interface###    
+• next:   
+• hasNext:  
+• remove:  
+###ListIterator interface###    
+• previous:  
+• hasPrevious  
+• nextIndex:   
+• previousIndex:  
+• add: 
 

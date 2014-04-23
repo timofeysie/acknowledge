@@ -1,0 +1,37 @@
+ ###The String Equals Method###
+ 998       /**
+  999        * Compares this string to the specified object.  The result is {@code
+ 1000        * true} if and only if the argument is not {@code null} and is a {@code
+ 1001        * String} object that represents the same sequence of characters as this
+ 1002        * object.
+ 1003        *
+ 1004        * @param  anObject
+ 1005        *         The object to compare this {@code String} against
+ 1006        *
+ 1007        * @return  {@code true} if the given object represents a {@code String}
+ 1008        *          equivalent to this string, {@code false} otherwise
+ 1009        *
+ 1010        * @see  #compareTo(String)
+ 1011        * @see  #equalsIgnoreCase(String)
+ 1012        */
+ 1013       public boolean equals(Object anObject) {
+ 1014           if (this == anObject) {
+ 1015               return true;
+ 1016           }
+ 1017           if (anObject instanceof String) {
+ 1018               String anotherString = (String)anObject;
+ 1019               int n = count;
+ 1020               if (n == anotherString.count) {
+ 1021                   char v1[] = value;
+ 1022                   char v2[] = anotherString.value;
+ 1023                   int i = offset;
+ 1024                   int j = anotherString.offset;
+ 1025                   while (n-- != 0) {
+ 1026                       if (v1[i++] != v2[j++])
+ 1027                           return false;
+ 1028                   }
+ 1029                   return true;
+ 1030               }
+ 1031           }
+ 1032           return false;
+ 1033       }
