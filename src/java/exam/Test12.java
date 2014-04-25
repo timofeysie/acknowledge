@@ -7,7 +7,11 @@ public class Test12
 	static Object obj;
 	static Vector <String> vec;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
+		int y;
+		System.out.println("y before init "+y);
+		y = 100;
 		name = "Java Tiger";
 		number = 13;
 		obj = 13;

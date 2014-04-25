@@ -1241,6 +1241,11 @@ public class Test {
 	static int j = 10;
 }
 Compile error: illegal forward reference.
+Another uninitialized gotcha:
+		int y;
+		System.out.println("y before init "+y);
+		y = 100;
+Even tyring to print an unitialized variable fails upon compile with the error: variable y might not have been initialized. 
 
 public class Test8
 {
@@ -1402,4 +1407,90 @@ method()
 			print("Y is "+y);
 }
 - Will not compile with the warning that the variable y may not have been initialized.
+
+This will not compile:
+
+import java.util.*;
+
+class Test13
+{
+	public static void main(String[] args) {
+		ArrayList<String> a =new ArrayList<String>();
+		a.add("one");
+		a.add("two");
+		a.add("three");
+		String[] s = a.toArray();
+		for (String str:s)
+		{
+			System.out.println(str);
+		}
+	}
+}
+
+Remeber, the toArray() method returns an array of Objects, and needs to be cast to a String array like this:
+String[] s = a.toArray(new String[0]);
+Trying this fails during runtime:
+String[] s = (String[])a.toArray();
+ClassCastException: Object cannot be cast to String.
+Yeah right.  An Object has never been cast to a String before.  Anyhow, how did we do this before?  Can't remember and time to move on.  However, before we move on,
+String[] s = a.toArray(new String[a.size()]);
+works also.  If we choose size 4, then a null string is added to the list.
+
+Remeber in Test3.java?
+		Set<Test3> s = new TreeSet<Test3>();
+		s.add(new Test3()); // Test3 cannot be cast to Comparable.
+Our notes state: Either Test3 has to implement Comparable, or you need to provide a comparator when creating the TreeSet.
+Alos note this is a RUNTIME error, and the code actually compiles fine, although that seems a little strange in the rigid world of Java.
+ClassCastException: Test3 cannot be cast to Comparable.
+If we used an ArrayList, then there would be no problem, like this:
+ArrayList s = new ArrayList();
+Then we get a compile time error in the for loop:
+error: incompatible types.  required Test3
+found Object
+		for (Test3 out: s)
+				        ^
+Not sure how to fix it.  But the second similar looking question does this:
+given:
+class A{}
+class B extends A{}
+class C extends B{}
+Will this compile?
+		ArrayList a = new ArrayList();
+		a.add(new A());
+		a.add(new B());
+		a.add(new C());
+		for (Object object:a)
+			System.out.println(object);
+A generic type used without type parameters is know as a raw type.  In the above example we assign the generic types to the raw type variable, and then insert different types of objects into it.  The raw type is not type-checked, hence there are no compiler errors but warnings are thrown.  The code also runs fine =)~
+
+Given the Customer is a class:
+1. Customer []c1 = new Customer[10];
+2. Customer [][]c2 = new Customer[10][];
+3. c2[0] = new Customer[5];
+4. print(c1[0]); // prints null
+5. print(c2[1][0]); 
+In the case of arrays, initialization is supposed to be complete when we specify the leftmost dimension of the array.  The problem occurs at runtime if we try to access an element of the array which has not been initialized (specification of size).  In the question above there is no problem until line 5.  We are tyring to access c2[1][0] whereas we have only initialized c2[0].  In other words we can access any element in cs[0] row but not any other element which is in any row other than c2[0].  Therefore accessing c2[1][0] will cause a runtime exception (npe).
+
+Now, onto threads:
+public class MyThread extends Thread
+{
+	MyThread(int i)
+	{
+		this.i = i;
+	}
+	static int i = 0;
+	public void run()
+	{
+		System.out.println(i);
+	}
+	public static void main(String[] args) {
+		for(int i = 0; i < 10; i++)
+		{
+			new Thread().start();
+		}
+	}
+}
+Will this compile and run?  Notice MyThread is not started, but Thread.  To start MyThread, we need to supply an argument:
+new MyThread(11).start();
+This will print 11 ten times.  Should we go over the threads tutorial, even though threads are sposed to be in the OCP exam?  sab.
 
