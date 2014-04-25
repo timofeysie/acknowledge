@@ -190,7 +190,7 @@ static void unorthadoxUnary()
 	System.out.println("Unary test 1: "+x);
 }
 
-public static void main(String args[]) 
+private static void testExamQuestions()
 {
 	ExamQuestions qs = new ExamQuestions();
 	qs.trueOrFalse();	
@@ -198,9 +198,16 @@ public static void main(String args[])
 	qs.StringBuilderQuestion();	
 	qs.testLoop();
 	qs.initDataTypes();
-	testEquals();
-	testBitwise();
-	Number Float = 99.455f;
+}
+
+private static void defualtValue()
+	{
+
+	}
+
+	private static void randomCode()
+	{
+		Number Float = 99.455f;
 	System.out.println("Float "+Float);
 	/* This causese the error" ';' expected 
 	with an arrow pointing between the Float 
@@ -288,16 +295,15 @@ public static void main(String args[])
 	System.out.println(4<5 && true);
 	System.out.println(6<5 && false);	
 
-Boolean string1=new Boolean("TrUe");
-boolean character1=true;
-assert string1.booleanValue()==character1;
-assert string1==character1;
-assert string1.equals(character1);
-//assert !string1.booleanValue()=="true";
-assert !string1.equals("true");
-//assert !character1=="true";
+	Boolean string1=new Boolean("TrUe");
+	boolean character1=true;
+	assert string1.booleanValue()==character1;
+	assert string1==character1;
+	assert string1.equals(character1);
+	//assert !string1.booleanValue()=="true";
+	assert !string1.equals("true");
+	//assert !character1=="true";
 
-	unorthadoxUnary();
 	//System.out.println(new Integer(0).booleanValue());
 	Character ch1 = 65;
 	char ch2 = 65;
@@ -306,12 +312,6 @@ assert !string1.equals("true");
 	Float value1 = 39.0F;
 	float value2 = (float)39.0;
 	//System.out.println(value2.equals(value1)); // float caoonot be dereferenced
-	basicFailedQuestions();
-}
-
-	private static void defualtValue()
-	{
-
 	}
 
 	private static void basicFailedQuestions()
@@ -392,5 +392,51 @@ assert !string1.equals("true");
 		boolean b = false;
 		boolean c = true; 
 		assert(a && (b = c));
+	}
+
+	private static void failedFinalMockExamQuestions()
+	{
+		String str = "Java*JSP*EJB*J2EE";
+		System.out.println(Arrays.toString(str.split("*",-2)));
+		/* java.util.regex.PatternSyntaxException:
+		Dangling meta character * near index 0.
+		PatternSysntaxException occurs if the regular expressions's
+		syntx is invalid.  Note that to use "*" as a delimiter,
+		we have to specify "\\*" as the regular expression.
+		Given that, we would split the string into
+		[Java, JSP, EJB, J2EE]
+		Also, the -2 is not needed; the same output is got without it.
+		*/
+	}
+
+	/**
+	* All instances of a generic class have the same runtime class,
+	* regardless of their actual type parameters.  So the getClass()
+	* method returns a java.util.Vector for both x and y.  Since no
+	* data has been added to both Vector objects, they are also
+	* meaningfully equal.  So the equals method returns true here
+	* and the output is true, true, true, true.
+	*/
+	private static void payRollExample()
+	{
+		Vector<String> employeeList = new Vector<String>();
+		Vector<Integer> employeeIdList = new Vector<Integer>();
+		Vector<Object> employeeProfileList = new Vector<Object>();
+		System.out.println(employeeList.getClass() == employeeIdList.getClass());
+		System.out.println(employeeList.equals(employeeProfileList));
+		System.out.println(employeeList.getClass() == employeeProfileList.getClass());
+		System.out.println(employeeIdList.equals(employeeProfileList));
+	}
+
+	public static void main(String args[]) 
+	{
+		//testExamQuestions();
+		//testEquals();
+		//testBitwise();
+		//randomCode();
+		//unorthadoxUnary();
+		//basicFailedQuestions();
+		//failedFinalMockExamQuestions();
+		payRollExample();
 	}
 }

@@ -1,24 +1,25 @@
- TOC
+ TOC  
 
-Object  
-The StringBuilder Class  
-The Character Class  
-The String Class
+Object   
+The StringBuilder Class    
+The Character Class    
+The String Class  
 CharacterSequence  
-Pattern  
-Iterator
-ListIterator
+Pattern   
+Iterator  
+ListIterator  
+enum  
 
 ###Object###
-protected Object clone() 
-boolean equals(Object obj) 
-protected  void	finalize() 
-Class getClass() 
-int hashCode() 
-void notify() 
-void notifyAll() 
-String toString() 
-void wait() 
+protected Object clone()  
+boolean equals(Object obj)   
+protected  void	finalize()   
+Class getClass()  
+int hashCode()   
+void notify()  
+void notifyAll()   
+String toString()   
+void wait()   
 
 #The StringBuilder Class#
 - like String objects but can be modified(append(),insert())
@@ -44,13 +45,13 @@ setLength(), append(), delete(), insert(), replace(), setCharAt(), reverse()
 - Character ch = new Character('a');
 - boolean isLetter(char ch), isDigit, isWhitespace, isUpper/LowerCase, toUpper/LowerCase
 - escape sequence is a character starting with a \ (backslash)
-\t  tab
-\b  backspace
-\n  newline
-\r  carriage return
-\f  formfeed
-\'  single quote character
-\"  double quote character
+\t  tab  
+\b  backspace  
+\n  newline  
+\r  carriage return  
+\f  formfeed  
+\'  single quote character  
+\"  double quote character  
 
 ###The String Class###
 - boolean ends/startsWith(String su/prefix)
@@ -115,4 +116,18 @@ String toString(): Returns the string representation of this pattern.
 • nextIndex:   
 • previousIndex:  
 • add: 
+
+###enum###
+protected Object clone() Throws CloneNotSupportedException.   
+int	compareTo(E o) Compares this enum with the specified object for order.  
+boolean	equals(Object o) true if o is equal to this enum constant.  
+protected void	finalize() enum classes cannot have finalize methods.  
+Class<E> getDeclaringClass() the Class of this enum constant's enum type.  
+int	hashCode() hash code for this enum constant.  
+String name() name of this enum constant as declared in its enum declaration.  
+int	ordinal() the ordinal of this enumeration constant (its position in its enum declaration, where the initial constant is assigned an ordinal of zero).  
+String	toString() the name of this enum constant, as contained in the declaration.  
+static <T extends Enum<T>> 
+T	valueOf(Class<T> enumType, String name) the enum constant of the specified enum type with the specified name.  Throws: IllegalArgumentException - if the specified enum type has no constant with the specified name, or the specified class object does not represent an enum type
+NullPointerException - if enumType or name is null
 

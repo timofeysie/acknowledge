@@ -51,6 +51,7 @@ Set Interface & Implementations
 List Interface  
 List Iterator Interface  
 List Implementations  
+The String.split method  
 
 
 ###Rules of Promotion###
@@ -1975,3 +1976,35 @@ HashMap         (HashSet)          unordered
 TreeMap         (TreeSet)          ordered   
 LinkedHashMap   (LinkedHashSet)    insertion order
 ArrayList, LinkedList, Vector all insertion order
+
+
+###The String.split method###
+The split() method has two versions:  
+
+String[] split(String regex)  
+String[] split(String regex, int limit)  
+
+The string "boo:and:foo", for example, yields the following results with these expressions:
+```
+Regex   Result
+:       { "boo", "and", "foo" }
+o       { "b", "", ":and:f" }
+```
+
+The limit parameter controls the number of times the pattern is applied and therefore affects the length of the resulting array. If the limit n is greater than zero then the pattern will be applied at most n - 1 times, the array's length will be no greater than n, and the array's last entry will contain all input beyond the last matched delimiter. If n is non-positive then the pattern will be applied as many times as possible and the array can have any length. If n is zero then the pattern will be applied as many times as possible, the array can have any length, and trailing empty strings will be discarded.
+
+The string "boo:and:foo", for example, yields the following results with these parameters:
+```
+Regex   Limit   Result
+:       2       { "boo", "and:foo" }
+:       5       { "boo", "and", "foo" }
+:      -2       { "boo", "and", "foo" }
+o       5       { "b", "", ":and:f", "", "" }
+o       -2      { "b", "", ":and:f", "", "" }
+o       0       { "b", "", ":and:f" }
+```
+An invocation of this method of the form str.split(regex, n) yields the same result as the expression
+
+Pattern.compile(regex).split(str, n)
+
+Throws: PatternSyntaxException - if the regular expression's syntax is invalid

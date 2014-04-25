@@ -1316,10 +1316,90 @@ public class Test10
 }
 The valueOf() method returns the enum constant whose vluae corresponds to the string argument passed in.  The enum constant can be compared for == relational operator or the equals() method, since they are instances of the declared enumeration type.
 
+local variables can be declared as final and cannot be declared static private, public or protected.  Local variables are defined in the bodies of methods.  Trying to use any declaration besides static will cause a compile error that says: illegal start of expression
+
+class TestOuter
+{
+	static Integer num = 200;
+
+	TestOuter()
+	{
+		num = 400;
+	}
+
+	static class TestInner
+	{
+		TestInner()
+		{
+			System.out.print(num);
+		}
+	}
+
+	public static void main(String[] args) {
+		new TestOuter.TestInner();
+	}
+}
+
+What will be printed?  Static nested classes are allowed to access static variables of the enclosing class.  So 200 will be printed.  The OuterClass is never instantiated, so the value is not changed by the constructor.  If we put this before the call, TestOuter to = new TestOuter();, 400 will be printed.
+
+public class Test11
+{
+	public static void main(String[] args) 
+	{
+		Integer  arg = 20;
+		switch(arg)
+		{
+			default:
+				System.out.println("default");
+			case 10:
+				System.out.println("100");
+			case 20:
+				System.out.println("200");
+		}
+	}
+}
+The class compiles and runs fine.  Obviously the position of the dafult case doesn't matter.  The Integer wrapper class in unboxed and 200 is printed out.
 
 
+String str = "Java*JSP*EJB*J2EE";
+System.out.println(Arrays.toString(str.split("*",-2)));
+java.util.regex.PatternSyntaxException: Dangling meta character * near index 0.
+PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
+[Java, JSP, EJB, J2EE]
+Also, the -2 is not needed; the same output is got without it.
+The limit parameter controls the number of times the pattern is applied and therefore affects the length of the resulting array. If the limit n is greater than zero then the pattern will be applied at most n - 1 times, the array's length will be no greater than n, and the array's last entry will contain all input beyond the last matched delimiter. If n is non-positive then the pattern will be applied as many times as possible and the array can have any length. If n is zero then the pattern will be applied as many times as possible, the array can have any length, and trailing empty strings will be discarded.
+The string "boo:and:foo", for example, yields the following results with these parameters:
+Regex	Limit	Result
+:	2	{ "boo", "and:foo" }
+:	5	{ "boo", "and", "foo" }
+:	-2	{ "boo", "and", "foo" }
+o	5	{ "b", "", ":and:f", "", "" }
+o	-2	{ "b", "", ":and:f", "", "" }
+o	0	{ "b", "", ":and:f" }
+An invocation of this method of the form str.split(regex, n) yields the same result as the expression:
+Pattern.compile(regex).split(str, n)
 
+		Vector<String> employeeList = new Vector<String>();
+		Vector<Integer> employeeIdList = new Vector<Integer>();
+		Vector<Object> employeeProfileList = new Vector<Object>();
+		System.out.println(employeeList.getClass() == employeeIdList.getClass());
+		System.out.println(employeeList.equals(employeeProfileList));
+		System.out.println(employeeList.getClass() == employeeProfileList.getClass());
+		System.out.println(employeeIdList.equals(employeeProfileList));
+All instances of a generic class have the same runtime class, regardless of their actual type parameters.  So the getClass() method returns a java.util.Vector for both x and y.  Since no data has been added to both Vector objects, they are also meaningfully equal.  So the equals method returns true here and the output is true, true, true, true.
 
+- logical operators &&,||, ! and ?: always use boolean operands. 
+- bitwise operators and shift operators allow numeric operands.
 
+- primitives and String objects will not be changed in methods.  Other objects can be changed.
 
+method()
+{
+	int x = 10;
+	int y;
+	if (x < 100) y = 100;
+		if (x >= 100) y = x * 10;
+			print("Y is "+y);
+}
+- Will not compile with the warning that the variable y may not have been initialized.
 

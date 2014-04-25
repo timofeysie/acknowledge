@@ -271,3 +271,16 @@ Defaults
 
 - The initial capacity of a ArrayList created with its default
 constructor is 10.
+
+
+###enum###
+protected Object clone() Throws CloneNotSupportedException.
+int compareTo(E o)
+boolean equals(Object o)
+protected void  finalize() enum classes cannot have finalize methods.
+Class<E> getDeclaringClass()
+int hashCode()
+String name()
+int ordinal() the position in its enum declarations starts at zero.
+String  toString()
+static <T extends Enum<T>> T valueOf(Class<T> enumType, String name) 
