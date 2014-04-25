@@ -10,7 +10,7 @@ Iterator
 ListIterator
 
 ###Object###
-clone() 
+protected Object clone() 
 boolean equals(Object obj) 
 protected  void	finalize() 
 Class getClass() 
@@ -18,7 +18,7 @@ int hashCode()
 void notify() 
 void notifyAll() 
 String toString() 
-wait() 
+void wait() 
 
 #The StringBuilder Class#
 - like String objects but can be modified(append(),insert())

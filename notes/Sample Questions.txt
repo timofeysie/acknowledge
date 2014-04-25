@@ -1209,3 +1209,117 @@ x = 1.300000
 
 -0.0 == 0.0 is true.
 
+------------ final mock exam --------------------
+
+- creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor!!!
+
+//package java.lang;
+public class ExtendedObject extends java.lang.Object
+{
+		String name = "DEFAULT VALUE";
+		protected void finalize() { name = null; }
+		public static void main(String as[]) throws Throwable
+		{
+			Object ob = new ExtendedObject();
+			ob.finalize();
+			System.out.println(ob);
+		}
+}
+
+a. the code will not compinle
+b. by uncommenting line 1, it will compile.
+
+The finalize() method is declared as protected in the class Object, so it cannot be invoked from code in other packages.  The compile error msg says finalize() has protected access in java.lang.Object
+If we use the same package java.lang then the code will compile, but at runtime a SecurityException will be thrown stating that prohibited package name:java.lang.
+When we ran the class with the uncommented package line, we got a java.lang.NoClassDefFoundError runtime error.
+The same behavior would be found if we eliminate the extends part.  Here is some discussion about that.
+"Unless the Object class is not actually the java.lang.Object class (the tutorial does not include the imports, so it's hard to see), the extends Object is redundant."
+"Extends clause is optional as stated in Java Language Specification. If it is omitted, the class is derived from java.lang.Object. It is just a matter of coding style to write it or not to write it in this case. Usually it is omitted."
+
+public class Test {
+	static int i = j;
+	static int j = 10;
+}
+Compile error: illegal forward reference.
+
+public class Test8
+{
+	static String s1 = "Java";
+	public static void main(String args[]) {
+		String s2 = "Java";
+		String s3 = new String(s1);
+		System.out.println(s1==s2);        // 8. true
+		System.out.println(s1.equals(s2)); // 9. true
+		System.out.println(s3==s1); 	   // 10.false
+		System.out.println(s3.equals(1));  // 11.false
+		System.out.println(Test9.s4==s1);  // 12.true
+	}
+}
+class Test9
+{
+	static String s4 = "Java";
+}
+Only line 10 will print false.  Strings are immutable objects.  That is, a string is read only once the string has been created and initialized, and Java optimizes handling of string literals; only one anonymous string object is shared by all string literals with the same contents.  Hence in the above code, the strings s1, s2 and s4 reger to the same anonymous string object, initialized with the character string "Java".  This, s1 ==s2 and Test9.s4 will both return true and obviously s1.equals(s2) will return true.
+
+public class AccountBal
+{
+	public int getBalance(Short amt){return amt*2;}
+	public double getBalance(double amt){return amt*3;}
+	//public long getBalance(long amt){return amt*4;}
+	public static void main(String[] args) {
+		AccountBal ac = new AccountBal();
+		Integer val = 20;
+		System.out.println(ac.getBalance(val));
+	}
+}
+Our choice was:
+1 code will not compile
+2 if you uncomment the long method, the code will compile, run and print 80.
+The lab answer said the code will comple, run and print 60.0
+The lab notes state: The getBalance() call made from the main method with an int argument calls the getBalace(double amt) method and prints 60.0.  Because short cannot hold an int.  If we uncomment getBalance(long amt) method then the getBalance(double amt) will not be called and hence 80 will be printed out.
+Is this a rules of promotion thing?  With an Integer, what other types will work?
+int fits with double
+That's Integer actually.
+float only goes to float.
+ float will not fit into a Float, but a double.  
+ If we cancel out the double, then it will fit into the Float method.
+ float to float, double, Float, end.
+ Float Float, float, double, end.
+ int to int, long, float, double, Integer, end.
+ Integer to Integer, int, long, float, double, end
+ byte to byte, short, int, long, float, double, Byte, end.
+ Byte to Byte, byte, short, int...
+ char to char, int, long, float, double, Character, end.
+ Character to Character, char, int, long, float, double, end.
+ short to short, int, long, float, double, Short, end.
+ Short to Short, short, int, long, float, double, end.
+ float double Float end.
+ long to long, float, double, Long, end.
+That's the opposite to the rules of promotion, which we had as double, float, long, int.  So the order for primitives is:
+int
+long
+float
+double
+Wrapper class.
+For a wrapper class, it slips that last step.
+
+enum Month {JAN,FEB,MAR,APR,MY}
+public class Test10
+{
+	public static void main(String[] args) {
+		Month mon = Month.valueOf("JAN");
+		if(mon==Month.JAN)
+			System.out.println("Inside JAN");
+		if(mon.equals(Month.JAN))
+			System.out.println("Inside JAN");
+	}
+}
+The valueOf() method returns the enum constant whose vluae corresponds to the string argument passed in.  The enum constant can be compared for == relational operator or the equals() method, since they are instances of the declared enumeration type.
+
+
+
+
+
+
+
+

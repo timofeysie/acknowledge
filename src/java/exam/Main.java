@@ -3,9 +3,9 @@ public class Main extends A
 {
 	public static void main(String[] args) {
 		new Main(1L).Main();
-		System.out.println();
-		System.out.println("---");
-		new Main().Main();
+		//System.out.println();
+		//System.out.println("---");
+		//new Main().Main();
 	}
 
 	public Main(int x) {
