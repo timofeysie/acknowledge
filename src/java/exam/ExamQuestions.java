@@ -438,5 +438,6 @@ private static void defualtValue()
 		//basicFailedQuestions();
 		//failedFinalMockExamQuestions();
 		payRollExample();
+		Class ExamQuestions = ExamQuestions.class;
 	}
 }

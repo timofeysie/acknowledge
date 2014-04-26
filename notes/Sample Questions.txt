@@ -1864,7 +1864,7 @@ public class Test17 {
 			B c = new B();
 		}	
 }
-
+Output: ACB
 class A { public A(){System.out.println("A");}}
 class B extends A {public B() {System.out.println("B");}}
 class C extends B {public C(){System.out.println("C");}}
@@ -1874,8 +1874,60 @@ public class Test17 {
 			C c = new C();
 		}	
 }
+Output: ACB
+The contruction order is from bottom to up (who wrote this shit?) from each child class constructor its parent's constructor will be called and so on till the topmost class in he hierarchy.
+Actually I would say it is from the top to the bottom.  The top of the heirachy is A, then down to its child, and then its child.  That's just the way it looks to me.  We might have gotten this question right but we skipped it due to its lenght and lack of time.
 
-volatile
+question 29:
+try {
+	throw new Exception();
+} catch (Exception ne) {
+	throw ne;
+	System.out.println("Inside Exception");
+} finally {
+	System.out.println("Inside Finally");
+}
+a. Prints "Exception" and "Finally"
+b. Prints "Finally"
+c. Prints "Exception"
+d. Does not compile.
+Will it compile or no?  Have to read all the answers to see that the only valid one is the final one.  Maybe the test makers just made a mistake, but that's no excuse for us.  Anyhow, we didn't see why.
+The line that prints "Inside Exception" is unreachable.  That's a compile time error.
+
+Question 30:
+The try-catch block should catch the exceptions in the order from specific to generalized.  Hence the order should be FileNotFoundException, IOException and Exception.  FileNotFoundException is the subclass of IOException and IOException is the subclass of Exception.
+import java.io.*;
+class ExceptionTest {
+	public static void main(String[] args) {
+		try {
+			File f = new File("first file");
+			throw new FileNotFoundException();
+		} catch (FileNotFoundException fnfe)
+		{
+			System.out.println("inside 1");
+		} catch (IOException ioe)
+		{
+			System.out.println("inside 2");
+		} catch (Exception e)
+		{
+			System.out.println("inside 3");
+		} finally 
+		{
+			System.out.println("inside 4");
+		}
+	}
+}
+There is a compiler warning: undreachabe catch clause at the IOException.  Thrown type FileNotFoundException has already been caught.
+The question was, drag and drop the correct exceptions to make the program print inside 4.  But since the code does not compile... The warning is actually a compile error?  If you want to reach the finally block, then you need to throw an exception that will not be caught here.  We can't see the choices anymore, but we can guess that a RuntimeException might do it.
+If we throw that, then there are real compiler errors that say: exception IOException and fnfe are never thrown in the body of the corresponding try statement.
+
+Finally, question 31:
+Class ExamQuestions = ExamQuestions.class;
+This code is fine.  We thought it would trigger a ClassCastException, but it won't.  So that's it.
+
+
+
+
 super.method()?
 import A.Enum?
 

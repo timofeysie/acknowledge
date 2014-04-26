@@ -52,7 +52,7 @@ List Interface
 List Iterator Interface  
 List Implementations  
 The String.split method  
-
+Volatile
 
 ###Rules of Promotion###
 For operands of a numeric operator such as + or *, the conversion process is called numeric promotion. In the case of binary operators, the conversion chosen for one operand may depend in part on the type of the other operand expression.  
@@ -76,6 +76,28 @@ double
 float  
 long    
 int  
+In actual fact, it's the opposite.
+If you have a float will not fit into a method that accepts a Float, but will instead be foreced into a method that accepts a double if available.  So the following list show what the preferred types are for each.  First, each one would choose itself if posibble.  If that is not available, it will look for the next one:
+- float to double, Float, end.
+- Float to float, double, end.
+- int to long, float, double, Integer, end.
+- Integer to int, long, float, double, end
+- byte to short, int, long, float, double, Byte, end.
+- Byte to byte, short, int, long, float double, end
+- char to int, long, float, double, Character, end.
+- Character to char, int, long, float, double, end.
+- short to int, long, float, double, Short, end.
+- Short to short, int, long, float, double, end.
+- long to float, double, Long, end.
+The Order:
+int
+long
+float
+double
+Wrapper class.
+For a wrapper class, it slips that last step and chooses its own type first/
+
+
 
 - compound assignment operators behave as they have an implicit type case. Example:  
 ```
@@ -2008,3 +2030,17 @@ An invocation of this method of the form str.split(regex, n) yields the same res
 Pattern.compile(regex).split(str, n)
 
 Throws: PatternSyntaxException - if the regular expression's syntax is invalid
+
+###volatile###
+Used to indicate that a variable's value will be modified by different threads.  Declaring a volatile Java variable means:
+- The value of this variable will never be cached thread-locally: all reads and writes will go straight to "main memory";
+- Access to the variable acts as though it is enclosed in a synchronized block, synchronized on itself.  We say "acts as though" in the second point, because to the programmer at least (and probably in most JVM implementations) there is no actual lock object involved.
+
+The main differences between synchronized and volatile are:
+
+a-  primitive variable may be declared volatile (whereas you can't synchronize on a primitive with synchronized);
+- an access to a volatile variable never has the potential to block: we're only ever doing a simple read or write, so unlike a synchronized block we will never hold on to any lock;
+- because accessing a volatile variable never holds a lock, it is not suitable for cases where we want to read-update-write as an atomic operation (unless we're prepared to "miss an update");
+- a volatile variable that is an object reference may be null (because you're effectively synchronizing on the reference, not the actual object).
+- Attempting to synchronize on a null object will throw a NullPointerException.
+
