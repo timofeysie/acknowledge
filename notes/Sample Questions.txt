@@ -1494,3 +1494,388 @@ Will this compile and run?  Notice MyThread is not started, but Thread.  To star
 new MyThread(11).start();
 This will print 11 ten times.  Should we go over the threads tutorial, even though threads are sposed to be in the OCP exam?  sab.
 
+public class RefObject {
+	String class_name = "RefObject";
+	RefObject() {
+		className = "RefObject_200";
+	}
+	static void method1(Object ob) {
+		ob = null;
+	}
+	public static void main(String[] args) {
+		RefObject refOb = new RefObject();
+		method1(refOb);
+		System.out.println(RefOb.className);
+	}
+}
+
+When a metho which takes an object argument is invoked, the method obtains a copy of the object reference from the calling method.  SO altering the object within the method affects the original object passed.  Hence the output "RefObject_200" will be printed.
+The method1() call merely sets the copy of the reference to null, but does not change the object, or the original reference to the object held in the refOb variable.
+
+Consider the following code:
+class Base {
+	int i = 1999;
+	public void aMethod() {System.out.println("Base.amethod()");}
+	Base() {aMethod();}
+}
+public class Derived extends Base {
+	int i = -1;
+	public static void main(String[] args) {
+		Base b = new Derived();
+		System.out.println(b.i);
+		b.aMethod();
+	}
+	public void aMethod(){System.out.println("Derived.aMethod()");}
+}
+It creates an instance of the Derived class but assignes it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.
+But note that if the aMethod was not present in the base class then compilation error would be reported at compile time, when the compiler sees the statement b.aMethod(), it checks if the method is present in the bas class.  Only at runtime it decides to call the method from the derived class.
+The constructor in Base is called when the new Derived object is created, but the call in the constructor calls the method is the subclass, since it is present.
+
+
+Riddle me this:
+abstract class A {
+	String name = "OCA Java SE 7";
+	abstract String getName() throws Throwable;
+}
+class B extends A {
+	String s = "OCP Java SE 7";
+	String getName()throws Exception {
+		if (true) throw new Exception("Error");return s;
+	}
+}
+public class Test14 {
+	public static void main(String[] args) {
+		A obj = new B();
+		System.out.println(obj.getName());
+	}
+}
+This program has nothing to do with the Exception vs. Throwable/checked vs unchecked situation we thought it was.  It will not compile due to the getName() method call.  The reference variable used to invoke the method is of type A.  The getName() method is class A throws a Throwable, which is not handled at the place where it is invoked.  Even though the actual object at runtime is of type B, the compiler looks for a matching method in class A.  It finds the method in the superclass which declares to throw the Throwable and gives and error that Throwable should be caught or declared to be thrown.
+If we surround the getName() method call in a try catch block like this, then the class will compile:
+		try
+		{
+			System.out.println(obj.getName());
+		} catch (Throwable t)
+		{
+			System.out.println("throwable");
+		}
+
+Observe:
+class A {}
+class B extends A {}
+public class Test15
+{
+	public static void main(String[] args) {
+		A obj1 = new A();
+		B obj2 = (B)obj1;
+	}
+}
+The class compiles, but throws a runtime java.lang.ClassCastException: A cannot be cast to B.
+But if we were to change the cast to a different type of object, say Integer, then we would get a compile error: inconvertable types.
+required: Integer
+found: A
+So the compiler knows it should be A, but lets it pass at compile time.  Strange.  The notes from the exam state: The code trying to assign a super class object into a sublass object by type casting.  Hence it will throw ClassCastException at runtime.
+
+Another very similar question has the same A B setup, and tries this:
+		A B = new A();
+		B A = new B();
+		A = (B)B;
+Oracle is trying to throw us for a curve by switching a and b.  If we fix that curve, then it looks like this:
+		A a = new A();
+		B b = new B();
+		b = (B)a;
+The exception is the same: A cannot be cast to B.
+I seems however that the message should be
+B cannot be cast to A, but why not?  B is a subclass of A, and B has no methods that would conflict with A.  Maybe this is why it's a runtime error and not a compile error?
+The first question can be reconfigured like this:
+		A a = new A();
+		B b = (B)a;
+In this case, the message A cannot be cast to B makes sense, maybe it should always have made sense, and that is why we continue to fail the mock exams.  But success is build on failure, so slog on.
+Just remeber that this is a RUNTIME EXCEPTION, not a compile error.  And, fuck it, let's nip this in the bud now.  I want to know why it's not a compile time error.  So I found someone else with the same question:
+
+
+Asked on asked Nov 10 '13 at 21:17 by luukburger rep 78:
+interface Roamable {
+}
+class Phone {
+}
+public class Tablet extends Phone implements Roamable {
+    public static void main(String... args) {
+        Roamable var = (Roamable) new Phone();
+    }
+}
+When I change Roamable var = (Roamable) new Phone(); into Roamable var = (Roamable) new String(); I get a compilation error right away.  Two questions:
+Why does the code above compile at all? Phone seems unrelated to Roamable to me?  Why does the code compile with new Phone(), but doesn't it compile with new String()?
+
+Answered Nov 10 '13 at 21:39 by Sage rep 9,277
+Why does the code above compile at all? Phone seems unrelated to Roamable to me?
+yes because Roamable is an interface it might cause a Run-time exception but not compile time exception, because even if Phone doesn't implement Roamable, a subclass of Phone might, hence the compiler has no way to know it but at the Run time.
+It is already defined in java language specification. Check out my answer here.
+Why does the code compile with new Phone(), but doesn't it compile with new String()?
+Because class String is declared as public final class in java.lang package. As specified in jls 8.1.1.2 final class section: a class declared as final can't be extended and hence it won't have any subclass. So, the compiler already knows that String can't be extended: hence no subclass's existence is possible to implement interface Roamable
+Edit: (With response to your below comment)
+Let us assume that B is a subclass of A which implements an interface T.
+Now an statement :
+   T t = (T)new A();
+is essentially same as:
+   A aObj = new A() ;
+   T t = (T)aObj ; // a run-time exception happen
+before running into conclusion, let us do the same thing with an object of B:
+   A aObj = new B();
+   T t = (T)aObj; // no exception happen.
+so, the real reason with super class and sub class here is the reference. The aObj class in this second code example is also an instance of class A but it is also an instance of class B which has implemented T.
+
+Sage provides a link to another page that has this example:
+interface Printable {}
+class BlackInk {}
+
+public class Main {
+    public static void main(String args[]) {
+        Printable printable = null;
+        BlackInk blackInk = new BlackInk();
+        printable = (Printable)blackInk;
+    }
+}
+If the preceding code is compiled and run, the result is a ClassCastException at printable = (Printable)blackInk;. But, if Printable is changed to a class, it doesn't compile because blackInk can't be cast to Printable. Why does it compile when Printable is an interface?
+
+Sage answers,
+The compiler does not know that this won't work: You could have a subclass of BlackInk that implements Printable. Then the cast would be fine.
+In situations where the compiler knows it won't work, you will get an error.
+For example, if you make BlackInk final (so that there can be no subclasses) you get an error.
+
+Sage also provides a link to a longer discussion, which finally puts it succintly:
+"Even if class casting is detected in compile time, Interface casting is detected in runtime."
+That seems to clear it up for interface casting, but our initial questions were not about interfaces, but classes, so what is the sound bite for that issue?  If we add a class C to our Test15.java file, then try this:
+		A a = new A();
+		B b = (C)a;
+Lo and behold we do get a compile time error: inconvertable types
+reuqired: C
+found: A
+So lets boild it down:
+
+class A {}
+class B extends A {}
+class C {}
+		A a = new A();
+		B b = (B)a; // runtime java.lang.ClassCastException
+		B b = (C)a; // compile time error incompatible types
+There might be a sublcass solves the runtime exception, the compiler doesn't know.  But there is no possible connection for C, so the compiler knows that it can't work.  At least that's the way we are understanding it now.  And now it really is time to move on.  We can revisit this in a notes review session later.
+
+And infact we have ANOTHER A B question we failed!
+interface A {}
+class B implements A {}
+class C extends B {}
+public class Test16 {
+	public static void main(String[] args) {
+			A a1 = new B();
+			A b1 = new C();
+			a1 = b1;
+			C b2 = (C)a1;
+		}	
+}
+The only explaination given: "the object reference at line 9 is valid".  Gee, thanks a lot.  Our notes go like this:
+a1 (a_b)
+b1 (a_c)
+a1 = b1 (a_b = a_c) or (b = c)?
+b2 - (C)a1(a_b) or (a_c = a_b)?
+Those (a1 = b1;C b2 = (C)a1;) are both similar casts.  Since C extends B which implemnts A, B and C are pretty interchangeable, at least it looks that way.
+
+package epractizelabs;
+public class Super {
+	protected void print() {
+		System.out.println("Inside Print");
+	}
+}
+import epractizelabs.*;
+class Sub extends Super {
+	public static void main(String[] args) {
+			new Super().print(); // line 6
+			new Sub().print(); // line 7
+		}	
+}
+OK, now I thought that since line 6 is creating an instance of the class Super, it should be able to call that protected method, but that Sub couldn't, so that there would be a compile error at line 7.  It also extends Super.  But that is not the case.  Line 6 will not compile due to protected access.  So how then is a protected method used, if not from within an instance of that class?  Where is our example where we learned that before?
+The notes in the exam say: "The code will not compile because Sub class in a package different from that of the Super class can access protected members of the superclass only theough inheritance.  Such a subclass cannot use a superclass reference to access a protected member.  Hence compiler error at line 6"
+So it's because the subclass is the one creating the superclass instance, and so that subclass cannot call the superclass method unless it were in the same package.
+print has protected access in Super.  That's the compile error.
+The Trail says: "The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package."
+So the second part of that is what we seem to have here.  Sub is a sublcass of Super by the extends keyword.  SO why the error then?
+But actually, if we comment out line 6, then the class compiles and runs.
+Is this because Sub extends Super, and we call the method from the subclassed reference, not from the super class reference in the sublass?  Yes, it's confusing.  Here is another example from StackOverflow:
+
+package first;
+public class First {
+    protected void pro(){
+        System.out.println("Can see protected method");
+    }
+}
+package first;
+public class InFirst {
+    public static void main(String[] args){
+        First fst = new First();
+        fst.pro();
+    }
+}
+package second;
+import first.First;
+public class Second extends First {
+    public static void main(String[] args){
+        First fst = new First();
+		//fst.pro();
+        Second sec = new Second();
+        sec.pro();
+    }
+}
+
+And an answer: The webpage @MadProgrammer linked gives a decent explanation:
+
+"The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package."
+This means the protected member must be accessed directly through either the class it is defined in or a subclass of said class while also being within the appropriate package. It does not necessarily mean you can access the protected member through an instance of said class created within a subclass of said class. The focus is on the packages involved.  Ryan goes on to explain more:
+
+package second; // Current package
+First fst = new First(); // from package first and does not extend anything
+fst.pro();
+Attempting to access member in question from which package? second
+Is the (sub)class, which contains said member, or its parent class, which it inherits the member from, defined within that same package? No, First is defined in package first, so protected makes the member inaccessible from First in package second.
+
+package second; // Current package
+Second sec = new Second(); // from package second and extends First from package first
+sec.pro();
+Attempting to access member in question from which package? second
+Is the (sub)class, which contains said member, or its parent class, which it inherits the member from, defined within that same package? Yes, Second, which is defined in package second, inherits the member from First, so the protected member is accessible from Second in package second.
+
+A commenter also linked to this table:
+Access rights for the different elements
+class 								private 	default		protected 	public 
+own class							yes			yes		 	yes			yes
+subclass - same package (SubA)		no			yes			yes			yes
+class - same package (AnotherA)		no			yes			yes			yes
+subclass - another package (SubB)	no			no			yes/no*		yes
+class - another package (AnotherB)	no			no			no			yes
+* Class SubB has access only to the inherited from Base protected elements, i.e. its own elements, but the protected data of other Base instances is not accessible from SubB.
+
+With this code:
+
+package packageA;
+public class Base {
+    public String publicStr = "publicString";
+    protected String protectedStr = "protectedString";
+    String defaultStr = "defaultString";
+    private String privateStr = "privateString";
+    public void print() {
+        System.out.println("packageA.Base has access to");
+        System.out.println("    " + publicStr);
+        System.out.println("    " + protectedStr);
+        System.out.println("    " + defaultStr);
+        System.out.println("    " + privateStr);
+
+        Base b = new Base(); // -- other Base instance
+        System.out.println("    b." + b.publicStr);
+        System.out.println("    b." + b.protectedStr);
+        System.out.println("    b." + b.defaultStr);
+        System.out.println("    b." + b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageA;
+public class SubA extends Base {
+    public void print() {
+        System.out.println("packageA.SubA has access to");
+        System.out.println("    " + publicStr + " (inherited from Base)");
+        System.out.println("    " + protectedStr + " (inherited from Base)");
+        System.out.println("    " + defaultStr + " (inherited from Base)");
+        // -- not accessible - private elements are even not inherited
+        // System.out.println(privateStr);
+
+        Base b = new Base(); // -- other Base instance
+        System.out.println("    b." + b.publicStr);
+        System.out.println("    b." + b.protectedStr);
+        System.out.println("    b." + b.defaultStr);
+        // -- not accessible
+        // System.out.println(b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageA;
+public class AnotherA {
+    public void print() {
+        System.out.println("packageA.AnotherA has access to");
+        Base b = new Base();
+        System.out.println("    b." + b.publicStr);
+        System.out.println("    b." + b.protectedStr);
+        System.out.println("    b." + b.defaultStr);
+        // System.out.println(b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageB;
+import packageA.Base;
+public class SubB extends Base {
+    public void print() {
+        System.out.println("packageB.SubB has access to");
+        System.out.println("    " + publicStr + " (inherited from Base)");
+        // -- protectedStr is inherited element -> accessible
+        System.out.println("    " + protectedStr + " (inherited from Base)");
+        // -- not accessible
+        // System.out.println(defaultStr);
+        // System.out.println(privateStr);
+
+        Base b = new Base(); // -- other Base instance
+        System.out.println("    b." + b.publicStr);
+        // -- protected element, which belongs to other object -> not accessible
+        // System.out.println(b.protectedStr);
+
+        // -- not accessible
+        // System.out.println(b.defaultStr);
+        // System.out.println(b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageB;
+import packageA.Base;
+public class AnotherB {
+    public void print() {
+        System.out.println("packageB.AnotherB has access to");
+        Base b = new Base();
+        System.out.println("    b." + b.publicStr);
+        // -- not accessible
+        // System.out.println(b.protectedStr);
+        // System.out.println(b.defaultStr);
+        // System.out.println(b.privateStr);
+    }
+}
+
+This states it best:
+"reference in subclass in another package is not allowed to access."
+
+Question 28/Test17:
+class C extends A {public C() {System.out.println("C");}}
+class A { public A(){System.out.println("A");}}
+class B extends C {public B(){System.out.println("B");}}
+public class Test17 {
+	public static void main(String[] args) {
+			System.out.println("Test17");
+			B c = new B();
+		}	
+}
+
+class A { public A(){System.out.println("A");}}
+class B extends A {public B() {System.out.println("B");}}
+class C extends B {public C(){System.out.println("C");}}
+public class Test17 {
+	public static void main(String[] args) {
+			System.out.println("Test17");
+			C c = new C();
+		}	
+}
+
+volatile
+super.method()?
+import A.Enum?
+
