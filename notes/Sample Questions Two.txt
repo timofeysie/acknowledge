@@ -19,11 +19,18 @@ Overloading
 The Object Class
 Exceptions
 The List Class
+The == Operator
+The instanceof Operator
+Reserved Words
+The toArray method
 Random
 
 
 
 **Inheritance** /*----------------------------------------
+
+- constructors are not inherited
+
 How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
 						 Superclass Instance Method		Superclass Static Method
 Subclass Instance Method Overrides						compile-time error
@@ -237,8 +244,20 @@ public class BankBranch extends Bank
 }
 Does not compile: getBranchName() cannot override the superclass method.  The overridden method does not throw an exception.  (But it could if it were a RuntimeException, right?  Or is that only checked exceptions?)
 
+Question: if A extends B,
+A a = new A();
+B b = new B(); 
+which are legal?
+b=a 	
+b=(A)a; 
+a=b;
+a=(A)b;
+a=(B)b;
+Answer: The first two are not legal.
+
 
 **Strings** /* ---------------------------------------
+
 String s = "Java";
 s.concat(" SE 6");
 s.replace('6','7');
@@ -259,10 +278,78 @@ boolean a = new Boolean("tRuE"); will allocate a Boolean object representing tru
 
 **Rules of Promotion** ---------------------------------
 
+Question:
 int a = 5;
 print("Value is - "+((a < 5) ? 9.9 : 9));
-
+Answer:
 The result of a ternary operator must be determined at compile time, and here the type chosen using the rules of promotion for binary operands is double.  Since the result is a double the output value is printed in a floating point.  The choice of which value to be printed is made on the basis of the result of the comparison "a < 5" which results in false, hence the variable "a" takes the second of the two possible values, which is 9, but because the result type is promoted to double the output value is actually written as 9.0 rather than the more obvious 9.
+
+- if the unary operators + and - are applied to byte, char or short the types are automatically promoted to an int.
+
+Question: Which method will be called:
+void aMethod(Object ob) { //1 }
+void aMethod(Float ob) {  //2 }
+...
+test.aMethod(0.0);
+
+Answer:  0.0 is autoboxed to Double object.  Following the rules of promotion:
+int long float double, why isn't the wrapper class used?  Lets look at another question:
+
+public class AccountBal
+{
+	public int getBalance(Short amt){return amt*2;}
+	public double getBalance(double amt){return amt*3;}
+	//public long getBalance(long amt){return amt*4;}
+	public static void main(String[] args) {
+		AccountBal ac = new AccountBal();
+		Integer val = 20;
+		System.out.println(ac.getBalance(val));
+	}
+}
+Our choice was:
+1 code will not compile
+2 if you uncomment the long method, the code will compile, run and print 80.
+The lab answer said the code will comple, run and print 60.0
+The lab notes state: The getBalance() call made from the main method with an int argument calls the getBalace(double amt) method and prints 60.0.  Because short cannot hold an int.  If we uncomment getBalance(long amt) method then the getBalance(double amt) will not be called and hence 80 will be printed out.
+Is this a rules of promotion thing?  With an Integer, what other types will work?
+int fits with double
+That's Integer actually.
+float only goes to float.
+ float will not fit into a Float, but a double.  
+ If we cancel out the double, then it will fit into the Float method.
+ float to float, double, Float, end.
+ Float Float, float, double, end.
+ int to int, long, float, double, Integer, end.
+ Integer to Integer, int, long, float, double, end
+ byte to byte, short, int, long, float, double, Byte, end.
+ Byte to Byte, byte, short, int...
+ char to char, int, long, float, double, Character, end.
+ Character to Character, char, int, long, float, double, end.
+ short to short, int, long, float, double, Short, end.
+ Short to Short, short, int, long, float, double, end.
+ float double Float end.
+ long to long, float, double, Long, end.
+That's the opposite to the rules of promotion, which we had as double, float, long, int.  So the order for primitives is:
+int
+long
+float
+double
+Wrapper class.
+For a wrapper class, it slips that last step.
+
+Now back to the previous question:
+aMethod(0.0);
+This will call a method that accepts a double, Double, Object, but never a Float.  A compile time error would occur first.
+If we try this:
+aMethod(0.0f);
+The order is float, double, Float, Object compile error.  Never will it call the Double method.  Strange.
+aMethod(-0.0); double, Double, Object, error
+aMethod(0); // int, long, float, double, Integer, Object, error
+Remember, a byte has the following order:
+byte, short, int, long, float, double, Byte.
+What if we throw a string in there?
+aMethod("0"); // String, Object, error.
+
 
 **Inner Classes** ---------------------------------------
 
@@ -294,6 +381,8 @@ What is true about local inner classes?
 **Overriding & Hiding** -------------------------------------
 
 - an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
+
+- An overriding method must not throw any checked exceptions that were not declared in the original method.
 
 Question
 Which of the following must be true for a method to support polymorphism?
@@ -472,6 +561,8 @@ We beg to differ.  instanceof is an operator.  The method would be getClass and 
 
 **Exceptions** --------------------------------------------
 
+- checked exceptions represent invalid conditions in areas outside the immediate control of the program.
+
 Question:
 1. Which of the following implement checked exceptions?
 a. Class A extends RuntimeException
@@ -550,6 +641,94 @@ Which are List objects?
 - Stack
 
 
+**The == Operator** ---------------------------------------
+
+String str = "10";
+int a = new Integer(10);
+boolean b = str==a;
+The comparison is not legal, as only the + operator performs the implicit conversion to a String object.
+ie: b = str==a+""
+
+Question:
+boolean b = false;
+boolean c = true;
+if (b = c) print("true");
+Answer:
+The if evaluates to true because the assigment statement also has a value equal to the value being assinged.  Using the == operator provides expected behaviour.
+if (b == c) ... false
+
+Question:
+Integer a = 123;
+float b = 123f;
+boolean c = false;
+if (c|a==b) print("true");
+Answer: The a==b will be evaluated first, so the answer is true.
+
+Question: WIll this compile?
+String str = "1";
+Integer a = 1;
+boolean b=str==a;
+Answer: will not compile.  Incomparable types: String and Integer 
+
+**The instanceof Operator** ---------------------------------
+
+String num = "0";
+num = null;
+if (num instanceof Object) ... false!
+- null compared with a string is not equal.
+
+
+
+**Reserved Words** ----------------------------------------
+
+Question: How does this code compile?
+Number Float = 99.455f;
+Answer: Float is not a reserved word.  'float' is.
+
+
+**The toArray method** ------------------------------------
+
+Question: Will this compile:
+Vector<String> set = new Vector<String>();
+String[] arr = set.toArray();
+Answer:  The toArray() method returns Object[], so to compile, the set must be cast to String.  You can fix it like this:
+String[] arr = (String [])set.toArray();
+
+Question:  What will the output be:
+import java.util.*;
+class Test13
+{
+	public static void main(String[] args) {
+		ArrayList<String> a =new ArrayList<String>();
+		a.add("one");
+		a.add("two");
+		a.add("three");
+		String[] s = a.toArray();
+		for (String str:s)
+		{
+			System.out.println(str);
+		}
+	}
+}
+
+Answer: Remeber, the toArray() method returns an array of Objects, and needs to be cast to a String array like this:
+String[] s = a.toArray(new String[0]);
+Trying this fails during runtime:
+String[] s = (String[])a.toArray();
+ClassCastException: Object cannot be cast to String.
+But then we tried these and they worked, so maybe the above was a different prob?
+String[] s3 = (String[])al.toArray();
+String[] s4 = set.toArray(new String[al.size()]);
+String[] s = a.toArray(new String[a.size()]);
+works also.  If we choose size 4, then a null string is added to the list.
+
+
+The size of the array cannot be specified in the following examples:
+		int i[] = new int[2] {1,2};
+		int j[4] = {1,2,3,4};
+The size is given implicitly by the initialization code (instance), never in the declaration of an array (reference).
+
+
 **Random** ------------------------------------------------
 
 A static method can only be hidden by another static method.  A static variable may be hidden by an instance variable.
@@ -578,91 +757,45 @@ quote(String s) returns a literal pattern string for the specified String.  This
 
 - Number is the super class for many wrapper classes, but not Boolean and Character
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - The split() and matches() methods are present in both String and Pattern class.
 
-- checked exceptions represent invalid conditions in areas outside the immediate control of the program.
-
-String str = "10";
-int a = new Integer(10);
-boolean b = str==a;
-The comparison is not legal, as only the + operator performs the implicit conversion to a String object.
-ie: b = str==a+""
-
-- if the unary operators + and - are applied to byte, char or short the types are automatically promoted to an int.
-
-How does this code compile?
-```
-Number Float = 99.455f;
-```
-Answer, Float is not a reserved word.  'float' is.
-
-```
-boolean b = false;
-boolean c = true;
-if (b = c) ... true
-```
-The if evaluates to true because the assigment statement also has a value equal to the value being assinged.
-if (b == c) ... false
-
-Integer a = 123;
-float b = 123f;
-boolean c = false;
-if (c|a==b) ... true!
-- The a==b will be evaluated first.
-
-boolean b=str==a; will not compile.
-Incomparable types: String and Integer 
-
-String num = "0";
-num = null;
-if (num instanceof Object) ... false!
-- null compared with a string is not equal.
-
-Integer number = 145; // autoboxing is ok.
-
-Vector<String> set = new Vector<String>();
-String[] arr = set.toArray();
-- The toArray() method returns Object[], so to compile, the set must be cast to String.  You can fix it like this:
-String[] arr = (String [])set.toArray();
 
 
-The size of the array cannot be specified in the following examples:
-		int i[] = new int[2] {1,2};
-		int j[4] = {1,2,3,4};
-The size is given implicitly by the initialization code (instance), never in the declaration of an array (reference).
 
-void aMethod(Object ob) { //1 }
-void aMethod(Float ob) {  //2 }
-...
-test.aMethod(0.0);  // autoboxed to Double object.
 
-- An overriding method must not throw any checked exceptions that were not declared in the original method.
 
-- constructors are not inherited
 
-A a = new A();
-B b = new B(); // A extends B
 
-b=a 	x
-b=(A)a; x
-a=b;
-a=(A)b;
-a=(B)b;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Test3
@@ -1292,47 +1425,7 @@ class Test9
 }
 Only line 10 will print false.  Strings are immutable objects.  That is, a string is read only once the string has been created and initialized, and Java optimizes handling of string literals; only one anonymous string object is shared by all string literals with the same contents.  Hence in the above code, the strings s1, s2 and s4 reger to the same anonymous string object, initialized with the character string "Java".  This, s1 ==s2 and Test9.s4 will both return true and obviously s1.equals(s2) will return true.
 
-public class AccountBal
-{
-	public int getBalance(Short amt){return amt*2;}
-	public double getBalance(double amt){return amt*3;}
-	//public long getBalance(long amt){return amt*4;}
-	public static void main(String[] args) {
-		AccountBal ac = new AccountBal();
-		Integer val = 20;
-		System.out.println(ac.getBalance(val));
-	}
-}
-Our choice was:
-1 code will not compile
-2 if you uncomment the long method, the code will compile, run and print 80.
-The lab answer said the code will comple, run and print 60.0
-The lab notes state: The getBalance() call made from the main method with an int argument calls the getBalace(double amt) method and prints 60.0.  Because short cannot hold an int.  If we uncomment getBalance(long amt) method then the getBalance(double amt) will not be called and hence 80 will be printed out.
-Is this a rules of promotion thing?  With an Integer, what other types will work?
-int fits with double
-That's Integer actually.
-float only goes to float.
- float will not fit into a Float, but a double.  
- If we cancel out the double, then it will fit into the Float method.
- float to float, double, Float, end.
- Float Float, float, double, end.
- int to int, long, float, double, Integer, end.
- Integer to Integer, int, long, float, double, end
- byte to byte, short, int, long, float, double, Byte, end.
- Byte to Byte, byte, short, int...
- char to char, int, long, float, double, Character, end.
- Character to Character, char, int, long, float, double, end.
- short to short, int, long, float, double, Short, end.
- Short to Short, short, int, long, float, double, end.
- float double Float end.
- long to long, float, double, Long, end.
-That's the opposite to the rules of promotion, which we had as double, float, long, int.  So the order for primitives is:
-int
-long
-float
-double
-Wrapper class.
-For a wrapper class, it slips that last step.
+
 
 enum Month {JAN,FEB,MAR,APR,MY}
 public class Test10
@@ -1434,33 +1527,8 @@ method()
 }
 - Will not compile with the warning that the variable y may not have been initialized.
 
-This will not compile:
 
-import java.util.*;
 
-class Test13
-{
-	public static void main(String[] args) {
-		ArrayList<String> a =new ArrayList<String>();
-		a.add("one");
-		a.add("two");
-		a.add("three");
-		String[] s = a.toArray();
-		for (String str:s)
-		{
-			System.out.println(str);
-		}
-	}
-}
-
-Remeber, the toArray() method returns an array of Objects, and needs to be cast to a String array like this:
-String[] s = a.toArray(new String[0]);
-Trying this fails during runtime:
-String[] s = (String[])a.toArray();
-ClassCastException: Object cannot be cast to String.
-Yeah right.  An Object has never been cast to a String before.  Anyhow, how did we do this before?  Can't remember and time to move on.  However, before we move on,
-String[] s = a.toArray(new String[a.size()]);
-works also.  If we choose size 4, then a null string is added to the list.
 
 Remeber in Test3.java?
 		Set<Test3> s = new TreeSet<Test3>();

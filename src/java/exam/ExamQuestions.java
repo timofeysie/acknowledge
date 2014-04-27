@@ -434,8 +434,37 @@ private static void defualtValue()
 		int i = a.length -1;
 		while(i>=0)
 		{System.out.print(a[i]);i--;}
+
+		Vector<String> set = new Vector<String>();
+		//String[] arr = set.toArray();
+		String[] arr1 = (String [])set.toArray();
+		String[] arr2 = set.toArray(new String[0]);
+
+		ArrayList<String> al =new ArrayList<String>();
+		al.add("one");
+		al.add("two");
+		al.add("three");
+		//String[] s = a.toArray();
+		String[] s3 = (String[])al.toArray();
+		String[] s4 = set.toArray(new String[al.size()]);
 	}
 
+	static void aMethod(Byte ob) {System.out.println("Byte");}
+	static void aMethod(byte ob) {System.out.println("byte");}
+	static void aMethod(Character ob) {System.out.println("Character");}
+	static void aMethod(char ob) {System.out.println("char");}
+	static void aMethod(Short ob) {System.out.println("Short");}
+	static void aMethod(short ob) {System.out.println("short");}
+	static void aMethod(Integer ob) {System.out.println("Interger");}
+	static void aMethod(int ob) {System.out.println("int");}
+	static void aMethod(Float ob) {System.out.println("Float");}
+	static void aMethod(float ob) {System.out.println("float");}
+	static void aMethod(Long ob) {System.out.println("Long");}
+	static void aMethod(long ob) {System.out.println("long");}
+	static void aMethod(Double ob) {System.out.println("Double");}
+	static void aMethod(double ob) {System.out.println("double");}
+	//static void aMethod(Object ob) {System.out.println("Object");}
+	//static void aMethod(String ob) {System.out.println("String");}
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -447,6 +476,9 @@ private static void defualtValue()
 		//failedFinalMockExamQuestions();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
-		arrayWork();
+		//arrayWork();
+		aMethod("0");
+		// int, long, float, double, Integer, Object, error
+
 	}
 }
