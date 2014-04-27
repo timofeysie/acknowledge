@@ -16,12 +16,14 @@ Arrays
 Looping
 Methods
 Overloading
+The Object Class
+Exceptions
+The List Class
+Random
 
 
 
-
-
-**Inheritance** /*----------------------*/
+**Inheritance** /*----------------------------------------
 How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
 						 Superclass Instance Method		Superclass Static Method
 Subclass Instance Method Overrides						compile-time error
@@ -38,7 +40,7 @@ e. No combination will work
 
 Answer: a and d This results in ClassC being the "grandchild" of ClassA.
 
-**Integers** /*----------------------*/
+**Integers** /*-------------------------------------
 Question - What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
 Answer - 
 String base5String = "230";
@@ -47,7 +49,11 @@ static Integer valueOf(String s, int radix): Returns an Integer object holding t
 
 43 = o53 (octal)
 
-**Doubles & Floats** /*----------------------*/
+Integer n1 = new Integer(0);
+Byte n2 = new Byte((byte)0);
+System.out.println(n1.equals(n2)); false!!!
+
+**Doubles & Floats** /*---------------------------------------
 Question: What Double(Float) method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 Answer: isNaN()
 NaN	Example
@@ -57,7 +63,7 @@ NaN	Example
      System.out.println(d1 + " = " + d1.isNaN()); // false
      System.out.println(d2 + " = " + d2.isNaN()); // true
 
-**Arrays** /*----------------------*/
+**Arrays** /*-------------------------------------------------
 - Basic Example:
 int []a = {1,2,3,4,5,6};
 ini i = a.length -1;
@@ -87,13 +93,23 @@ Answer: a and d
 
 
 **Interface & Abstract Classes** /*----------------------*/
+
 - Must extend an abstract class
 - An interface can't extend a class
 - An interface can extend multiple interfaces
 - The method definitions inside interfaces are public and abstract. They cannot be private or protected.
 
-**Extending a Class** /*---------------------------*/
-A a = new B()
+A variable from an interface is by default final so cannot be changed in a subclass.
+- Interfaces only describe behaviour, not state.
+- they're only to be used as constants. Hence static and final. 
+
+- abstract classes cannot be instantiated
+
+
+**Extending a Class** /*------------------------------
+
+Left Side vs. Right Side
+	A a 		 =  	new B()
 Reference Side   / Instance side
 Reference handle / assigned to class type
 declared as      / actual insance
@@ -154,7 +170,75 @@ If method1 in parent were not private, the output would be:
 Parent2
 Child1
 
-**Strings** /* ---------------------- */
+
+Given the following class definitions:
+public class ClassA 
+{
+	public ClassA() 
+	{
+		System.out.println("ClassA constructor");
+	}
+	public void someMethod() 
+	{
+		System.out.println("ClassA someMethod");
+	}
+}
+class ClassB extends ClassA 
+{
+	public ClassB() 
+	{
+		System.out.println("ClassB constructor");
+	}
+	public void someMethod() 
+	{
+		// comment
+		System.out.println("ClassB someMethod");
+	}
+	public static void main(String args[]) 
+	{
+		ClassB b = new ClassB();
+		b.someMethod();
+	}
+}
+
+What statement is needed at the comment line to generate the
+following output:
+ClassA constructor
+ClassB constructor
+ClassA someMethod
+ClassB someMethod
+a. super();
+b. super().someMethod;
+c. super.someMethod();
+d. someMethod();
+e. None of the above
+c (second time lucky!)
+The first answer is used only as the first statement of a
+constructor. The second answer generates a syntax error. The
+fourth option results in unbounded recursion.  Therefore the correct answer is c.
+
+
+
+class Bank
+{
+	String bankName;
+	public String getBranchName()
+	{
+		return bankName;
+	}
+}
+public class BankBranch extends Bank
+{
+	public static void main(String[] argv) {}
+	public String getBranchName() throws Exception 
+	{
+		return bankName;
+	}
+}
+Does not compile: getBranchName() cannot override the superclass method.  The overridden method does not throw an exception.  (But it could if it were a RuntimeException, right?  Or is that only checked exceptions?)
+
+
+**Strings** /* ---------------------------------------
 String s = "Java";
 s.concat(" SE 6");
 s.replace('6','7');
@@ -168,11 +252,12 @@ line 5 'java'
 5. s.toLowerCase();   4
 
 
-**Booleans** --------------------------
+**Booleans** -------------------------------------------
 Any string other than 'true' of 'false' as a Boolean constructor will result in a value of false;  Note case does not matter.
 boolean a = new Boolean("tRuE"); will allocate a Boolean object representing true.
 
-**Rules of Promotion** ----------------
+
+**Rules of Promotion** ---------------------------------
 
 int a = 5;
 print("Value is - "+((a < 5) ? 9.9 : 9));
@@ -180,6 +265,7 @@ print("Value is - "+((a < 5) ? 9.9 : 9));
 The result of a ternary operator must be determined at compile time, and here the type chosen using the rules of promotion for binary operands is double.  Since the result is a double the output value is printed in a floating point.  The choice of which value to be printed is made on the basis of the result of the comparison "a < 5" which results in false, hence the variable "a" takes the second of the two possible values, which is 9, but because the result type is promoted to double the output value is actually written as 9.0 rather than the more obvious 9.
 
 **Inner Classes** ---------------------------------------
+
 public class Outer {
 	public int a = 1;
 	privte int b = 2;
@@ -198,11 +284,30 @@ public class Outer {
 
 Since inner is not a static inner class, it has a reference to an enclosing object and all the variables of that object are accessible. Therefore a and b are correct even if b is private. Variables in the enclosing method are only accessible when they are marked as final, hence c is accessible but not d. e is obviously correct as it is a parameter to the method containing line 12 itself.  d is not final so not visible.  So a, b, c and e are correct.
 
-**Overriding & Hiding** ----------------------
+What is true about local inner classes?
+- They can access only final variables.
+
+
+- Nested (inner) classes can be declared abstract, final, private, public, or protected to restrict access to the class.
+
+
+**Overriding & Hiding** -------------------------------------
+
 - an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
 
+Question
+Which of the following must be true for a method to support polymorphism?
+a. The method must override a base class method
+b. The method must overload a base class method
+c. The method's class must extend a base class that has the
+overridden method
+d. The method must execute against a base class reference variable
 
-**Math** --------------------
+Answer: Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior. So a and d are correct.
+
+
+
+**Math** ------------------------------------------------
 
 Question:  What is the return type of method round(double d) defined in Math class?
 Answer: long 
@@ -211,7 +316,8 @@ static long	round(double a): Returns the closest long to the argument, with ties
 static int	round(float a): Returns the closest int to the argument, with ties rounding up.
 
 
-**Access** ------------------
+**Access** -----------------------------------------
+
 You cannot access an instance variable from a static method.
 
 Question:
@@ -256,14 +362,15 @@ c As the classes are in the same package and all of the methods
 are visible except for the private method.
 
 
-**Primitives** -------------
+**Primitives** ---------------------------------------------
+
 float f=3.1415; float f = 3.14f;
 
 byte b=257; wrong!!!
 A byte has the range of -128 to 127 only.
 
 
-**Arrays** ----------------------
+**Arrays** -------------------------------------------------
 
 Given the following code, which of the following statements can be used to
 determine if cat can be found in the list?
@@ -282,7 +389,8 @@ method does not take an integer argument and the hasObject
 method does not exist.
 
 
-**Looping** ------------------------
+**Looping** -----------------------------------------
+
 Given the following declarations, which of the following statement will
 compile?
 int i = 5;
@@ -309,6 +417,7 @@ No, they aren't!  only b is correct. c  misses the first element, and d causes a
 
 
 **Methods** ------------------------------
+
 Question:
 Which of the following declares a method that takes a float and an integer and returns an array of integers?
 a. public int[] someMethod(int i, float f)
@@ -323,7 +432,8 @@ Answer:
 a, c, and d Option b fails to initialize the array properly.
 
 
-**Overloading** ---------------------------
+**Overloading** ----------------------------------
+
 Question:
 Which of the following statements about overloaded methods are true?
 a. Static methods cannot be overloaded.
@@ -348,110 +458,29 @@ Answer: The last line is a method that happens to have the same name as the cons
 default constructor, the class has no default constructor.  So c and d are correct.
 
 
+**The Object Class** ----------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Question
-Which of the following must be true for a method to support polymorphism?
-a. The method must override a base class method
-b. The method must overload a base class method
-c. The method's class must extend a base class that has the
-overridden method
-d. The method must execute against a base class reference variable
-
-Answer: Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior. So a and d are correct.
-
-X3.c
 What method is used to determine the type of an object?
 a. isType
 b. typeOf
 c. instanceof
 d. instanceOf
-a
+
 Answer: d The other methods do not exist.
 We beg to differ.  instanceof is an operator.  The method would be getClass and then use instancof?  Pretty sure they mean c., which then makes the question's use of the word 'method' wrong.
 
-X4.a,b,c
-Which of the following are valid casts?
-a. num1 = num2;
-b. num1 = (int)num2;
-c. num1 = (float)num2;
-d. num1(int) = num2;
-a,b,c
-Answer: b.  The others will generate syntax errors.
 
-X5.d
-Given the following class definitions:
-public class ClassA 
-{
-	public ClassA() 
-	{
-		System.out.println("ClassA constructor");
-	}
-	public void someMethod() 
-	{
-		System.out.println("ClassA someMethod");
-	}
-}
-class ClassB extends ClassA 
-{
-	public ClassB() 
-	{
-		System.out.println("ClassB constructor");
-	}
-	public void someMethod() 
-	{
-		// comment
-		System.out.println("ClassB someMethod");
-	}
-	public static void main(String args[]) 
-	{
-		ClassB b = new ClassB();
-		b.someMethod();
-	}
-}
+**Exceptions** --------------------------------------------
 
-What statement is needed at the comment line to generate the
-following output:
-ClassA constructor
-ClassB constructor
-ClassA someMethod
-ClassB someMethod
-a. super();
-b. super().someMethod;
-c. super.someMethod();
-d. someMethod();
-e. None of the above
-c (second time lucky!)
-c The first answer is used only as the first statement of a
-constructor. The second answer generates a syntax error. The
-fourth option results in unbounded recursion.
-
-Chapter 8: Handling Exceptions in an Application p.275 (3/5)
-x1.a,c,d
+Question:
 1. Which of the following implement checked exceptions?
 a. Class A extends RuntimeException
 b. Class A extends Throwable
 c. Class A extends Exception
 d. Class A extends IOException
-d (second time wrong.  This time we ignored the implment part of the question)
-Answer: c and d Checked exceptions are those classes that extend the Exception class but not the RuntimeException class.
+Answer: Checked exceptions are those classes that extend the Exception class but not the RuntimeException class.  So the answer is c and d.
 
-X5.b,d
+Question:
 What exceptions may the following code generate at runtime?
 String s;
 int i = 5;
@@ -463,57 +492,39 @@ a. ArithmeticException
 b. DivisionByZeroException
 c. FileNotFoundException
 d. NullPointerException
-b,d
-Answer: a and d DivisionByZeroException does not exist. No file
-operations are performed here.
 
-(p.297 answers)
+Answer: DivisionByZeroException does not exist. No file
+operations are performed here.  So the answer is a and d.
 
-====================
-
-Chapter 1: Getting Started with Java p.37 (2/2)
-Chapter 2: Java Data Types and Their Usage p.76 (4/6)
-Chapter 3: Decision Constructs p.114 (5/5!)
-Chapter 4: Using Arrays and Collections p.151 (1/3)
-Chapter 5: Looping Constructs p.183 (4/5)
-Chapter 6: Classes, Constructors, and Methods p.216 (3/7)
-Chapter 7: Inheritance & Polymorphism (1/6) 
-Chapter 8: Handling Exceptions in an Application p.275 (3/5)
-23 out of 39 is 58%.  We need to score above 70% to pass, and advice said we should be scoring above 80% on mock exams before attempting the test.  
-So no time to waste.
-
-
-
-EPractize Test Product ---------
-
+Question:
 BufferedReader reader = null;      
 try {         
-		URL url = new URL("http://www.epractizelabs.com/serverdate.html");         
-		reader = new BufferedReader(new InputStreamReader(url.openStream()));         
-		String line = reader.readLine();         
-		SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");         
-		Date date = format.parse(line);     
-	  } catch (MalformedURLException exception) 
-	  {          // handle wrong URL     
-	  } catch (IOException exception) 
-	  {          // handle I/O errors     
-	  } catch (ParseException exception) 
-	  {          // handle date parse problems.     
-	  } finally 
-	  {          
-		if (reader != null) 
-		{             
-			try 
-			{                 
-				reader.close();             
-			} catch (IOException ex) 
-			{                 
-				ex.printStackTrace();             
-			}          
-		}     
-	}
+	URL url = new URL("www.epractizelabs.com/serverdate.html");		
+	reader = new BufferedReader(new InputStreamReader(url.openStream()));
+	String line = reader.readLine();         
+	SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");        
+	Date date = format.parse(line);     
+} catch (MalformedURLException exception) 
+{          // handle wrong URL     
+} catch (IOException exception) 
+{          // handle I/O errors     
+} catch (ParseException exception) 
+{          // handle date parse problems.     
+} finally 
+{          
+	if (reader != null) 
+	{             
+		try 
+		{                 
+			reader.close();             
+		} catch (IOException ex) 
+		{                 
+			ex.printStackTrace();             
+		}          
+	}     
+}
 
-Question : Which of the following Java SE 7 code replaces above code?
+Question : Which of the following Java SE 7 code snippets replaces above code?
 
 Select one. 
 Choice A: 
@@ -523,26 +534,14 @@ try {     
 	SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");    
 	Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
 
-Choice B: (Chosen)
-try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL                                                            ("http://www.epractizelabs.com/serverdate.html").openStream()))) {     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
+Choice B:
+try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL                                                            ("www.epractizelabs.com/serverdate.html").openStream()))) {     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
 
 Choice C: 
 try (@BufferedReader reader) {     reader = new BufferedReader(new InputStreamReader( new URL                                    ("http://www.epractizelabs.com/serverdate.html").openStream()));     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
 
-Pre Measurement  Date : 01/04/2014 
-Passing score : 77%   Your score : 75%    Test status : Fail
-Total No. of question(s): 16                                                   
-Correct answered question(s) : 12
 
-Objective Score
-Java Basics 50%
-Working With Java Data Types 33%
-Using Operators and Decision Constructs 100%
-Creating and Using Arrays 0%
-Using Loop Constructs 100%
-Working with Methods and Encapsulation 100%
-Working with Inheritance 100%
-Handling Exceptions 100%
+**The List Class** ----------------------------------------------
 
 Which are List objects?
 - ArrayList
@@ -550,8 +549,8 @@ Which are List objects?
 - Vector
 - Stack
 
-What is true about local inner classes?
-- It can access only final variables.
+
+**Random** ------------------------------------------------
 
 A static method can only be hidden by another static method.  A static variable may be hidden by an instance variable.
 
@@ -559,15 +558,11 @@ The combination of 'abstract' and 'synchronized' modifiers are not allowed.
 
 According to the JavaBean naming standards, if the boolean property is named 'x', the accessor method is of the form boolean isX() and the mutator method is of the form void setX(boolean newValue)
 
-variable arguments allows a method to be called with ZERO or more arguments.
-
-A variable from an interface is by default final so cannot be changed in a subclass.
-- Interfaces only describe behaviour, not state.
-- they're only to be used as constants. Hence static and final. 
+variable arguments (varargs) allows a method to be called with ZERO or more arguments.
 
 Class members cannot use the this keywords as there is no this to refer to.
 
-False: Member inner classes are the static class.
+False: Member inner classes are the static class.(?)
 
 Finalize will always run before an object is garbage collected.
 
@@ -577,37 +572,26 @@ Answer: declare the sensitive fields as private transient.
 Question: Which of the following keywords is used when a constructor calls an overload constructor in the same class.
 Answer: this
 
-Integer n1 = new Integer(0);
-Byte n2 = new Byte((byte)0);
-System.out.println(n1.equals(n2)); false!!!
-
-- abstract classes cannot be instantiated
-
 - super() must be the first statement in a subclass contructor.
 
-quote(String s) returns a literal pattern string for the specified String.  This method produces a String that can be used to create a Pattern that would match the String s as if it were a literal pattern.  Meta characters or escape sequences in the input sequence will be given no special meaning.
+quote(String s) returns a literal pattern string for the specified String.  This method produces a String that can be used to create a Pattern that would match the String s as if it were a literal pattern. Meta characters or escape sequences in the input sequence will be given no special meaning.
 
 - Number is the super class for many wrapper classes, but not Boolean and Character
 
-- Nested (inner) classes can be declared abstract, final, private, public, or protected to restrict access to the class.
 
-class Bank
-{
-	String bankName;
-	public String getBranchName()
-	{
-		return bankName;
-	}
-}
-public class BankBranch extends Bank
-{
-	public static void main(String[] argv) {}
-	public String getBranchName() throws Exception 
-	{
-		return bankName;
-	}
-}
-Does not compile: getBranchName() cannot override the superclass method.  The overridden method does not throw an exception.  (But it could if it were a runtime exception, right?  Or is that only checked exceptions?)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - The split() and matches() methods are present in both String and Pattern class.
 
@@ -2002,3 +1986,6 @@ Council: $196p/q approx
 Strata: $5,786p/q approx
 
 Wed.  Cherie meets Henry and looks at some places at Potts Point.
+
+A mess of more than one mans making.
+A giant portrait of mankind.
