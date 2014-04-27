@@ -428,6 +428,14 @@ private static void defualtValue()
 		System.out.println(employeeIdList.equals(employeeProfileList));
 	}
 
+	private static void arrayWork()
+	{
+		int []a = {1,2,3,4,5,6};
+		int i = a.length -1;
+		while(i>=0)
+		{System.out.print(a[i]);i--;}
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -437,7 +445,8 @@ private static void defualtValue()
 		//unorthadoxUnary();
 		//basicFailedQuestions();
 		//failedFinalMockExamQuestions();
-		payRollExample();
-		Class ExamQuestions = ExamQuestions.class;
+		//payRollExample();
+		//Class ExamQuestions = ExamQuestions.class;
+		arrayWork();
 	}
 }

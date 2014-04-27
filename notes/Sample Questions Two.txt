@@ -1,62 +1,107 @@
-Sample Questions
+Inheritance
+Integer
+Doubles & Floats
+Arrays
+Interface & Abstract Classes
+Extending a Class
+Strings
+Booleans
+Rules of Promotion
+Inner Classes
+Overriding & Hiding
+Math
+Access
+Primitives
+Arrays
+Looping
+Methods
+Overloading
 
-Consider the following code snippet:
-    arrayOfInts[j] > arrayOfInts[j+1]
-Question: What operators does the code contain?
-Answer: >, +
 
-Consider the following code snippet:
-int i = 10;
-int n = i++%5;
-    Question: What are the values of i and n after the code is executed?
-    Answer: i is 11, and n is 0.
-    Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
-    Answer: i is 11, and n is 1.
 
-Questions and Exercises: Inheritance
-1.a and c incorrect.  How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
-http://docs.oracle.com/javase/tutorial/java/IandI/override.html
 
-- What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
+
+**Inheritance** /*----------------------*/
+How do you hide an inherited method?  It's considered a bad programming practice, but the table in Overriding and Hiding Methods section shows the effect of declaring a method with the same signature as a method in the superclass.
+						 Superclass Instance Method		Superclass Static Method
+Subclass Instance Method Overrides						compile-time error
+Subclass Static Method	 compile-time error				Hides
+
+Question:
+Which set of statements result in ClassB and ClassC being derived
+from ClassA?
+a. class ClassB extends ClassA {}
+b. class ClassB extends ClassC {}
+c. class ClassA extends ClassB {}
+d. class ClassC extends ClassB {}
+e. No combination will work
+
+Answer: a and d This results in ClassC being the "grandchild" of ClassA.
+
+**Integers** /*----------------------*/
+Question - What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
+Answer - 
 String base5String = "230";
 int result = Integer.valueOf(base5String, 5);
-static Integer	valueOf(String s, int radix): Returns an Integer object holding the value extracted from the specified String when parsed with the radix given by the second argument.
+static Integer valueOf(String s, int radix): Returns an Integer object holding the value extracted from the specified String when parsed with the radix given by the second argument.
 
+43 = o53 (octal)
 
-Question: What Double method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
+**Doubles & Floats** /*----------------------*/
+Question: What Double(Float) method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 Answer: isNaN()
-
-NaN	
+NaN	Example
 	Double d1 = new Double(-1.0/0.0);
 	Double d2 = new Double(0.0/0.0);
      // returns true if this Double value is a Not-a-Number (NaN) 
      System.out.println(d1 + " = " + d1.isNaN()); // false
      System.out.println(d2 + " = " + d2.isNaN()); // true
 
-###gocertify###
-1. E
+**Arrays** /*----------------------*/
+- Basic Example:
 int []a = {1,2,3,4,5,6};
 ini i = a.length -1;
 while(i>=0)
-{System.out.println(a[i]);i--}
+{System.out.println(a[i]);i--;}
 Result 654321
-a len is 6. go from index 5 to 0
+length is 6, so i is set to 5. go from index 5 to 0, which means 6 to 1 will be printed.  If we use (i>0) instead, the output is from 6 to 2.
 
-3. Must extend an abstract class
-4. An interface can't extend a class
-An interface can extend multiple interfaces
-5. Arrays are objects, so
+- Arrays are objects, so
 int a[] = {1,2,3,4}
 print(a instanceof Object) prints true.
--6. Indexing of array elemnts begins with zero, 43 = o53 (octal)
-7. anonymous arrays.  assigned two one dimensional int arrays to the two dinmensiaonal array a.  So the code compiles and poroduces 2.
+
 int a[][] = new int[3][];
 a[1]=new int[]{1,2,3};
 a[2]=new int[]{4,5};
 print(a[1][1]); = 2
 
-11. wrong pass by reference nightmare
--12
+Question: Which of the following statements will compile without an error?
+a. int arr[];
+b. int arr[5];
+c. int arr[5] = {1,2,3,4,5};
+d. int arr[] = {1,2,3,4,5};
+The number of elements in an array declaration is not used in
+the declaration. However, we can use the following:
+int arr[] = new int[5];
+Answer: a and d
+
+
+**Interface & Abstract Classes** /*----------------------*/
+- Must extend an abstract class
+- An interface can't extend a class
+- An interface can extend multiple interfaces
+- The method definitions inside interfaces are public and abstract. They cannot be private or protected.
+
+**Extending a Class** /*---------------------------*/
+A a = new B()
+Reference Side   / Instance side
+Reference handle / assigned to class type
+declared as      / actual insance
+Static methods   / instance methods
+compile time     / runtime polymorphism (late binding)
+hides            / overrides
+
+- Basic Example:
 class Base
 {
 	int i = 99;
@@ -87,50 +132,9 @@ Output:
 Derived.amethod()
 99
 Derived.amethod()
-It creates an instance of the Derived class but assigns it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.  But note that if the amethod() was not present in the base class, then compilation error would be reported at compile time.  When the compiler sees the statement like b.amethod(), it checks if the method is present in the Base class or not.  Only at the run time it decides to call the method from the derived class.
-13. 
-String s = "Java";
-s.concat(" SE 6");
-s.replace('6','7');
-print(s) // Java (the two calls are abandoned instantly)
-14.
-line 3, two more objects created, 'SE 6', and 'Java SE 6'
-line 5 'java'
-3. String s = "Java"; 1
-4. s.concat(" SE 6"); 2,3
-5. s.toLowerCase();   4
-15
 
-Test http://www.gocertify.com/quizzes/java/scjp1/
+- This creates an instance of the Derived class but assigns it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.  But note that if the amethod() was not present in the base class, then compilation error would be reported at compile time.  When the compiler sees the statement like b.amethod(), it checks if the method is present in the Base class or not.  Only at the run time does it decide to call the method from the derived class.
 
-2. Any string other than 'true' of 'false' as a Boolean constructor will result in a value of false;  Note case does not matter.
-boolean a = new Boolean("tRuE"); will allocate a Boolean object representing true.
-
-4. 
-int a = 5;
-print("Value is - "+((a < 5) ? 9.9 : 9));
-The result of a ternary operator must be determined at compile time, and here the type chosen using the rules of promotion for binary operands is double.  Since the result is a double the output value is printed in a floating point.  The choice of which value to be printed is made on the basis of the result of the comparison "a < 5" which results in false, hence the variable "a" takes the second of the two possible values, which is 9, but because the result type is promoted to double the output value is actually written as 9.0 rather than the more obvious 9.
-5. a,c,d,e (Ouch, no d! and b is ok too..)
-public class Outer {
-	public int a = 1;
-	privte int b = 2;
-	public void method(final int c)
-	{
-		int d = 3;
-		class inner
-		{
-			private void iMethod(int e)
-			{
-				// which variables may be referenced here?
-			}
-		}
-	}
-}
-a, b, c and e are correct. Since inner is not a static inner class, it has a reference to an enclosing object and all the variables of that object are accessible. Therefore A and B are correct even if b is private. Variables in the enclosing method are only accessible when they are marked as final, hence c is accessible but not d. E is obviously correct as it is a parameter to the method containing line 12 itself.  d is not final so not visible.
-
-X6. - an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
-
-X16.
 class Parent
 {
 	private void method1(){System.out.println("Parent1");}
@@ -150,61 +154,117 @@ If method1 in parent were not private, the output would be:
 Parent2
 Child1
 
+**Strings** /* ---------------------- */
+String s = "Java";
+s.concat(" SE 6");
+s.replace('6','7');
+print(s) // Java (the two calls are abandoned instantly)
 
-Javaprepare Mock exam 1 for SCJP 6
+- How many objects are created?
+line 3, two more objects created, 'SE 6', and 'Java SE 6'
+line 5 'java'
+3. String s = "Java"; 1
+4. s.concat(" SE 6"); 2,3
+5. s.toLowerCase();   4
 
-x2.c,g - bcf
-x5. 0005 0x05
-x6. c,f,g,h - bcfg
-x9."amp" - am
-x10.A - ac 
-C. The method definitions inside interfaces are public and abstract. They cannot be private or protected.
 
-x11.F 14 ^ 23 = ?
-x13.private - protected
-x14.c,d - a,c
-x16.b - c
-x21.b,d,e - bce
-x25.e - a
-x27.e - d
-x*32.a,c - bd
-?33.c - bc
--34.c collections
-x35.a " - c
-x37.c - f
--?38.the return type of method round(double d) defined in Math class
-long or float
-x42.ArrayList
-x46.String of hex value. - int
-x47.b - d
-29 out of 48 is 60%.  Not good enough.  Need to get at least 80.
+**Booleans** --------------------------
+Any string other than 'true' of 'false' as a Boolean constructor will result in a value of false;  Note case does not matter.
+boolean a = new Boolean("tRuE"); will allocate a Boolean object representing true.
 
-PDF Questions:
+**Rules of Promotion** ----------------
 
-Test you knowledge:
-Chapter 1: Getting Started with Java p.37 (2/2)
+int a = 5;
+print("Value is - "+((a < 5) ? 9.9 : 9));
 
-Chapter 2: Java Data Types and Their Usage p.76 (4/6)
-X1.a x c.cannot access an instance variable from a static method.
-X2.a. x c,e 
+The result of a ternary operator must be determined at compile time, and here the type chosen using the rules of promotion for binary operands is double.  Since the result is a double the output value is printed in a floating point.  The choice of which value to be printed is made on the basis of the result of the comparison "a < 5" which results in false, hence the variable "a" takes the second of the two possible values, which is 9, but because the result type is promoted to double the output value is actually written as 9.0 rather than the more obvious 9.
+
+**Inner Classes** ---------------------------------------
+public class Outer {
+	public int a = 1;
+	privte int b = 2;
+	public void method(final int c)
+	{
+		int d = 3;
+		class inner
+		{
+			private void iMethod(int e)
+			{
+				// which variables may be referenced here?
+			}
+		}
+	}
+}
+
+Since inner is not a static inner class, it has a reference to an enclosing object and all the variables of that object are accessible. Therefore a and b are correct even if b is private. Variables in the enclosing method are only accessible when they are marked as final, hence c is accessible but not d. e is obviously correct as it is a parameter to the method containing line 12 itself.  d is not final so not visible.  So a, b, c and e are correct.
+
+**Overriding & Hiding** ----------------------
+- an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
+
+
+**Math** --------------------
+
+Question:  What is the return type of method round(double d) defined in Math class?
+Answer: long 
+
+static long	round(double a): Returns the closest long to the argument, with ties rounding up.
+static int	round(float a): Returns the closest int to the argument, with ties rounding up.
+
+
+**Access** ------------------
+You cannot access an instance variable from a static method.
+
+Question:
+Which of the following keywords cannot be used when declaring a class?
+a. public  
+b. private 
+c. protected 
+d. package   
+
+Answer:
+a and b Only the private and public keywords can be used when
+declaring a class and the private keyword can only be used
+with inner classes.
+
+Question:
+Assuming that the following classes are in the same package, which
+statements are true?
+class SomeClass 
+{
+	void method1() { }
+	public void method2() { }
+	private void method3() { }
+	protected void method4() { }
+}
+public class SomeClassAccessDemo 
+{
+	public void someMethod(String[] parameters) 
+	{
+		SomeClass sc = new SomeClass();
+		sc.method1();
+		sc.method2();
+		sc.method3(); // only private methods are not visible.
+		sc.method4();
+	}
+}
+a. sc.method1() will generate a syntax error.
+b. sc.method2() will generate a syntax error.
+c. sc.method3() will generate a syntax error.
+d. sc.method4() will generate a syntax error.
+e. No syntax errors will be generated.
+c As the classes are in the same package and all of the methods
+are visible except for the private method.
+
+
+**Primitives** -------------
 float f=3.1415; float f = 3.14f;
-byte b=257; byte -128 to 127 only.
-OX4.a,d x a,b,d: No!  a and d only are right.  Mistake in question!
 
-Chapter 3: Decision Constructs p.114 (5/5!)
+byte b=257; wrong!!!
+A byte has the range of -128 to 127 only.
 
-Chapter 4: Using Arrays and Collections p.151 (1/3)
-X1.a,b,c,d
-Which of the following statements will compile without an error?
-a. int arr[];
-b. int arr[5];
-c. int arr[5] = {1,2,3,4,5};
-d. int arr[] = {1,2,3,4,5};
-a and d The number of elements in an array declaration is not used in
-the declaration. However, we can use the following:
-int arr[] = new int[5];
-O2.b
-X3.a x 
+
+**Arrays** ----------------------
+
 Given the following code, which of the following statements can be used to
 determine if cat can be found in the list?
 ArrayList<String> list = new ArrayList<>();
@@ -212,18 +272,17 @@ list.add("dog");
 list.add("cat");
 list.add("frog");
 a. list.contains("cat")
-b. list.hasObject("cat") x
+b. list.hasObject("cat")
 c. list.indexOf("cat")
-d. list.indexOf(1)       x
+d. list.indexOf(1)    
 a and c The contains method will return true if the object is found
 and indexOf takes an object reference and returns the index
 of the object if found, otherwise it returns a -1. The indexOf
 method does not take an integer argument and the hasObject
 method does not exist.
 
-Chapter 5: Looping Constructs p.183 (4/5)
-X1.a,c
-p.179 pitfalls
+
+**Looping** ------------------------
 Given the following declarations, which of the following statement will
 compile?
 int i = 5;
@@ -232,9 +291,10 @@ a. while(i < j) {}
 b. while(i) {}
 c. while(i = 5) {}  thought it was i == 5!
 d. while((i = 12)!=5) {}  // (12 != 5)
+
 a and d The other options will not work because the expression does
 not evaluate to a Boolean value.
-OX2.b
+
 Given the following declaration of an array, which statement will display
 each element of the array?
 int arr[] = {1,2,3,4,5};
@@ -247,8 +307,9 @@ d. for(int n=1; n <= 5; n++) { System.out.println(arr[n]);
 b,c,d are correct.
 No, they aren't!  only b is correct. c  misses the first element, and d causes an array index out of bounds exception!
 
-Chapter 6: Classes, Constructors, and Methods p.216 (3/7) -------
-X1.b
+
+**Methods** ------------------------------
+Question:
 Which of the following declares a method that takes a float and an integer and returns an array of integers?
 a. public int[] someMethod(int i, float f)
 { return new int[5];}
@@ -258,20 +319,21 @@ c. public int[] someMethod(int i, float f)
 { return new int[i];}
 d. public int []someMethod(int i, float f)
 { return new int[5];}
+Answer:
 a, c, and d Option b fails to initialize the array properly.
 
 
-X3.b
+**Overloading** ---------------------------
+Question:
 Which of the following statements about overloaded methods are true?
 a. Static methods cannot be overloaded.
 b. The return value is not considered when overloading a method.
 c. Private methods cannot be overloaded.
 d. An overloaded method cannot throw exceptions.
-a The return value is not considered when overloading a method.
-(isnt that what our answer said?)
-Yes, we did get this right.  b is the correct answer.
+Answer:
+- a The return value is not considered when overloading a method so b is the correct answer.
 
-X4.a
+Question:
 Given the following code, which of the following statements are true?
 public class SomeClass {
 public SomeClass(int i, float f) { }
@@ -282,66 +344,36 @@ a. error will occur cause void cannot be used with a constructor.
 b. error will occur cause the first two constructors are not unique.
 c. The class does not have a default constructor.
 d. No syntax errors will be generated.
-c and d The last line is a method that happens to have the same name as the constructor. As there are constructors defined but no
-default constructor, the class has no default constructor.
+Answer: The last line is a method that happens to have the same name as the constructor. As there are constructors defined but no
+default constructor, the class has no default constructor.  So c and d are correct.
 
-X5.d
-Which of the following keywords cannot be used when declaring a class?
-a. public  OK
-b. private OK
-c. protected x
-d. package   x
-a and b Only the private and public keywords can be used when
-declaring a class and the private keyword can only be used
-with inner classes.
 
-X6.a,c,d
-Assuming that the following classes are in the same package, which
-statements are true?
-class SomeClass 
-{
-	void method1() { }
-	public void method2( { }
-	private void method3( { }
-	protected void method4() { }}
-	class demo 
-	{
-		public void someMethod(String[] parameters) 
-		{
-			SomeClass sc = new SomeClass();
-			sc.method1();
-			sc.method2();
-			sc.method3(); only protected methods are not visible.
-			sc.method41();}}
-a. sc.method1() will generate a syntax error.
-b. sc.method2() will generate a s0yntax error.
-c. sc.method3() will generate a syntax error.
-d. sc.method4() will generate a syntax error.
-e. No syntax errors will be generated.
-c As the classes are in the same package and all of the methods
-are visible except for the private method.
 
-Chapter 7: Inheritance & Polymorphism (1/6) ---------p.246
-X1.c,d
-Which set of statements result in ClassB and ClassC being derived
-from ClassA?
-a. class ClassB extends ClassA {}
-b. class ClassB extends ClassC {}
-c. class ClassA extends ClassB {}
-d. class ClassC extends ClassB {}
-e. No combination will work
-a, d (second time around answer is correct!)
-Answer: a and d This results in ClassC being the "grandchild" of ClassA.
 
-X2.a,b,c?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Question
 Which of the following must be true for a method to support polymorphism?
 a. The method must override a base class method
 b. The method must overload a base class method
 c. The method's class must extend a base class that has the
 overridden method
 d. The method must execute against a base class reference variable
-a,c (second time around also wrong)
-Answer: a and d.  Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior.
+
+Answer: Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior. So a and d are correct.
 
 X3.c
 What method is used to determine the type of an object?
@@ -1058,6 +1090,16 @@ Float numm2 = -0.0F;
 Float numm3 = 0.0F;
 (numm1.intValue() == numm3)) true
 
+
+Operator Precedence
+
+Consider the following code snippet:
+int i = 10;
+int n = i++%5;
+    Question: What are the values of i and n after the code is executed?
+    Answer: i is 11, and n is 0.
+    Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
+    Answer: i is 11, and n is 1.
 
 4 + 5 * 6 / 3 will be treated as 
 4 + (5 * (6 / 3)) = ?
@@ -1929,15 +1971,34 @@ This code is fine.  We thought it would trigger a ClassCastException, but it won
 
 - can we transfer if we move?
 - static ip?
+- can I use Linksys WRT54C router?
+- What about the modem?
+DOCSIS 3.0 is replacing DOCSIS 2.0 
+Status lights?  
+Warranty?
+
+Connection speeds:
+ADSL2+or ADSL crumbly old copper lines outside your home.  list themselves at 24,000/1024 (or similar), even though for practical purposes nobody actually hits that 24,000Kbps mark.
+Korea 16.63 Mbit/s
+Australia 2.86 Mbit/s
+
 Harbour ISP Unlimited Tier 1 NBN Plan Bundle
 $65 per month - Unlimited 
 
 SpinTel Zoom Four Unlimited ADSL2+ 
-$69.95 per month
+$69.95 per month - unlimited - ADSL2+
+https://www.spintel.net.au/products/broadband
+- Depending on your usage, other fees and charges may apply, including early exit fees.
+- how much is A Static IP?
+- TP-Link TD-W8951ND (4 Port with Wireless) ($59+$15 delivery = 74$. $38 at Walmart.) is this for purchase or rental?
+- Connection is speed limited when usage allowance exceeded
 
-import A.Enum?
 
 Unit 355/6 Cowper Wharf Rd.
 Woolloomooloo, 2011
+OUTGOINGS
+Water: $183p/q approx
+Council: $196p/q approx
+Strata: $5,786p/q approx
 
 Wed.  Cherie meets Henry and looks at some places at Potts Point.
