@@ -1,0 +1,4 @@
+Runtime Errors
+
+Integer num_123 = Integer.parseInt("123L");
+- this method accepts digits only and causes a runtime exception

@@ -351,6 +351,15 @@ To be serialized successfully, two conditions must be met:
 - The class must implement the java.io.Serializable interface.
 - All of the fields in the class must be serializable. If a field is not serializable, it must be marked transient. 
 
+During serialization,
+- state is saved but methods are not.
+- transient and static variables are not.
+- objects that inerhit Externalizable are.
+
+by implementating java.io.Serializable, you get "automatic" serialization capability for objects of your class. No need to implement any other logic, it'll just work. The Java runtime will use reflection to figure out how to marshal and unmarshal your objects.
+
+In earlier version of Java, reflection was very slow, and so serializaing large object graphs (e.g. in client-server RMI applications) was a bit of a performance problem. To handle this situation, the java.io.Externalizable interface was provided, which is like java.io.Serializable but with custom-written mechanisms to perform the marshalling and unmarshalling functions (you need to implement readExternal and writeExternal methods on your class).
+
 
 ###PDF Collections###
 The remove method is an optional Iterator method. If an attempt is made to use

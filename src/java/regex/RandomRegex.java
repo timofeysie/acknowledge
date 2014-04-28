@@ -12,5 +12,6 @@ public class RandomRegex
 	private static void testSplit(String[] args)
 	{
 		System.out.println((args[0].split(args[1])).length);
+		System.out.println(args[0].split(args[1]));
 	}
 }

@@ -1,5 +1,6 @@
 #Table of Contents#
 Quotes  
+Hash Codes
 To Do  
 Terms  
 Pass by Value Discussion  
@@ -38,6 +39,14 @@ Well, like Democratic politics, that's what happens when you try to please every
 - Scratch 
 Catastrophic Backtracking.
 I need to be sheilded from your sheilding.
+
+###Hash Codes###
+
+The so-called "hashing algorithm" implemented by class Test1 will always retrn the same value, 42, which is legal but will place all of the hash table entries into a single bucket, the most inefficient setup possible.
+A **hash function** is any algorithm that maps data of arbitrary length to data of a fixed length. The values returned by a hash function are called hash values, hash codes, hash sums, checksums or simply hashes. 
+- every class implicitly or explicitly provides a hashCode() method, which digests the data stored in an instance of the class into a single hash value (a 32-bit signed integer). This hash is used by other code when storing or manipulating the instance – the values are intended to be evenly distributed for varied inputs in order to use in clustering. This property is important to the performance of hash tables and other data structures that store objects in groups ("buckets") based on their computed hash values. Technically, in Java, hashCode() by default is a native method, meaning, it has the modifier 'native', as it is implemented directly in the native code in the JVM.
+- a hash table (also hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the correct value can be found.
+
 
 #Collections#
 - Hashtable:  We have used this class extensively in the past, since we started learning Java 1.2.  In a professional environment, this is not acceptable.  We need to know all the types intimately so that the best solution can be used in the right place.  We read this last night when we started to fall back on the old hashtable: "Hashtable is a legacy collection which was replaced by Java 1.2 collections in 1998. I suggest you avoid it, along with Vector and Enumeration." (Peter Lawrey reputation 207k)

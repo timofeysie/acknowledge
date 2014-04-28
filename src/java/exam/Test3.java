@@ -8,12 +8,24 @@ class Test3
 
 	public static void main(String[] args) 
 	{
-		secondTest();
+		//firstTest();
+		//secondTest();
+		thirdTest();
+	}
+
+	private static void thirdTest()
+	{
+		Set<Test3> s = new HashSet<Test3>();
+		s.add(new Test3()); // Test3 cannot be cast to Comparable.
+		s.add(new Test3());
+		s.add(new Test3());
+		for (Test3 out: s)
+			System.out.println(out);
 	}
 
 	private static void secondTest()
 	{
-		ArrayList a = new ArrayList();
+		ArrayList<Object> a = new ArrayList<>();
 		a.add(new A());
 		a.add(new B());
 		a.add(new C());

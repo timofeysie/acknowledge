@@ -3,6 +3,7 @@ import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.*;
+import java.io.*;
 
 public class ExamQuestions
 {
@@ -465,6 +466,94 @@ private static void defualtValue()
 	static void aMethod(double ob) {System.out.println("double");}
 	//static void aMethod(Object ob) {System.out.println("Object");}
 	//static void aMethod(String ob) {System.out.println("String");}
+
+	private static void testIO()
+	{
+		try
+		{
+			Writer w = new BufferedWriter(new FileWriter("example"));
+		} catch (java.io.IOException ioe)
+		{
+			System.out.println(ioe.toString());
+		}
+	}
+
+	static void bMethod() throws RuntimeException
+	{
+		throw new NullPointerException(); // Exception cannot go here.
+	}
+
+	private static void testException()
+	{
+		try
+		{
+			bMethod();
+		} catch (ClassCastException cce)
+		{
+			System.out.println("cce");
+		} finally
+		{
+			System.out.println("finally");
+		}
+	}
+
+
+	private static void testBooleans()
+	{
+		Boolean string1=new Boolean("TrUe");
+		boolean character1=true;
+		System.out.println(string1.booleanValue()==character1);
+		System.out.println(string1==character1);
+		System.out.println(string1.equals(character1));
+		//System.out.println(string1.booleanValue()=="true"); // error
+		System.out.println(string1.equals("true"));
+		//System.out.println(character1=="true"); // ditto
+		// incompatible types, boolean and String
+	}
+
+// private synchronized int e;
+
+	private static void testNumbers()
+	{
+		Byte b1 = 1;
+		byte b2 = 1;
+		System.out.println((b1==b2)); // true
+		double num1 = 0.2;
+		float num2 = 0.2f;
+		System.out.println(num1+" == "+num2);
+		System.out.println(num1 == num2); // false
+		System.out.println(num1 == (double)num2); // false
+		System.out.println((float)num1 == num2); // true
+		num1 = 0.5;
+		num2 = 0.5f;
+		System.out.println(num1+" == "+num2);
+		System.out.println(num1 == num2); // true
+		System.out.println(num1 == (double)num2); // true
+		System.out.println((float)num1 == num2); // true
+		Integer num3 = 123;
+		float num4 = 123.0f;
+		double num5 = 123.0;
+		float num6 = 123;
+		Integer num7 = new Integer("123");
+		byte num8 = 123;
+		System.out.println("Integer == float "+(num3 == num4)); //true
+		System.out.println("double == float "+(num5 == num4));  // true
+		System.out.println("float == int "+(num6 == num7));     // true
+		System.out.println("int == byte? "+(num7 == num8));     // true
+	}
+
+	private static void testOperators()
+	{
+		byte b1 = 1;
+		byte b2 = 2;
+		System.out.print(b1+" += "+b2+" = ");
+		// b1 = b1 + b2; // 1
+		b1 += b2; // compilation successful
+		System.out.print(b1);
+		/* 1 compilation fails due to error: possible loss of precision.
+		*/
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -477,8 +566,11 @@ private static void defualtValue()
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
 		//arrayWork();
-		aMethod("0");
+		//aMethod("0");
 		// int, long, float, double, Integer, Object, error
-
+		//testIO();
+		//testException();
+		//testNumbers();
+		testOperators();
 	}
 }

@@ -1,6 +1,9 @@
+Question Types
+
 Inheritance
 Integer
 Doubles & Floats
+Numbers
 Arrays
 Interface & Abstract Classes
 Extending a Class
@@ -12,17 +15,23 @@ Overriding & Hiding
 Math
 Access
 Primitives
-Arrays
 Looping
 Methods
 Overloading
 The Object Class
 Exceptions
 The List Class
+The euqals Method
 The == Operator
 The instanceof Operator
 Reserved Words
 The toArray method
+IO
+Regex
+Initial Capacity
+Printf
+Pass by Reference
+Enum
 Random
 
 
@@ -60,6 +69,14 @@ Integer n1 = new Integer(0);
 Byte n2 = new Byte((byte)0);
 System.out.println(n1.equals(n2)); false!!!
 
+Integer num_123 = Integer.parseInt("123L");
+- this method accepts digits only and causes a runtime exception
+Integer num_123 = Integer.parseInt(123L);
+- compile time error: no suitable method.
+parseInt(long)
+Integer num_123L = Integer.parseInt(123);
+- same error, no method parseInt(int)
+
 **Doubles & Floats** /*---------------------------------------
 Question: What Double(Float) method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 Answer: isNaN()
@@ -70,7 +87,46 @@ NaN	Example
      System.out.println(d1 + " = " + d1.isNaN()); // false
      System.out.println(d2 + " = " + d2.isNaN()); // true
 
+		Byte b1 = 1;
+		byte b2 = 1;
+		System.out.println((b1==b2)); // true
+		double num1 = 0.2;
+		float num2 = 0.2f;
+		System.out.println(num1+" == "+num2);
+		System.out.println(num1 == num2); // false
+		System.out.println(num1 == (double)num2); // false
+		System.out.println((float)num1 == num2); // true
+		num1 = 0.5;
+		num2 = 0.5f;
+		System.out.println(num1+" == "+num2);
+		System.out.println(num1 == num2); // true
+		System.out.println(num1 == (double)num2); // true
+		System.out.println((float)num1 == num2); // true
+
+
+**Numbers** --------------------------------------------------
+
+		Integer num3 = 123;
+		float num4 = 123.0f;
+		double num5 = 123.0;
+		float num6 = 123;
+		Integer num7 = new Integer("123");
+		byte num8 = 123;
+		System.out.println("Integer == float "+(num3 == num4)); //true
+		System.out.println("double == float "+(num5 == num4));  // true
+		System.out.println("float == int "+(num6 == num7));     // true
+		System.out.println("int == byte? "+(num7 == num8));     // true
+
+Integer numm1 = 0;
+Float numm2 = -0.0F;
+(numm1.intValue() == numm2)) true
+Float numm3 = 0.0F;
+(numm1.intValue() == numm3)) true
+
+
+
 **Arrays** /*-------------------------------------------------
+
 - Basic Example:
 int []a = {1,2,3,4,5,6};
 ini i = a.length -1;
@@ -99,10 +155,39 @@ int arr[] = new int[5];
 Answer: a and d
 
 
+// question 20
+		Integer arr[] = {2,1,0};
+		print(arr);
+		...
+		public static void print(int...arr)
+- Though Integer can be boxed into int type, Integer[] cannot be boxed to int[], so
+print(int...arr) cannot be applied to print(Integer[]). and causes a compiler error
+
+
+Given the following code, which of the following statements can be used to
+determine if cat can be found in the list?
+ArrayList<String> list = new ArrayList<>();
+list.add("dog");
+list.add("cat");
+list.add("frog");
+a. list.contains("cat")
+b. list.hasObject("cat")
+c. list.indexOf("cat")
+d. list.indexOf(1)    
+a and c The contains method will return true if the object is found
+and indexOf takes an object reference and returns the index
+of the object if found, otherwise it returns a -1. The indexOf
+method does not take an integer argument and the hasObject
+method does not exist.
+
+
+
+
 **Interface & Abstract Classes** /*----------------------*/
 
 - Must extend an abstract class
 - An interface can't extend a class
+- classes cannot extend interfaces, they must implement them.
 - An interface can extend multiple interfaces
 - The method definitions inside interfaces are public and abstract. They cannot be private or protected.
 
@@ -112,8 +197,23 @@ A variable from an interface is by default final so cannot be changed in a subcl
 
 - abstract classes cannot be instantiated
 
+-  abstract methods cannot define a method body.
+public abstract void method(){}
+final abstract int method(){}
+- both are illegal.  it should be like this:
+public abstract void method();
 
-**Extending a Class** /*------------------------------
+interface IAccount { String getAccoundNumber();}
+abstract class Account implements IAccount{}
+The class Account is valid as it is declared abstract and therefore doesn't have to implement all the methods of the superclass.
+
+- Watch out!!! You cannot assign a value to a variable declared in an interface even when the class at hand implements that interface, as all interface variables are implicitly final!
+
+- You can only implement interfaces:
+class Outside implements String // interface expected
+
+
+**Extending a Class** /*--------------------------------------------------
 
 Left Side vs. Right Side
 	A a 		 =  	new B()
@@ -272,11 +372,33 @@ line 5 'java'
 
 
 **Booleans** -------------------------------------------
+
 Any string other than 'true' of 'false' as a Boolean constructor will result in a value of false;  Note case does not matter.
 boolean a = new Boolean("tRuE"); will allocate a Boolean object representing true.
 
+Question:
+		Boolean string1=new Boolean("TrUe");
+		boolean character1=true;
+		System.out.println(string1.booleanValue()==character1); // 1
+		System.out.println(string1==character1);				// 2
+		System.out.println(string1.equals(character1));			// 3
+		System.out.println(string1.booleanValue()=="true"); 	// 4
+		System.out.println(string1.equals("true"));				// 5
+		System.out.println(character1=="true"); 				// 6
+What is the output?
+Answer: 
+Compile error: incompatible types, boolean and String
+For lines 4 and 6.
+
 
 **Rules of Promotion** ---------------------------------
+
+Question:
+int num = -50;
+System.out.println(num % 25.0)
+Answer:
+output -0.0
+We suppose that any expression containing a negative will give a negative answer, as well as follow the rules of promotion.
 
 Question:
 int a = 5;
@@ -353,6 +475,42 @@ aMethod("0"); // String, Object, error.
 
 **Inner Classes** ---------------------------------------
 
+- An inner class can be delcared public, final, abstract.
+- A local (inner) class can have static members provided that they are constant variables.
+
+What is true about local inner classes?
+- They can access only final variables.
+
+- Nested (inner) classes can be declared abstract, final, private, public, or protected to restrict access to the class.
+
+
+
+Questions 27
+public class TestInterface
+{
+	public abstract class InnerTest
+	{
+		abstract void f();
+	}
+
+	public static void main(String[] args) {
+		TestInterface t = new TestInterface();
+		//t.f(); // cannot be found
+		TestInterface.InnerTest test = t.new InnerTest()
+		{
+			public void f() 
+			{ 
+				System.out.println("Inner f");
+			}
+		};
+		test.f(); 
+	}
+}
+
+Answer:
+Works fine.
+
+
 public class Outer {
 	public int a = 1;
 	privte int b = 2;
@@ -371,13 +529,6 @@ public class Outer {
 
 Since inner is not a static inner class, it has a reference to an enclosing object and all the variables of that object are accessible. Therefore a and b are correct even if b is private. Variables in the enclosing method are only accessible when they are marked as final, hence c is accessible but not d. e is obviously correct as it is a parameter to the method containing line 12 itself.  d is not final so not visible.  So a, b, c and e are correct.
 
-What is true about local inner classes?
-- They can access only final variables.
-
-
-- Nested (inner) classes can be declared abstract, final, private, public, or protected to restrict access to the class.
-
-
 **Overriding & Hiding** -------------------------------------
 
 - an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
@@ -394,6 +545,25 @@ d. The method must execute against a base class reference variable
 
 Answer: Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior. So a and d are correct.
 
+If a method declararation overrides a method in the super class, there will be a compile time error when:
+- there are different return types
+- one is void and the other has a return type
+- one throws a clause that conflicts with that of any other method that it overrides or hides
+However, it can throw unchecked exceptions (RuntimeExceptions and it's descendants)  
+
+Given this:
+	public class Customer
+	{
+    	double calculate(int num) { /* */ }
+	}
+You can do this in a subclass:
+	double calculate(int num)
+	public double calculate(int num)
+	protected double calculate(int num)
+	double calculate(int num) throws RuntimeException
+You cannot do these:
+	double calculate(int num) throws Exception
+	private double calculate(int num)
 
 
 **Math** ------------------------------------------------
@@ -451,31 +621,30 @@ c As the classes are in the same package and all of the methods
 are visible except for the private method.
 
 
+Questions:
+package packages;
+public class Account { protected String number = "123"; }
+import packages.*;
+public class SilverAccount extends Account
+{
+	public static void main(String[] args) {
+		Account gold = new Account();
+		// System.out.println(gold.number); // call 1
+		SilverAccount silver = new SilverAccount();
+		System.out.println(silver.number); } // call 2
+}
+Answer:
+Protected variables or methods will not be accessable by a sub-class from their parent classes which are in different packages.  
+call 1<- protected access!
+call 2 works with the subclass.	
+
+
 **Primitives** ---------------------------------------------
 
 float f=3.1415; float f = 3.14f;
 
 byte b=257; wrong!!!
 A byte has the range of -128 to 127 only.
-
-
-**Arrays** -------------------------------------------------
-
-Given the following code, which of the following statements can be used to
-determine if cat can be found in the list?
-ArrayList<String> list = new ArrayList<>();
-list.add("dog");
-list.add("cat");
-list.add("frog");
-a. list.contains("cat")
-b. list.hasObject("cat")
-c. list.indexOf("cat")
-d. list.indexOf(1)    
-a and c The contains method will return true if the object is found
-and indexOf takes an object reference and returns the index
-of the object if found, otherwise it returns a -1. The indexOf
-method does not take an integer argument and the hasObject
-method does not exist.
 
 
 **Looping** -----------------------------------------
@@ -631,6 +800,43 @@ try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL  
 Choice C: 
 try (@BufferedReader reader) {     reader = new BufferedReader(new InputStreamReader( new URL                                    ("http://www.epractizelabs.com/serverdate.html").openStream()));     String line = reader.readLine();     SimpleDateFormat format = new SimpleDateFormat("MM/DD/YY");     Date date = format.parse(line); } catch (ParseException | IOException exception) {      // handle I/O problems. } 
 
+Question 32
+static void aMethod() throws RuntimeException
+{
+	throw new NullPointerException(); // Exception cannot go here.
+}
+...
+	try
+	{
+		aMethod();
+	} catch (ClassCastException cce)
+	{
+		System.out.println("cce");
+	} finally
+	{
+		System.out.println("finally");
+	}
+Not sure exactly what we were talking abut there.  The following code runs fine and produces the output "finally" and then the npe thrown in the method:
+	static void bMethod() throws RuntimeException
+	{
+		throw new NullPointerException(); // Exception cannot go here.
+	}
+
+	private static void testException()
+	{
+		try
+		{
+			bMethod();
+		} catch (ClassCastException cce)
+		{
+			System.out.println("cce");
+		} finally
+		{
+			System.out.println("finally");
+		}
+	}
+
+
 
 **The List Class** ----------------------------------------------
 
@@ -641,13 +847,31 @@ Which are List objects?
 - Stack
 
 
+**The euqals Method** --------------------------------------------
+
+- the equals() method will return false if the objects are not the same class.
+
+Boolean b1 = new Boolean("TRUE");
+boolean b2 = true;
+if (b1==b2) // true
+if (b1.equals(b2)) // true
+if (b1.booleanValue()==b2) // true
+
+By contract, if two objects are equivalent according to the equals() method, the  the hashCode() method must evaulate them to be ==.  
+if (x3.equals(x4))
+x3.hashCode() == x4.hashCode();
+
+
 **The == Operator** ---------------------------------------
 
+Question:  Will this work?
 String str = "10";
 int a = new Integer(10);
 boolean b = str==a;
+Answer:
 The comparison is not legal, as only the + operator performs the implicit conversion to a String object.
 ie: b = str==a+""
+
 
 Question:
 boolean b = false;
@@ -670,6 +894,17 @@ Integer a = 1;
 boolean b=str==a;
 Answer: will not compile.  Incomparable types: String and Integer 
 
+Question:
+Character obj = 65;
+char c = 65;
+if c==obj 
+Answer: true
+
+		Byte b1 = 1;
+		byte b2 = 1;
+		System.out.println((b1==b2));
+
+Answer: true
 **The instanceof Operator** ---------------------------------
 
 String num = "0";
@@ -677,538 +912,14 @@ num = null;
 if (num instanceof Object) ... false!
 - null compared with a string is not equal.
 
+**Operators** -----------------------------------------------
 
+byte b1 = 1;
+byte b2 = 2;
+b1 = b1 + b2; // compilation fails
+b1 += b2; // compilation successful
 
-**Reserved Words** ----------------------------------------
-
-Question: How does this code compile?
-Number Float = 99.455f;
-Answer: Float is not a reserved word.  'float' is.
-
-
-**The toArray method** ------------------------------------
-
-Question: Will this compile:
-Vector<String> set = new Vector<String>();
-String[] arr = set.toArray();
-Answer:  The toArray() method returns Object[], so to compile, the set must be cast to String.  You can fix it like this:
-String[] arr = (String [])set.toArray();
-
-Question:  What will the output be:
-import java.util.*;
-class Test13
-{
-	public static void main(String[] args) {
-		ArrayList<String> a =new ArrayList<String>();
-		a.add("one");
-		a.add("two");
-		a.add("three");
-		String[] s = a.toArray();
-		for (String str:s)
-		{
-			System.out.println(str);
-		}
-	}
-}
-
-Answer: Remeber, the toArray() method returns an array of Objects, and needs to be cast to a String array like this:
-String[] s = a.toArray(new String[0]);
-Trying this fails during runtime:
-String[] s = (String[])a.toArray();
-ClassCastException: Object cannot be cast to String.
-But then we tried these and they worked, so maybe the above was a different prob?
-String[] s3 = (String[])al.toArray();
-String[] s4 = set.toArray(new String[al.size()]);
-String[] s = a.toArray(new String[a.size()]);
-works also.  If we choose size 4, then a null string is added to the list.
-
-
-The size of the array cannot be specified in the following examples:
-		int i[] = new int[2] {1,2};
-		int j[4] = {1,2,3,4};
-The size is given implicitly by the initialization code (instance), never in the declaration of an array (reference).
-
-
-**Random** ------------------------------------------------
-
-A static method can only be hidden by another static method.  A static variable may be hidden by an instance variable.
-
-The combination of 'abstract' and 'synchronized' modifiers are not allowed.
-
-According to the JavaBean naming standards, if the boolean property is named 'x', the accessor method is of the form boolean isX() and the mutator method is of the form void setX(boolean newValue)
-
-variable arguments (varargs) allows a method to be called with ZERO or more arguments.
-
-Class members cannot use the this keywords as there is no this to refer to.
-
-False: Member inner classes are the static class.(?)
-
-Finalize will always run before an object is garbage collected.
-
-Questions: When using the writeObject method to store (serialize) the state of an object, how can you protect sensitive data from being acessed in the stored object?
-Answer: declare the sensitive fields as private transient.
-
-Question: Which of the following keywords is used when a constructor calls an overload constructor in the same class.
-Answer: this
-
-- super() must be the first statement in a subclass contructor.
-
-quote(String s) returns a literal pattern string for the specified String.  This method produces a String that can be used to create a Pattern that would match the String s as if it were a literal pattern. Meta characters or escape sequences in the input sequence will be given no special meaning.
-
-- Number is the super class for many wrapper classes, but not Boolean and Character
-
-- The split() and matches() methods are present in both String and Pattern class.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Test3
-{
-	public String toString() {
-		return "Test3";
-	}
-
-	public static void main(String[] args) {
-		Set<Test3> s = new TreeSet<Test3>();
-		s.add(new Test3()); // Test3 cannot be cast to Comparable.
-		s.add(new Test3());
-		s.add(new Test3());
-		for (Test3 out: s)
-			System.out.println(out);
-	}
-	/**
-	Either Test3 has to implement Comparable, or you need to provide a comparator when creating the TreeSet.
-	 */
-}
-To fix this:
-class Test3 implements Comparable {
- 	@Override
-    public int compareTo(Test3 test)
-    { /* Custom test */ }
-
-Writer w = new BufferedWriter(new FileWriter());
-This will cause an IOException.
-- If the named file exists but is a directory rather than a file, an IOException will be thrown.
-Writer w = new BufferedWriter(new FileWriter("name.txt"));
-- If the file doesnt exist it will be created.
-
-
-When you call System.exit() inside a finally block, the system will exit.
-
-Mock Exam 2
-
-int num = -50;
-System.out.println(num % 25.0)
-output -0.0
-We suppose that any expression containing a negative will give a negative answer, as well as follow the rules of promotion.
-
-- j2ee-struts is not a valid identifier because it has a SLASH!!!
-
-RegEx question:
-java Test x7+y8+z9=4P [4789][+-=]
-Test class main has this expression:
-System.out.println((args[0].split(args[1])).length);
-[abc][vz] Set definition, can match a or b or c followed by either v or z.
-
-
-- classes cannot extend interfaces, they must implement them.
-
-- the equals() method will return false if the objects are not the same class.
-
-String c = new String("1234567890");
-StringBuffer sb = new StringBuffer(c);
-- The capacity for sb is now 10+16 = 26
-
-line 10:	Integer e;
-1ine 11:	System.out.println(e); 
-// compile time error at line 11, not in the previous line!
-
-      double d_num = 999.3568;
-      System.out.printf("% .2f", d_num);
-Output: 999.36
-
-      Object obj = 99;
-      System.out.println(obj);
-This looks odd but it compiles.  However, there would be no output.  Not true, 99 will be printed!
-By autoboxing, 99 int primitive value will be automatically converted to Integer object and assigned to the variable obj.
-
-Character obj = 65;
-char c = 65;
-if c==obj ... TRUE
-
-- case labels only accept constant (final) expressions.
-
-The so-called "hashing algorithm" implemented by class Test1 will always retrn the same value, 42, which is legal but will place all of the hash table entries into a single bucket, the most inefficient setup possible.
-A **hash function** is any algorithm that maps data of arbitrary length to data of a fixed length. The values returned by a hash function are called hash values, hash codes, hash sums, checksums or simply hashes. 
-- every class implicitly or explicitly provides a hashCode() method, which digests the data stored in an instance of the class into a single hash value (a 32-bit signed integer). This hash is used by other code when storing or manipulating the instance – the values are intended to be evenly distributed for varied inputs in order to use in clustering. This property is important to the performance of hash tables and other data structures that store objects in groups ("buckets") based on their computed hash values. Technically, in Java, hashCode() by default is a native method, meaning, it has the modifier 'native', as it is implemented directly in the native code in the JVM.
-- a hash table (also hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the correct value can be found.
-
-Boolean b1 = new Boolean("TRUE");
-boolean b2 = true;
-if (b1==b2) // true
-if (b1.equals(b2)) // true
-if (b1.booleanValue()==b2) // true
-
-// question 20
-		Integer arr[] = {2,1,0};
-		print(arr);
-		...
-		public static void print(int...arr)
-- Though Integer can be boxed into int type, Integer[] cannot be boxed to int[], so
-print(int...arr) cannot be applied to print(Integer[]). and causes a compiler error
-
-		List list2 = new ArrayList<String>();
-		list2.add(new StringBuilder("123"));
-This will compile because list2 is a raw type variable,
-and no checking is done at compile time.
-However, if you try this:
-String sbu = list2.get(0);
-You will get a runtime error: found Object, required String.
-
-class Test {
-	public void Test(String a){print(a);}
-	public void Test(int b){rint(b);}
-	public void Test(){print("None");}
-}
-Question:  What is printed when you call new Test();?
-Answer: Nothing, those are not constructors because of the void return type modifier.
-
-// question 25
-int subTotal;
-static int total;
-public void calculate()
-{
-	int local;
-	local = this.total; //1
-	local = this.subTotal; //2
-	this.total = total; //3
-	//this.local = 4; Cannot find symbol
-	//this = new ExamQuestions(); // 5
-
--  Non-static mehods have an implicit 'this' object reference.  The this reference cannot be changed.  (5)
-- The 'this' reference can be used in a non-static context to refer to both instance and static members.
-- It cannot be used to refer to locl variables. (see 4)
-
-- Questions 27
-public class TestInterface
-{
-	public abstract class InnerTest
-	{
-		abstract void f();
-	}
-
-	public static void main(String[] args) {
-		TestInterface t = new TestInterface();
-		//t.f(); // cannot be found
-		TestInterface.InnerTest test = t.new InnerTest()
-		{
-			public void f() 
-			{ 
-				System.out.println("Inner f");
-			}
-		};
-		test.f(); // works fine
-	}
-}
-
-- Questions 28 & 29
-Protected variables or methods will not be accessable by a sub-class from their parent classes which are in different packages.  For example:
-
-package packages;
-public class Account { protected String number = "123"; }
-import packages.*;
-public class SilverAccount extends Account
-{
-	public static void main(String[] args) {
-		Account gold = new Account();
-		// System.out.println(gold.number); <- protected access!
-		SilverAccount silver = new SilverAccount();
-		System.out.println(silver.number); } // works with the subclass.	
-}
-
-- abstract methods cannot define a method body.
-public abstract void method(){}
-final abstract int method(){}
-- both are illegal.  it should be like this:
-public abstract void method();
-
-Integer num_123 = Integer.parseInt("123L");
-- this method accepts digits only and causes a runtime exception
-Integer num_123 = Integer.parseInt(123L);
-- compile time error: no suitable method.
-parseInt(long)
-Integer num_123L = Integer.parseInt(123);
-- same error, no method parseInt(int)
-
-- Question 32
-static void aMethod() throws RuntimeException
-{
-	throw new NullPointerException(); // Exception cannot go here.
-}
-...
-	try
-	{
-		aMethod();
-	} catch (ClassCastException cce)
-	{
-		System.out.println("cce");
-	} finally
-	{
-		System.out.println("finally");
-	}
-
-
-Retesting -------------------------------------------------------
-
-
-Class A {
-	int a =200;
-	A(int b) {
-		this.a=b;
-	}
-}
-Class Test {
-	static void a1(int a) {
-		a=-1;
-	}
-	static void a1(A a) {
-	a.a=-1;
-	}
-	public static void main(String as[]) {
-	int a=100;
-	a1(a);
-	A b = new A(400);
-	a1(b);
-	System.out.print(a+" "+b.a);
-	}
-}
-
-Output: 100 -1
-
-Mock Exam 1 Retest
-Boolean string1=new Boolean("TrUe");
-boolean character1=true;
-assert string1.booleanValue()==character1;
-assert string1==character1;
-assert string1.equals(character1);
-//assert !string1.booleanValue()=="true";
-assert !string1.equals("true");
-//assert !character1=="true";
-
-Vector<String> set = new Vector<String>();
-String[]arr=set.toArray();
-toArray() returns Object[].  The return type needs to be cast to String[] to compile.
-(See repeat question above for answer)
-
-- It's possible to loop an enum with an enhanced for look using the values() method:
-enum Direction {
-   NORTH,
-   EAST,
-   SOUTH,
-   WEST
-}
-for (Direction dir : Direction.values()) {
-  // do what you want
-}
-
-Exam 2 re-rest:
-
-interface IAccount { String getAccoundNumber();}
-abstract class Account implements IAccount{}
-The class Account is valid as it is declared abstract and therefore doesn't have to implement all the methods of the superclass.
-
-System.out.println(new Integer(0).booleanValue());
-There is no such method in the Integer class.
-
-By contract, if two objects are equivalent according to the equals() method, the  the hashCode() method must evaulate them to be ==.  
-if (x3.equals(x4))
-x3.hashCode() == x4.hashCode();
-
-If a method declararation overrides a method in the super class, there will be a compile time error when:
-- there are different return types
-- one is void and the other has a return type
-- one throws a clause that conflicts with that of any other method that it overrides or hides
-However, it can throw unchecked exceptions (RuntimeExceptions and it's descendants)  
-Given this:
-	public class Customer
-	{
-    	double calculate(int num) { /* */ }
-	}
-You can do this:
-	double calculate(int num)
-	public double calculate(int num)
-	protected double calculate(int num)
-	double calculate(int num) throws RuntimeException
-You cannot do these:
-	double calculate(int num) throws Exception
-	private double calculate(int num)
-
-Throwable
-Exception
-ClassNotFoundException
-CloneNotSupportedException
-IllegalAccessException
-IntantiationException
-InterruptedException
-NoSUchMethodExcption
-
-RuntimeException
-ArithmethicException
-ArrayStoreException
-ClassCastException
-IllegalArgumentException (nfe)
-IllegalMonitorStateException
-IndexOutOfBoundsException (aioobe)
-NegativeArraySizeException
-NullPointerException
-SecurityException
-
-class Test6<Ob>
-{
-	static Ob getOb()
-	{
-		// error: non-static type variable Ob 
-		// cannot be referenced from a static
-		// context.
-		return null;
-	}
-}
-
-- remember, abstract methods do not have a body!
-abstract void f();
-
-String str = "10";
-int a = new Integer(10);
-boolean b = str == a;
-// incomparable types: String and int
-//only the + operator performs implicit conversion to a String object.
-
-- finalize will always run before an object is garbage collected.
-
-- Member inner classes are the static class
-
-- priavte synchronized int e; is an invalid class level (nonlocal) variable declaration.
-
-class A {A() {System.out.print("Super ");}}
-public class Main extends A {
-    public static void main(String [] args) {
-        new Main(1L).Main();
-    }
-    public Main(int x) {
-        this();
-        System.out.print(" " + (x * 2));
-    }
-    public Main(long x) {
-        this((int) x);
-        System.out.print(" " + x);
-    }
-    public Main() {
-        super(); 
-        System.out.print("No arg Sub");
-    }
-    void Main() {
-        System.out.print(" method "); 
-    }
-}
-
-- Watch out!!! You cannot assign a value to a variable declared in an interface even when the class at hand implements that interface, as all interface variables are implicitly final!
-
-Methods shared by the String and the Pattern class:
-- split
-- matches
-
-- An inner class can be delcared public, final, abstract.
-- A local (ineer) class can have static members provided that they are constant variables.
-
-		double num1 = 0.2;
-		float num2 = 0.2f;
-		System.out.println(num1 == num2); // false
-		System.out.println(num1 == (double)num2); // false
-		System.out.println((float)num1 == num2); // true
-		Integer num3 = 123;
-		float num4 = 123f;
-		double num5 = 123;
-		float num6 = 123;
-		Integer num7 = new Integer("123");
-		byte num8 = 123;
-		System.out.println("Integer == float "+(num3 == num3)); //true
-		System.out.println("double == float "+(num5 == num4));  // true
-		System.out.println("float == int "+(num6 == num7));     // true
-		System.out.println("int == byte? "+(num7 == num8));     // true
-
-
-public static void main(String [] args) {}
-public void main(String ...arg){}
-- This class will not compile as the method signatures are the same.
-
-- casting from a child class to a parent class is called implicit casting.
-
-- Object references are passed by value. Additionally Strings are immutable.  Passing  a String to a method creates a new string object that the copy of the reference now points to. The original reference still points to the original string.
-It would be like creating a new String object.
-void foo( object o )
-{
-    o = new Object( );  // original reference still points to old value on the heap
-}
-
-- There is a BIG difference between overriding and overloading methods!
-
-
-During serialization,
-- state is saved but methods are not.
-- transient and static variables are not.
-- objects that inerhit Externalizable are.
-
-by implementating java.io.Serializable, you get "automatic" serialization capability for objects of your class. No need to implement any other logic, it'll just work. The Java runtime will use reflection to figure out how to marshal and unmarshal your objects.
-
-In earlier version of Java, reflection was very slow, and so serializaing large object graphs (e.g. in client-server RMI applications) was a bit of a performance problem. To handle this situation, the java.io.Externalizable interface was provided, which is like java.io.Serializable but with custom-written mechanisms to perform the marshalling and unmarshalling functions (you need to implement readExternal and writeExternal methods on your class).
-
-- You can only implement interfaces:
-class Outside implements String // interface expected
-
-Integer numm1 = 0;
-Float numm2 = -0.0F;
-(numm1.intValue() == numm2)) true
-Float numm3 = 0.0F;
-(numm1.intValue() == numm3)) true
-
-
-Operator Precedence
+**Operator Precedence** -------------------------------------
 
 Consider the following code snippet:
 int i = 10;
@@ -1299,10 +1010,442 @@ x = 5
 x++ * --x
 This is 25.
 
-byte b1 = 1;
-byte b2 = 2;
-b1 = b1 + b2; // compilation fails
-b1 += b2; // compilation successful
+
+
+**Reserved Words** ----------------------------------------
+
+Question: How does this code compile?
+Number Float = 99.455f;
+Answer: Float is not a reserved word.  'float' is.
+
+
+**The toArray method** ------------------------------------
+
+Question: Will this compile:
+Vector<String> set = new Vector<String>();
+String[] arr = set.toArray();
+Answer:  The toArray() method returns Object[], so to compile, the set must be cast to String.  You can fix it like this:
+String[] arr = (String [])set.toArray();
+
+Question:  What will the output be:
+import java.util.*;
+class Test13
+{
+	public static void main(String[] args) {
+		ArrayList<String> a =new ArrayList<String>();
+		a.add("one");
+		a.add("two");
+		a.add("three");
+		String[] s = a.toArray();
+		for (String str:s)
+		{
+			System.out.println(str);
+		}
+	}
+}
+
+Answer: Remeber, the toArray() method returns an array of Objects, and needs to be cast to a String array like this:
+String[] s = a.toArray(new String[0]);
+Trying this fails during runtime:
+String[] s = (String[])a.toArray();
+ClassCastException: Object cannot be cast to String.
+But then we tried these and they worked, so maybe the above was a different prob?
+String[] s3 = (String[])al.toArray();
+String[] s4 = set.toArray(new String[al.size()]);
+String[] s = a.toArray(new String[a.size()]);
+works also.  If we choose size 4, then a null string is added to the list.
+
+
+The size of the array cannot be specified in the following examples:
+		int i[] = new int[2] {1,2};
+		int j[4] = {1,2,3,4};
+The size is given implicitly by the initialization code (instance), never in the declaration of an array (reference).
+
+
+**Extending Comparable** ----------------------------------
+
+class Test3
+{
+	public String toString() {
+		return "Test3";
+	}
+
+	public static void main(String[] args) {
+		Set<Test3> s = new TreeSet<Test3>();
+		s.add(new Test3()); // Test3 cannot be cast to Comparable.
+		s.add(new Test3());
+		s.add(new Test3());
+		for (Test3 out: s)
+			System.out.println(out);
+	}
+	/**
+	Either Test3 has to implement Comparable, or you need to provide a comparator when creating the TreeSet.
+	 */
+}
+
+To fix this:
+class Test3 implements Comparable {
+ 	@Override
+    public int compareTo(Test3 test)
+    { /* Custom test */ }
+Or, we could use a HashSet which isn's ordered.
+
+Also note this is a RUNTIME error, and the code actually compiles fine, although that seems a little strange in the rigid world of Java.
+If we used an ArrayList, then there would be no problem, like this:
+ArrayList s = new ArrayList();
+Then we get a compile time error in the for loop:
+error: incompatible types.  required Test3
+found Object
+		for (Test3 out: s)
+				        ^
+Not sure how to fix it.  But the second similar looking question does this:
+given:
+class A{}
+class B extends A{}
+class C extends B{}
+Will this compile?
+		ArrayList a = new ArrayList();
+		a.add(new A());
+		a.add(new B());
+		a.add(new C());
+		for (Object object:a)
+			System.out.println(object);
+A generic type used without type parameters is know as a raw type.  In the above example we assign the generic types to the raw type variable, and then insert different types of objects into it.  The raw type is not type-checked, hence there are no compiler errors but warnings are thrown.  The code also runs fine =)~
+
+
+**IO** ----------------------------------------------------
+
+Writer w = new BufferedWriter(new FileWriter());
+- COMPILE ERROR: No such constructor found.
+Writer w = new BufferedWriter(new FileWriter("example"));
+- error: unreported exception IOException; must be caught or declared to be thrown.
+		try
+		{
+			Writer w = new BufferedWriter(new FileWriter("example"));
+		} catch (java.io.IOException ioe)
+		{
+			System.out.println(ioe.toString());
+		}
+If the example directory does not exist it will be created.
+Writer w = new BufferedWriter(new FileWriter("name.txt"));
+- If the file doesnt exist it will be created.
+
+
+**Regex** -------------------------------------------------
+
+RegEx question:
+java Test x7+y8+z9=4P [4789][+-=]
+Test class main has this expression:
+System.out.println((args[0].split(args[1])).length);
+[abc][vz] Set definition, can match a or b or c followed by either v or z.
+
+
+**Initial Capacity** --------------------------------------
+
+String c = new String("1234567890");
+StringBuffer sb = new StringBuffer(c);
+- The capacity for sb is now 10+16 = 26
+
+
+**Printf** ------------------------------------------------
+
+      double d_num = 999.3568;
+      System.out.printf("% .2f", d_num);
+Output: 999.36
+
+
+**Switch** ------------------------------------------------
+
+- case labels only accept constant (final) expressions.
+
+
+**Constructors** ------------------------------------------
+
+class Test {
+	public void Test(String a){print(a);}
+	public void Test(int b){print(b);}
+	public void Test(){print("None");}
+}
+Question:  What is printed when you create a new Test();?
+Answer: Nothing, those are not constructors because of the void return type modifier.
+
+Question:  What will the output be?
+class A {A() {System.out.print("Super ");}}
+public class Main extends A {
+    public static void main(String [] args) {
+        new Main(1L).Main();
+    }
+    public Main(int x) {
+        this();
+        System.out.print(" " + (x * 2));
+    }
+    public Main(long x) {
+        this((int) x);
+        System.out.print(" " + x);
+    }
+    public Main() {
+        super(); 
+        System.out.print("No arg Sub");
+    }
+    void Main() {
+        System.out.print(" method "); 
+    }
+}
+Answer:
+Super No arg Sub 2 1 method
+
+
+**The 'this' keyword** ------------------------------------
+
+
+Question:
+int subTotal;
+static int total;
+public void calculate()
+{
+	int local;
+	local = this.total; //1
+	local = this.subTotal; //2
+	this.total = total; //3
+	this.local = 4; // 4
+	this = new ExamQuestions(); // 5
+Answer:
+-  Non-static mehods have an implicit 'this' object reference.  The this reference cannot be changed.  (5)
+- The 'this' reference can be used in a non-static context to refer to both instance and static members.
+- It cannot be used to refer to local variables. (see 4) "Cannot find symbol" error.
+
+
+**Pass by Reference** -------------------------------------
+
+Class A {
+	int a =200;
+	A(int b) {
+		this.a=b;
+	}
+}
+Class Test {
+	static void a1(int a) {
+		a=-1;
+	}
+	static void a1(A a) {
+	a.a=-1;
+	}
+	public static void main(String as[]) 
+	{
+		int a=100;
+		a1(a);
+		A b = new A(400);
+		a1(b);
+		System.out.print(a+" "+b.a);
+	}
+}
+
+Output: 100 -1
+
+
+**Enum** --------------------------------------------------
+
+
+
+- It's possible to loop an enum with an enhanced for look using the values() method:
+enum Direction {
+   NORTH,
+   EAST,
+   SOUTH,
+   WEST
+}
+for (Direction dir : Direction.values()) {
+  // do what you want
+}
+
+
+**Random** ------------------------------------------------
+
+line 10:	Integer e;
+1ine 11:	System.out.println(e); 
+// compile time error at line 11, not in the previous line!
+
+- j2ee-struts is not a valid identifier because it has a SLASH!!!
+
+A static method can only be hidden by another static method.  A static variable may be hidden by an instance variable.
+
+The combination of 'abstract' and 'synchronized' modifiers are not allowed.
+
+According to the JavaBean naming standards, if the boolean property is named 'x', the accessor method is of the form boolean isX() and the mutator method is of the form void setX(boolean newValue)
+
+variable arguments (varargs) allows a method to be called with ZERO or more arguments.
+
+Class members cannot use the this keywords as there is no this to refer to.
+
+False: Member inner classes are the static class.(?)
+
+Finalize will always run before an object is garbage collected.
+
+Questions: When using the writeObject method to store (serialize) the state of an object, how can you protect sensitive data from being acessed in the stored object?
+Answer: declare the sensitive fields as private transient.
+
+Question: Which of the following keywords is used when a constructor calls an overload constructor in the same class.
+Answer: this
+
+- super() must be the first statement in a subclass contructor.
+
+quote(String s) returns a literal pattern string for the specified String.  This method produces a String that can be used to create a Pattern that would match the String s as if it were a literal pattern. Meta characters or escape sequences in the input sequence will be given no special meaning.
+
+- Number is the super class for many wrapper classes, but not Boolean and Character
+
+- The split() and matches() methods are present in both String and Pattern class.
+
+      Object obj = 99;
+      System.out.println(obj);
+This looks odd but it compiles.  However, there would be no output.  Not true, 99 will be printed!
+By autoboxing, 99 int primitive value will be automatically converted to Integer object and assigned to the variable obj.
+
+		List list2 = new ArrayList<String>();
+		list2.add(new StringBuilder("123"));
+This will compile because list2 is a raw type variable,
+and no checking is done at compile time.
+However, if you try this:
+String sbu = list2.get(0);
+You will get a runtime error: found Object, required String.
+
+System.out.println(new Integer(0).booleanValue());
+There is no such method in the Integer class.
+
+Question:  Will this class compile?
+class Test6<Ob>
+{
+	static Ob getOb()
+	{
+		return null;
+	}
+}
+
+Answer: Compile error: non-static type variable Ob cannot be referenced from a static context.
+* Not sure why in this case...
+
+- finalize will always run before an object is garbage collected.
+
+- Member inner classes are the static class
+
+Question:  Will this work as a class variable?
+private synchronized int e; 
+Answer:
+This is an invalid class level (nonlocal) variable declaration.
+Compile time error: modifier synchronized not allowed here.
+
+Methods shared by the String and the Pattern class:
+- split
+- matches
+
+public static void main(String [] args) {}
+public void main(String ...arg){}
+- This class will not compile as the method signatures are the same.
+
+- casting from a child class to a parent class is called implicit casting.
+
+- Object references are passed by value. Additionally Strings are immutable.  Passing  a String to a method creates a new string object that the copy of the reference now points to. The original reference still points to the original string.
+It would be like creating a new String object.
+void foo( object o )
+{
+    o = new Object( );  // original reference still points to old value on the heap
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 interface Rideable 
 {
@@ -1530,32 +1673,6 @@ method()
 
 
 
-Remeber in Test3.java?
-		Set<Test3> s = new TreeSet<Test3>();
-		s.add(new Test3()); // Test3 cannot be cast to Comparable.
-Our notes state: Either Test3 has to implement Comparable, or you need to provide a comparator when creating the TreeSet.
-Alos note this is a RUNTIME error, and the code actually compiles fine, although that seems a little strange in the rigid world of Java.
-ClassCastException: Test3 cannot be cast to Comparable.
-If we used an ArrayList, then there would be no problem, like this:
-ArrayList s = new ArrayList();
-Then we get a compile time error in the for loop:
-error: incompatible types.  required Test3
-found Object
-		for (Test3 out: s)
-				        ^
-Not sure how to fix it.  But the second similar looking question does this:
-given:
-class A{}
-class B extends A{}
-class C extends B{}
-Will this compile?
-		ArrayList a = new ArrayList();
-		a.add(new A());
-		a.add(new B());
-		a.add(new C());
-		for (Object object:a)
-			System.out.println(object);
-A generic type used without type parameters is know as a raw type.  In the above example we assign the generic types to the raw type variable, and then insert different types of objects into it.  The raw type is not type-checked, hence there are no compiler errors but warnings are thrown.  The code also runs fine =)~
 
 Given the Customer is a class:
 1. Customer []c1 = new Customer[10];
@@ -2033,9 +2150,6 @@ Connection speeds:
 ADSL2+or ADSL crumbly old copper lines outside your home.  list themselves at 24,000/1024 (or similar), even though for practical purposes nobody actually hits that 24,000Kbps mark.
 Korea 16.63 Mbit/s
 Australia 2.86 Mbit/s
-
-Harbour ISP Unlimited Tier 1 NBN Plan Bundle
-$65 per month - Unlimited 
 
 SpinTel Zoom Four Unlimited ADSL2+ 
 $69.95 per month - unlimited - ADSL2+
