@@ -77,7 +77,9 @@ parseInt(long)
 Integer num_123L = Integer.parseInt(123);
 - same error, no method parseInt(int)
 
+
 **Doubles & Floats** /*---------------------------------------
+
 Question: What Double(Float) method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
 Answer: isNaN()
 NaN	Example
@@ -102,6 +104,24 @@ NaN	Example
 		System.out.println(num1 == num2); // true
 		System.out.println(num1 == (double)num2); // true
 		System.out.println((float)num1 == num2); // true
+
+Question:
+float x = 0.1f;
+while (x != 1.1) 
+{
+	System.out.printf("x = %f%n", x);
+	x = x + 0.1f;
+}
+Answer:
+The number 0.1 cannot be stored precisely in base two in the same way that the
+decimal equivalent of the fraction 1/3 cannot be represented exactly (0.333333…).  The result of adding this number repeatedly to x will result in a number that is not quite 1.1. The comparison, x != 1.1, will return true and the loop will never end.  The output of the printf statement does not show this difference:
+...
+x = 0.900000
+x = 1.000000
+x = 1.100000
+x = 1.200000
+x = 1.300000
+...
 
 
 **Numbers** --------------------------------------------------
@@ -135,14 +155,19 @@ while(i>=0)
 Result 654321
 length is 6, so i is set to 5. go from index 5 to 0, which means 6 to 1 will be printed.  If we use (i>0) instead, the output is from 6 to 2.
 
-- Arrays are objects, so
+Question:
 int a[] = {1,2,3,4}
-print(a instanceof Object) prints true.
+print(a instanceof Object) 
+Answer:
+Arrays are objects, so prints true.
 
+Question:
 int a[][] = new int[3][];
 a[1]=new int[]{1,2,3};
 a[2]=new int[]{4,5};
-print(a[1][1]); = 2
+print(a[1][1]);
+Answer:
+Compiles and prints 2.
 
 Question: Which of the following statements will compile without an error?
 a. int arr[];
@@ -180,6 +205,14 @@ of the object if found, otherwise it returns a -1. The indexOf
 method does not take an integer argument and the hasObject
 method does not exist.
 
+Given the Customer is a class:
+1. Customer []c1 = new Customer[10];
+2. Customer [][]c2 = new Customer[10][];
+3. c2[0] = new Customer[5];
+4. print(c1[0]); // prints null
+5. print(c2[1][0]); 
+In the case of arrays, initialization is supposed to be complete when we specify the leftmost dimension of the array.  The problem occurs at runtime if we try to access an element of the array which has not been initialized (specification of size).  In the question above there is no problem until line 5.  We are tyring to access c2[1][0] whereas we have only initialized c2[0].  In other words we can access any element in c2[0] row but not any other element which is in any row other than c2[0].  Therefore accessing c2[1][0] will cause a runtime exception (npe).
+
 
 
 
@@ -213,7 +246,7 @@ The class Account is valid as it is declared abstract and therefore doesn't have
 class Outside implements String // interface expected
 
 
-**Extending a Class** /*--------------------------------------------------
+**Extending a Class** a.k.a. Polymorphism -------------------------
 
 Left Side vs. Right Side
 	A a 		 =  	new B()
@@ -355,12 +388,120 @@ a=(A)b;
 a=(B)b;
 Answer: The first two are not legal.
 
+Question:
+interface Rideable 
+{
+	String getGait();
+}
+public class Camel implements Rideable 
+{
+	int weight = 2;
+	public static void main(String[] args) 
+	{
+		new Camel().go(8);
+	}
+	void go(int speed) 
+	{
+		++speed;
+		weight++;
+		int walkrate = speed * weight;
+		System.out.print(walkrate + getGait());
+	}
+	String getGait() 
+	{
+		return " mph, lope";
+	}
+}
+
+Answer:
+error: getGait() in Camel cannot implement getGait() in Rideable
+attempting to assign weaker access privileges; was public
+- This happens becuase "methods in an interface are implicitly public, so the public modifier can be omitted." but the default for a class is package private.
+
+class A.  class B extends A.
+A a = new B().go() output: B
+B b = new A() compile error- incompatible types: required: A found: B 
+
+//package java.lang;
+public class ExtendedObject extends java.lang.Object
+{
+		String name = "DEFAULT VALUE";
+		protected void finalize() { name = null; }
+		public static void main(String as[]) throws Throwable
+		{
+			Object ob = new ExtendedObject();
+			ob.finalize();
+			System.out.println(ob);
+		}
+}
+
+a. the code will not compinle
+b. by uncommenting line 1, it will compile.
+
+The finalize() method is declared as protected in the class Object, so it cannot be invoked from code in other packages.  The compile error msg says finalize() has protected access in java.lang.Object
+If we use the same package java.lang then the code will compile, but at runtime a SecurityException will be thrown stating that prohibited package name:java.lang.
+When we ran the class with the uncommented package line, we got a java.lang.NoClassDefFoundError runtime error.
+The same behavior would be found if we eliminate the extends part.  Here is some discussion about that.
+"Unless the Object class is not actually the java.lang.Object class (the tutorial does not include the imports, so it's hard to see), the extends Object is redundant."
+"Extends clause is optional as stated in Java Language Specification. If it is omitted, the class is derived from java.lang.Object. It is just a matter of coding style to write it or not to write it in this case. Usually it is omitted."
+
+
+Question: Consider the following code:
+class Base {
+	int i = 1999;
+	public void aMethod() {System.out.println("Base.amethod()");}
+	Base() {aMethod();}
+}
+public class Derived extends Base {
+	int i = -1;
+	public static void main(String[] args) {
+		Base b = new Derived();
+		System.out.println(b.i);
+		b.aMethod();
+	}
+	public void aMethod(){System.out.println("Derived.aMethod()");}
+}
+Answer:
+It creates an instance of the Derived class but assignes it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.
+But note that if the aMethod was not present in the base class then compilation error would be reported at compile time, when the compiler sees the statement b.aMethod(), it checks if the method is present in the bass class.  Only at runtime it decides to call the method from the derived class.
+The constructor in Base is called when the new Derived object is created, but the call in the constructor calls the method is the subclass, since it is present.
+Output:? 
+Derived.aMethod()
+1999
+Derived.aMethod()
+
+
+
 
 **Strings** /* ---------------------------------------
 
 String s = "Java";
 s.concat(" SE 6");
-s.replace('6','7');
+s.replace('6'Question: Consider the following code:
+class Base {
+	int i = 1999;
+	public void aMethod() {System.out.println("Base.amethod()");}
+	Base() {aMethod();}
+}
+public class Derived extends Base {
+	int i = -1;
+	public static void main(String[] args) {
+		Base b = new Derived();
+		System.out.println(b.i);
+		b.aMethod();
+	}
+	public void aMethod(){System.out.println("Derived.aMethod()");}
+}
+Answer:
+It creates an instance of the Derived class but assignes it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.
+But note that if the aMethod was not present in the base class then compilation error would be reported at compile time, when the compiler sees the statement b.aMethod(), it checks if the method is present in the bass class.  Only at runtime it decides to call the method from the derived class.
+The constructor in Base is called when the new Derived object is created, but the call in the constructor calls the method is the subclass, since it is present.
+Output:? 
+Derived.aMethod()
+1999
+Derived.aMethod()
+
+,'7');
 print(s) // Java (the two calls are abandoned instantly)
 
 - How many objects are created?
@@ -529,6 +670,29 @@ public class Outer {
 
 Since inner is not a static inner class, it has a reference to an enclosing object and all the variables of that object are accessible. Therefore a and b are correct even if b is private. Variables in the enclosing method are only accessible when they are marked as final, hence c is accessible but not d. e is obviously correct as it is a parameter to the method containing line 12 itself.  d is not final so not visible.  So a, b, c and e are correct.
 
+Question:
+class TestOuter
+{
+	static Integer num = 200;
+	TestOuter()
+	{
+		num = 400;
+	}
+	static class TestInner
+	{
+		TestInner()
+		{
+			System.out.print(num);
+		}
+	}
+	public static void main(String[] args) {
+		new TestOuter.TestInner();
+	}
+}
+Answer:
+What will be printed?  Static nested classes are allowed to access static variables of the enclosing class.  So 200 will be printed.  The OuterClass is never instantiated, so the value is not changed by the constructor.  If we put this before the call, TestOuter to = new TestOuter();, 400 will be printed.
+
+
 **Overriding & Hiding** -------------------------------------
 
 - an overriding method can allow more, but not less, access than the overridden method. Order: public, protected, (no modifier), private
@@ -638,6 +802,15 @@ Protected variables or methods will not be accessable by a sub-class from their 
 call 1<- protected access!
 call 2 works with the subclass.	
 
+
+Question:
+public int aMethod(String a)
+{
+	private int b = a;
+	return b;
+}
+Answer:
+local variables can be declared as final and cannot be declared static private, public or protected.  Local variables are defined in the bodies of methods.  Trying to use any declaration besides static will cause a compile error that says: illegal start of expression
 
 **Primitives** ---------------------------------------------
 
@@ -847,7 +1020,7 @@ Which are List objects?
 - Stack
 
 
-**The euqals Method** --------------------------------------------
+**The equals Method** --------------------------------------------
 
 - the equals() method will return false if the objects are not the same class.
 
@@ -860,6 +1033,36 @@ if (b1.booleanValue()==b2) // true
 By contract, if two objects are equivalent according to the equals() method, the  the hashCode() method must evaulate them to be ==.  
 if (x3.equals(x4))
 x3.hashCode() == x4.hashCode();
+
+Question:
+public class Test8
+{
+	static String s1 = "Java";
+	public static void main(String args[]) {
+		String s2 = "Java";
+		String s3 = new String(s1);
+		System.out.println("1 "+(s1==s2));        // true
+		System.out.println("2 "+(s1.equals(s2))); // true
+		System.out.println("3 "+(s3==s1)); 	   	  // false
+		System.out.println("4 "+(s3.equals(s1))); // true
+		System.out.println("5 "+(Test9.s4==s1));  // true
+	}
+}
+class Test9
+{
+	static String s4 = "Java";
+}
+Answer:
+Only 3(line 10?) will print false.  Strings are immutable objects.  That is, a string is read only once the string has been created and initialized, and Java optimizes handling of string literals; only one anonymous string object is shared by all string literals with the same contents.  Hence in the above code, the strings s1, s2 and s4 refer to the same anonymous string object, initialized with the character string "Java".  This, s1 ==s2 and Test9.s4 will both return true and obviously s1.equals(s2) will return true.
+
+Vector<String> employeeList = new Vector<String>();
+Vector<Integer> employeeIdList = new Vector<Integer>();
+Vector<Object> employeeProfileList = new Vector<Object>();
+System.out.println(employeeList.getClass() == employeeIdList.getClass());
+System.out.println(employeeList.getClass() == employeeProfileList.getClass());
+System.out.println(employeeList.equals(employeeProfileList));
+System.out.println(employeeIdList.equals(employeeProfileList));
+All instances of a generic class have the same runtime class, regardless of their actual type parameters.  So the getClass() method returns a java.util.Vector for both x and y.  Since no data has been added to both Vector objects, they are also meaningfully equal.  So the equals method returns true here and the output is true, true, true, true.
 
 
 **The == Operator** ---------------------------------------
@@ -905,12 +1108,18 @@ Answer: true
 		System.out.println((b1==b2));
 
 Answer: true
+
+
+-0.0 == 0.0 is true.
+
+
 **The instanceof Operator** ---------------------------------
 
 String num = "0";
 num = null;
 if (num instanceof Object) ... false!
 - null compared with a string is not equal.
+
 
 **Operators** -----------------------------------------------
 
@@ -1139,6 +1348,27 @@ Test class main has this expression:
 System.out.println((args[0].split(args[1])).length);
 [abc][vz] Set definition, can match a or b or c followed by either v or z.
 
+Question:
+String str = "Java*JSP*EJB*J2EE";
+System.out.println(Arrays.toString(str.split("*",-2)));
+Answer:
+Runtime Exception: java.util.regex.PatternSyntaxException: Dangling meta character * near index 0.
+PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
+[Java, JSP, EJB, J2EE]
+We could use the regex "[*]" to get the same result.  Also, the -2 is not needed; the same output is got without it.  
+Regarding the limit parameter controls the number of times the pattern is applied and therefore affects the length of the resulting array. If the limit n is greater than zero then the pattern will be applied at most n - 1 times, the array's length will be no greater than n, and the array's last entry will contain all input beyond the last matched delimiter. If n is non-positive then the pattern will be applied as many times as possible and the array can have any length. If n is zero then the pattern will be applied as many times as possible, the array can have any length, and trailing empty strings will be discarded.
+The string "boo:and:foo", for example, yields the following results with these parameters:
+Regex	Limit	Result
+:		2		{ "boo", "and:foo" }
+:		5		{ "boo", "and", "foo" }
+:	    -2		{ "boo", "and", "foo" }
+o		5		{ "b", "", ":and:f", "", "" }
+o	   -2		{ "b", "", ":and:f", "", "" }
+o		0		{ "b", "", ":and:f" }
+An invocation of this method of the form str.split(regex, n) yields the same result as the expression:
+Pattern.compile(regex).split(str, n)
+
+
 
 **Initial Capacity** --------------------------------------
 
@@ -1157,6 +1387,25 @@ Output: 999.36
 **Switch** ------------------------------------------------
 
 - case labels only accept constant (final) expressions.
+
+public class Test11
+{
+	public static void main(String[] args) 
+	{
+		Integer  arg = 20;
+		switch(arg)
+		{
+			default:
+				System.out.println("default");
+			case 10:
+				System.out.println("100");
+			case 20:
+				System.out.println("200");
+		}
+	}
+}
+The class compiles and runs fine.  Obviously the position of the dafault case doesn't matter.  The Integer wrapper class in unboxed and 200 is printed out.
+
 
 
 **Constructors** ------------------------------------------
@@ -1193,6 +1442,9 @@ public class Main extends A {
 }
 Answer:
 Super No arg Sub 2 1 method
+
+
+- creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor!!!
 
 
 **The 'this' keyword** ------------------------------------
@@ -1239,13 +1491,31 @@ Class Test {
 		System.out.print(a+" "+b.a);
 	}
 }
-
+Answer:
 Output: 100 -1
+
+Question:
+public class RefObject {
+	String class_name = "RefObject";
+	RefObject() {
+		className = "RefObject_200";
+	}
+	static void method1(Object ob) {
+		ob = null;
+	}
+	public static void main(String[] args) {
+		RefObject refOb = new RefObject();
+		method1(refOb);
+		System.out.println(RefOb.className);
+	}
+}
+Answer:
+When a method which takes an object argument is invoked, the method obtains a copy of the object reference from the calling method.  So altering the object within the method affects the original object passed.  Hence the output "RefObject_200" will be printed.
+The method1() call merely sets the copy of the reference to null, but does not change the object, or the original reference to the object held in the refOb variable.
+
 
 
 **Enum** --------------------------------------------------
-
-
 
 - It's possible to loop an enum with an enhanced for look using the values() method:
 enum Direction {
@@ -1257,6 +1527,51 @@ enum Direction {
 for (Direction dir : Direction.values()) {
   // do what you want
 }
+
+
+Question:
+enum Month {JAN,FEB,MAR,APR,MAY}
+public class Test10
+{
+	public static void main(String[] args) {
+		Month mon = Month.valueOf("JAN");
+		if(mon==Month.JAN)
+			System.out.println("Inside JAN 1");
+		if(mon.equals(Month.JAN))
+			System.out.println("Inside JAN 2");
+	}
+}
+Answer:
+The valueOf() method returns the enum constant whose value corresponds to the string argument passed in.  The enum constant can be compared for == relational operator or the equals() method, since they are instances of the declared enumeration type.  The output will be 
+Inside JAN 1
+Inside JAN 2
+
+
+**Threads** -----------------------------------------------
+
+Question:
+public class MyThread extends Thread
+{
+	MyThread(int i)
+	{
+		this.i = i;
+	}
+	static int i = 0;
+	public void run()
+	{
+		System.out.println(i);
+	}
+	public static void main(String[] args) {
+		for(int i = 0; i < 10; i++)
+		{
+			new Thread().start();
+		}
+	}
+}
+Answer:
+Will this compile and run?  Notice MyThread is not started, but Thread.  To start MyThread, we need to supply an argument:
+new MyThread(11).start();
+This will print 11 ten times. 
 
 
 **Random** ------------------------------------------------
@@ -1350,316 +1665,29 @@ void foo( object o )
     o = new Object( );  // original reference still points to old value on the heap
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-interface Rideable 
-{
-	String getGait();
-}
-public class Camel implements Rideable 
-{
-	int weight = 2;
-	public static void main(String[] args) 
-	{
-		new Camel().go(8);
-	}
-	void go(int speed) 
-	{
-		++speed;
-		weight++;
-		int walkrate = speed * weight;
-		System.out.print(walkrate + getGait());
-	}
-	String getGait() 
-	{
-		return " mph, lope";
-	}
-}
-```
-error: getGait() in Camel cannot implement getGait() in Rideable
-attempting to assign weaker access privileges; was public
-- This happens becuase "methods in an interface are implicitly public, so the public modifier can be omitted." but the default for a class is package private.
-
-class A.  class B extends A.
-A a = new B().go() output: B
-B b = new A() compile error- incompatible types: required: A found: B 
-
-
-Arrays are objects, so
-int a[] = {1,2,3,4}
-print(a instanceof Object) prints true.
-
+Question:
 boolean a = true;
 boolean b = false;
 boolean c = true;
 if (a && (b = c)) 
-- an assignment statement also has a value equal to the value being 
-assigned, hence (b = c) evaluates to true and subsequently a 
-(b = c) evaluates to true
+Answer:
+An assignment statement also has a value equal to the value being 
+assigned, hence (b = c) evaluates to true.
 
-float x = 0.1f;
-while (x != 1.1) 
-{
-	System.out.printf("x = %f%n", x);
-	x = x + 0.1f;
-}
-
-The number 0.1 cannot be stored precisely in base two in the same way that the
-decimal equivalent of the fraction 1/3 cannot be represented exactly (0.333333…).  The result of adding this number repeatedly to x will result in a number that is not quite 1.1. The comparison, x != 1.1, will return true and the loop will never end.  The output of the printf statement does not show this difference:
-...
-x = 0.900000
-x = 1.000000
-x = 1.100000
-x = 1.200000
-x = 1.300000
-...
-
--0.0 == 0.0 is true.
-
------------- final mock exam --------------------
-
-- creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor!!!
-
-//package java.lang;
-public class ExtendedObject extends java.lang.Object
-{
-		String name = "DEFAULT VALUE";
-		protected void finalize() { name = null; }
-		public static void main(String as[]) throws Throwable
-		{
-			Object ob = new ExtendedObject();
-			ob.finalize();
-			System.out.println(ob);
-		}
-}
-
-a. the code will not compinle
-b. by uncommenting line 1, it will compile.
-
-The finalize() method is declared as protected in the class Object, so it cannot be invoked from code in other packages.  The compile error msg says finalize() has protected access in java.lang.Object
-If we use the same package java.lang then the code will compile, but at runtime a SecurityException will be thrown stating that prohibited package name:java.lang.
-When we ran the class with the uncommented package line, we got a java.lang.NoClassDefFoundError runtime error.
-The same behavior would be found if we eliminate the extends part.  Here is some discussion about that.
-"Unless the Object class is not actually the java.lang.Object class (the tutorial does not include the imports, so it's hard to see), the extends Object is redundant."
-"Extends clause is optional as stated in Java Language Specification. If it is omitted, the class is derived from java.lang.Object. It is just a matter of coding style to write it or not to write it in this case. Usually it is omitted."
-
+Question:
 public class Test {
 	static int i = j;
 	static int j = 10;
 }
+Answer:
 Compile error: illegal forward reference.
-Another uninitialized gotcha:
+
+Question:
 		int y;
 		System.out.println("y before init "+y);
 		y = 100;
-Even tyring to print an unitialized variable fails upon compile with the error: variable y might not have been initialized. 
-
-public class Test8
-{
-	static String s1 = "Java";
-	public static void main(String args[]) {
-		String s2 = "Java";
-		String s3 = new String(s1);
-		System.out.println(s1==s2);        // 8. true
-		System.out.println(s1.equals(s2)); // 9. true
-		System.out.println(s3==s1); 	   // 10.false
-		System.out.println(s3.equals(1));  // 11.false
-		System.out.println(Test9.s4==s1);  // 12.true
-	}
-}
-class Test9
-{
-	static String s4 = "Java";
-}
-Only line 10 will print false.  Strings are immutable objects.  That is, a string is read only once the string has been created and initialized, and Java optimizes handling of string literals; only one anonymous string object is shared by all string literals with the same contents.  Hence in the above code, the strings s1, s2 and s4 reger to the same anonymous string object, initialized with the character string "Java".  This, s1 ==s2 and Test9.s4 will both return true and obviously s1.equals(s2) will return true.
-
-
-
-enum Month {JAN,FEB,MAR,APR,MY}
-public class Test10
-{
-	public static void main(String[] args) {
-		Month mon = Month.valueOf("JAN");
-		if(mon==Month.JAN)
-			System.out.println("Inside JAN");
-		if(mon.equals(Month.JAN))
-			System.out.println("Inside JAN");
-	}
-}
-The valueOf() method returns the enum constant whose vluae corresponds to the string argument passed in.  The enum constant can be compared for == relational operator or the equals() method, since they are instances of the declared enumeration type.
-
-local variables can be declared as final and cannot be declared static private, public or protected.  Local variables are defined in the bodies of methods.  Trying to use any declaration besides static will cause a compile error that says: illegal start of expression
-
-class TestOuter
-{
-	static Integer num = 200;
-
-	TestOuter()
-	{
-		num = 400;
-	}
-
-	static class TestInner
-	{
-		TestInner()
-		{
-			System.out.print(num);
-		}
-	}
-
-	public static void main(String[] args) {
-		new TestOuter.TestInner();
-	}
-}
-
-What will be printed?  Static nested classes are allowed to access static variables of the enclosing class.  So 200 will be printed.  The OuterClass is never instantiated, so the value is not changed by the constructor.  If we put this before the call, TestOuter to = new TestOuter();, 400 will be printed.
-
-public class Test11
-{
-	public static void main(String[] args) 
-	{
-		Integer  arg = 20;
-		switch(arg)
-		{
-			default:
-				System.out.println("default");
-			case 10:
-				System.out.println("100");
-			case 20:
-				System.out.println("200");
-		}
-	}
-}
-The class compiles and runs fine.  Obviously the position of the dafult case doesn't matter.  The Integer wrapper class in unboxed and 200 is printed out.
-
-
-String str = "Java*JSP*EJB*J2EE";
-System.out.println(Arrays.toString(str.split("*",-2)));
-java.util.regex.PatternSyntaxException: Dangling meta character * near index 0.
-PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
-[Java, JSP, EJB, J2EE]
-Also, the -2 is not needed; the same output is got without it.
-The limit parameter controls the number of times the pattern is applied and therefore affects the length of the resulting array. If the limit n is greater than zero then the pattern will be applied at most n - 1 times, the array's length will be no greater than n, and the array's last entry will contain all input beyond the last matched delimiter. If n is non-positive then the pattern will be applied as many times as possible and the array can have any length. If n is zero then the pattern will be applied as many times as possible, the array can have any length, and trailing empty strings will be discarded.
-The string "boo:and:foo", for example, yields the following results with these parameters:
-Regex	Limit	Result
-:	2	{ "boo", "and:foo" }
-:	5	{ "boo", "and", "foo" }
-:	-2	{ "boo", "and", "foo" }
-o	5	{ "b", "", ":and:f", "", "" }
-o	-2	{ "b", "", ":and:f", "", "" }
-o	0	{ "b", "", ":and:f" }
-An invocation of this method of the form str.split(regex, n) yields the same result as the expression:
-Pattern.compile(regex).split(str, n)
-
-		Vector<String> employeeList = new Vector<String>();
-		Vector<Integer> employeeIdList = new Vector<Integer>();
-		Vector<Object> employeeProfileList = new Vector<Object>();
-		System.out.println(employeeList.getClass() == employeeIdList.getClass());
-		System.out.println(employeeList.equals(employeeProfileList));
-		System.out.println(employeeList.getClass() == employeeProfileList.getClass());
-		System.out.println(employeeIdList.equals(employeeProfileList));
-All instances of a generic class have the same runtime class, regardless of their actual type parameters.  So the getClass() method returns a java.util.Vector for both x and y.  Since no data has been added to both Vector objects, they are also meaningfully equal.  So the equals method returns true here and the output is true, true, true, true.
-
-- logical operators &&,||, ! and ?: always use boolean operands. 
-- bitwise operators and shift operators allow numeric operands.
-
-- primitives and String objects will not be changed in methods.  Other objects can be changed.
-
+Answer:
+Even tyring toQuestion:
 method()
 {
 	int x = 10;
@@ -1668,79 +1696,148 @@ method()
 		if (x >= 100) y = x * 10;
 			print("Y is "+y);
 }
-- Will not compile with the warning that the variable y may not have been initialized.
+Answer:
+Will not compile with the warning that the variable y may not have been initialized.
 
+ print an unitialized variable fails upon compile with the error: variable y might not have been initialized. 
 
-
-
-
-Given the Customer is a class:
-1. Customer []c1 = new Customer[10];
-2. Customer [][]c2 = new Customer[10][];
-3. c2[0] = new Customer[5];
-4. print(c1[0]); // prints null
-5. print(c2[1][0]); 
-In the case of arrays, initialization is supposed to be complete when we specify the leftmost dimension of the array.  The problem occurs at runtime if we try to access an element of the array which has not been initialized (specification of size).  In the question above there is no problem until line 5.  We are tyring to access c2[1][0] whereas we have only initialized c2[0].  In other words we can access any element in cs[0] row but not any other element which is in any row other than c2[0].  Therefore accessing c2[1][0] will cause a runtime exception (npe).
-
-Now, onto threads:
-public class MyThread extends Thread
+Question:
+method()
 {
-	MyThread(int i)
-	{
-		this.i = i;
-	}
-	static int i = 0;
-	public void run()
-	{
-		System.out.println(i);
-	}
-	public static void main(String[] args) {
-		for(int i = 0; i < 10; i++)
-		{
-			new Thread().start();
-		}
-	}
+	int x = 10;
+	int y;
+	if (x < 100) y = 100;
+		if (x >= 100) y = x * 10;
+			print("Y is "+y);
 }
-Will this compile and run?  Notice MyThread is not started, but Thread.  To start MyThread, we need to supply an argument:
-new MyThread(11).start();
-This will print 11 ten times.  Should we go over the threads tutorial, even though threads are sposed to be in the OCP exam?  sab.
+Answer:
+Will not compile with the warning that the variable y may not have been initialized.
 
-public class RefObject {
-	String class_name = "RefObject";
-	RefObject() {
-		className = "RefObject_200";
-	}
-	static void method1(Object ob) {
-		ob = null;
-	}
-	public static void main(String[] args) {
-		RefObject refOb = new RefObject();
-		method1(refOb);
-		System.out.println(RefOb.className);
-	}
-}
 
-When a metho which takes an object argument is invoked, the method obtains a copy of the object reference from the calling method.  SO altering the object within the method affects the original object passed.  Hence the output "RefObject_200" will be printed.
-The method1() call merely sets the copy of the reference to null, but does not change the object, or the original reference to the object held in the refOb variable.
+- logical operators &&,||, ! and ?: always use boolean operands. 
+- bitwise operators and shift operators allow numeric operands.
 
-Consider the following code:
-class Base {
-	int i = 1999;
-	public void aMethod() {System.out.println("Base.amethod()");}
-	Base() {aMethod();}
-}
-public class Derived extends Base {
-	int i = -1;
-	public static void main(String[] args) {
-		Base b = new Derived();
-		System.out.println(b.i);
-		b.aMethod();
-	}
-	public void aMethod(){System.out.println("Derived.aMethod()");}
-}
-It creates an instance of the Derived class but assignes it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.
-But note that if the aMethod was not present in the base class then compilation error would be reported at compile time, when the compiler sees the statement b.aMethod(), it checks if the method is present in the bas class.  Only at runtime it decides to call the method from the derived class.
-The constructor in Base is called when the new Derived object is created, but the call in the constructor calls the method is the subclass, since it is present.
+- primitives and String objects will not be changed in methods.  Other objects can be changed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Riddle me this:
@@ -2156,8 +2253,10 @@ $69.95 per month - unlimited - ADSL2+
 https://www.spintel.net.au/products/broadband
 - Depending on your usage, other fees and charges may apply, including early exit fees.
 - how much is A Static IP?
-- TP-Link TD-W8951ND (4 Port with Wireless) ($59+$15 delivery = 74$. $38 at Walmart.) is this for purchase or rental?
-- Connection is speed limited when usage allowance exceeded
+- TP-Link TD-W8951ND (4 Port with Wireless) ($59+$15 delivery = 74$. $38 at Walmart.) is this for purchase or rental?  Has DOCSIS 3.0?
+- Connection is speed limited when usage allowance exceeded for unlimited?
+- can we downgrade?
+- 
 
 
 Unit 355/6 Cowper Wharf Rd.

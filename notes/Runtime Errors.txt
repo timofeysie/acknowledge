@@ -2,3 +2,19 @@ Runtime Errors
 
 Integer num_123 = Integer.parseInt("123L");
 - this method accepts digits only and causes a runtime exception
+
+Question:
+String str = "Java*JSP*EJB*J2EE";
+System.out.println(Arrays.toString(str.split("*",-2)));
+Answer:
+Runtime Exception: java.util.regex.PatternSyntaxException: Dangling meta character * near index 0.
+PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
+[Java, JSP, EJB, J2EE]
+
+
+
+v.s. Compile Time Errors
+
+
+- creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor!!!
+

@@ -395,10 +395,12 @@ private static void defualtValue()
 		assert(a && (b = c));
 	}
 
-	private static void failedFinalMockExamQuestions()
+	private static void failedRegex()
 	{
 		String str = "Java*JSP*EJB*J2EE";
-		System.out.println(Arrays.toString(str.split("*",-2)));
+		//System.out.println(Arrays.toString(str.split("*",-2)));
+		System.out.println(Arrays.toString(str.split("[*]",-2)));
+		System.out.println(Arrays.toString(str.split("\\*",-2)));
 		/* java.util.regex.PatternSyntaxException:
 		Dangling meta character * near index 0.
 		PatternSysntaxException occurs if the regular expressions's
@@ -562,7 +564,7 @@ private static void defualtValue()
 		//randomCode();
 		//unorthadoxUnary();
 		//basicFailedQuestions();
-		//failedFinalMockExamQuestions();
+		failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
 		//arrayWork();
@@ -571,6 +573,6 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers();
-		testOperators();
+		//testOperators();
 	}
 }

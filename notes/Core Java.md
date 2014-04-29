@@ -1463,7 +1463,7 @@ if you are going to write a clone() method to override the one in Object.
 — to decouple them, you must override clone() so that it clones the object and ObjExternal. Then the original object references ObjExternal and the clone references a clone of ObjExternal, so that the object and its clone are truly independent
 
 #Abstract & Interface#
-- Java does not permit multiple inheritance(can only extend one class) but interfaces provide an alternative because you can implement more than one interface (an interface can extend any number of interfaces). 
+- Java does not permit multiple inheritance(a class can only extend one class) but interfaces provide an alternative because you can implement more than one interface (an interface can extend any number of interfaces). 
 - An interface name can be used anywhere a type can be used. 
 - If a class includes abstract methods, the class itself must be declared abstract
 - All methods declared in an interface are implicitly public and non-static, so the public modifier can be omitted.
@@ -1608,6 +1608,35 @@ You can prevent a class or method from being subclassed by using the final keywo
     import java.awt.font.*;
 ```
 
+Compiling and running packages
+1. no package class
+```
+System.out.println("App1 hello world...");
+```
+2. has package
+```
+package java.java.package1;
+System.out.println("App1 hello world...");
+```
+then, compile and run them,the result as follows:
+```
+D:\javaTest>javac App1.java
+D:\javaTest>javac App2.java
+D:\javaTest>java App1
+App1 hello world...
+D:\javaTest>java java.java.package1.App2
+Exception in thread "main" java.lang.NoClassDefFoundError: java/java/package1/Ap
+p2
+```
+You should compile using the -d option so that the classes end up in an appropriate directory hierarchy:
+
+javac -d . App2.java
+java java.java.package1.App2
+Also, you shouldn't use a package name starting with java in the first place.
+
+Also, if you put the source in an appropriate directory hierarchy, and compile/run from the root of the hierarchy, you wouldn't have this problem.      
+In addition to what Chuck Norris said: When you compile and you're at the root of the directory hierarcy, you must use / instead of .. When you run the program, it's reversed: use . instead of /.
+
 ###Regular Expressions2###
 
 meta characters
@@ -1662,6 +1691,27 @@ System.out.println(EXAMPLE_TEST.replaceAll(pattern, "$1$3"));
 // Extract the text between the two title elements
 pattern = "(?i)(<title.*?>)(.+?)(</title>)";
 String updated = EXAMPLE_TEST.replaceAll(pattern, "$2"); 
+
+Question:
+String str = "Java*JSP*EJB*J2EE";
+System.out.println(Arrays.toString(str.split("*",-2)));
+Answer:
+Runtime Exception: java.util.regex.PatternSyntaxException: Dangling meta character * near index 0.
+PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
+[Java, JSP, EJB, J2EE]
+We could use the regex "[*]" to get the same result.  Also, the -2 is not needed; the same output is got without it.  
+Regarding the limit parameter controls the number of times the pattern is applied and therefore affects the length of the resulting array. If the limit n is greater than zero then the pattern will be applied at most n - 1 times, the array's length will be no greater than n, and the array's last entry will contain all input beyond the last matched delimiter. If n is non-positive then the pattern will be applied as many times as possible and the array can have any length. If n is zero then the pattern will be applied as many times as possible, the array can have any length, and trailing empty strings will be discarded.
+The string "boo:and:foo", for example, yields the following results with these parameters:
+Regex   Limit   Result
+:       2       { "boo", "and:foo" }
+:       5       { "boo", "and", "foo" }
+:       -2      { "boo", "and", "foo" }
+o       5       { "b", "", ":and:f", "", "" }
+o      -2       { "b", "", ":and:f", "", "" }
+o       0       { "b", "", ":and:f" }
+An invocation of this method of the form str.split(regex, n) yields the same result as the expression:
+Pattern.compile(regex).split(str, n)
+
 
 
 ###Exceptions###  
