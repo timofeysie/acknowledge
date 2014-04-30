@@ -34,6 +34,62 @@ Pass by Reference
 Enum
 Random
 
+**Common Traps** -----------------------------------------
+
+Watch for thread initiation with classes that don't have a run() method.
+
+Case statements must have values within permissible range.
+
+Watch for Math class being an option for immutable classes.
+
+Watch for System.exit() in try-catch-finally blocks.
+
+main() can be declared final.
+
+A class without abstract methods can still be declared abstract.
+
+Map does not implement Collection.
+
+Dictionary is a class, not an interface.
+
+Collection (singular) is an Interface, but Collections (plural) is a helper class.
+
+Class declarations can come in any order (e.g., derived first, base next, etc.).
+
+Multi-dimensional arrays can be "sparse" -- i.e., if you imagine the array as a matrix, every row need not have the same number of columns.
+
+Arrays, whether local or class-level, are always initialized
+
+A declaration cannot be labelled.
+
+continue must be in a loop (e.g., for, do, while). It cannot appear in case constructs.
+
+Primitive array types can never be assigned to each other, even though the primitives themselves can be assigned. For example, ArrayofLongPrimitives = ArrayofIntegerPrimitives gives compiler error even though longvar = intvar is perfectly valid.
+
+A constructor can throw any exception.
+
+Initializer blocks are executed in the order of declaration.
+
+Instance initializers are executed only if an object is constructed.
+
+All comparisons involving NaN and a non-NaN always result in false.
+
+Default type of a numeric literal with a decimal point is double.
+
+int and long operations / and % can throw an ArithmeticException, while float and double / and % never will (even in case of division by zero).
+
+== gives compiler error if the operands are cast-incompatible.
+
+You can never cast objects of sibling classes (sharing the same parent).
+
+equals() returns false if the object types are different. It does not raise a compiler error.
+
+No inner class (non-static inner class) can have a static member.
+
+File class has no methods to deal with the contents of the file.
+
+InputStream and OutputStream are abstract classes
+
 
 
 **Inheritance** /*----------------------------------------
@@ -58,6 +114,7 @@ Answer: a and d This results in ClassC being the "grandchild" of ClassA.
 
 **Integers** /*-------------------------------------
 Question - What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
+
 Answer - 
 String base5String = "230";
 int result = Integer.valueOf(base5String, 5);
@@ -81,7 +138,9 @@ Integer num_123L = Integer.parseInt(123);
 **Doubles & Floats** /*---------------------------------------
 
 Question: What Double(Float) method can you use to detect whether a floating-point number has the special value Not a Number (NaN)?
-Answer: isNaN()
+
+Answer: 
+isNaN()
 NaN	Example
 	Double d1 = new Double(-1.0/0.0);
 	Double d2 = new Double(0.0/0.0);
@@ -112,6 +171,7 @@ while (x != 1.1)
 	System.out.printf("x = %f%n", x);
 	x = x + 0.1f;
 }
+
 Answer:
 The number 0.1 cannot be stored precisely in base two in the same way that the
 decimal equivalent of the fraction 1/3 cannot be represented exactly (0.333333…).  The result of adding this number repeatedly to x will result in a number that is not quite 1.1. The comparison, x != 1.1, will return true and the loop will never end.  The output of the printf statement does not show this difference:
@@ -158,6 +218,7 @@ length is 6, so i is set to 5. go from index 5 to 0, which means 6 to 1 will be 
 Question:
 int a[] = {1,2,3,4}
 print(a instanceof Object) 
+
 Answer:
 Arrays are objects, so prints true.
 
@@ -166,6 +227,7 @@ int a[][] = new int[3][];
 a[1]=new int[]{1,2,3};
 a[2]=new int[]{4,5};
 print(a[1][1]);
+
 Answer:
 Compiles and prints 2.
 
@@ -177,7 +239,9 @@ d. int arr[] = {1,2,3,4,5};
 The number of elements in an array declaration is not used in
 the declaration. However, we can use the following:
 int arr[] = new int[5];
-Answer: a and d
+
+Answer: 
+a and d
 
 
 // question 20
@@ -386,7 +450,9 @@ b=(A)a;
 a=b;
 a=(A)b;
 a=(B)b;
-Answer: The first two are not legal.
+
+Answer: 
+The first two are not legal.
 
 Question:
 interface Rideable 
@@ -461,6 +527,7 @@ public class Derived extends Base {
 	}
 	public void aMethod(){System.out.println("Derived.aMethod()");}
 }
+
 Answer:
 It creates an instance of the Derived class but assignes it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.
 But note that if the aMethod was not present in the base class then compilation error would be reported at compile time, when the compiler sees the statement b.aMethod(), it checks if the method is present in the bass class.  Only at runtime it decides to call the method from the derived class.
@@ -516,6 +583,7 @@ public class Derived extends Base {
 	}
 	public void aMethod(){System.out.println("Derived.aMethod()");}
 }
+
 Answer:
 It creates an instance of the Derived class but assignes it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.
 But note that if the aMethod was not present in the base class then compilation error would be reported at compile time, when the compiler sees the statement b.aMethod(), it checks if the method is present in the bass class.  Only at runtime it decides to call the method from the derived class.
@@ -551,6 +619,7 @@ Question:
 		System.out.println(string1.equals("true"));				// 5
 		System.out.println(character1=="true"); 				// 6
 What is the output?
+
 Answer: 
 Compile error: incompatible types, boolean and String
 For lines 4 and 6.
@@ -561,6 +630,7 @@ For lines 4 and 6.
 Question:
 int num = -50;
 System.out.println(num % 25.0)
+
 Answer:
 output -0.0
 We suppose that any expression containing a negative will give a negative answer, as well as follow the rules of promotion.
@@ -568,6 +638,7 @@ We suppose that any expression containing a negative will give a negative answer
 Question:
 int a = 5;
 print("Value is - "+((a < 5) ? 9.9 : 9));
+
 Answer:
 The result of a ternary operator must be determined at compile time, and here the type chosen using the rules of promotion for binary operands is double.  Since the result is a double the output value is printed in a floating point.  The choice of which value to be printed is made on the basis of the result of the comparison "a < 5" which results in false, hence the variable "a" takes the second of the two possible values, which is 9, but because the result type is promoted to double the output value is actually written as 9.0 rather than the more obvious 9.
 
@@ -579,7 +650,8 @@ void aMethod(Float ob) {  //2 }
 ...
 test.aMethod(0.0);
 
-Answer:  0.0 is autoboxed to Double object.  Following the rules of promotion:
+Answer:  
+0.0 is autoboxed to Double object.  Following the rules of promotion:
 int long float double, why isn't the wrapper class used?  Lets look at another question:
 
 public class AccountBal
@@ -713,6 +785,7 @@ class TestOuter
 		new TestOuter.TestInner();
 	}
 }
+
 Answer:
 What will be printed?  Static nested classes are allowed to access static variables of the enclosing class.  So 200 will be printed.  The OuterClass is never instantiated, so the value is not changed by the constructor.  If we put this before the call, TestOuter to = new TestOuter();, 400 will be printed.
 
@@ -731,7 +804,8 @@ c. The method's class must extend a base class that has the
 overridden method
 d. The method must execute against a base class reference variable
 
-Answer: Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior. So a and d are correct.
+Answer: 
+Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior. So a and d are correct.
 
 If a method declararation overrides a method in the super class, there will be a compile time error when:
 - there are different return types
@@ -757,7 +831,9 @@ You cannot do these:
 **Math** ------------------------------------------------
 
 Question:  What is the return type of method round(double d) defined in Math class?
-Answer: long 
+
+Answer: 
+long 
 
 static long	round(double a): Returns the closest long to the argument, with ties rounding up.
 static int	round(float a): Returns the closest int to the argument, with ties rounding up.
@@ -821,6 +897,7 @@ public class SilverAccount extends Account
 		SilverAccount silver = new SilverAccount();
 		System.out.println(silver.number); } // call 2
 }
+
 Answer:
 Protected variables or methods will not be accessable by a sub-class from their parent classes which are in different packages.  
 call 1<- protected access!
@@ -833,6 +910,7 @@ public int aMethod(String a)
 	private int b = a;
 	return b;
 }
+
 Answer:
 local variables can be declared as final and cannot be declared static private, public or protected.  Local variables are defined in the bodies of methods.  Trying to use any declaration besides static will cause a compile error that says: illegal start of expression
 
@@ -883,6 +961,7 @@ c. public int[] someMethod(int i, float f)
 { return new int[i];}
 d. public int []someMethod(int i, float f)
 { return new int[5];}
+
 Answer:
 a, c, and d Option b fails to initialize the array properly.
 
@@ -895,6 +974,7 @@ a. Static methods cannot be overloaded.
 b. The return value is not considered when overloading a method.
 c. Private methods cannot be overloaded.
 d. An overloaded method cannot throw exceptions.
+
 Answer:
 - a The return value is not considered when overloading a method so b is the correct answer.
 
@@ -909,7 +989,9 @@ a. error will occur cause void cannot be used with a constructor.
 b. error will occur cause the first two constructors are not unique.
 c. The class does not have a default constructor.
 d. No syntax errors will be generated.
-Answer: The last line is a method that happens to have the same name as the constructor. As there are constructors defined but no
+
+Answer: 
+The last line is a method that happens to have the same name as the constructor. As there are constructors defined but no
 default constructor, the class has no default constructor.  So c and d are correct.
 
 
@@ -921,7 +1003,8 @@ b. typeOf
 c. instanceof
 d. instanceOf
 
-Answer: d The other methods do not exist.
+Answer: 
+d The other methods do not exist.
 We beg to differ.  instanceof is an operator.  The method would be getClass and then use instancof?  Pretty sure they mean c., which then makes the question's use of the word 'method' wrong.
 
 
@@ -935,7 +1018,9 @@ a. Class A extends RuntimeException
 b. Class A extends Throwable
 c. Class A extends Exception
 d. Class A extends IOException
-Answer: Checked exceptions are those classes that extend the Exception class but not the RuntimeException class.  So the answer is c and d.
+
+Answer: 
+Checked exceptions are those classes that extend the Exception class but not the RuntimeException class.  So the answer is c and d.
 
 Question:
 What exceptions may the following code generate at runtime?
@@ -950,7 +1035,8 @@ b. DivisionByZeroException
 c. FileNotFoundException
 d. NullPointerException
 
-Answer: DivisionByZeroException does not exist. No file
+Answer:
+DivisionByZeroException does not exist. No file
 operations are performed here.  So the answer is a and d.
 
 Question:
@@ -1050,6 +1136,7 @@ public class Test14 {
 		System.out.println(obj.getName());
 	}
 }
+
 Answer:
 This program has nothing to do with the Exception vs. Throwable/checked vs unchecked situation we thought it was.  It will not compile due to the getName() method call.  The reference variable used to invoke the method is of type A.  The getName() method is class A throws a Throwable, which is not handled at the place where it is invoked.  Even though the actual object at runtime is of type B, the compiler looks for a matching method in class A.  It finds the method in the superclass which declares to throw the Throwable and gives and error that Throwable should be caught or declared to be thrown.
 If we surround the getName() method call in a try catch block like this, then the class will compile:
@@ -1073,6 +1160,7 @@ public class Test16 {
 			C b2 = (C)a1;
 		}	
 }
+
 Answer:
 The only explaination given: "the object reference at line 9 is valid". 
 
@@ -1089,6 +1177,7 @@ a. Prints "Exception" and "Finally"
 b. Prints "Finally"
 c. Prints "Exception"
 d. Does not compile.
+
 Answer:
 What is the output?  Will it compile or no?  Have to read all the answers to see that the only valid one is the final one.  Maybe the test makers just made a mistake, but that's no excuse for us.  Anyhow, we didn't see why.
 The line that prints "Inside Exception" is unreachable.  That's a compile time error.
@@ -1173,6 +1262,7 @@ class Test9
 {
 	static String s4 = "Java";
 }
+
 Answer:
 Only 3(line 10?) will print false.  Strings are immutable objects.  That is, a string is read only once the string has been created and initialized, and Java optimizes handling of string literals; only one anonymous string object is shared by all string literals with the same contents.  Hence in the above code, the strings s1, s2 and s4 refer to the same anonymous string object, initialized with the character string "Java".  This, s1 ==s2 and Test9.s4 will both return true and obviously s1.equals(s2) will return true.
 
@@ -1192,6 +1282,7 @@ Question:  Will this work?
 String str = "10";
 int a = new Integer(10);
 boolean b = str==a;
+
 Answer:
 The comparison is not legal, as only the + operator performs the implicit conversion to a String object.
 ie: b = str==a+""
@@ -1201,6 +1292,7 @@ Question:
 boolean b = false;
 boolean c = true;
 if (b = c) print("true");
+
 Answer:
 The if evaluates to true because the assigment statement also has a value equal to the value being assinged.  Using the == operator provides expected behaviour.
 if (b == c) ... false
@@ -1210,18 +1302,21 @@ Integer a = 123;
 float b = 123f;
 boolean c = false;
 if (c|a==b) print("true");
+
 Answer: The a==b will be evaluated first, so the answer is true.
 
 Question: WIll this compile?
 String str = "1";
 Integer a = 1;
 boolean b=str==a;
+
 Answer: will not compile.  Incomparable types: String and Integer 
 
 Question:
 Character obj = 65;
 char c = 65;
 if c==obj 
+
 Answer: true
 
 		Byte b1 = 1;
@@ -1254,10 +1349,15 @@ b1 += b2; // compilation successful
 Consider the following code snippet:
 int i = 10;
 int n = i++%5;
-    Question: What are the values of i and n after the code is executed?
-    Answer: i is 11, and n is 0.
-    Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
-    Answer: i is 11, and n is 1.
+Question: What are the values of i and n after the code is executed?
+
+Answer: 
+i is 11, and n is 0.
+
+Question: What are the final values of i and n if instead of using the postfix increment operator (i++), you use the prefix version (++i))?
+    
+Answer: 
+i is 11, and n is 1.
 
 4 + 5 * 6 / 3 will be treated as 
 4 + (5 * (6 / 3)) = ?
@@ -1346,7 +1446,9 @@ This is 25.
 
 Question: How does this code compile?
 Number Float = 99.455f;
-Answer: Float is not a reserved word.  'float' is.
+
+Answer: 
+Float is not a reserved word.  'float' is.
 
 
 **The toArray method** ------------------------------------
@@ -1354,7 +1456,9 @@ Answer: Float is not a reserved word.  'float' is.
 Question: Will this compile:
 Vector<String> set = new Vector<String>();
 String[] arr = set.toArray();
-Answer:  The toArray() method returns Object[], so to compile, the set must be cast to String.  You can fix it like this:
+
+Answer:  
+The toArray() method returns Object[], so to compile, the set must be cast to String.  You can fix it like this:
 String[] arr = (String [])set.toArray();
 
 Question:  What will the output be:
@@ -1374,7 +1478,8 @@ class Test13
 	}
 }
 
-Answer: Remeber, the toArray() method returns an array of Objects, and needs to be cast to a String array like this:
+Answer: 
+Remeber, the toArray() method returns an array of Objects, and needs to be cast to a String array like this:
 String[] s = a.toArray(new String[0]);
 Trying this fails during runtime:
 String[] s = (String[])a.toArray();
@@ -1472,6 +1577,7 @@ System.out.println((args[0].split(args[1])).length);
 Question:
 String str = "Java*JSP*EJB*J2EE";
 System.out.println(Arrays.toString(str.split("*",-2)));
+
 Answer:
 Runtime Exception: java.util.regex.PatternSyntaxException: Dangling meta character * near index 0.
 PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
@@ -1537,7 +1643,9 @@ class Test {
 	public void Test(){print("None");}
 }
 Question:  What is printed when you create a new Test();?
-Answer: Nothing, those are not constructors because of the void return type modifier.
+
+Answer: 
+Nothing, those are not constructors because of the void return type modifier.
 
 Question:  What will the output be?
 class A {A() {System.out.print("Super ");}}
@@ -1561,6 +1669,7 @@ public class Main extends A {
         System.out.print(" method "); 
     }
 }
+
 Answer:
 Super No arg Sub 2 1 method
 
@@ -1582,6 +1691,7 @@ public void calculate()
 	this.total = total; //3
 	this.local = 4; // 4
 	this = new ExamQuestions(); // 5
+
 Answer:
 -  Non-static mehods have an implicit 'this' object reference.  The this reference cannot be changed.  (5)
 - The 'this' reference can be used in a non-static context to refer to both instance and static members.
@@ -1612,6 +1722,7 @@ Class Test {
 		System.out.print(a+" "+b.a);
 	}
 }
+
 Answer:
 Output: 100 -1
 
@@ -1630,6 +1741,7 @@ public class RefObject {
 		System.out.println(RefOb.className);
 	}
 }
+
 Answer:
 When a method which takes an object argument is invoked, the method obtains a copy of the object reference from the calling method.  So altering the object within the method affects the original object passed.  Hence the output "RefObject_200" will be printed.
 The method1() call merely sets the copy of the reference to null, but does not change the object, or the original reference to the object held in the refOb variable.
@@ -1662,6 +1774,7 @@ public class Test10
 			System.out.println("Inside JAN 2");
 	}
 }
+
 Answer:
 The valueOf() method returns the enum constant whose value corresponds to the string argument passed in.  The enum constant can be compared for == relational operator or the equals() method, since they are instances of the declared enumeration type.  The output will be 
 Inside JAN 1
@@ -1689,6 +1802,7 @@ public class MyThread extends Thread
 		}
 	}
 }
+
 Answer:
 Will this compile and run?  Notice MyThread is not started, but Thread.  To start MyThread, we need to supply an argument:
 new MyThread(11).start();
@@ -1718,10 +1832,14 @@ False: Member inner classes are the static class.(?)
 Finalize will always run before an object is garbage collected.
 
 Questions: When using the writeObject method to store (serialize) the state of an object, how can you protect sensitive data from being acessed in the stored object?
-Answer: declare the sensitive fields as private transient.
+
+Answer: 
+declare the sensitive fields as private transient.
 
 Question: Which of the following keywords is used when a constructor calls an overload constructor in the same class.
-Answer: this
+
+Answer: 
+this
 
 - super() must be the first statement in a subclass contructor.
 
@@ -1756,7 +1874,8 @@ class Test6<Ob>
 	}
 }
 
-Answer: Compile error: non-static type variable Ob cannot be referenced from a static context.
+Answer: 
+Compile error: non-static type variable Ob cannot be referenced from a static context.
 * Not sure why in this case...
 
 - finalize will always run before an object is garbage collected.
@@ -1764,7 +1883,8 @@ Answer: Compile error: non-static type variable Ob cannot be referenced from a s
 - Member inner classes are the static class
 
 Question:  Will this work as a class variable?
-private synchronized int e; 
+private synchronized int e;
+
 Answer:
 This is an invalid class level (nonlocal) variable declaration.
 Compile time error: modifier synchronized not allowed here.
@@ -1791,6 +1911,7 @@ boolean a = true;
 boolean b = false;
 boolean c = true;
 if (a && (b = c)) 
+
 Answer:
 An assignment statement also has a value equal to the value being 
 assigned, hence (b = c) evaluates to true.
@@ -1800,6 +1921,7 @@ public class Test {
 	static int i = j;
 	static int j = 10;
 }
+
 Answer:
 Compile error: illegal forward reference.
 
@@ -1807,6 +1929,7 @@ Question:
 		int y;
 		System.out.println("y before init "+y);
 		y = 100;
+
 Answer:
 Even tyring toQuestion:
 method()
@@ -1817,6 +1940,7 @@ method()
 		if (x >= 100) y = x * 10;
 			print("Y is "+y);
 }
+
 Answer:
 Will not compile with the warning that the variable y may not have been initialized.
 
@@ -1831,6 +1955,7 @@ method()
 		if (x >= 100) y = x * 10;
 			print("Y is "+y);
 }
+
 Answer:
 Will not compile with the warning that the variable y may not have been initialized.
 
@@ -1842,6 +1967,7 @@ Will not compile with the warning that the variable y may not have been initiali
 
 Question:
 Class ExamQuestions = ExamQuestions.class;
+
 Answer:
 This code is fine.  We thought it would trigger a ClassCastException, but it won't.
 
