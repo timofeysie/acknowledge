@@ -556,6 +556,13 @@ private static void defualtValue()
 		*/
 	}
 
+	private static void testErrors()
+	{
+		//int and long operations / and % can throw an ArithmeticException, while float and double / and % never will (even in case of division by zero).
+		//int i = 0/0; // / by zero runtime error:
+		float l = -0.0f/0.0f; // no error		
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -564,7 +571,7 @@ private static void defualtValue()
 		//randomCode();
 		//unorthadoxUnary();
 		//basicFailedQuestions();
-		failedRegex();
+		//failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
 		//arrayWork();
@@ -574,5 +581,6 @@ private static void defualtValue()
 		//testException();
 		//testNumbers();
 		//testOperators();
+		testErrors();
 	}
 }

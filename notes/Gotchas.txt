@@ -1,0 +1,254 @@
+
+**Common Traps from Code Ranch** -----------------------------------------
+
+- Watch for thread initiation with classes that don't have a run() method.
+myThread = new Thread(new Server());
+myThread.start();
+That will cause whatever you put in the Server class' run method to be executed by myThread.  There are two separate concepts here, the Thread and the Runnable. The Runnable specifies what work needs to be done, the Thread is the mechanism that executes the Runnable. Although Thread has a run method that you can extend, you can ignore that and use a separate Runnable.
+public class Server implements Runnable {
+    static Thread myThread;
+    public void run() { // TODO Auto-generated method stub  }
+    public static void main(String[] args) {
+        System.out.println("Good morning");
+        myThread = new Thread(new Server());
+    }
+}
+
+- Case statements must have values within permissible range.
+byte: min -128 max 127
+char: 0 to 65,535
+
+- Watch for Math class being an option for immutable classes.
+The Math class is not only immutable, you can't even create an instance of it, so you can't change any instance variables because there are none.
+
+- main() can be declared final.
+public final static void main(String[] args)
+STATIC MODIFIERS ARE IMPLICITLY FINAL.
+"public final void main(String args[])"
+
+- A class without abstract methods can still be declared abstract.
+That also means that it doesn't have to implement all the methods of an interface.
+
+- Map does not implement Collection.
+Word.
+
+-Dictionary is a class, not an interface.
+
+-Collection (singular) is an Interface, but Collections (plural) is a helper class.
+
+-Multi-dimensional arrays can be "sparse" -- i.e., if you imagine the array as a matrix, every row need not have the same number of columns.
+
+- A declaration cannot be labelled.
+you can label anything in your program, but you can't use a break or continue with a label unless what immediatly follows the label is a loop for continue and break or a switch statement for break only (not continue).
+continue must be in a loop (e.g., for, do, while). It cannot appear in case constructs.
+
+public class Decl
+{
+	public static void main(String[] args)
+	{
+		label1: float f = 1.3f;
+		label2 : for(int i=0;i<10;i++)
+		{
+			System.out.println(i);
+		}
+}
+error: '.class' expected: line 5
+error: not a statement: line 5
+error: illegal start of expression
+error: ';' expected
+I think declarations cannot be labeled. 
+
+
+- Primitive array types can never be assigned to each other, even though the primitives themselves can be assigned. For example, ArrayofLongPrimitives = ArrayofIntegerPrimitives gives compiler error even though longvar = intvar is perfectly valid.
+
+A constructor can throw any exception.
+
+Instance initializers are executed only if an object is constructed.
+
+All comparisons involving NaN and a non-NaN always result in false.
+
+Default type of a numeric literal with a decimal point is double.
+
+- int and long operations / and % can throw an ArithmeticException, while float and double / and % never will (even in case of division by zero).
+		//int i = 0/0; // / by zero runtime error:
+		float l = -0.0f/0.0f; // no error	
+
+== gives compiler error if the operands are cast-incompatible.
+
+You can never cast objects of sibling classes (sharing the same parent).
+
+equals() returns false if the object types are different. It does not raise a compiler error.
+
+No inner class (non-static inner class) can have a static member.
+
+File class has no methods to deal with the contents of the file.
+
+InputStream and OutputStream are abstract classes
+
+
+**Technofundo** -----------------------------------
+http://www.technofundo.com/tech/scjp/scjpnotes.html
+
+Language Fundamentals
+Two public classes in the same file are not allowed.
+Check modifier of the top level class, it shouldn't be "private" or "protected ".
+The main() method calling a non-static method directly, or accessing non-static variables, using this reference is a compile time error.
+Methods can have same name as the constructor(s), check for return type.
+Case statements with values out of permissible range, only integer compatible value are permitted.
+Private constructors, watch out for them especially if there is a subclass, if default no-argument constructor is private, a subclass will not be compiled, if its constructor has to use this default constructor.
+If the compiler gives you the default no-args constructor for the class, its accessibility is same as the class.
+An assignment statement for boolean data type, which looks like a comparison if (a=true), it is valid but will be always evaluated to true.
+main() can be declared final, or native.
+Class declarations can come in any order (superclass first, subclass next etc).
+Forward references to variables gives compiler error.
+-0.0 == 0.0 is *true*.
+Multi dimensional arrays can be sparce ie., if you imagine the array as a matrix, every row need not have the same number of columns.
+Arrays, whether local or class-level, are always initialized.
+Strings are initialized to null, not empty String. And an empty String ("") is *NOT* same as a null string.
+A declaration cannot be labeled.
+continue must be in a loop (for, do , while). It cannot appear in case constructs.
+break can be used to break out of any labeled block.
+A constructor can throw any exception.
+Constructor must declare all the checked exceptions declared in the base constructor. They may add other exceptions. This behaviour is exactly opposite from that of methods. The overriding method cannot throw any exception other than overridden method. It may throw subclass of those exception.
+Initializer blocks are executed in the following order
+Static initializers executed first, in the order they are declared. Takes place when the class is loaded, instance creation is not required.
+Instance initializers are executed next, Instance initializers get executed ONLY IF the objects are constructed.
+The constructor is executed at the last while creating an object.
+An instance final variable may be initialized only once, latest in the constructors.
+A static final variable may be only initialized once, latest in a static initializer, but not in the constructor because it can be referenced w/o creating an instance of the class.
+All comparisons involving NaN and a non-NaN would always result false, moreover comparisons involving two NaN values will also result in false, except for !=.
+i.e. Float.NaN == Float.NaN results in false.
+Float.NaN != Float.NaN results in true.
+Default type of a numeric literal with a decimal point is double.
+We can declare array of ZERO elements, it is perfectly valid and is commonly done by main() method if there are no command line arguments.
+you can *NOT* use more than '4' digits in case of character constant.
+Char constant '\101' is valid as it is representing the value in "octal", which is equivalent to 65.
+Values for char constant '\u000A' and '\u000D' is not valid as they represent line breaks, in fact these values can not appear anywhere in the Java source code.
+Interface methods can not be native, static, synchronized, final, private, or protected.
+Interface fields can't be private or protected. They are by default public static final. The final variable must be initialized.
+transient variables can't be members of interfaces.
+volatile variables can't be final or members of interfaces.
+CONSTANT values up to an int can be assigned (without cast) to variables of lesser size (eg. short to byte) if the value is representable by the variable.(ie. fits into the size of the variable).
+native method declarations can not have bodies, as they are implemented outside JVM.
+abstract method declarations can not have bodies, because its implementation is differed to the subclass.
+Operators
+integer (and long ) operations / and % can throw ArithmeticException while / and % will never, even in case of division by zero.
+The == gives compiler error if the operands are cast-incompatible.
+instanceOf is *NOT* same as instanceof, later is Java operator, former is *NOT*.
+instanceof operator always return false for null value.
+Class H and class G have no relation (i.e if two class has no relation) with each other so both instanceof and == operator will give you compile time error.
+RHS of an instanceof operator must be a Class, Interface or an Array.
+The genral rule is that ~i = -i-1 (eg.: ~7 = -7 - 1 = -8)
+&& and || oprators are "short-circuit" operators, i.e. they NEVER evaluate RHS operand if LHS operand can determine the result of the operation.
+operands of mathematical operators are ALWAYS promoted to ATLEAST int. (ie. for byte * byte both bytes will be first promoted to int.) and the return value will be ATLEAST int.
+int i = 5 + 'c'; is perfectly valid, and c will get converted to its numeric value.
+char is the only integral which is unsigned, all others are signed.
+Compound assignment oprators ( +=, *= etc) behave in this way -
+operand1 += operand2;
+Gives => operand1 = (TYPE_OF_OPERAND1)(operand1 + operand2);
+except that operand1 is evaluated only once.
+Example
+int x    =  4;
+x       +=  3.78;	// x becomes 7, but no compiler error
+Flow Control And Exceptions
+Check for uninitialized variable references with no path of proper initialization.
+You an have finally w/o catch block, but try must be followed by either catch or finally.
+if there is a System.exit() in try-catch-finally blocks, finally won't complete.
+Order of try-catch-finally blocks matters.
+The following code will give you compiler error " Unreachable statement "
+while(false)	//compiler error
+{
+	System.out.println("Hello");
+}
+Casting and Conversion
+Conversion sequence for primitives is as follows -
+byte --> short --> int --> long --> float --> double
+                  /
+         char ___/ 	
+boolean can not be converyted to any other primitiv, and any other primitive can not be converted to boolean.
+objectOfSuperclass = objectOfSubclass is always valid w/o explicit casting.
+Primitive array types can never be assigned to each other, even though the primitives themselves can be assigned. ie. ArrayofLongPrimitives = ArrayofIntegerPrimitives gives compiler error even though longVar = intVar is perfectly valid.
+null value can be casted but do remember it is of no use to cast null value.
+Overriding and Overloading
+A class without abstract methods can still be declared abstract.
+If a class has an abstract method, it must be declared abstract.
+If null is passed as a method parameter to an overloaded method, then most specific method as per the parameter hierarchy will be called. BUT if two methods which are not form the same hierarchy are present than compiler will raise an ambiguity error.
+Overriding method must have same signature and return type as the overriden method.
+Overriding method can be more accessible (public) than the overriden method, but it can not be more restrictive, otherwise it will result in a compile time error. The accessibilty (from most restrictive to least restrictive) is as follows -
+private => package => protected => public
+The overriding method *MUST* throw exception which is either same as the exception that the overriden method is throwing, or should be a subclass of it. It may also choose not to to throw an exception.
+Threads
+Threads can not be initiated with classes that do not either implement Runnable or extend Thread.
+Signature of run() method is - public void run(), any other variation is not allowed and will result in a compile time error if a method by this signature is not present in a class extending Thread or implementing Runnable. This method does not throw any exception.
+The default Thread priority is the priority of the thread which started it, it can be changed using method setPriority(int priority).
+The methods sleep() and yield() are static methods of the thead class, they ALWAYS work on the thread which is currently executing. sleep() method throws IterruptedException, whereas yield() does not throw any.
+The methods wait(), notify(), and notifyAll() are the methods of Oject class, they are inherited in the Thread class and all throw InterruptedException.
+The methods wait(), notify(), and notifyAll() *MUST* be called in a synchronized block, otherwise the call will result in IllegalMonitorStateException at Runtime (It is-a RuntimeException).
+The instance method setDaemon(bolean on) of Thread class can be used to set a thread as daemon thread, or user thread. This method *MUST* be called before the thread is started, otherwise IllegalThreadStateException is thrown at Runtime.
+The instance method join() can be called on any thread, so that the calling thread waits till this particular thread (on which join() has been called) dies, i.e completes execution of its run() method. The method throws IterruptedException, and its overloaded version take "timeout" paramete in milli-seconds and other in mili-seconds and nano-seconds.
+Inner Classes
+Inner classes can also be private or protected.
+Inner classes can access all the instance variables of the enclosing class.
+Local inner classes *CAN NOT* access non-final vars of the enclosing method, it is a compiler error.
+You cannot declare a static variable inside a non-static inner class but static final variable is allowed as the compiler will treat it as a constant.
+Inner classes do not have same name as the enclosing classes.
+java.util Package
+Following classes are the implementations of various Collection framework interfaces.
+interface Set extends Collection - HashSet
+interface SortedSet extends Set - TreeSet
+interface List extends Collection - ArrayList, Vector, LinkedList
+interface Map - HashMap, HashTable
+interface SortedMap extends Map - TreeMap
+Set => Unique values, no duplicates, List => Order, Map => key-value pair.
+Map *does not* extend Collection.
+Dictionary is a class, not an interface.
+Collection is an Interface where as Collections is a helper class.
+BitSet has nothing to do with sets or collections.
+Only Vector and Hashtable class of java.util package are thread safe.
+Important bulk operations of Collection with their mathematical equivalent statement. (Note that methods are called on "a" and a is being modified as a result)
+	(1) a.containsAll(b)  --> b is a subset of a
+	(2) a.addAll(b)       --> a is a union b
+	(3) a.removeAll(b)    --> a is a difference b
+	(4) a.retainAll(b)    --> a is a intersect b
+	(5) a.clear()         --> a is an empty set
+The operations performed by methods addAll(b), removeAll(b), retainAll(b) and clear() *do modify* the original collecton.
+java.lang Package
+Wrapper classes are all immuatable, the wrapper classes for primitives int and char are Integer, and Character respectively.
+void is *NOT* a primitive, so Wrapper class Void *IS NOT* a Primitive Wrapper class.
+Math class is not an immutable classes. It's final, non-instantiable (private constructor) class.
+Math.abs() will return the argument itself, if it is equivalent to Integer.MIN_VALUE or Long.MIN_VALUE. e.g. Math.abs(-2147483648) return -2147483648. if literal is less than MIN_VALUE then compile time error will occur "Decimal must be in the range of so and so".
+In java.lang.Math class - 
+Math.ceil(-0.5) = -0.0
+Math.round(-5.5) = -5
+Math.round(5.5) = 6
+Math.round(5.49) = 5
+Math.round(-5.49) = -5
+equals() method of standard Wrapper classes, String and StringBuffer return false if the object classes are different. It does not flag a compiler error. However, you can not be certain about the other classes if they override this method.
+You can not pass primitives to equals() method.
+You can use negative argument in indexOf() and lastIndexOf() method of String class. In such case it will start searching from zero.
+There is *no* trim() method in StringBuffer.
+There is *no* reverse() or append method in String.
+Strings are IMMUTABLE, can not be changed once created. They are immutable, period.
+replace() method of String class returns the same object if both the parameters are same, ie. if there is no change.
+java.io Package
+File class has NO methods to deal with the contents of the file.
+File class can delete (delete()) and create new files (createNewFile()).
+File class method renameTo() takes File object as param.
+To test if file is a directory, method isDirectory() of File class can be used.
+getParent() of File class returns name of the parent directory as a String, whereas getParentFile() returns File object.
+RandomAccessFile descends from Object and implements DataInput and DataOutput, for reading and writing all java primitives. Additionally, also has methods to read/write UTF - readUTF() and writeUTF().
+InputStream and OutputStream are abstract classes, while DataInput and DataOutput are interfaces.
+Only InputStreamReader and OutputSreamWriter are for customizing the "Encoding", their constructors take encoding as a parameter.
+The default encoding used by these classes is defined by the system property - file.encoding
+Only InputStreamReader and OutputSreamWriter are the reader/writer classes which take InputStream and OutputStream in their parameters respectively. Also PrintWriter class can take an OutputStream as a parameter in its constructor.
+The Writer class has no write() method with a parameter of type char, instead has a method that takes an int, only lower 16 bits of this int are written as a character.
+Abstract Reader class's subclass must implement are write(char[], int, int) and close() methods. Most other methods are defined, or are overridden by subclasses.
+Abstract Writer class's subclass must implement are write(char[], int, int), flush(), and close(). Most other methods are defined, or are overridden by subclasses.
+Abstract Writer class has 2 additional write() methods besides the write trio, which takes String as a parameter. They are -
+void write(String str) throws IOException
+void write(String str, int offset, int len) throws IOException
+Only FileOutputStream and FileWriter can append to a file. They both take boolean parameter "append" as second parameter in their constructors.
+LineNumberReader extends BufferedReader, there is *NO* corresponding LineNumberWriter class.
+System.out and System.err are PrintStream.
+PrintWriter extends Writer and has all print() and println() methods analogus to the PrintStream.
+PrintStream and PrintWriter constructors also have boolean as their second parameter, but the second parameter here indicates whether it is "autoFlush". By default auto flush is off.
