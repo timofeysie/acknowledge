@@ -1,0 +1,172 @@
+
+package epractizelabs;
+public class Super {
+	protected void print() {
+		System.out.println("Inside Print");
+	}
+}
+import epractizelabs.*;
+class Sub extends Super {
+	public static void main(String[] args) {
+			new Super().print(); // line 6
+			new Sub().print(); // line 7
+		}	
+}
+Answer:
+Line 6 will not compile due to protected access.  The notes in the exam say: "The code will not compile because Sub class in a package different from that of the Super class can access protected members of the superclass only theough inheritance.  Such a subclass cannot use a superclass reference to access a protected member.  Hence compiler error at line 6"
+So it's because the subclass is the one creating the superclass instance, and so that subclass cannot call the superclass protected method unless it were in the same package or is an instance of a class that extends that superclass, which it is at line 7.
+The Trail says: "The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package."
+If we comment out line 6, then the class compiles and runs.
+Is this because Sub extends Super, and we call the method from the subclassed reference, not from the super class reference in the sublass?  Yes, it's confusing.  Here is another example from StackOverflow:
+
+package first;
+public class First {
+    protected void pro(){
+        System.out.println("Can see protected method");
+    }
+}
+package first;
+public class InFirst {
+    public static void main(String[] args){
+        First fst = new First();
+        fst.pro();
+    }
+}
+package second;
+import first.First;
+public class Second extends First {
+    public static void main(String[] args){
+        First fst = new First();
+		//fst.pro(); // same as line 6
+        Second sec = new Second();
+        sec.pro(); // same as line 7
+    }
+}
+
+And an answer: The webpage @MadProgrammer linked gives a decent explanation:
+"The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package."
+This means the protected member must be accessed directly through either the class it is defined in or a subclass of said class while also being within the appropriate package. It does not necessarily mean you can access the protected member through an instance of said class created within a subclass of said class. The focus is on the packages involved.  Ryan goes on to explain more:
+
+package second; // Current package
+First fst = new First(); // from package first and does not extend anything
+fst.pro();
+Attempting to access member in question from which package? second
+Is the (sub)class, which contains said member, or its parent class, which it inherits the member from, defined within that same package? No, First is defined in package first, so protected makes the member inaccessible from First in package second.
+
+package second; // Current package
+Second sec = new Second(); // from package second and extends First from package first
+sec.pro();
+Attempting to access member in question from which package? second
+Is the (sub)class, which contains said member, or its parent class, which it inherits the member from, defined within that same package? Yes, Second, which is defined in package second, inherits the member from First, so the protected member is accessible from Second in package second.
+
+A commenter also linked to this table:
+Access rights for the different elements
+class 								private 	default		protected 	public 
+own class							yes			yes		 	yes			yes
+subclass - same package (SubA)		no			yes			yes			yes
+class - same package (AnotherA)		no			yes			yes			yes
+subclass - another package (SubB)	no			no			yes/no*		yes
+class - another package (AnotherB)	no			no			no			yes
+* Class SubB has access only to the inherited from Base protected elements, i.e. its own elements, but the protected data of other Base instances is not accessible from SubB.
+
+With this code:
+
+package packageA;
+public class Base {
+    public String publicStr = "publicString";
+    protected String protectedStr = "protectedString";
+    String defaultStr = "defaultString";
+    private String privateStr = "privateString";
+    public void print() {
+        System.out.println("packageA.Base has access to");
+        System.out.println("    " + publicStr);
+        System.out.println("    " + protectedStr);
+        System.out.println("    " + defaultStr);
+        System.out.println("    " + privateStr);
+
+        Base b = new Base(); // -- other Base instance
+        System.out.println("    b." + b.publicStr);
+        System.out.println("    b." + b.protectedStr);
+        System.out.println("    b." + b.defaultStr);
+        System.out.println("    b." + b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageA;
+public class SubA extends Base {
+    public void print() {
+        System.out.println("packageA.SubA has access to");
+        System.out.println("    " + publicStr + " (inherited from Base)");
+        System.out.println("    " + protectedStr + " (inherited from Base)");
+        System.out.println("    " + defaultStr + " (inherited from Base)");
+        // -- not accessible - private elements are even not inherited
+        // System.out.println(privateStr);
+
+        Base b = new Base(); // -- other Base instance
+        System.out.println("    b." + b.publicStr);
+        System.out.println("    b." + b.protectedStr);
+        System.out.println("    b." + b.defaultStr);
+        // -- not accessible
+        // System.out.println(b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageA;
+public class AnotherA {
+    public void print() {
+        System.out.println("packageA.AnotherA has access to");
+        Base b = new Base();
+        System.out.println("    b." + b.publicStr);
+        System.out.println("    b." + b.protectedStr);
+        System.out.println("    b." + b.defaultStr);
+        // System.out.println(b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageB;
+import packageA.Base;
+public class SubB extends Base {
+    public void print() {
+        System.out.println("packageB.SubB has access to");
+        System.out.println("    " + publicStr + " (inherited from Base)");
+        // -- protectedStr is inherited element -> accessible
+        System.out.println("    " + protectedStr + " (inherited from Base)");
+        // -- not accessible
+        // System.out.println(defaultStr);
+        // System.out.println(privateStr);
+
+        Base b = new Base(); // -- other Base instance
+        System.out.println("    b." + b.publicStr);
+        // -- protected element, which belongs to other object -> not accessible
+        // System.out.println(b.protectedStr);
+
+        // -- not accessible
+        // System.out.println(b.defaultStr);
+        // System.out.println(b.privateStr);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+package packageB;
+import packageA.Base;
+public class AnotherB {
+    public void print() {
+        System.out.println("packageB.AnotherB has access to");
+        Base b = new Base();
+        System.out.println("    b." + b.publicStr);
+        // -- not accessible
+        // System.out.println(b.protectedStr);
+        // System.out.println(b.defaultStr);
+        // System.out.println(b.privateStr);
+    }
+}
+
+This states it best:
+"reference in subclass in another package is not allowed to access."

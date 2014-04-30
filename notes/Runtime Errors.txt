@@ -11,10 +11,155 @@ Runtime Exception: java.util.regex.PatternSyntaxException: Dangling meta charact
 PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
 [Java, JSP, EJB, J2EE]
 
-
+"Even if class casting is detected in compile time, Interface casting is detected in runtime."
 
 v.s. Compile Time Errors
-
+========================
 
 - creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor!!!
 
+
+Extending, Inheritance and Runtime vs. Compile Time Errors
+==========================================================
+
+Question:
+abstract class A {
+	String name = "OCA Java SE 7";
+	abstract String getName() throws Throwable;
+}
+class B extends A {
+	String s = "OCP Java SE 7";
+	String getName()throws Exception {
+		if (true) throw new Exception("Error");return s;
+	}
+}
+public class Test14 {
+	public static void main(String[] args) {
+		A obj = new B();
+		System.out.println(obj.getName());
+	}
+}
+Answer:
+This program has nothing to do with the Exception vs. Throwable/checked vs unchecked situation we thought it was.  It will not compile due to the getName() method call.  The reference variable used to invoke the method is of type A.  The getName() method is class A throws a Throwable, which is not handled at the place where it is invoked.  Even though the actual object at runtime is of type B, the compiler looks for a matching method in class A.  It finds the method in the superclass which declares to throw the Throwable and gives and error that Throwable should be caught or declared to be thrown.
+If we surround the getName() method call in a try catch block like this, then the class will compile:
+		try
+		{
+			System.out.println(obj.getName());
+		} catch (Throwable t)
+		{
+			System.out.println("throwable");
+		}
+
+Observe:
+class A {}
+class B extends A {}
+public class Test15
+{
+	public static void main(String[] args) {
+		A obj1 = new A();
+		B obj2 = (B)obj1;
+	}
+}
+The class compiles, but throws a runtime java.lang.ClassCastException: A cannot be cast to B.
+But if we were to change the cast to a different type of object, say Integer, then we would get a compile error: inconvertable types.
+required: Integer
+found: A
+So the compiler knows it should be A, but lets it pass at compile time.  Strange.  The notes from the exam state: The code trying to assign a super class object into a sublass object by type casting.  Hence it will throw ClassCastException at runtime.
+
+Another very similar question has the same A B setup, and tries this:
+		A B = new A();
+		B A = new B();
+		A = (B)B;
+Oracle is trying to throw us for a curve by switching a and b.  If we fix that curve, then it looks like this:
+		A a = new A();
+		B b = new B();
+		b = (B)a;
+The exception is the same: A cannot be cast to B.  The first question can be reconfigured like this:
+		A a = new A();
+		B b = (B)a;
+In this case, the message A cannot be cast to B makes sense, maybe it should always have made sense, and that is why we continue to fail the mock exams.  But success is build on failure, so slog on.
+Just remeber that this is a RUNTIME EXCEPTION, not a compile error.  
+Why isn't it a compile time error?  I found someone else with the same question:
+
+Asked on asked Nov 10 '13 at 21:17 by luukburger rep 78:
+interface Roamable {}
+class Phone {}
+public class Tablet extends Phone implements Roamable {
+    public static void main(String... args) {
+        Roamable var = (Roamable) new Phone();
+    }
+}
+When I change Roamable var = (Roamable) new Phone(); into Roamable var = (Roamable) new String(); I get a compilation error right away.  Two questions:
+Why does the code above compile at all? Phone seems unrelated to Roamable to me?  Why does the code compile with new Phone(), but doesn't compile with new String()?
+
+Answered Nov 10 '13 at 21:39 by Sage rep 9,277
+Because Roamable is an interface it might cause a Run-time exception but not compile time exception, because even if Phone doesn't implement Roamable, a subclass of Phone might, hence the compiler has no way to know it at Run time.
+String is already defined in the java language specification.  It compile with new String() because the class String is declared as public final class in java.lang package. As specified in jls 8.1.1.2 final class section: a class declared as final can't be extended and hence it won't have any subclass. So, the compiler already knows that String can't be extended: hence no subclass's existence is possible to implement interface Roamable. 
+Let us assume that B is a subclass of A which implements an interface T.
+class A {}
+interface T {}
+class B extends A implements B {}
+Now a statement :
+   T t = (T)new A();
+is essentially same as:
+   A a = new A() ;
+   T t = (T)a ; // a run-time exception happens.
+before running the conclusion, let us do the same thing with an object of B:
+   A a = new B();
+   T t = (T)a; // no exception happen.
+so, the real reason with super class and sub class here is the reference. The a object class in this second code example is also an instance of class A but it is also an instance of class B which has implemented T.
+
+Sage provides a link to another page that has this example:
+interface Printable {}
+class BlackInk {}
+public class Main {
+    public static void main(String args[]) {
+        Printable printable = null;
+        BlackInk blackInk = new BlackInk();
+        printable = (Printable)blackInk;
+    }
+}
+If the preceding code is compiled and run, the result is a ClassCastException at printable = (Printable)blackInk;. But, if Printable is changed to a class, it doesn't compile because blackInk can't be cast to Printable. Why does it compile when Printable is an interface?
+
+Sage answers,
+The compiler does not know that this won't work: You could have a subclass of BlackInk that implements Printable. Then the cast would be fine.
+In situations where the compiler knows it won't work, you will get an error.
+For example, if you make BlackInk final (so that there can be no subclasses) you get an error.
+
+Sage also provides a link to a longer discussion, which finally puts it succintly:
+"Even if class casting is detected in compile time, Interface casting is detected in runtime."
+That seems to clear it up for interface casting, but our initial questions were not about interfaces, but classes, so what is the sound bite for that issue?  If we add a class C to our Test15.java file, then try this:
+		A a = new A();
+		B b = (C)a;
+Lo and behold we do get a compile time error: inconvertable types
+reuqired: C
+found: A
+So lets boil it down:
+
+class A {}
+class B extends A {}
+class C {}
+		A a = new A();
+		B b = (B)a; // runtime java.lang.ClassCastException
+		B b = (C)a; // compile time error incompatible types
+There might be a sublcass that solves the runtime exception, the compiler doesn't know.  But there is no possible connection for C, so the compiler knows that it can't work.  At least that's the way we are understanding it now.  And now it really is time to move on.  We can revisit this in a notes review session later.
+
+And infact we have ANOTHER A B question we failed!
+interface A {}
+class B implements A {}
+class C extends B {}
+public class Test16 {
+	public static void main(String[] args) {
+			A a1 = new B();
+			A b1 = new C();
+			a1 = b1;
+			C b2 = (C)a1;
+		}	
+}
+The only explaination given: "the object reference at line 9 is valid".  Gee, thanks a lot.  Our notes go like this:
+a1 is (a_b)
+b1 is (a_c)
+a1 = b1 is (a_b = a_c)
+b2 = (C)a1 is (c(b(a))) = a_b which means that b2 is now c_a_b.
+Remeber we can do a = b, but not b = a.
+Those (a1 = b1;C b2 = (C)a1;) are both similar casts.  Since C extends B which implemnts A, B and C are pretty interchangeable, at least it looks that way.
