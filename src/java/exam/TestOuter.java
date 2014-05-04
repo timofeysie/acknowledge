@@ -16,7 +16,8 @@ class TestOuter
 	}
 
 	public static void main(String[] args) {
-		TestOuter to = new TestOuter();
+		//TestOuter to = new TestOuter();
+		//new TestOuter().TestInner(); error: cannot find symbol TestInner()
 		new TestOuter.TestInner();
 	}
 }

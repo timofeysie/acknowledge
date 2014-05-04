@@ -1,5 +1,5 @@
 import java.io.*;
-class ExceptionTest {
+class ExceptionTest2 {
 	public static void main(String[] args) {
 		try {
 			File f = new File("first file");
@@ -10,6 +10,7 @@ class ExceptionTest {
 		} catch (IOException ioe)
 		{
 			System.out.println("inside 2");
+			// warning: unreachable catch clause
 		} catch (Exception e)
 		{
 			System.out.println("inside 3");

@@ -7,6 +7,14 @@ import java.io.*;
 
 public class ExamQuestions
 {
+	ExamQuestions () {
+		this("ExamQuestions");
+	}
+
+	ExamQuestions (String name)
+	{
+		System.out.println("Started :"+name);
+	}
 
 /*
 This is a very good question to test the concepts of execution flow 
@@ -274,7 +282,7 @@ private static void defualtValue()
 	}
 	
 	//Integer num_123L = Integer.parseInt(123);
-	//Integer num_123S = Integer.parseInt("123L");
+	Integer num_123S = Integer.parseInt("123L");
 	//System.out.println("num_123 "+num_123S);
 
 	try
@@ -466,8 +474,8 @@ private static void defualtValue()
 	static void aMethod(long ob) {System.out.println("long");}
 	static void aMethod(Double ob) {System.out.println("Double");}
 	static void aMethod(double ob) {System.out.println("double");}
-	//static void aMethod(Object ob) {System.out.println("Object");}
-	//static void aMethod(String ob) {System.out.println("String");}
+	static void aMethod(Object ob) {System.out.println("Object");}
+	static void aMethod(String ob) {System.out.println("String");}
 
 	private static void testIO()
 	{
@@ -561,6 +569,37 @@ private static void defualtValue()
 		//int and long operations / and % can throw an ArithmeticException, while float and double / and % never will (even in case of division by zero).
 		//int i = 0/0; // / by zero runtime error:
 		float l = -0.0f/0.0f; // no error		
+		double d1 = 1.0;
+		Double d2 = 1.0;
+		System.out.println(d1 == d2);
+		int num = -50;
+		Object obj = num % 25.0;
+		boolean b = obj instanceof Double;
+		System.out.println(b); // true!
+	}
+
+	void testMethodVars()
+	{
+		final int a = 1;
+		//static int b = 2; illegal start of expression.
+		//a = 2; cannot assign a value to final variable.
+		//float f = 3.1415; error: possible loss of precision.
+		float f = 3.14f;
+	}
+
+	static void testExceptions() throws Exception
+	{
+		int i = 0;
+		//int j = 1/i; java.lang.ArithmaticExcpetion: / by zero
+		try {
+			throw new Exception();
+		} catch (Exception ne) {
+			throw ne;
+			//System.out.println("Inside Exception"); // unreachable
+			//System.exit();
+		} finally {
+			System.out.println("Inside Finally");
+		}
 	}
 
 	public static void main(String args[]) 
@@ -577,10 +616,20 @@ private static void defualtValue()
 		//arrayWork();
 		//aMethod("0");
 		// int, long, float, double, Integer, Object, error
+		//aMethod(0.0f);
+		// float, double, Float, Object, error.
 		//testIO();
 		//testException();
 		//testNumbers();
 		//testOperators();
-		testErrors();
+		//testErrors();
+		try
+		{
+			//testExceptions();
+		} catch (Exception e)
+		{
+			System.out.println("e");
+		}
+		ExamQuestions eq = new ExamQuestions();
 	}
 }

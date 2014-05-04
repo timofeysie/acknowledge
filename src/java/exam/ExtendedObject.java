@@ -1,4 +1,4 @@
-//package java.lang;
+package java.lang;
 public class ExtendedObject extends java.lang.Object
 {
 		String name = "DEFAULT VALUE";

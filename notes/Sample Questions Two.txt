@@ -56,9 +56,10 @@ e. No combination will work
 Answer: a and d This results in ClassC being the "grandchild" of ClassA.
 
 **Integers** /*-------------------------------------
-Question - What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
+Question:
+What Integer method would you use to convert a string expressed in base 5 into the equivalent int? For example, how would you convert the string "230" into the integer value 65? Show the code you would use to accomplish this task.
 
-Answer - 
+Answer:
 String base5String = "230";
 int result = Integer.valueOf(base5String, 5);
 static Integer valueOf(String s, int radix): Returns an Integer object holding the value extracted from the specified String when parsed with the radix given by the second argument.
@@ -150,11 +151,14 @@ Float numm3 = 0.0F;
 
 **Arrays** /*-------------------------------------------------
 
-- Basic Example:
+Question:
 int []a = {1,2,3,4,5,6};
 ini i = a.length -1;
 while(i>=0)
 {System.out.println(a[i]);i--;}
+
+Answer:
+What is the output?
 Result 654321
 length is 6, so i is set to 5. go from index 5 to 0, which means 6 to 1 will be printed.  If we use (i>0) instead, the output is from 6 to 2.
 
@@ -196,6 +200,7 @@ a and d
 print(int...arr) cannot be applied to print(Integer[]). and causes a compiler error
 
 
+Question:
 Given the following code, which of the following statements can be used to
 determine if cat can be found in the list?
 ArrayList<String> list = new ArrayList<>();
@@ -205,19 +210,24 @@ list.add("frog");
 a. list.contains("cat")
 b. list.hasObject("cat")
 c. list.indexOf("cat")
-d. list.indexOf(1)    
+d. list.indexOf(1)
+
+Answer:    
 a and c The contains method will return true if the object is found
 and indexOf takes an object reference and returns the index
 of the object if found, otherwise it returns a -1. The indexOf
 method does not take an integer argument and the hasObject
 method does not exist.
 
+Question:
 Given the Customer is a class:
 1. Customer []c1 = new Customer[10];
 2. Customer [][]c2 = new Customer[10][];
 3. c2[0] = new Customer[5];
 4. print(c1[0]); // prints null
 5. print(c2[1][0]); 
+
+Answer:
 In the case of arrays, initialization is supposed to be complete when we specify the leftmost dimension of the array.  The problem occurs at runtime if we try to access an element of the array which has not been initialized (specification of size).  In the question above there is no problem until line 5.  We are tyring to access c2[1][0] whereas we have only initialized c2[0].  In other words we can access any element in c2[0] row but not any other element which is in any row other than c2[0].  Therefore accessing c2[1][0] will cause a runtime exception (npe).
 
 
@@ -243,8 +253,11 @@ final abstract int method(){}
 - both are illegal.  it should be like this:
 public abstract void method();
 
+Question:
 interface IAccount { String getAccoundNumber();}
 abstract class Account implements IAccount{}
+
+Answer:
 The class Account is valid as it is declared abstract and therefore doesn't have to implement all the methods of the superclass.
 
 - Watch out!!! You cannot assign a value to a variable declared in an interface even when the class at hand implements that interface, as all interface variables are implicitly final!
@@ -262,8 +275,9 @@ Reference handle / assigned to class type
 declared as      / actual insance
 Static methods   / instance methods
 compile time     / runtime polymorphism (late binding)
-hides            / overrides
+hides (static)   / overrides
 
+Question:
 - Basic Example:
 class Base
 {
@@ -291,13 +305,15 @@ public class Derived extends Base
 		System.out.println("Derived.amethod()");
 	}
 }
+
+Answer:
 Output: 
 Derived.amethod()
 99
 Derived.amethod()
-
 - This creates an instance of the Derived class but assigns it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.  But note that if the amethod() was not present in the base class, then compilation error would be reported at compile time.  When the compiler sees the statement like b.amethod(), it checks if the method is present in the Base class or not.  Only at the run time does it decide to call the method from the derived class.
 
+Question:
 class Parent
 {
 	private void method1(){System.out.println("Parent1");}
@@ -310,6 +326,8 @@ class Child extends Parent
 	 public static void main(String args[])
 	 {Parent p = new Child();p.method2();}
 }
+
+Answer:
 Output: 
 Parent2
 Parent1
@@ -317,7 +335,7 @@ If method1 in parent were not private, the output would be:
 Parent2
 Child1
 
-
+Question:
 Given the following class definitions:
 public class ClassA 
 {
@@ -348,6 +366,7 @@ class ClassB extends ClassA
 	}
 }
 
+Answer:
 What statement is needed at the comment line to generate the
 following output:
 ClassA constructor
@@ -365,7 +384,7 @@ constructor. The second answer generates a syntax error. The
 fourth option results in unbounded recursion.  Therefore the correct answer is c.
 
 
-
+Question:
 class Bank
 {
 	String bankName;
@@ -382,6 +401,8 @@ public class BankBranch extends Bank
 		return bankName;
 	}
 }
+
+Answer:
 Does not compile: getBranchName() cannot override the superclass method.  The overridden method does not throw an exception.  (But it could if it were a RuntimeException, right?  Or is that only checked exceptions?)
 
 Question: if A extends B,
@@ -509,35 +530,16 @@ Actually I would say it is from the top to the bottom.  The top of the heirachy 
 
 **Strings** /* ---------------------------------------
 
+Question:
 String s = "Java";
 s.concat(" SE 6");
-s.replace('6'Question: Consider the following code:
-class Base {
-	int i = 1999;
-	public void aMethod() {System.out.println("Base.amethod()");}
-	Base() {aMethod();}
-}
-public class Derived extends Base {
-	int i = -1;
-	public static void main(String[] args) {
-		Base b = new Derived();
-		System.out.println(b.i);
-		b.aMethod();
-	}
-	public void aMethod(){System.out.println("Derived.aMethod()");}
-}
+s.replace('6','7');
 
 Answer:
-It creates an instance of the Derived class but assignes it to a reference of the Base class.  In this situation a reference to any of the fields such as i will refer to the value in the Base class, but a call to a method will refer to the method in the class type rather than its reference handle.
-But note that if the aMethod was not present in the base class then compilation error would be reported at compile time, when the compiler sees the statement b.aMethod(), it checks if the method is present in the bass class.  Only at runtime it decides to call the method from the derived class.
-The constructor in Base is called when the new Derived object is created, but the call in the constructor calls the method is the subclass, since it is present.
-Output:? 
-Derived.aMethod()
-1999
-Derived.aMethod()
-
-,'7');
-print(s) // Java (the two calls are abandoned instantly)
+print(s) 
+Output:
+Java 
+(the two calls are abandoned instantly)
 
 - How many objects are created?
 line 3, two more objects created, 'SE 6', and 'Java SE 6'
@@ -1575,7 +1577,7 @@ public class Test11
 	}
 }
 The class compiles and runs fine.  Obviously the position of the dafault case doesn't matter.  The Integer wrapper class in unboxed and 200 is printed out.
-
+And infact, the default condition seems unreachable.
 
 
 **Constructors** ------------------------------------------

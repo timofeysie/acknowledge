@@ -6,7 +6,7 @@ public class Test11
 		switch(arg)
 		{
 			default:
-				System.out.println("default");
+				System.out.println("default"); // seems unreachable
 			case 10:
 				System.out.println("100");
 			case 20:

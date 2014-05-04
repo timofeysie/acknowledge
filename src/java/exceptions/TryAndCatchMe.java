@@ -66,11 +66,10 @@ public class TryAndCatchMe
             // code
             // We saw this on the code ranch list of gotchas:
             // "Watch for System.exit() in try-catch-finally blocks."
-            //System.exit();
-
+            System.exit();
         } catch (java.lang.Exception e)
         {
-             //
+             System.out.println("after exit");
         }
     }
 }

@@ -8,9 +8,9 @@ class Test3
 
 	public static void main(String[] args) 
 	{
-		//firstTest();
+		firstTest();
 		//secondTest();
-		thirdTest();
+		//thirdTest();
 	}
 
 	private static void thirdTest()

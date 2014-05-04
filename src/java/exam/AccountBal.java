@@ -5,7 +5,7 @@ public class AccountBal
 	//public long getBalance(long amt){return amt*4;}
 	public static void main(String[] args) {
 		AccountBal ac = new AccountBal();
-		Integer val = 20;
+		Double val = 20d;
 		System.out.println(ac.getBalance(val));
 		//test(10);
 		//byte b = 1;

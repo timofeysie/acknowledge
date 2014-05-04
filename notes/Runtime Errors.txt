@@ -1,9 +1,39 @@
 Runtime Errors
 
+java.lang.NumberFormatException
 Integer num_123 = Integer.parseInt("123L");
-- this method accepts digits only and causes a runtime exception
+- this method accepts digits only and causes a nfe runtime exception.
+Integer num_123 = Integer.parseInt(123L);
+- compile time error: no suitable method.
+parseInt(long)
+Integer num_123L = Integer.parseInt(123);
+- same compiler error, no method parseInt(int)
 
-Question:
+
+java.lang.NoClassDefFoundError
+//package java.lang;
+public class ExtendedObject extends java.lang.Object
+{
+		String name = "DEFAULT VALUE";
+		protected void finalize() { name = null; }
+		public static void main(String as[]) throws Throwable
+		{
+			Object ob = new ExtendedObject();
+			ob.finalize();
+			System.out.println(ob);
+		}
+}
+By uncommenting line 1, it will compile.  The finalize() method is declared as protected in the class Object, so it cannot be invoked from code in other packages.  The compile error msg says finalize() has protected access in java.lang.Object
+If we use the same package java.lang then the code will compile, but at runtime a SecurityException will be thrown stating that prohibited package name:java.lang.
+When we ran the class with the uncommented package line, we got a java.lang.NoClassDefFoundError runtime error.  So what happened to the SecurityException?
+java.lang.NoClassDefFoundError (wrong name: java/lang/ExtendedObject)
+
+ArrithmaticException:
+		int i = 0;
+		int j = 1/i;
+java.lang.ArithmaticException: / by zero.
+
+java.util.regex.PatternSyntaxException
 String str = "Java*JSP*EJB*J2EE";
 System.out.println(Arrays.toString(str.split("*",-2)));
 Answer:
@@ -12,6 +42,35 @@ PatternSysntaxException occurs if the regular expressions's syntx is invalid.  N
 [Java, JSP, EJB, J2EE]
 
 "Even if class casting is detected in compile time, Interface casting is detected in runtime."
+
+java.lang.ClassCastException cce
+class Test3
+{
+	public String toString() {
+		return "Test3";
+	}
+
+	public static void main(String[] args) {
+		Set<Test3> s = new TreeSet<Test3>();
+		s.add(new Test3()); // Test3 cannot be cast to Comparable.
+		s.add(new Test3());
+		s.add(new Test3());
+		for (Test3 out: s)
+			System.out.println(out);
+	}
+	/**
+	Either Test3 has to implement Comparable, or you need to provide a comparator when creating the TreeSet.
+	 */
+}
+
+To fix this:
+class Test3 implements Comparable {
+ 	@Override
+    public int compareTo(Test3 test)
+    { /* Custom test */ }
+Or, we could use a HashSet which isn's ordered.
+
+This is a error.
 
 v.s. Compile Time Errors
 ========================
