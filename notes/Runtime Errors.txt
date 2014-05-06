@@ -69,11 +69,22 @@ class Test3 implements Comparable {
     public int compareTo(Test3 test)
     { /* Custom test */ }
 Or, we could use a HashSet which isn's ordered.
+This is an error.
 
-This is a error.
+java.lang.ArrayStoreException
+int[] scores1 = { 1, 2, 3, 4, 5, 6};
+Object[] scores2 = { 0, 0, 0, 0, 0, 0};
+int srcPos = 2;int destPos = 3;int length = 2;
+System.arraycopy(scores1, srcPos, scores2, destPos, length);
+for(int i :  scores1) System.out.print(i);
+- The src and dest arguments refers to different types, such as an array with a primitive component type and an array with a reference component type.
+
+java.lang.IndexOutOfBoundsException
+This will be thrown in the above code if any of the positions are greater than the size of the arrays.  For example if the length is greater than 3.
+
 
 v.s. Compile Time Errors
-========================
+========================----------------------------------
 
 - creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor!!!
 

@@ -8,6 +8,7 @@
 45 questions a 75 minutes a half  
 
 ###TOC###
+Default Capacity
 Rules of Promotion
 Arrays  
 Serializable
@@ -53,6 +54,17 @@ List Iterator Interface
 List Implementations  
 The String.split method  
 Volatile
+
+###Default Capacity###
+
+- The initial capacity of a ArrayList created with its default
+constructor is 10. 
+
+```
+String c = new String("1234567890");
+StringBuffer sb = new StringBuffer(c);
+```
+- The capacity for sb is now 10+16 = 26
 
 ###Rules of Promotion###
 For operands of a numeric operator such as + or *, the conversion process is called numeric promotion. In the case of binary operators, the conversion chosen for one operand may depend in part on the type of the other operand expression.  
@@ -381,10 +393,10 @@ ListIterator interface
 • add:   
 
 ArrayList   
-• Access is performed in constant time  
+• Access is performed in constant time: it implements java.util.RandomAccess interface, which is a marker interface that signifies that you can directly access any element of this collection. This also implies that it takes the same amount of time to access any element.  
 • Insertion/deletion is performed in linear time  
 
-not synchronized. When an iterator is obtained for a ArrayList object, it is susceptible to possible simultaneous overwrites with loss of data if modified in a concurrent fashion. When multiple threads access the same object, it is possible that they may all write to the object at the same time, that is, concurrently. When this simultaneous overwrite occurs, a ConcurrentModificationException exception is thrown.
+Not synchronized. When an iterator is obtained for a ArrayList object, it is susceptible to possible simultaneous overwrites with loss of data if modified in a concurrent fashion. When multiple threads access the same object, it is possible that they may all write to the object at the same time, that is, concurrently. When this simultaneous overwrite occurs, a ConcurrentModificationException exception is thrown.
 
 - The initial capacity of a ArrayList created with its default
 constructor is 10.  

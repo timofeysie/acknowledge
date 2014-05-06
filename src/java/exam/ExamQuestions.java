@@ -602,6 +602,86 @@ private static void defualtValue()
 		}
 	}
 
+	private static void testRuntimeErrors()
+	{
+		List list2 = new ArrayList<String>();
+		list2.add(new StringBuilder("123"));
+		//String sbu = list2.get(0); compile time error.
+	}
+
+	private static void testSubstring1()
+	{
+		StringBuilder b1 = new StringBuilder("snorkler");
+		StringBuilder b2 = new StringBuilder("yoodler");
+		b1.append(b2.substring(2,5).toUpperCase());
+		System.out.println("b1 "+b1.toString());
+		System.out.println("b2 "+b2);
+	}
+
+	private static void testSubstring2()
+	{
+		StringBuilder b1 = new StringBuilder("snorkler");
+		StringBuilder b2 = new StringBuilder("yoodler");
+		b2.insert(3,b1.append("a"));
+		System.out.println("b1 "+b1.toString());
+		System.out.println("b2 "+b2);
+	}
+
+	private static void testSubstring3()
+	{
+		System.out.println("testSubstring3---");
+		StringBuilder b1 = new StringBuilder("snorkler");
+		StringBuilder b2 = new StringBuilder("yoodler");
+		b1.replace(3,4,b2.substring(4)).append(b2.append(false));
+		StringBuilder b1e = b1;
+		StringBuilder b2e = b2;
+
+		StringBuilder b2a = new StringBuilder("yoodler");
+		String b2a1 = b2a.substring(4);
+		System.out.println("b2.substring(4) "+b2a1);
+
+		StringBuilder b1a = new StringBuilder("snorkler");
+		StringBuilder b1a1 = b1a.replace(3,4,b2a1);
+		System.out.println("b1.replace(3,4,"+b2a1+") "+b1a1);
+
+		StringBuilder b2b = new StringBuilder("yoodler");
+		StringBuilder b2b1 = b2b.append(false);
+		System.out.println("b2.append(false) "+b2b1);
+		
+		System.out.println("answers: ---");
+		System.out.println("b1 "+b1e);
+		System.out.println("b2 "+b2e);
+
+		//b2b.append("a").substring(0, 4).insert(2, "asdf");
+		// not leagal as substring returns a String which has no insert method.
+	}
+
+	/**
+	* With no break statement, counter goes to 27.
+	* With a break inner statement, counter will be 18
+	* With a break middle, it is only 3.
+	* With a break outer statement, the counter will be 1. 
+	*/
+	private static void testLoops()
+	{
+		int counter = 0;
+        outer:
+        for (int i = 0; i < 3; i++) {
+            middle:
+            for (int j = 0; j < 3; j++) {
+                inner:
+                for (int k = 0; k < 3; k++) {
+                	System.out.println("i="+i+" j="+j+" k="+k+" counter "+counter);
+                    if (k - j > 0) {
+                        break middle;
+                    }
+                    counter++;
+                }
+            }
+        }
+        System.out.println("counter "+counter);
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -630,6 +710,12 @@ private static void defualtValue()
 		{
 			System.out.println("e");
 		}
-		ExamQuestions eq = new ExamQuestions();
+		//ExamQuestions eq = new ExamQuestions();
+		//testRuntimeErrors();
+		//boolean b = 1; // incomatible types.
+		//testSubstring1();
+		//testSubstring2();
+		//testSubstring3();
+		testLoops();
 	}
 }

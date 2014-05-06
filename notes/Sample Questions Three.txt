@@ -1,0 +1,396 @@
+eTS Sample Exam Questions.
+
+Table of Contents
+
+Using Loop Constructs
+Creating and Using Arrays
+Working with Methods
+Constructors
+Working with Java Data Types - String, StringBuilder
+Working with Inheritance
+Using Operators and Decision Constructs
+Handling Exceptions
+
+
+**Using Loop Constructs** ------------------------
+
+Question:
+Which of these statements are valid when occurring by themselves?
+A. do { break ; } while (true) ;
+B. if (true) { break ; } (When not inside a switch block or a loop)
+C. switch (1) { default : break; }
+D. for ( ; true ; ) break ;
+
+Answer:
+B. Cannot have break or continue in an 'if' or 'else' block as it's not possible to break out of an if statement. But when the if statement IS placed within a labelled block or a switch statement or a loop construct, the usage of break in option 3 would be valid.
+C. You can use a constant in switch(...);
+Correct answers: A, C,D.
+
+
+
+**Creating and Using Arrays** --------------------
+
+Question:
+Identify the correct statements about ArrayList?
+A. Standard JDK provides no subclasses of ArrayList.
+B. You cannot store primitives in an ArrayList.
+C. It allows constant time access to all its elements.
+D. An ArrayList is backed by an array.
+
+Answer:
+A. It does.
+Direct Known Subclasses: 
+AttributeList, RoleList, RoleUnresolvedList 
+B. This is true because only Objects can be stored in it.
+C. This is true because it implements java.util.RandomAccess interface, which is a marker interface that signifies that you can directly access any element of this collection. This also implies that it takes the same amount of time to access any element.
+D. This is true. The elements are actually stored in an array and that is why is it called an ArrayList.
+(The expression "backed by an array" means that the implementation of ArrayList actually uses an array to store elements.)
+ArrayList is a subclass of AbstractList.  
+java.lang.Object 
+-  java.util.AbstractCollection<E>    
+-    java.util.AbstractList<E>      
+-      java.util.ArrayList<E>  
+All Implemented Interfaces: 
+Serializable, Cloneable, Iterable<E>, Collection<E>, List<E>, RandomAccess  
+Direct Known Subclasses: 
+AttributeList, RoleList, RoleUnresolvedList
+
+**Working with Methods** -------------------------
+
+Question:
+Consider the following class...
+class TestClass{
+   int x;
+   public static void main(String[] args){
+      // lot of code.
+   }
+}
+A. By declaring x as static, main can access this.x
+B. main cannot access this.x as it is declared now.
+Answer:
+Because main() is a static method. It does not have 'this'!
+It is not possible to access x from main without making it static. Because main is a static method and only static members are accessible from static methods. There is no 'this' available in main so none of the this.x are valid.
+
+
+**Constructors**
+
+Question:
+You can call only public and protected constructors of the super class from a subclass if the subclass is not in the same package because only those are inherited.
+
+Answer:
+Most of the statement is correct but remember that constructors are NEVER (whether public or otherwise) inherited. (The above statement is true for other methods though.) So, if you have a class :
+class A{
+     public A(int i){}
+}
+and another class:
+class B extends A{
+}
+You cannot do : new B(10); because that is A's constructor and it is not inherited by B. To invoke A's constructor you have to do:
+class B extends A{
+     public B(int i){  super(i); }
+}
+
+
+**Working with Java Data Types - String, StringBuilder**
+Question:
+Which of these statements concerning the charAt() method of the String class are true?
+A. The charAt( ) method can take a char value as an argument.
+B. The charAt( ) method returns a Character object.
+
+Answer:
+A.Yes, it can because it takes an int and char will be implicitly promoted to int.
+B. No, It returns char.
+
+
+**Working with Inheritance** ------------------------
+
+Question:
+class ABCD{
+   int x = 10;
+   static int y = 20;
+}
+class MNOP extends ABCD{
+   int x = 30;
+   static int y = 40;
+}
+
+public class TestClass {
+   public static void main(String[] args) {
+     System.out.println(new MNOP().x+", "+new MNOP().y);
+   }
+}
+
+Answer:
+Access to static and instance fields and static methods depends on the class of reference variable and not the actual object to which the variable points to. Observe that this is opposite of what happens in the case of instance methods.  In case of instance methods the method of the actual class of the object is called.  
+Therefore, in case of 
+System.out.println(new MNOP().x); 
+the reference is of type MNOP and so MNOP's x will be accessed.  Had it been like this:    
+ABCD a = new MNOP();    
+System.out.println(a.x);    
+System.out.println(a.y); 
+ABCD's x and y would have been accessed because a is of type ABCD even though the actual object is of type MNOP.
+Output: 30, 40
+
+Question:
+Which of the given statements are correct about the following code? 
+//Filename: TestClass.java 
+class TestClass{    
+	public static void main(String[] args){       
+		A a = new A();       
+		B b = new B();    
+	}; 
+} 
+class A implements T1, T2{} 
+class B extends A implements T1{} 
+interface T1 { } 
+interface T2 { }
+A. (a instanceof T1) will return true.
+B. (a instanceof T2) will return true.
+C. (b instanceof T1) will return true.
+D. (b instanceof T2) will return true.
+E. (b instanceof A) will return false.
+
+Answer:
+D. Will return true because B extends A and 'b' is referring to an object of class B.
+Since A implements both T1 and T2, 1 and 2 are correct. b instanceof A will return true as B is a subclass of A. Note that it is 'A' and not 'a'. ( b instanceof a ) will not compile.
+Correct response: A,B,C,D.
+
+
+
+
+
+**Using Operators and Decision Constructs** ---------------------
+
+-instance of operator does not accept objects as the right hand side operand, only classes:
+(o1 instanceof o2) WRONG
+(o1 instanceof o2) right!
+- it will return true even if the right hand side is a super class.  ie:
+class Animal {} class Dog extends Animal {}
+Dog d = new Dog();
+(d instanceof Animal) == true;
+
+Question:
+Consider: o1 and o2 denote two object references to two different objects of same class. Which of the following statements are true?
+A. o1 == o2 will always be false.
+B. Nothing can be said about o1.equals(o2) regarding what it will return based on the given information.
+C. Nothing can be said about o1 == o2.
+
+Answer:
+A. The == operator compares whether the two references are pointing to the same object or not. Here, they are not, so it returns false.
+B. It depends on how the class implements this method.
+C. It will always return false if references are to two different objects.
+Note that both equals() and hashCode() methods can be overridden by the programmer so you can't say anything about what they will return without looking at the code.
+So A and B are correct.
+
+
+**Handling Exceptions** -----------------------------------------
+
+Question:
+Consider the following code...  
+class MyException extends Exception {}  
+public class TestClass{      
+	public void myMethod() throws XXXX{          
+		throw new MyException();      
+	} 
+}  
+What can replace XXXX?
+A. MyException
+B. Exception
+C. Throwable
+D. RuntimeException
+
+Answer:
+B. Because Exception is a superclass of MyException.
+A throws clause is necessary because MyException is a checked exception. Any exception that extends java.lang.Exception but is not a subclass of java.lang.RuntimeException is a checked exception.
+C. Because Throwable is a super class of Exception.
+Why: You can use Throwable as well as Exception as both of them are super classes of MyException. RuntimeException (and its subclasses such as NullPointerException and ArrayIndexOutOfBoundsException) is not a checked exception. So it cannot cover for MyException which is a checked exception. You cannot use Error as well because it is not in the hierarchy of MyException, which is: 
+Object <- Throwable <- Exception <- MyException.
+Correct Answer: A, B, C but not D.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Unsorted** -----------------------------------------------
+
+
+
+Question:
+Given the following class definitions :
+interface MyIface{};
+class A {};
+class B extends A implements MyIface{};
+class C implements MyIface{};
+and the following object instantiations:
+  A a = new A();
+  B b = new B();
+  C c = new C();
+Which of the following assignments are legal at compile time?
+
+Answer:
+c = (C) b; // Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
+MyIface i = c; // Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
+
+Question:
+What will the following code print?
+        int[] scores1 = { 1, 2, 3, 4, 5, 6};
+        int[] scores2 = { 0, 0, 0, 0, 0, 0};
+        System.arraycopy(scores2, 2, scores1, 3, 2);
+        for(int i :  scores2) System.out.print(i);
+Answer:
+Source is scores2 and destination is scores1. So scores1 will become 1 2 3 0 0 6. However, you are printing scores2, which is still {0, 0, 0, 0, 0, 0}.
+
+System.arraycopy(scores2, 2, scores1, 3, 2);
+scores2 = src
+2       = srcPos
+scores1 = dest
+3		= destPos
+2		= length
+public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
+- The number of components copied is equal to the length argument. The components at positions srcPos through srcPos+length-1 in the source array are copied into positions destPos through destPos+length-1, respectively, of the destination array. 
+- If the src and dest arguments refer to the same array object, then the copying is performed as if the components at positions srcPos through srcPos+length-1 were first copied to a temporary array with length components and then the contents of the temporary array were copied into positions destPos through destPos+length-1 of the destination array.  
+- If dest is null, then a NullPointerException is thrown.  
+- If src is null, then a NullPointerException is thrown and the destination array is not modified.
+- ArrayStoreException is thrown and the destination is not modified if any of the following is true:
+	- The src or dest arguments refers to an object that is not an array. 
+	- The src argument and dest argument refer to arrays whose component types are different primitive types. 
+	- The src and dest arguments refers to different types, such as an array with a primitive component type and an array with a reference component type.
+- IndexOutOfBoundsException is thrown and the destination is not modified if any of the following is true:
+	- The srcPos, destPos or length argument is negative. 
+	- srcPos+length is greater than src.length, the length of the source array. destPos+length is greater than dest.length, the length of the destination array.
+- ArrayStoreException is thrown if any actual component of the source array from position srcPos through srcPos+length-1 cannot be converted to the component type of the destination array by assignment conversion. 
+In this case, let k be the smallest nonnegative integer less than length such that src[srcPos+k] cannot be converted to the component type of the destination array; when the exception is thrown, source array components from positions srcPos through srcPos+k-1 will already have been copied to destination array positions destPos through destPos+k-1 and no other positions of the destination array will have been modified. (Because of the restrictions already itemized, this paragraph effectively applies only to the situation where both arrays have component types that are reference types.)
+
+Question:
+boolean b = 1; 
+
+Answer:
+Compile error: incomatible types.
+
+Question:
+Given:
+	StringBuilder b1 = new StringBuilder("snorkler");
+	StringBuilder b1 = new StringBuilder("yoodler");
+b1.append(b2.substring(2,5).toUpperCase());
+b2.insert(3,b1.append("a"));
+b1.replace(3,4,b2.substring(4)).append(b2.append(false));
+
+Answer:
+- You need to understand how append, insert, delete, and substring methods of StringBuilder/StringBuffer work. Please go through JavaDoc API for these methods. This is very important for the exam. Observe that substring() does not modify the object it is invoked on but append, insert and delete do.
+- In the exam, you will find questions that use such quirky syntax, where multiple calls are chained together. For example: 
+sb.append("a").append("asdf").insert(2, "asdf"). 
+- Make yourself familiar with this technique. If in doubt, just break it down into multiple calls. For example, the aforementioned statement can be thought of as:  
+sb.append("a"); 
+sb.append("asdf"); 
+sb.insert(2, "asdf")  
+- Note that the method substring() in StringBuilder/StringBuffer returns a String (and not a reference to itself, unlike append, insert, and delete). So another StringBuilder method cannot be chained to it. For example, the following is not valid: 
+sb.append("a").substring(0, 4).insert(2, "asdf");  
+The error would be: cannot find symbol: method inster(int,String) location: class String.
+- The following is valid though:  
+String str = sb.append("a").insert(2, "asdf").substring(0, 4);
+
+Question:
+Consider the following method...  
+public int setVar(int a, int b, float c) { ...}  
+Which of the following methods correctly overload the above method?
+A. public int setVar(int a, float b, int c){   return (int)(a + b + c); }
+B. public int setVar(int a, float b, int c){   return this(a, c, b); }
+C. public float setVar(int a){   return a; }
+
+Answer:
+B. this( ... ) can only be called in a constructor and that too as a first statement.
+method is said to be overloaded when the other method's name is same and parameters ( either the number or their order) are different. Option 2 is not valid Because of the line: return this(a, c, b); This is the syntax of calling a constructor and not a method. It should have been: return this.setVar(a, c, b);
+
+Question:
+What will the following program print? 
+class LoopTest{
+    public static void main(String args[]) {
+        int counter = 0;
+        outer:
+        for (int i = 0; i < 3; i++) {
+            middle:
+            for (int j = 0; j < 3; j++) {
+                inner:
+                for (int k = 0; k < 3; k++) {
+                    if (k - j > 0) {
+                        break middle;
+                    }
+                    counter++;
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+
+Answer:
+To understand how this loop works let us put some extra print statements in the innermost loop:
+System.out.println("i="+i+" j="+j+" k="+k);
+if(k-j>0){
+     System.out.println("breaking middle "+j);
+     break middle;
+}
+counter++;
+This is what it prints:
+i=0 j=0 k=0
+i=0 j=0 k=1
+breaking middle 0
+i=1 j=0 k=0
+i=1 j=0 k=1
+breaking middle 0
+i=2 j=0 k=0
+i=2 j=0 k=1
+breaking middle 0
+3
+The key is that the middle loop is broken as soon as k-j becomes > 0. This happens on every second iteration of inner loop when k is 1 and j is 0. Now, when middle is broken inner cannot continue. So the next iteration of outer starts.
+
+Question:
+Consider the following two classes (in the same package but defined in different source files):
+public class Square {
+    double side = 0;
+    double area;
+    public Square(double length){        this.side = length;    }
+    public double getSide() {  return side;    }
+    public void setSide(double side) {  this.side = side;   }
+    double getArea() {   return area;   }
+}
+public class TestClass {
+    public static void main(String[] args) throws Exception {
+        Square sq = new Square(10.0);
+        sq.area = sq.getSide()*sq.getSide();
+        System.out.println(sq.getArea());
+    }
+}
+You are assigned the task of refactoring the Square class to make it better in terms of encapsulation. What changes will you make to this class?
+A. Make side and area fields private.
+B. Make the side field private and remove the area field.
+C. Change getArea method to:
+D. Add a setArea() method.
+
+Answer:
+A. There is no need to keep the area field because that would amount to duplicating the data. If you change side, the value of area will become obsolete.
+D. This is not required because area is calculated using the side. So if you allow other classes to set the area, it could make side and area inconsistent with each other.
+There can be multiple ways to accomplish this. The exam asks you questions on the similar pattern.
+The key is that your data variable should be private and the functionality that is to be exposed outside should be public. Further, your setter methods should be coded such that they don't leave the data members inconsistent with each other.
+Therefore B and C are the correct answers.
+
+
+
+

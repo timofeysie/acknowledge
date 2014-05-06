@@ -36,6 +36,7 @@ public class Arraying
 		for(int n=0; n < arr.length; n++) { System.out.print(arr[n]);}
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void EpractizeQuestions()
 	{
 		// question 18
@@ -53,7 +54,7 @@ public class Arraying
 		//int me = 99;
 		//list.add(me);
 
-		ArrayList list = new ArrayList();
+		ArrayList <Integer> list = new ArrayList<>();
 		list.add(new Integer(99));
 		//System.out.println(list.get(0));
 		list.add(99);
@@ -65,8 +66,8 @@ public class Arraying
 		//print(arr); required int[], found Integer[]
 
 		// question 21
-		List list2 = new ArrayList<String>();
-		list2.add(new StringBuilder("123"));
+		List list2 = new ArrayList<String>(); // raw type declaration
+		list2.add(new StringBuilder("123")); // unsafe and may fail in runtime
 		System.out.println("list2: "+list2);
 	}
 	
@@ -119,16 +120,6 @@ public class Arraying
 		System.out.println(Arrays.deepEquals(grades, grades2)); // true  		
 	}
 
-	public static void main(String[] args) 
-	{
-		decrementTest();
-		nonWorking();
-		System.out.println("~5 = "+(~5)+" + 1 = "+(~5+1));
-		whatWorks();//?
-		EpractizeQuestions();
-		equalsTest();
-	}
-
 	private static void nonWorking()
 	{
 		/*
@@ -139,4 +130,27 @@ public class Arraying
 		//String[] arr = set.toArray();
 		//String[] arr = (String [])set.toArray();
 	}
+
+	private static void testArraycopy()
+	{
+		int[] scores1 = { 1, 2, 3, 4, 5, 6};
+        int[] scores2 = { 0, 0, 0, 0, 0, 0};
+        int srcPos = 2;
+        int destPos = 3;
+        int length = 3;
+        System.arraycopy(scores1, srcPos, scores2, destPos, length);
+        for(int i :  scores1) System.out.print(i);
+	}
+
+	public static void main(String[] args) 
+	{
+		//decrementTest();
+		//nonWorking();
+		//System.out.println("~5 = "+(~5)+" + 1 = "+(~5+1));
+		//whatWorks();//?
+		//EpractizeQuestions();
+		//equalsTest();
+		testArraycopy();
+	}
+
 }

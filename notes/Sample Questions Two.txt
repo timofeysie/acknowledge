@@ -1805,7 +1805,7 @@ This will compile because list2 is a raw type variable,
 and no checking is done at compile time.
 However, if you try this:
 String sbu = list2.get(0);
-You will get a runtime error: found Object, required String.
+You will get a compile error: found Object, required String.
 
 System.out.println(new Integer(0).booleanValue());
 There is no such method in the Integer class.
@@ -1876,7 +1876,9 @@ Question:
 		y = 100;
 
 Answer:
-Even tyring toQuestion:
+Even tyring to print an unitialized variable fails upon compile with the error: variable y might not have been initialized. 
+
+Question:
 method()
 {
 	int x = 10;
@@ -1889,7 +1891,6 @@ method()
 Answer:
 Will not compile with the warning that the variable y may not have been initialized.
 
- print an unitialized variable fails upon compile with the error: variable y might not have been initialized. 
 
 Question:
 method()
