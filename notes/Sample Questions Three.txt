@@ -155,13 +155,37 @@ D. Will return true because B extends A and 'b' is referring to an object of cla
 Since A implements both T1 and T2, 1 and 2 are correct. b instanceof A will return true as B is a subclass of A. Note that it is 'A' and not 'a'. ( b instanceof a ) will not compile.
 Correct response: A,B,C,D.
 
+Question:
+Consider the following code appearing in Eagle.java
+class Bird {
+    private Bird(){     }
+}
+class Eagle extends Bird { 
+    public String name;
+    public Eagle(String name){
+        this.name = name;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(new Eagle("Bald Eagle").name);
+    }
+}
+What can be done to make this code compile?
+A. Nothing, it will compile as it is.
+B. Make Bird constructor public: public Bird() { ... }
 
+Answer:
+Since the constructor of Bird is private, the subclass cannot access it and therefore, it needs to be made public. protected or default access is also valid.
+Correct choice: B.
+As it is, the compile error is
+Eagle.java:6: Bird() has private access in Bird
+Line 6 is the public Eagle(String name){ line.
 
 
 
 **Using Operators and Decision Constructs** ---------------------
 
--instance of operator does not accept objects as the right hand side operand, only classes:
+- the instanceof operator does not accept objects as the right hand side operand, only classes:
 (o1 instanceof o2) WRONG
 (o1 instanceof o2) right!
 - it will return true even if the right hand side is a super class.  ie:
@@ -181,6 +205,48 @@ B. It depends on how the class implements this method.
 C. It will always return false if references are to two different objects.
 Note that both equals() and hashCode() methods can be overridden by the programmer so you can't say anything about what they will return without looking at the code.
 So A and B are correct.
+
+Question:
+Consider the following class :  
+public class Test{    
+	public static void main(String[] args){       
+		if (args[0].equals("open"))          
+			if (args[1].equals("someone"))             
+				System.out.println("Hello!");       
+		else System.out.println("Go away "+ args[1]);     
+	} 
+}  
+Which of the following statements are true if the above program is run with the command line : java Test closed
+A. It will throw ArrayIndexOutOfBoundsException at runtime.
+B. It will end without exceptions and will print nothing.
+
+Answer:
+As in C and C++, the Java if statement suffers from the so-called "dangling else problem," The problem is that both the outer if statement and the inner if statement might conceivably own the else clause. In this example, one might be tempted to assume that the programmer intended the else clause to belong to the outer if statement.  
+The Java language, like C and C++ and many languages before them, arbitrarily decree that an else clause belongs to the innermost if so as the first if() condition fails (args[0] not being "open") there is no else associated to execute. So, the program does nothing. The else actually is associated with the second if. So had the command line been : 
+java Test open, 
+it would have executed the second if and thrown ArrayIndexOutOfBoundsException. If the command line had been: 
+java Test open xyz, 
+it would execute the else part(which is associated with the second if) and would have printed "Go away xyz".
+Personally I would write the code as below, to cure the dangling else problem.  Some people code this way.  I call it the second line format after the Eclipse IDE editor format option.  The majority of programmers and samples I see however follow the first line format shown above.  If the code is written with second line formatting as below, it can be clear which if block the else is associated with.  This would make the code run as it implies it should:
+public class Test18
+{    
+	public static void main(String[] args)
+	{       
+		if (args[0].equals("open"))
+		{          
+			if (args[1].equals("someone"))
+			{             
+				System.out.println("Hello!");       
+			}
+		} else 
+		{
+			System.out.println("Go away "+ args[1]);     
+		}
+	} 
+}  
+When the above code is run, open Tim will have no output, and open someone will say hello.
+But actually, when run as shown in the question, the program requires a second argument to work, otherwise there is an error.  If we revert to the original else glued to the second if, then open Tim will say go away, and open someone will say hello.  So maybe that IS what was intended.  But we need to move on...
+
 
 
 **Handling Exceptions** -----------------------------------------
@@ -207,7 +273,25 @@ Why: You can use Throwable as well as Exception as both of them are super classe
 Object <- Throwable <- Exception <- MyException.
 Correct Answer: A, B, C but not D.
 
+Question:
+Identify the exceptions that are usually thrown by the JVM and the exceptions usually thrown by an application.
+A.
+	    JVM : IllegalStateException, IllegalArgumentException
+Application :  ClassCastException, NullPointerException, SecurityException
+B.
+		JVM : ClassCastException, NullPointerException, SecurityException
+Application :  IllegalStateException, IllegalArgumentException
 
+Answer:
+Note: The terminology "thrown by the JVM" and "thrown programatically or by the application" is not precise but is used by popular books. If it helps, you can think of the exception categories as "thrown implicitly" and "thrown explicitly". An exception that is thrown even when there is no throw statement, is said to be thrown implicitly. For example, calling a method on null will cause a NullPointerException to be thrown automatically, even though there is no throw statement. On the other hand, a code may throw an exception explicitly by using the throw statement. For example, a method code might check an argument for validity and if it finds the argument inappropriate, it may throw an exception by executing throw new IllegalArgumentException();.  
+A quick way to determine who should throw an exception is to see if the exception extends java.lang.Error. Errors are always thrown only by the JVM.  
+Generally, RuntimeExceptions are also thrown by the JVM. However, it is ok for an application code to throw a RuntimeException if it makes sense for the application to throw a RuntimeException in a given situation.  
+The correct answer is B.
+Both of those categories: thrown by the JVM and programatically are unchecked runtime exceptions.  This is the first we are hearing about a distinction between these types of exceptions.
+thrown by the JVM: impicitly, even when there is no throw statement.
+thrown programatically: explicitly using a throw statement.
+It's not really a fair question.  It's not discussed in the Java tutorials.
+And where is a complete list of these so call programatically thrown exceptions?
 
 
 

@@ -59,6 +59,7 @@ Volatile
 
 - The initial capacity of a ArrayList created with its default
 constructor is 10. 
+- StringBuilder()- initial capacity of 16 characters.
 
 ```
 String c = new String("1234567890");
@@ -1493,7 +1494,7 @@ If an abstract class is subclassed and contians unimplemented methods, it must a
 - If an abstract class contains only abstract method declarations, it should be declared as an interface instead.
 - Multiple interfaces can be implemented by classes anywhere in the class hierarchy, whether or not they are related to one another in any way. Think of Comparable or Cloneable, for example.
 - By comparison, abstract classes are most commonly subclassed to share pieces of implementation. A single abstract class is subclassed by similar classes that have a lot in common (the implemented parts of the abstract class), but also have some differences (the abstract methods).
-- You can define an abstract class that does not implement all of an interface method.
+- You can define an abstract class that does not implement all of an interface method.  A class later will have to implement them.
 - An abstract class may have static fields and static methods that can be used with a class reference—for: AbstractClass.staticMethod()—as with any other class.
 - The combination of 'abstract' and 'synchronized' modifiers is not allowed.
 ```

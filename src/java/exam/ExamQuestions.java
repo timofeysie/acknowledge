@@ -682,6 +682,18 @@ private static void defualtValue()
         System.out.println("counter "+counter);
 	}
 
+	private static void testStringBuilder()
+	{
+		StringBuilder sb = new StringBuilder("Hello ");
+		byte b = 1;
+		sb.append(b);
+		int [] i = {1,2,3};
+		sb.append(i);
+		int hash_code = i.hashCode();
+		sb.append(" "+hash_code);
+		System.out.println(sb);
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -717,5 +729,6 @@ private static void defualtValue()
 		//testSubstring2();
 		//testSubstring3();
 		testLoops();
+		testStringBuilder();
 	}
 }

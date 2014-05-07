@@ -1,0 +1,16 @@
+
+
+StringBuilder	append(boolean,char,char[],CharSequence,double,float,int,long,Object,String,StringBuffer)
+
+There is no mention of byte here.  But if we try this:
+
+		StringBuilder sb = new StringBuilder("Hello ");
+		byte b = 1;
+		sb.append(b);
+
+It works anyhow.  What other things will work?  An array of ints?  No:
+
+		int [] i = {1,2,3};
+		sb.append(i);
+
+This will append the hash code for the array.
