@@ -2,6 +2,7 @@ eTS Sample Exam Questions.
 
 Table of Contents
 
+Random
 Overloading Methods
 Using Loop Constructs
 Creating and Using Arrays
@@ -11,6 +12,20 @@ Working with Java Data Types - String, StringBuilder
 Working with Inheritance
 Using Operators and Decision Constructs
 Handling Exceptions
+
+Current on question 44.
+
+**Random** -------------------------------------------
+
+public void saveObject(List e ){}
+saveObject(null); // OK!
+
+Since Runnable is an interface, it cannot be instantiated like this. But you can do: 
+Runnable r = new Runnable(){ public void run(){ } };
+
+int 2ndArgument = Integer.parseInt(args[2]); // LOOKOUT MUTHA FUCKA!!!
+
+if( i = 5) { ... } // not valid because the value of the expression i = 5 is an int (5) and not a boolean.
 
 
 **Overloading Methods** ------------------------------
@@ -116,6 +131,32 @@ B. No, It returns char.
 
 
 **Working with Inheritance** ------------------------
+
+Question:
+Consider the following classes: 
+class A implements Runnable{ ...} 
+class B extends A implements Observer { ...} 
+(Assume that Observer has no relation to Runnable.)  
+and the declarations :   
+A a = new A();   
+B b = new B();  
+Which of the following Java code fragments will compile and execute without throwing exceptions?
+A. Object o = a; Runnable r = o;
+B. Object o = a; Runnable r = (Runnable) o;
+C. Object o = a; Observer ob = (Observer) o ;
+D. Object o = b; Observer o2 = o;
+E. Object o = b; Runnable r = (Runnable) b;
+F. Object o = b; Runnable r4 = b;
+Answer:
+A. Although o refers to an object which is Runnable but the compiler doesn't know about it. You have to do: 
+Runnable r = (Runnable) o; 
+You can assign a subclass object reference to superclass reference without a cast but to assign a super class object reference to a subclass (or interface) reference you need an explicit cast as in option 2.
+B. Here you are explicitly telling the compiler that o refers to an object that is Runnable.
+C. It will compile but will fail at run time as 'a' does not refer to an object which is Observable
+D. 'o' is declared as an Object. so same case as in choice A.
+E. Since b is declared of a type that indirectly implements Runnable, the compiler can figure out that b will always point to an object that is assignable to a Runnable. Therefore, explicit cast is not required here. It will still work fine with the explicit cast though.
+F. Since B extends A which implements Runnable, object b can be assigned to a Runnable without an explicit cast.
+The correct respones is B, E and F.
 
 Question:
 Consider the following classes :
@@ -238,13 +279,113 @@ Line 6 is the public Eagle(String name){ line.
 
 **Using Operators and Decision Constructs** ---------------------
 
-- the instanceof operator does not accept objects as the right hand side operand, only classes:
-(o1 instanceof o2) WRONG
-(o1 instanceof o2) right!
+Question:
+Consider the following method...
+
+public static void ifTest(boolean flag){
+   if (flag)   //1
+   if (flag)   //2
+   if (flag)   //3
+   System.out.println("False True");
+   else        //4
+   System.out.println("True False");
+   else        //5
+   System.out.println("True True");
+   else        //6
+   System.out.println("False False");
+}
+Which of the following statements are correct ?
+1. If run with an argument of 'false', it will print 'False False'
+2. If run with an argument of 'true', it will print 'True False'
+3. It will never print 'True True'
+
+Answer:
+Look at it like this:
+  if (flag)      //1
+   {
+       if (flag)       // 2
+       {
+            if (flag)        //3
+            {
+                  System.out.println("False True");
+            }
+            else            //4
+            {
+                  System.out.println("True False");
+            }
+       }
+       else           //5
+       {
+             System.out.println("True True");
+       }
+   }
+  else           //6
+  {
+        System.out.println("False False");
+   }
+Note that if and else do not cascade. They are like opening an closing brackets. So, else at //4 is associated with if at //3 and else at //5 is associated with if at //2
+
+
+Question:
+What will the output of the following code be?
+Object o1 = new Object();
+Object o2 = new Object();
+System.out.println("o1 is an Object? "+(o1 instanceof o2));
+ture, false, compile error, runtime error?
+
+Answer:
+This will cause a compile time error: cannot find symbol: o2.  The instanceof operator does not accept instantiated objects as the right hand side operand, only classes.  For example:
+(o1 instanceof o2) Wrong.
+(o1 instanceof Object) right!
 - it will return true even if the right hand side is a super class.  ie:
-class Animal {} class Dog extends Animal {}
-Dog d = new Dog();
-(d instanceof Animal) == true;
+class Animal {} class Cat extends Animal {}
+Cat c = new Cat();
+(c instanceof Animal) == true;
+
+Question:
+What will the following code print when run without any arguments ...
+public class TestClass {
+    public static int m1(int i){
+        return ++i;
+    }   
+    public static void main(String[] args) {
+        int k = m1(args.length);
+        k += 3 + ++k;
+        System.out.println(k);
+    }
+}
+
+Answer:
+When the program is run without any arguments, args gets assigned a string array of size 0. So NullPointerException or ArrayIndexOutofBoundsException are out of question. Thus, the first call becomes : int k = m1(0);
+Follow through the code like this: 
+1. Method m1() uses pre-increment operation. Therefore, first i is incremented and then the new value of i is returned. 
+2. Thus, k gets the value of 1.
+3. Expand the += operator as: k = k + 3 + ++k;
+This becomes (remember that k = 1 at this point): 
+k = 1 + 3 + (++k) i.e. 
+k = 1 + 3 + 2; (at this point value of k is 2 because of ++k). But the value of Right Hand Side has not yet been assigned to k. 
+k = 6; 6 is assigned to k thereby overwriting the value of 2.  
+Therefore, the final value of k is 6.
+
+Question:
+Which of the following statements will compile without any error?
+A. System.out.println("a"+'b'+63);
+B. System.out.println("a"+63);
+C. System.out.println('b'+new Integer(63));
+D. String s = 'b'+63+"a";
+E. String s = 63 + new Integer(10);
+
+Answer:
++ is overloaded such that if any one of its two operands is a String then it will convert the other operand to a String and create a new string by concatenating the two.
+Therefore, in 63+"a" and "a"+63, 63 is converted to "63" and 'b' +"a" and "a"+'b', 'b' is converted to "b".
+Note that in 'b'+ 63 , 'b' is promoted to an int i.e. 98 giving 161.
+A & B Since the first operand is a String all others (one by one) will be converted to String."ab" + 63 => "ab63"
+C. Since the first operand of + one is of numeric type, its numeric value of 98 will be used. Integer 63 will be unboxed and added to 98. Therefore, the final value will be int 161.
+D. Since the first one is numeric type so, 'b'+63 = 161, 161+"a" = 161a.
+E. Since neither of the operands of + operator is a String, it will not generate a String. However, due to auto-unboxing of 10, it will generate an int value of 73.
+So the correct answers are A,B,C, and D.
+
+
 
 Question:
 Consider: o1 and o2 denote two object references to two different objects of same class. Which of the following statements are true?

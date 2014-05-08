@@ -1,0 +1,19 @@
+Question 1:
+What will the output of the following code be?
+Object o1 = new Object();
+Object o2 = new Object();
+System.out.println("o1 is an Object? "+(o1 instanceof o2));
+A. o1 is an Object? true
+B. o1 is an Object? false
+C. compile time error
+D. runtime error
+
+Answer:
+This will cause a compile time error: cannot find symbol: o2.  The instanceof operator can not take instantiated objects as the right hand side operand, only classes.  
+For example:
+(o1 instanceof o2) Wrong.
+(o1 instanceof Object) right!
+- it will return true even if the right hand side is a super class.  ie:
+class Animal {} class Cat extends Animal {}
+Cat c = new Cat();
+(c instanceof Animal) == true

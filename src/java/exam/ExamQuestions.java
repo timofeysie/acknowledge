@@ -694,6 +694,33 @@ private static void defualtValue()
 		System.out.println(sb);
 	}
 
+	private static void testCharValues()
+	{
+		char retChar1 = 'x';
+		char retChar2 = '\0'; 
+		char retChar3 = (char) 0;
+		char retChar4 = 65; //Which will give you an empty value of character
+		Character g; 
+		char s = 'a'; 
+		char c = '\u0064';
+		System.out.println("'\u0064' "+c);
+		g = new Character(s); 
+		s = g.charValue();
+		System.out.println("s "+s);
+		System.out.println("retChar1 "+retChar1);
+		System.out.println("retChar2 "+retChar2);
+		System.out.println("retChar3 "+retChar3);
+		System.out.println("retChar4 "+retChar4);
+	}
+
+	private static void testInstanceof()
+	{
+		Object o1 = new Object();
+		Object o2 = new Object();
+		//System.out.println(o1 instanceof o2);
+		System.out.println("o1 is an Object? "+(o1 instanceof Object));
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -728,7 +755,9 @@ private static void defualtValue()
 		//testSubstring1();
 		//testSubstring2();
 		//testSubstring3();
-		testLoops();
-		testStringBuilder();
+		//testLoops();
+		//testStringBuilder();
+		//testCharValues();
+		testInstanceof();
 	}
 }

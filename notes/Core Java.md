@@ -67,6 +67,15 @@ StringBuffer sb = new StringBuffer(c);
 ```
 - The capacity for sb is now 10+16 = 26
 
+char c = '\0';
+(That's also the default value for an instance (or static) variable of type char)
+char retChar = 'x';
+char retChar = '\0'; 
+char retChar = (char) 0;
+char x = 0; //Which will give you an empty value of character
+
+
+
 ###Rules of Promotion###
 For operands of a numeric operator such as + or *, the conversion process is called numeric promotion. In the case of binary operators, the conversion chosen for one operand may depend in part on the type of the other operand expression.  
 
