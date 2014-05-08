@@ -15,12 +15,6 @@ public class Mouse
                 System.out.println(line);
             }
             return;
-        } catch (java.io.FileNotFoundException fnfe)
-        {
-
-        } catch (java.io.IOException ioe)
-        {
-
         } finally 
         {
             if (input != null) 
@@ -33,6 +27,12 @@ public class Mouse
 
                 }
             }
+        } catch (java.io.FileNotFoundException fnfe)
+        {
+
+        } catch (java.io.IOException ioe)
+        {
+
         }
     }
 }

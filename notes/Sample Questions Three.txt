@@ -2,6 +2,7 @@ eTS Sample Exam Questions.
 
 Table of Contents
 
+Overloading Methods
 Using Loop Constructs
 Creating and Using Arrays
 Working with Methods
@@ -10,6 +11,18 @@ Working with Java Data Types - String, StringBuilder
 Working with Inheritance
 Using Operators and Decision Constructs
 Handling Exceptions
+
+
+**Overloading Methods** ------------------------------
+
+Question:
+Which of the following are true regarding overloading of a method?
+A. An overloading method must have a different parameter list and same return type as that of the overloaded method.
+B. If there is another method with the same name but with a different number of arguments in a class then that method can be called as overloaded.
+
+Answer:
+There is no restriction on the return type. If the parameters are different then the methods are totally different (other than the name) so their return types can be anything.  So A is wrong and B is the correct answer.
+
 
 
 **Using Loop Constructs** ------------------------
@@ -103,6 +116,46 @@ B. No, It returns char.
 
 
 **Working with Inheritance** ------------------------
+
+Question:
+Consider the following classes :
+interface I{}
+class A implements I{}
+class B extends A {}
+class C extends B{}
+And the following declarations:
+A a = new A();
+B b = new B(); 
+Identify options that will compile and run without error.
+1. a = (B)(I)b;
+2. b = (B)(I) a;
+3. a = (I) b;
+4. I i = (C) a;
+
+Answer:
+1. class B does implement I because it extends A, which implements I. A reference of type I can be cast to any class at compile time. Since B is-a A, it can be assigned to a. 
+2. This will fail at run time because a does not point to an object of class B.
+3. An I is not an A. Therefore, it will not compile.
+4. It will compile because a C is-a A, which is-a I, and a reference of class A can point to an object of class C. But it will fail at runtime because a does not point to an object of class C.
+So answer 1 is correct.
+I still don't understand why:
+a = (B)(I)b;
+will work, but this wont:
+a = (I)b;
+b is already of type B, so it doesn't need to be cast.  Also, I suppose I didn't know that you cant cast to two different types.  Never seen that before.
+So check out Test20.java.  The error for 3 would be:
+incompatible types: required A, found I
+
+
+Question:
+Which of these statements are true?
+A. If a subclass does not have any declared constructors, the implicit default constructor of the subclass will have a call to super( ).
+B. super(...) can only be called in the first line of the constructor but this(...) can be called from anywhere.
+C. You can either call super(...) or this(...) but not both.
+
+Answer:
+Note that calling super() will not always work because if the super class has defined a constructor with arguments and has not defined a no args constructor then no args constructor will not be provided by the compiler. It is provided only to the class that does not define ANY constructor explicitly.
+Correct response: A, C.
 
 Question:
 class ABCD{
@@ -250,6 +303,49 @@ But actually, when run as shown in the question, the program requires a second a
 
 
 **Handling Exceptions** -----------------------------------------
+
+Question:
+What will be the result of compiling and running the following program ?
+class NewException extends Exception {}
+class AnotherException extends Exception {}
+public class ExceptionTest{
+    public static void main(String[] args) throws Exception{
+        try{
+            m2();
+        }
+        finally{
+            m3();
+        }
+        catch (NewException e){}
+    }
+    public static void m2() throws NewException { throw new NewException(); }
+    public static void m3() throws AnotherException{ throw new AnotherException(); }
+}
+A. It will compile but will throw AnotherException when run.
+B. It will not compile.
+
+Answer:
+The correct answer is B because a catch block cannot follow a finally block!
+The error: 'catch' without 'try'.
+Syntax of try/catch/finally is: 
+try{ } 
+catch(Exception1 e) {... } 
+catch(Exception2 e) {... } ... 
+catch(ExceptionN e) {... } 
+finally { ...  }
+With a try, either a catch and or finally or both can occur. A try MUST be followed by at least one catch or finally. (Unless it is a try with resources statement, which is not in scope for this exam.) 
+In Java 7, you can collapse the catch blocks into a single one: 
+try { ... }
+catch (SQLException | IOException | RuntimeException e) {        
+	// In this block, the class of the actual exception object will be whatever 
+	// exception is thrown at runtime.   
+	// But the class of the reference e will be the closest common super 
+	// of all the exceptions in the catch block.   
+	// In this case, it will be java.lang.Exception 
+	// because that is the most specific class that is a super class
+	// for all the three exceptions.   
+	e.printStackTrace(); 
+}
 
 Question:
 Consider the following code...  
