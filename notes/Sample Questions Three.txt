@@ -2,6 +2,7 @@ eTS Sample Exam 1 Questions.
 
 Table of Contents
 
+Basics
 Random
 Overloading Methods
 Using Loop Constructs
@@ -13,7 +14,36 @@ Working with Inheritance
 Using Operators and Decision Constructs
 Handling Exceptions
 
-Current on question 61.
+Current on question 67.
+
+**Basics** ----------------------------------------
+Consider the following two classes defined in two .java files.
+
+//in file /root/com/foo/X.java
+package com.foo;
+public class X{
+  public static int LOGICID = 10;
+  public void apply(int i){
+    System.out.println("applied");
+  }
+}
+//in file /root/com/bar/Y.java
+package com.bar;
+//1  <== INSERT STATEMENT(s) HERE
+public class Y{
+    public static void main(String[] args){
+       System.out.println(X.LOGICID);
+    }
+}
+What should be inserted at //1 so that Y.java can compile without any error?
+1. import static com.foo.*;
+2. import com.foo.*;
+
+Answer:
+1. Bad syntax. Package import does not use static keyword.
+2. This is required because Y is accessing class X. static import of LOGICID is NOT required because Y is accessing LOGICID through X ( X.LOGICID). Had it been just System.out.println(LOGICID), only one import statement: import static com.foo.X.*; would have worked.
+2 is correct.
+
 
 **Random** -------------------------------------------
  
@@ -171,6 +201,101 @@ B. No, It returns char.
 
 
 **Working with Inheritance** ------------------------
+
+Question:
+Which of the following statements are true?
+1. Private methods cannot be overridden in subclasses.
+2. A subclass can override any method in a non-final superclass.
+3. An overriding method can declare that it throws a wider spectrum of checked exceptions than the method it is overriding.
+4. The parameter list of an overriding method must be a subset of the parameter list of the method that it is overriding.
+5. The overriding method may opt not to declare any throws clause even if the original method has a throws clause.
+
+Answer:
+1. Only methods that are inherited can be overridden and private methods are not inherited.
+2. Only the methods that are not declared to be final can be overridden. Further, private methods are not inherited so they cannot be overridden either.
+4. An overriding method (the method that is trying to override the base class’s method) must have the same parameters.
+5. No exception (i.e. an empty set of exceptions) is a valid subset of the set of exceptions thrown by the original method so an overriding method can choose to not have any throws clause.
+A method can be overridden by defining a method with the same signature(i.e. name and parameter list) and return type as the method in a superclass. The return type can also be a subclass of the orginal method's return type.
+Only methods that are accessible can be overridden. A private method cannot, therefore, be overridden in subclasses, but the subclasses are allowed to define a new method with exactly the same signature. 
+A final method cannot be overridden. 
+An overriding method cannot exhibit behavior that contradicts the declaration of the original method. An overriding method therefore cannot return a different type (except a subtype) or throw a wider spectrum of exceptions than the original method in the superclass.
+A subclass may have a static method with the same signature as a static method in the base class but it is not called overriding. It is called shadowing because the concept of polymorphism doesn't apply to static members.
+Correct response: 1 and 5.
+
+Question:
+Consider the following classes:
+class A {
+      public int getCode(){ return 2;}
+}
+class AA extends A { 
+  public void doStuff() { 
+  } 
+}
+Given the following two declarations, which of the options will compile?
+   A a = null;
+   AA aa = null;
+1. a = (AA)aa; 
+2. a = new AA(); 
+3. aa = new A(); 
+4. aa = (AA) a; 
+5. aa = a; 
+6. ((AA)a).doStuff();
+
+Answer:
+4. a is declared as a reference of class A and therefore, at run time, it is possible for a to point to an object of class AA (because A is a super class of AA). Hence, the compiler will not complain. Although if a does not point to an object of class AA at run time, a ClassCastException will be thrown.
+5. A cast is required because the compiler needs to be assured that at run time a will point to an object of class AA. 
+6. Once you cast a to AA, you can call methods defined in AA. Of course, if a does not point to an object of class AA at runtime, a ClassCastException will be thrown.
+Correct response: 1, 2, 4, and 6.
+
+
+Question:
+What should be inserted in the code given below at line marked //10:  
+class MyClass{ }  
+class MyComparable implements Comparable<MyClass>{    
+	public int compareTo(  *INSERT CODE HERE*  x ) { //10          
+		return 0;    
+	} 
+}
+1. Object
+2. MyClass
+3. Object<MyClass>
+4. Comparable<MyClass>
+5. Comparable
+
+Answer:
+Since MyComparable class specifies that it implements the Comparable interface that has been typed to MyClass, it must implement compareTo method that takes a MyClass.
+Had it not declared a typed Comparable in its implements clause, compareTo(Object x) would have been correct. 
+The correct response is 2.
+
+
+Question:
+Given:
+//Insert code here  
+
+   public abstract void draw();
+}
+//Insert code here
+   public void draw(){  System.out.println("in draw..."); }
+}
+Which of the following lines of code can be used to complete the above code?
+A. abstract Shape {
+and
+public class Circle  extends Shape {
+B. public abstract class Shape {
+and
+class Circle  extends Shape {
+C. public abstract class Shape {
+and
+class Circle  implements Shape {
+D. public interface Shape {
+and
+class Circle  implements Shape {
+
+Answer:
+A. The class keyword is missing from the first declaration.
+C. You can only implement an interface not a class. So Circle implements shape is wrong.
+D. By default all the methods of an interface are public and abstract so there is no need to explicitly specify the "abstract" keyword for the draw() method if you make Shape an interface. But it is not wrong to do so.
+therefore B and D are correct.
 
 Question:
 Consider the following classes: 
@@ -562,6 +687,41 @@ But actually, when run as shown in the question, the program requires a second a
 
 
 **Handling Exceptions** -----------------------------------------
+
+Question:
+What is the result of compiling and running this code?
+class MyException extends Throwable{}
+class MyException1 extends MyException{}
+class MyException2 extends MyException{}
+class MyException3 extends MyException2{}
+public class ExceptionTest{
+   void myMethod() throws MyException{
+      throw new MyException3();
+   }
+   public static void main(String[] args){
+      ExceptionTest et = new ExceptionTest();
+      try{
+         et.myMethod();
+      }
+      catch(MyException me){
+         System.out.println("MyException thrown");
+      }
+      catch(MyException3 me3){
+         System.out.println("MyException3 thrown");
+      }
+      finally{
+         System.out.println(" Done");
+      }
+   }
+}
+Which exception is thrown?
+
+Answer:
+You can have multiple catch blocks to catch different kinds of exceptions, including exceptions that are subclasses of other exceptions. However, the catch clause for more specific exceptions (i.e. a "SubClassException") should come before the catch clause for more general exceptions ( i.e. a "SuperClassException"). Failure to do so results in a compiler error as the more specific exception is unreachable.
+
+In this case, catch for MyException3 cannot follow catch for MyException because if MyException3 is thrown, it will be caught by the catch clause for MyException. And so, there is no way the catch clause for MyException3 can ever execute. And so it becomes an "unreachable" statement.
+Correct answer: It fails to compile.
+
 
 Question:
 Which statements regarding the following code are correct ?

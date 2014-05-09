@@ -12,4 +12,14 @@ public class NewBase extends Base{
       void method1(){
            someMethod("args");
       }
+      void method2(){
+         System.out.println("method2");
+      }
+      public static void main(String[] args) {
+         Base a = new Base();
+         NewBase b = new NewBase();
+         a = b;
+         //a.methodo2(); cannot find symbol
+         // b = a; // required NewBase
+      }
 }
