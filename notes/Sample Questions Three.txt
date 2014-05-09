@@ -1,4 +1,4 @@
-eTS Sample Exam Questions.
+eTS Sample Exam 1 Questions.
 
 Table of Contents
 
@@ -13,9 +13,11 @@ Working with Inheritance
 Using Operators and Decision Constructs
 Handling Exceptions
 
-Current on question 44.
+Current on question 61.
 
 **Random** -------------------------------------------
+ 
+- A class cannot be declared abstract and final at the same time. 
 
 public void saveObject(List e ){}
 saveObject(null); // OK!
@@ -43,6 +45,17 @@ There is no restriction on the return type. If the parameters are different then
 **Using Loop Constructs** ------------------------
 
 Question:
+How many times will the line marked //1 be called in the following code?
+int x = 10;
+do{
+ x--;
+ System.out.println(x);  // 1
+}while(x<10);
+
+Answer:
+x keeps on decreasing by one in each iteration and every time the condition x<10 returns true. However, after x reaches -2147483648, which is its MIN_VALUE of int, it cannot decrease any further and at this time when x-- is executed, the value rolls over to 2147483647, which is Integer.MAX_VALUE. At this time, the condition x<10 fails and the loop terminates.
+
+Question:
 Which of these statements are valid when occurring by themselves?
 A. do { break ; } while (true) ;
 B. if (true) { break ; } (When not inside a switch block or a loop)
@@ -57,6 +70,33 @@ Correct answers: A, C,D.
 
 
 **Creating and Using Arrays** --------------------
+
+Question:
+Given the following program, which statements are true?  
+// Filename: TestClass.java 
+public class TestClass{    
+	public static void main(String args[]){       
+		A[] a, a1;       
+		B[] b;       
+		a = new A[10]; 
+		a1  = a;       
+		b =  new B[20];       
+		a = b;        // 1       
+		b = (B[]) a;  // 2       
+		b = (B[]) a1; // 3    
+	} 
+} 
+class A { } 
+class B extends A { }
+1. The program will throw a java.lang.ClassCastException at the line 2 when run.
+2. The program will throw a java.lang.ClassCastException at the line 3 when run.
+3. The cast at line 2 is needed.
+Answer:
+The line //1 will be allowed during compilation, since assignment is done from a subclass reference to a superclass reference.
+The cast in line //2 is needed because a superclass reference is assigned to a subclass reference variable. And this works at runtime because the object referenced to by a is actually of an array of B.
+Now, the cast at line //3 tells the compiler not to worry, that I'm a good programmer and I know what I am doing and the object referenced by the super class reference (a1) will actually be of class B at run time. So there is no compile time error. But at run time, this fails because the actual object is not an array of B but is an array of A.
+So the correct answer is 2 and 3.
+
 
 Question:
 Identify the correct statements about ArrayList?
@@ -156,7 +196,10 @@ C. It will compile but will fail at run time as 'a' does not refer to an object 
 D. 'o' is declared as an Object. so same case as in choice A.
 E. Since b is declared of a type that indirectly implements Runnable, the compiler can figure out that b will always point to an object that is assignable to a Runnable. Therefore, explicit cast is not required here. It will still work fine with the explicit cast though.
 F. Since B extends A which implements Runnable, object b can be assigned to a Runnable without an explicit cast.
-The correct respones is B, E and F.
+The correct respones is B, E and F. (See Test21.java)
+Note: 
+b = a; will throw a compile error: incompatible types: required B, found A.
+b = (B)a; will compile but throw a runtime error: java.lang.ClassCastException
 
 Question:
 Consider the following classes :
@@ -278,6 +321,82 @@ Line 6 is the public Eagle(String name){ line.
 
 
 **Using Operators and Decision Constructs** ---------------------
+
+Question:
+The following method will compile and run without any problems.
+public void switchTest(byte x){
+   switch(x){
+      case 'b':   // 1
+      default :   // 2
+      case -2:    // 3
+      case 80:    // 4
+   }
+}
+True of false?
+
+Answer:
+The following types can be used as a switch variable:  
+byte, char, short, int, String, and enums. Note that long, float, double, and boolean are not allowed.  
+All the case constants should be assignable to the switch variable type. i.e. had there been a case label of 128 ( case 128 : //some code ), it would not have compiled. Because the range of a byte is from -128 to 127 and so 128 is not assignable to 'x'.  
+The integral value of 'b' is 98, which is less than 127 so Line //1 is fine.  
+Note: Although it is not required for the exam to know the integral values of characters, it is good to know that all English letters (upper case as well as lower case) as well as 0-9 are below 127 and so are assignable to byte.
+
+
+Question:
+Given the following class definitions, the expression  
+(obj instanceof A) && ! (obj instanceof C) && ! (obj instanceof D)   
+correctly identifies whether the object referred to by obj was created by instantiating class B rather than classes A, C and D?    
+class A {}   
+class B extends A {}   
+class C extends B {}   
+class D extends C {} 
+True or false?
+
+Answer:
+The given expression will not be able to distinguish between an object of class A and an object of class B. It will return true in both the cases. Also, The last part !(obj instanceof D) of the given expression is redundant because anything which is not instance of C cannot be an instanceof D either!  
+Correct expression would be 
+(obj instanceof B) && ! (obj instanceof C) 
+This will return true only if obj points to an object of class B and not of A, C, or D.
+
+Question:
+What will the following code snippet print?      
+Object t = new Integer(107);     
+int k = (Integer) t.intValue()/9;     
+System.out.println(k);
+1. 11
+2. 12
+3. It will not compile.
+4. It will throw an exception at runtime
+
+Answer:
+The compiler will complain that the method intValue() is not available in Object. This is because the . operator has more precedence than the cast operator. So you have to write it like this:     
+int k = ((Integer) t).intValue()/9; 
+Now, since both the operands of / are ints, it is an integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 11 and not 12. 
+
+
+Question:
+Which of the following four constructs are valid?
+1. switch(8);
+2. int x = 0; switch(x){}
+
+Answer: 
+A switch statement must have a body. The body may even be empty as shown in 2.
+So the correct answer is 2.
+
+Question:
+Consider that str is a variable of class java.lang.String. Which of the following lines of code may throw a NullPointerException in certain situations?  Or a tougher version of the question could be : Which of the following lines of code are not an example of robust design ?
+1. if ( (str != null) | ( i == str.length() ) ) 
+2. if ( (str == null) | ( i == str.length() ) ) 
+3. if ( (str != null) || (i == str.length() ) )
+4. if ( (str == null) || (i == str.length() ) )
+
+Answer:
+(See TestClass22)
+1. (i == str.length()) will always be executed so if 'str' is null, then str.length() will throw a NullPointerException.
+2. (i == str.length()) will always be executed so if 'str' is null, then str.length() will throw a NullPointerException.
+3. (i == str.length()) will only be evaluated if (str != null) is false, and (str != null) will be false if 'str' is null. So it will also throw a NullPointerException.
+4. (i == str.length()) will only be evaluated if (str == null) is false, and (str == null) will be false if 'str' is NOT null. So it will NEVER throw a NullPointerException.
+The correct answers are 1,2 and 3.
 
 Question:
 Consider the following method...
@@ -442,8 +561,37 @@ When the above code is run, open Tim will have no output, and open someone will 
 But actually, when run as shown in the question, the program requires a second argument to work, otherwise there is an error.  If we revert to the original else glued to the second if, then open Tim will say go away, and open someone will say hello.  So maybe that IS what was intended.  But we need to move on...
 
 
-
 **Handling Exceptions** -----------------------------------------
+
+Question:
+Which statements regarding the following code are correct ?
+class Base{
+   void method1() throws java.io.IOException, NullPointerException{
+      someMethod("arguments");
+      // some I/O operations
+   }
+   int someMethod(String str){
+      if(str == null) throw new NullPointerException();
+      else return str.length();
+   }
+}
+public class NewBase extends Base{
+      void method1(){
+           someMethod("args");
+      }
+}
+1. method1 in class NewBase does not need to specify any exceptions.
+2. The code will not compile because RuntimeExceptions cannot be given in throws clause.
+3. method1 in class NewBase must at least give IOException in its throws clause.
+4. method1 in class NewBase must at least give NullpointerException in its throws clause.
+5. There is no problem with the code.
+
+Answer:
+Overriding method only needs to specify a subset of the list of exception classes the overridden method can throw. A set of no classes is a valid subset of that list.
+Remember that  NullPointerException is a subclass of RuntimeException, while IOException is a subclass of Exception.
+2. Any Exception can be specified in the throws clause.
+4. This is not needed because NullPointerException is a RuntimeException.
+Correct answer: 1 & 5.
 
 Question:
 What will be the result of compiling and running the following program ?
