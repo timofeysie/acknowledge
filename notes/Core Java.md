@@ -67,6 +67,7 @@ StringBuffer sb = new StringBuffer(c);
 ```
 - The capacity for sb is now 10+16 = 26
 
+char c = '\u0000' 
 char c = '\0';
 (That's also the default value for an instance (or static) variable of type char)
 char retChar = 'x';
@@ -552,6 +553,7 @@ Examples:
 - rules; a digit, letter _ or $
 - 1st cannot be a digit.
 - No reserved words; goto, strictfp, const, transient, native, synchronized
+-  _100 would actually be a valid variable name.
 
 ###Native###
 native modifier means that the method can have no body.

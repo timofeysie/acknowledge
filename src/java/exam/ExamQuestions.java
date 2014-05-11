@@ -719,6 +719,46 @@ private static void defualtValue()
 		Object o2 = new Object();
 		//System.out.println(o1 instanceof o2);
 		System.out.println("o1 is an Object? "+(o1 instanceof Object));
+		int x = 0;
+		// while (false) { x=3; } x=3 is unreachable.
+	}
+
+	private static void testLoop2()
+	{
+      boolean b = false;
+      int i = 1;
+      do{
+      	System.out.println(b+" "+i);
+         i++ ;
+      } while (b = !b);
+      System.out.println( i );
+      float f = 3.0f;
+      if (i==f)
+      {
+      	System.out.println(i+" == "+f);
+      }
+	}
+
+	private static void testPromotion()
+	{
+		int i = 5;
+		float f = 5.5f;
+		double d = 3.8;
+		char c = 'a';
+		if (i == f) c++;
+		if (((int) (f + d)) == ((int) f + (int) d)) c += 2;
+		c += 2;
+		System.out.println(c);
+		int g = ((int) (f + d)); // 9
+		int h = ((int) f + (int) d); // 8
+		System.out.println(g+" "+h);
+		int _100 = 100; 
+		int bin = 0b01001110_00100000;
+		int two = 0b100111000100000;
+		System.out.println(bin);
+		System.out.println(Integer.toBinaryString(bin));
+		System.out.println(two);
+		System.out.println(Integer.toBinaryString(two));
 	}
 
 	public static void main(String args[]) 
@@ -758,6 +798,8 @@ private static void defualtValue()
 		//testLoops();
 		//testStringBuilder();
 		//testCharValues();
-		testInstanceof();
+		//testInstanceof();
+		//testLoop2();
+		testPromotion();
 	}
 }

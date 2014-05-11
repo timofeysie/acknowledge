@@ -2,6 +2,13 @@ eTS Sample Exam 1 Questions.
 
 Table of Contents
 
+Added
+Working with Java Data Types - String, String Builder
+Working with Inheritance
+Java Basics
+Loop Constructs
+
+Older
 Basics
 Random
 Overloading Methods
@@ -14,7 +21,177 @@ Working with Inheritance
 Using Operators and Decision Constructs
 Handling Exceptions
 
-Current on question 67.
+Current on question 75
+----------------------
+
+Using Operators and Decision Constructs ----------------
+
+Question:
+What will be the result of attempting to compile and run the following code? public class public class PromotionTest{    
+	public static void main(String args[]){       
+		int i = 5;       
+		float f = 5.5f;       
+		double d = 3.8;       
+		char c = 'a';       
+		if (i == f) c++;       
+		if (((int) (f + d)) == ((int) f + (int) d)) c += 2;       
+		System.out.println(c);    
+	} 
+}
+
+Answer:
+In the case of i == f, value of i will be promoted to a float i.e. 5.0, and so it returns false.
+(int)(f + d) => (int) (5.5 + 3.8) => (int)(9.3) => 9
+(int)f+(int)d =  (int)5.5 + (int) 3.8 => 5 + 3 = 8 => this is also false
+So, c is not incremented at all. Hence c remains 'a'.
+
+Working with Java Data Types - String, String Builder --
+
+Question:
+In java, Strings are immutable. A direct implication of this is...
+A. you cannot call methods like "1234".replace('1', '9'); and expect to change the original String.
+B. You cannot change a String object, once it is created.
+C. you can change a String object only by the means of its methods.
+D. you cannot extend String class.
+
+Answer:
+A. calling such methods do not change this object. They create a new String object.
+D. That's because it is final, not because it is immutable. You can have a final class whose objects are mutable.
+Correct: A, B.
+
+Working with Inheritance ------------------------
+
+Question:
+Given the following class definition:
+class A{
+  protected int i;
+  A(int i) {    this.i = i;    }
+ 
+}
+// 1 : Insert code here
+Which of the following would be a valid class that can be inserted at //1 ?
+A. class B {}
+B. class B extends A {}
+C. class B extends A {  B()  {  System.out.println("i = " + i); }  }
+D. class B { B() {} }
+
+Answer:
+B & C: Since class B does not have any constructor, the compiler will try to insert the default constructor, which will look like this: 
+B(){ 
+	super();  
+	//Notice that it is trying to call the no args constructor of the super class, A. 
+} 
+Since A doesn't have any no-args constructor, the above code will fail to compile.
+Notice that class A does not define a no-argument constructor. Also note that the class B does not define a constructor. Thus, class B relies on the default constructor B(). Class B's default constructor looks like this: public B() {} However, Constructors implicitly (if an explicit call to the superclass's constructor is not present) call their superclass's constructor super(). So, class B's default constructor actually looks like this:
+public B(){
+  super();
+}
+Now, since class A does not define a no-argument constructor the above code will not compile. However, class B would be correct if changed to:
+class B extends A{
+  B(){
+    super(1); // pass it any integer
+  }
+  // or
+  B(int number){
+    super(number);
+  }
+}
+You could also add a no-argument constructor to class A and leave class B as is.
+Correct answer: A & D.
+
+Question: What will the following program print when compiled and run?
+class Game{
+  public void play() throws Exception{
+    System.out.println("Playing...");
+  }
+}
+
+public class Soccer extends Game{
+   public void play(){
+      System.out.println("Playing Soccer...");      
+   }
+   public static void main(String[] args){
+       Game g = new Soccer();
+       g.play();
+   }
+}
+
+Answer:
+Observe that play() in Game declares Exception in its throws clause. Further, class Soccer overrides the play() method without any throws clause. This is valid because a list of no exception is a valid subset of a list of exceptions thrown by the superclass method. 
+Now, even though the actual object referred to by 'g' is of class Soccer, the class of the variable g is of class Game. Therefore, at compile time, compiler assumes that g.play() might throw an exception, because Game's play method declares it, and thus expects this call to be either wrapped in a try-catch or the main method to have a throws clause for the main() method.
+So the correct answer is the code will not compile.
+
+Question:
+Which of the following statements is/are true?
+1. A class cannot override the super class's constructor.
+2. An interface can implement multiple interfaces.
+
+Answer:
+1. Because constructors are not inherited.
+2. Interface cannot "implement" anything. It can extend multiple interfaces. The following is a valid declaration : 
+interface I1 extends I2, I3, I4 { }
+Correct: 1.
+
+Java Basics ---------------------------------------
+
+Question:
+The following are the complete contents of TestClass.java file. Which packages are automatically imported?  class TestClass{    public static void main(String[] args){      System.out.println("hello");    } }
+1. java.lang
+2. The package with no name.
+Answer:
+If there is no package statement in the source file, the class is assumed to be created in a default package that has no name. In this case, all the types created in this default package will be available to this class without any import statement.  However, note that this default package cannot be imported in classes that belong to any other package at all, not even with any sort of import statement. So for example, if you have a class named SomeClass in package test, you cannot access TestClass defined in the problem statement (as it is defined in the default package) at all because there is no way to import it.  As per JLS Section 7.5: A type in an unnamed package has no canonical name, so the requirement for a canonical name in every kind of import declaration implies that (a) types in an unnamed package cannot be imported, and (b) static members of types in an unnamed package cannot be imported. 
+Correct: 1 & 2.
+
+Using Loop Contstructs ----------------------------
+
+Question:
+What will be the result of attempting to compile and run the following program?
+class TestClass{
+   public static void main(String args[]){
+      boolean b = false;
+      int i = 1;
+      do{
+         i++ ;
+      } while (b = !b);
+      System.out.println( i );
+   }
+}
+
+Answer:
+Unlike the 'while(){}' loop, the 'do {} while()' loop executes at least once because the condition is checked after the iteration.
+So the first time thru, i = 2, and b is set to true.  Then next time thru, i = 3, and the condition is set to false, so the loop ends.
+
+Question:
+What will the following code snippet print?
+int count = 0, sum = 0;
+do{
+       if(count % 3 == 0) continue;
+       sum+=count;
+}
+while(count++ < 11);
+System.out.println(sum);
+
+Answer:
+1. The while condition uses post increment operator, which means count is first compared with 11 (and based on this comparison a decision is made whether to execute the loop again or not) and then incremented. So when count is 10, the condition 10<11 is true (that means the loop needs to be executed again) and count is incremented to 11.  
+2. When count is completely divisible by 3, (i.e. when count is 0, 3, 6, 9) sum+=count; is not executed.  
+Thus, the result is the summation of: 1 2 4 5 7 8 10 11
+
+Question:
+Which of the following code snippets will compile without any errors? (Assume that the statement int x = 0; exists prior to the statements below.)
+1. while (false) { x=3; }
+2. if (false) { x=3; }
+3. do{ x = 3; } while(false);
+4. for( int i = 0; i< 0; i++) x = 3;
+
+Answer:
+3. In a do- while, the block is ALWAYS executed at least once because the condition check is done after the block is executed. Unlike a while loop, where the condition is checked before the execution of the block.
+
+while (false) { x=3; } is a compile-time error because the statement x=3; is not reachable; Similarly, for( int i = 0; false; i++) x = 3; is also a compile time error because x= 3 is unreachable.  
+In if(false){ x=3; }, although the body of the condition is unreachable, this is not an error because the JLS explicitly defines this as an exception to the rule. It allows this construct to support optimizations through the conditional compilation. 
+For example,  if(DEBUG){ System.out.println("beginning task 1"); }   
+Here, the DEBUG variable can be set to false in the code while generating the production version of the class file, which will allow the compiler to optimize the code by removing the whole if statement entirely from the class file.
+Correct: 2,3,4
+
 
 **Basics** ----------------------------------------
 Consider the following two classes defined in two .java files.
