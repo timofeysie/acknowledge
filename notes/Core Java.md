@@ -1724,6 +1724,9 @@ Runtime Exception: java.util.regex.PatternSyntaxException: Dangling meta charact
 PatternSysntaxException occurs if the regular expressions's syntx is invalid.  Note that to use "*" as a delimiter, we have to specify "\\*" as the regular expression.  Given that, we would split the string into:
 [Java, JSP, EJB, J2EE]
 We could use the regex "[*]" to get the same result.  Also, the -2 is not needed; the same output is got without it.  
+// A regex that matches a literal '*' character
+Pattern.compile("\\*"); 
+
 Regarding the limit parameter controls the number of times the pattern is applied and therefore affects the length of the resulting array. If the limit n is greater than zero then the pattern will be applied at most n - 1 times, the array's length will be no greater than n, and the array's last entry will contain all input beyond the last matched delimiter. If n is non-positive then the pattern will be applied as many times as possible and the array can have any length. If n is zero then the pattern will be applied as many times as possible, the array can have any length, and trailing empty strings will be discarded.
 The string "boo:and:foo", for example, yields the following results with these parameters:
 Regex   Limit   Result
@@ -1735,7 +1738,7 @@ o      -2       { "b", "", ":and:f", "", "" }
 o       0       { "b", "", ":and:f" }
 An invocation of this method of the form str.split(regex, n) yields the same result as the expression:
 Pattern.compile(regex).split(str, n)
-
+Also note that "\\:" could be used as well.
 
 
 ###Exceptions###  
@@ -1813,7 +1816,7 @@ try (Statement stmt = con.createStatement())
 - The close method of the Closeable interface throws exceptions of type IOException while the close method of the AutoCloseable interface throws exceptions of type Exception. 
 - subclasses of the AutoCloseable interface can override this behavior of the close method to throw specialized exceptions, such as IOException, or no exception at all.
 
-The runtime system checks handlers in the order in which they appear after the try statemen until its matches the type of exception that was thrown, and if found the runtime system ends its search for an appropriate exception handler. 
+The runtime system checks handlers in the order in which they appear after the try statement until its matches the type of exception that was thrown, and if found the runtime system ends its search for an appropriate exception handler. 
 
 After the exception handler executes, the runtime system passes control to the finally block. Code in the finally block executes regardless of the exception caught above it.
 
@@ -2121,7 +2124,7 @@ Used to indicate that a variable's value will be modified by different threads. 
 
 The main differences between synchronized and volatile are:
 
-a-  primitive variable may be declared volatile (whereas you can't synchronize on a primitive with synchronized);
+- a primitive variable may be declared volatile (whereas you can't synchronize on a primitive with synchronized);
 - an access to a volatile variable never has the potential to block: we're only ever doing a simple read or write, so unlike a synchronized block we will never hold on to any lock;
 - because accessing a volatile variable never holds a lock, it is not suitable for cases where we want to read-update-write as an atomic operation (unless we're prepared to "miss an update");
 - a volatile variable that is an object reference may be null (because you're effectively synchronizing on the reference, not the actual object).

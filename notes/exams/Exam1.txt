@@ -1,4 +1,38 @@
-Question 1:
+Category: The String Class
+Question:  What will happen when you compile and run the following code:
+	String search = "boo:and:foo";
+	char c = search.charAt(search.length());
+	System.out.println(c);
+A. The code will compile and when run print "o".
+B. The code will compile and when run have no output.
+C. The code will not compile.
+D. The code will compile but not run.
+Answer:
+D.  The code will compile and throw a runtime error:
+java.lang.StringIndexOutOfBoundsException: String index out of range: 11
+For answer A to print "o", you would have to use the following code:
+char c = search.charAt(search.length()-1);
+B is wrong as there would be no way to get no output from a the charAt method of a string with no spaces.
+C is wrong as the code will compile fine.
+
+Category: String Class
+Question:
+What will be the output of this code snippet?
+		String c2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		char c3 = c2.charAt('!');
+		System.out.println(c3);
+A. The code will compile and when run print "H".
+B. The code will compile and when run have no output.
+C. The code will not compile.
+D. The code will compile but not run.
+
+Answer:
+The correct answer is A.  The character '!' will be promoted to an integer with the value 33, so the it would be equivalent to the following:
+char c3 = c2.charAt(33);
+This will return the ASCII character for 33 which is "H".
+
+Category: instanceof equality
+Question:
 What will the output of the following code be?
 Object o1 = new Object();
 Object o2 = new Object();

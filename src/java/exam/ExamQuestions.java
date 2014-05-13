@@ -409,6 +409,13 @@ private static void defualtValue()
 		//System.out.println(Arrays.toString(str.split("*",-2)));
 		System.out.println(Arrays.toString(str.split("[*]",-2)));
 		System.out.println(Arrays.toString(str.split("\\*",-2)));
+		
+		String str2 = "Java-JSP-EJB-J2EE";
+		//System.out.println(Arrays.toString(str.split("*",-2)));
+		System.out.println(Arrays.toString(str2.split("\\-",-2)));
+
+		String search = "boo:and:foo";
+		System.out.println(Arrays.toString(search.split("\\:",-2)));
 		/* java.util.regex.PatternSyntaxException:
 		Dangling meta character * near index 0.
 		PatternSysntaxException occurs if the regular expressions's
@@ -418,6 +425,16 @@ private static void defualtValue()
 		[Java, JSP, EJB, J2EE]
 		Also, the -2 is not needed; the same output is got without it.
 		*/
+		char c = search.charAt(search.length()-1);
+		System.out.println(c);
+		for (int i = 0; i < 65; i++)
+		{
+			String s1 = Character.toString((char)i);
+			//System.out.println(i+" "+s1);
+		}
+		String c2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		char c3 = c2.charAt('!');
+		System.out.println(c3);
 	}
 
 	/**
@@ -759,6 +776,10 @@ private static void defualtValue()
 		System.out.println(Integer.toBinaryString(bin));
 		System.out.println(two);
 		System.out.println(Integer.toBinaryString(two));
+		int x = 5;
+		int y = 10;
+		int z = ++x * y--;
+		System.out.println("x "+x+" y "+y+" z "+z);
 	}
 
 	public static void main(String args[]) 
@@ -769,7 +790,7 @@ private static void defualtValue()
 		//randomCode();
 		//unorthadoxUnary();
 		//basicFailedQuestions();
-		//failedRegex();
+		failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
 		//arrayWork();
@@ -800,6 +821,6 @@ private static void defualtValue()
 		//testCharValues();
 		//testInstanceof();
 		//testLoop2();
-		testPromotion();
+		//testPromotion();
 	}
 }
