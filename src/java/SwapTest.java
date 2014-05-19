@@ -24,6 +24,9 @@ public class SwapTest
     StringWrapper s = new StringWrapper("Hello");
     appendWorld(s);
     System.out.println(s.value);
+    String files_path = "/var/lib/openshift/53.*context_id_here*..18/jbossews/null";
+    files_path = scrubPath(files_path);
+    System.out.println(files_path);
   }
 
   public static void swap(Integer iA, Integer iB) {
@@ -58,6 +61,15 @@ public class SwapTest
   public static void appendWorld(StringWrapper s)
   {
     s.value = s.value +" World";
+  }
+
+  private static String scrubPath(String files_path)
+  {
+    if (files_path.contains("null"))
+    {
+      files_path = files_path.replace("null", "work/Catalina/localhost/_/WEB-INF");
+    }
+    return files_path;
   }
 
 }
