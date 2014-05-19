@@ -790,7 +790,7 @@ private static void defualtValue()
 		//randomCode();
 		//unorthadoxUnary();
 		//basicFailedQuestions();
-		failedRegex();
+		//failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
 		//arrayWork();
@@ -822,5 +822,8 @@ private static void defualtValue()
 		//testInstanceof();
 		//testLoop2();
 		//testPromotion();
+		Float f = new Float(1.9);
+		int i = f.intValue();
+		System.out.println(i);
 	}
 }
