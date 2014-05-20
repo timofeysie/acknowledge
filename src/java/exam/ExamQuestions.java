@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.*;
 import java.io.*;
 
+// private class De {} // modifier private not allowed here.
+
 public class ExamQuestions
 {
 	ExamQuestions () {
@@ -782,6 +784,17 @@ private static void defualtValue()
 		System.out.println("x "+x+" y "+y+" z "+z);
 	}
 
+	private static void testFloat()
+	{
+		Float f1 = new Float(1.9);
+		int i1 = f1.intValue();
+		System.out.println("1.9 int value: "+i1);
+		int i2 = 1_234_567_890;
+		float f2 = i2;
+		System.out.println("Before cast: "+f2);
+		System.out.println(i2 - (int)f2);
+	} 
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -822,8 +835,6 @@ private static void defualtValue()
 		//testInstanceof();
 		//testLoop2();
 		//testPromotion();
-		Float f = new Float(1.9);
-		int i = f.intValue();
-		System.out.println(i);
+		testFloat();
 	}
 }

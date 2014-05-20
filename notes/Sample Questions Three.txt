@@ -20,8 +20,6 @@ Working with Java Data Types - String, StringBuilder
 Working with Inheritance
 Using Operators and Decision Constructs
 Handling Exceptions
-
-Current on question 75
 ----------------------
 
 Using Operators and Decision Constructs ----------------

@@ -1,8 +1,136 @@
 Sample Questions Four
 
+Overloading Methods
+Using Loop Constructs x 2
+Working with methos - Access Modifiers
 Java Basics - Garbage Collection
 Using Operators and Decision Constructs
-Creating and Using Arrays
+Creating and Using Arrays x 2
+
+*Overloading Methods* --------------------------------
+
+Question:
+Consider the following code:
+public class Varargs{
+   public void test(){
+        test1(10);       //1
+        test1(10, 20); //2
+   }
+   public static void main(String[] args){
+     new Varargs().test();
+   }
+   //insert method here.
+}
+Which of the following lines can be added independently to the above class so that it will run without any errors or exceptions?
+1. public void test1(int i, int j){}
+2. public void test1(int i, int... j){}
+3. public void test1(int... i){}
+4. public void test1(int i...){}
+5. public void test1(int[] i){}
+
+Answer:
+Even though a var-arg parameter of type int is very similar to int[], they are not interchangeable. Therefore, int[] cannot be substituted for int... and it will not satisfy either of //1 or //2.
+An interesting observation is that if you do javap on the following class, you will see the same signature for method m1 and m2. This shows that a var-arg parameter of type T is same as an array of type T.
+class TestClass {
+    String m1(int[] i) { return ""+i.length; }
+    String m2(int... i) { return ""+i.length; }
+}
+javap TestClass produces this:
+
+    java.lang.String m1(int[]);
+    java.lang.String m2(int[]);
+Conversely, the following code will not compile:
+class TestClass {
+    String m1(int[] i) { return ""+i.length; }
+    String m1(int... i) { return ""+i.length; }  // Compiler determines that this is a duplicate method.
+}
+Correct response: 2 & 3.
+
+
+*Using Loop Constructs* ------------------------------
+
+
+Question:
+Consider the following code:  
+public class Conversion{    
+	public static void main(String[] args){      
+		int i = 1234567890;      
+		float f = i;      
+		System.out.println(i - (int)f);    
+	} 
+}  
+What will it print when run?
+
+Answer:
+Actually it prints -46. This is because the information was lost during the conversion from type int to type float as values of type float are not precise to nine significant digits. Note: You are not required to know the number of significant digits that can be stored by a float for the exam. However, it is good to know about loss of precision while using float and double.
+float f = i;   // f = 1.23456794E9
+
+Question:
+Given the following code:
+class TestClass{
+   public static void main(String args[]){
+      int k = 0;
+      int m = 0;
+      for (int i = 0; i <= 3; i++){
+         k++;
+         if ( i == 2){
+            // line 1
+         }
+         m++;
+      }
+      System.out.println( k + ", " + m );
+   }
+}
+What is the output if line 1 is replaces by:
+1. break;
+2. continue
+3. i = m ++;
+4. i = 4;
+
+Answer:
+This is a simple loop. All you need to do is execute each statement in your head. For example, if line 1 is replaced by break:  
+1. k=0, m=0 2. 
+iteration 1: i=0     
+2.1 k = 1     
+2.2 i == 2 is false     
+2.3 m = 1 3. 
+iteration 2: i = 1     
+3.1 k=2     
+3.2 i==2 is false     
+3.3 m = 2 4. 
+iteration 3: i = 2     
+4.1 k=3     
+4.2 i==2 is true     
+4.3 break 5. 
+print 3, 2
+Correct answers:
+1. 3, 2
+2. 4, 3
+3. 4, 5
+4. 3, 3
+
+*Working with methos - Access Modifiers* -------------
+
+Question:
+Consider the following code in TestClass.java file:
+package p;
+private class TC extends java.util.HashMap{
+   public TC(){
+      super(100);
+      System.out.println("TC created");
+   }
+}
+public class TestClass extends TC{
+   public TestClass(){
+      System.out.println("TestClass created");
+   }
+   public static void main(String[] args){ new TestClass(); }
+}
+What will be the output when TestClass is run?
+
+Answer:
+The correct answer is that the code will not compile because TC is a top level class and private is not a valid access modifier for a top level class. private can be applied to an inner class.
+Error: modifier private not allowed here.
 
 
 *Java Basics - Garbage Collection* -----------------
@@ -47,9 +175,6 @@ Although not mentioned explicitly in the objectives, the exam has a few basic qu
 Correct Answer: 1.
 
 
-
-
-
 *Using Operators and Decision Constructs* ---------------------
 
 Question:
@@ -71,14 +196,34 @@ Correct response: compile time error.
 *Creating and Using Arrays* --------------------------------------
 
 Question:
+What will be the result when the following code is run?
+class Test26 {
+	public static int[ ] getArray() {return null;}
+	public static void main(String[] args) {
+		int index = 1;
+		try {
+			getArray()[index=2]++;
+		} catch (Exception e){ } //empty catch
+		System.out.println("index = " + index);
+	}
+}
+
+Answer:
+If the array reference expression produces null instead of a reference to an array, then a NullPointerException is thrown at runtime, but only after all parts of the array reference expression have been evaluated and only if these evaluations completed normally. 
+
+This means, first index = 2 will be executed, which assigns 2 to index. After that null[2] is executed, which throws a NullPointerException. But this exception is caught by the catch block, which prints nothing. So it seems like NullPointerException is not thrown but it actually is.
+
+In other words, the embedded assignment of 2 to index occurs before the check for array reference produced by getArray().
+
+In an array access, the expression to the left of the brackets appears to be fully evaluated before any part of the expression within the brackets is evaluated. Note that if evaluation of the expression to the left of the brackets completes abruptly, no part of the expression within the brackets will appear to have been evaluated.
+
+Question:
 Which of the following is a benefit of ArrayList over an array, true or false?
 It allows you to write type safe code.
 
 Answer:
 Since ArrayList is a generics enabled class, it helps you write type safe code. For example, if you have:   ArrayList<String> al = new ArrayList<>(); al.add(new Integer(10)); will not compile because the compiler knows that al can only contain Strings.  However, this is not an advantage over an array because arrays are also type safe. For example, if you have: String[] sa = new String[10]; you cannot do sa[0] = new Integer(10); either.  But you can do Object[] oa = sa; and oa[0]  = new Integer(10); This will compile fine but will fail at runtime. This is a hole in the type safety provided by arrays.
 Correct Answer: false.
-
-
 
 
 
