@@ -1,10 +1,16 @@
 class Bird {
-    public Bird(){     }
+    public Bird(){     } // if this is private, compilation will fail.
 }
 class Eagle extends Bird { 
     public String name;
     public Eagle(String name){
         this.name = name;
+    }
+
+    public Eagle()
+    {
+        this("Eagle");
+        // no args constructor.
     }
 
     private String method(String a)

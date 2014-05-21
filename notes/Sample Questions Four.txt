@@ -1,13 +1,140 @@
 Sample Questions Four
 
+Finished to question 31.
+
+Java Basics x 1
+Working with Inheritance x 5
+Working with Java Data Types - variables and Objects
 Overloading Methods
-Using Loop Constructs x 2
-Working with methos - Access Modifiers
+Using Loop Constructs x 3
+Working with methods - Access Modifiers
 Java Basics - Garbage Collection
 Using Operators and Decision Constructs
 Creating and Using Arrays x 2
 
-*Overloading Methods* --------------------------------
+*Java Basics* ---------------------------------------------
+
+Question:  Will the following code compile and run?
+static import java.lang.System.*;//1
+class $$//2
+{
+	static public void main(String... _$_) //3
+	{
+		String _ = ""; //4
+		for(int $=0; ++$ < _$_.length; ) //5
+			_ += _$_[$]; //6
+		out.println(_); //7
+	}
+}
+
+Answer:
+Everything here is valid, except the import statement, which should be import static ...
+Reverse these two words and everything will compile fine.
+Correct response: no.
+
+*Working with Inheritance* --------------------------------
+
+Question:
+Consider that you are writing a set of classes related to a new Data Transmission Protocol and have created your own exception hierarchy derived from java.lang.Exception as follows:
+enthu.trans.ChannelException
+              +-- enthu.trans.DataFloodingException, 
+                    enthu.trans.FrameCollisionException
+You have a TransSocket class that has the following method: 
+   long connect(String ipAddr) throws ChannelException
+Now, you also want to write another "AdvancedTransSocket" class, derived from "TransSocket" which overrides the above mentioned method. Which of the following are valid declaration of the overriding method?
+1. int connect(String ipAddr) throws ChannelException
+2. long connect(String ipAddr) throws FrameCollisionException
+3. long connect(String ipAddr) throws Exception
+4. long connect(String str)
+
+Answer:
+There are 2 important concepts involved here:
+1. The overriding method must have same return type in case of primitives (a subclass is allowed in case of classes)  (Therefore, the choices returning int are not valid.) and the parameter list must be the same (The name of the parameter does not matter, just the Type is important). 
+2. The overriding method can throw a subset of the exception or subclass of the exceptions thrown by the overridden class. Having no throws clause is also valid since an empty set is a valid subset. 
+Answer 3: This option is invalid because Exception is a super class of ChannelException so it cannot be thrown by the overriding method.
+Correct response: 2 and 4.
+
+Question:
+Which statements concerning the following code are true?
+class A{
+  public A() {} // A1
+  public A(String s) {  this();  System.out.println("A :"+s);  }  // A2
+}
+
+class B extends A{
+  public int B(String s) {  System.out.println("B :"+s);  return 0; } // B1
+}
+class C extends B{
+    private C(){ super(); } // C1
+    public C(String s){  this();  System.out.println("C :"+s);  } // C2
+    public C(int i){} // C3
+}
+1. At least one of the constructors of each class is called as a result of constructing an object of class C.
+2. Constructor at  //A2 will never be called in creation of an object of class C.
+3. Class C can be instantiated only in two ways by users of this class.
+4. //B1 will never be called in creation of objects of class A, B, or C.
+5. The code will not compile. 
+
+Answer:
+Note: The C1 constructor will call A1.
+1. To create any object one and only one constructor of that class and each of the super classes is called. (A constructor may delegate the construction to another constructor of the same class by calling this(...) as the first statement.)
+2. Because B has no defined constructor and so a default no-argument constructor will be called, which will call the no-argument constructor of A
+3. Since one constructor is private, users of this class can use only the other two public constructors from outside this class.
+4. Because //B1 is not a constructor. Note that it is returning an int. A constructor does not have any return type, not even void.
+Correct response: 1,2,3,4.
+
+Question:
+Which statements concerning the following code are true?
+
+class A{
+  public A() {} // A1
+  public A(String s) {  this();  System.out.println("A :"+s);  }  // A2
+}
+
+class B extends A{
+  public int B(String s) {  System.out.println("B :"+s);  return 0; } // B1
+}
+class C extends B{
+    private C(){ super(); } // C1
+    public C(String s){  this();  System.out.println("C :"+s);  } // C2
+    public C(int i){} // C3
+}
+1. At least one of the constructors of each class is called as a result of constructing an object of class C.
+2. Constructor at  //A2 will never be called in creation of an object of class C.
+3. Class C can be instantiated only in two ways by users of this class.
+4. //B1 will never be called in creation of objects of class A, B, or C.
+5. The code will not compile. 
+
+Answer:
+1. To create any object one and only one constructor of that class and each of the super classes is called. (A constructor may delegate the construction to another constructor of the same class by calling this(...) as the first statement.)
+2. Because B has no defined constructor and so a default no-argument constructor will be called, which will call the no-argument constructor of A
+3. Since one constructor is private, users of this class can use only the other two public constructors from outside this class.
+4. //B1 will never be called in creation of objects of class A, B, or C.
+Correct response:
+
+Question: Which of the following statements are correct?
+1. An interface can be extended by an abstract class.
+2. An interface can be extended by a concrete class.
+3. An abstract class cannot implement an interface.
+Answer:
+1. A class "implements" an interface. It does not "extend" an interface.
+3. Any class, whether abstract or concrete, can implement any interface.
+Correct response: 1, 2, and 3 are all wrong.
+
+
+*Working with Java Data Types - variables and Objects* ----
+
+Question: What will the output of the following be?
+		byte b = (byte)128;
+		System.out.println(b);
+
+Answer:
+Since the range of a byte is -128 to 127, the cast is necessary to compile and run.  The byte will clock around to the start, which is -128.
+The same answer will come from a value of 384.
+256 = 0.
+
+
+*Overloading Methods* -------------------------------------
 
 Question:
 Consider the following code:
@@ -49,6 +176,29 @@ Correct response: 2 & 3.
 
 *Using Loop Constructs* ------------------------------
 
+Question: 
+Will the folliwng code print?
+public class BreakTest{
+  public static void main(String[] args){
+    int i = 0, j = 5;
+    lab1 : for( ; ; i++){
+      for( ; ; --j)  if( i >j ) break lab1;
+    }
+    System.out.println(" i = "+i+", j = "+j);
+  }
+}
+
+Answer:
+The values of i and j in the inner most for loop change as follows: 
+i = 0 j = 5 
+i = 0 j = 4 
+i = 0 j = 3 
+i = 0 j = 2 
+i = 0 j = 1 
+i = 0 j = 0 
+i = 0 j = -1
+Note: for ( ; ; --j) actually compiles!
+So will for( ; ; )!
 
 Question:
 Consider the following code:  
@@ -108,6 +258,7 @@ Correct answers:
 2. 4, 3
 3. 4, 5
 4. 3, 3
+
 
 *Working with methos - Access Modifiers* -------------
 
@@ -176,6 +327,37 @@ Correct Answer: 1.
 
 
 *Using Operators and Decision Constructs* ---------------------
+
+Question:
+Assume that a, b, and c refer to instances of primitive wrapper classes. Which of the following statements are correct?
+1. a.equals(a) will always return true.
+2. a.equals(b) returns same as a == b.
+3. a.equals(b) returns false if they refer to instances of different classes.
+
+Answer:
+2. The wrapper classes's equals() method overrides Object's equals() method to compare the actual value instead of the reference.
+Equals method of a primitive wrapper class ( e.g. java.lang.Integer, Double, Float etc) are 1. symmetric => a.equals(b) returns same as b.equals(a) 2. transitive => if a.equals(b) and b.equals(c) return true, then a.equals(c) returns true. 3. reflexive => a.equals(a) return true.  For example, the following code for the equals method on Integer explains how it works: public boolean equals(Object obj) {    if (obj instanceof Integer) {        return value == ((Integer)obj).intValue();    }    return false; }
+Correct response: 1 & 3.
+
+
+Question:
+Consider the following lines of code:  
+Integer i = new Integer(42); 
+Long ln = new Long(42); 
+Double d = new Double(42.0);  
+Which of the following options are valid?
+i == ln; // 1
+ln == d; // 2
+i.equals(d); // 3
+d.equals(ln); // 4
+ln.equals(42); // 5
+
+Answer:
+The concept to understand here is as follows -
+If the compiler can figure out that something can NEVER happen, then it flags an error. In this question, the compiler knows that ln, i or d can never point to the same object in any case because they are references to different classes of objects that have no relation ( superclass/subclass ) between themselves.
+Therefore 1 and 2 will fail at compile time.
+5. Due to auto-boxing int 42 is converted into an Integer object containing 42. So this is valid. It will return false though because ln is a Long and 42 is boxed into an Integer.
+Correct response: 3, 4, 5.
 
 Question:
 What is the result of executing the following fragment of code:  boolean b1 = false; 

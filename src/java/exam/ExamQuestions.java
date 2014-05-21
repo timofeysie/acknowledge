@@ -795,6 +795,30 @@ private static void defualtValue()
 		System.out.println(i2 - (int)f2);
 	} 
 
+	private static void testOrder()
+	{
+		System.out.println(getArray()[getIndex()]++);
+	}
+
+	private static int getIndex()
+	{
+		System.out.println("getIndex()");
+		return 1;
+	}
+
+	private static int [] getArray()
+	{
+		System.out.println("getArray()");
+		int [] s = {2,3};
+		return s;
+	}
+
+	private static void testByte()
+	{
+		byte b = (byte)128;
+		System.out.println(b);
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -835,6 +859,8 @@ private static void defualtValue()
 		//testInstanceof();
 		//testLoop2();
 		//testPromotion();
-		testFloat();
+		//testFloat();
+		//testOrder();
+		testByte();
 	}
 }
