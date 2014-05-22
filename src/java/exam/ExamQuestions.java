@@ -817,6 +817,43 @@ private static void defualtValue()
 	{
 		byte b = (byte)128;
 		System.out.println(b);
+		short s = 10;
+		//char c = s;
+		//s = c;
+	}
+
+	private static void testIntern()
+	{
+		String t = "Timothy";
+		System.out.println(t.intern());
+	}
+
+	private static void testForSwitch()
+	{
+		char i;
+        LOOP: for (i=0;i<5;i++){
+            switch(i++){
+                case '0': System.out.println("A");
+                case 1: System.out.println("B"); break LOOP;
+                case 2: System.out.println("C"); break;
+                case 3: System.out.println("D"); break;
+                case 4: System.out.println("E");
+                case 'E' : System.out.println("F");
+            }
+        }
+
+        int j = 0;
+        switch (j++)
+        {
+        	default: System.out.println("j "+j); break;
+        }
+
+        int k = 0;
+        switch (k++)
+        {
+        	case 0: System.out.println("k is 0 "+k); break;
+        	case 1: System.out.println("k is 1 "+k); break;
+        }
 	}
 
 	public static void main(String args[]) 
@@ -861,6 +898,8 @@ private static void defualtValue()
 		//testPromotion();
 		//testFloat();
 		//testOrder();
-		testByte();
+		//testByte();
+		//testIntern();
+		testForSwitch();
 	}
 }

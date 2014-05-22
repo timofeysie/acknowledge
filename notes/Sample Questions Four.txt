@@ -1,16 +1,115 @@
 Sample Questions Four
 
-Finished to question 31.
-
+Encapsulation
+Working with Java Data Types: String, StringBuilder x 1
+Handling Exceptions x 1
 Java Basics x 1
-Working with Inheritance x 5
+Working with Inheritance x 7
 Working with Java Data Types - variables and Objects
 Overloading Methods
-Using Loop Constructs x 3
+Using Loop Constructs x 4
 Working with methods - Access Modifiers
 Java Basics - Garbage Collection
-Using Operators and Decision Constructs
+Using Operators and Decision Constructs x 5
 Creating and Using Arrays x 2
+
+*Encapsulation* -------------------------------------------
+
+Question:
+Consider the following class written by a novice programmer.
+class Elliptical{
+    public int radiusA, radiusB;
+    public int sum = 100;
+    public void setRadius(int r){
+        if(r>99) throw new IllegalArgumentException();
+        radiusA = r;
+        radiusB = sum - radiusA;
+    }
+}
+After some time, the requirements changed and the programmer now wants to make sure that radiusB is always (200 - radiusA) instead of (100 - radiusA) without breaking existing code that other people have written. Can she accomplish her goal?
+1. Make sum = 200 and make all fields (radiusA, radiusB, and sum) private.
+2. Write another method setRadius2(int r) and set radiusB accordingly in this method.
+3. She cannot.
+
+Answer:
+1. This should have been done when the class was first written.
+setRadius method makes sure that radiusB is set to sum - radiusA. So changing sum to 200 should do it. However, note that radiusA, radiusB, and sum are public which means that any other class can access these fields directly without going through the setRadius method. So there is no way to make sure that the value of radiusB is correctly set at all times. If you make them private now, other classes that are accessing the fields directly will break.
+The class should have been coded with proper encapsulation of the fields in the first place.
+Correct response: 3.
+
+*Working with Java Data Types: String, StringBuilder* -----
+
+Question:
+Which of the following methods modify the object on which they are called?
+1. setValue(int)of java.lang.Integer class.
+2. The substring(int) method of the String class
+3. The replace() method of the String class.
+4. The reverse() method of the StringBuffer class.
+
+Answer:
+1. There is no such method in Integer class. Note that Integer, Float and other such wrapper objects are immutable. 
+2. String is an immutable object. calling substring(...) returns a new different String object. It cannot change the original object.
+3. String objects can never be modified once created.
+Correct response: 4.
+Similar question on immutable wrapper classes:
+Given:
+1. class Ring {
+2. 	final static int x2 = 7;
+3. 	final static Integer x4 = 8;
+4. 	public static void main(String[] args) {
+5. 		Integer x1 = 5;
+6. 		String s = "a";
+7. 		if(x1 < 9) s += "b";
+8. 		switch(x1) {
+9. 			case 5: s += "c";
+10. 		case x2: s += "d";
+11. 		case x4: s += "e";
+12. 	}
+13. 	System.out.println(s);
+14. 	}
+15. }
+What is the result?
+A. abc
+B. abcde
+C. Compilation fails due only to an error on line 7.
+D. Compilation fails due only to an error on line 8.
+E. Compilation fails due only to an error on line 10.
+F. Compilation fails due only to an error on line 11.
+G. Compilation fails due to errors on multiple lines.
+
+Answer:
+A switch statement requires its case expressions to be constants, and wrapper variables (even final static ones) aren�t considered constants. The rest of the code is correct.
+x2 is final static, how would it go through? (just because it is not a wrapper class?)
+An instance of a wrapper class is not a constant expression. (In practice it is constant because the wrapper classes are immutable, but the Java compiler doesn't know that the wrapper classes are immutable).
+Correct response: F. 
+
+*Handling Exceptions* -------------------------------------
+
+Question:
+What will the following program print when run using the command line: java TestClass   
+public class TestClass {     
+	public static void methodX() throws Exception {       
+		throw new AssertionError();    
+	}       
+	public static void main(String[] args) {       
+		try{          
+			methodX();       
+		} catch (Exception e) {         
+			System.out.println("EXCEPTION");       
+		}    
+	} 
+}
+1. It will throw AssertionError out of the main method.
+2. It will print EXCEPTION.
+3. It will not compile because of the throws clause in methodX().
+4. It will end without printing anything because assertions are disabled by default.
+
+Answer:
+1. A subclass of Error cannot be caught using a catch block for Exception because java.lang.Error does not extend java.lang.Exception. 
+2. The catch block will not be able to catch the Error thrown by methodX().
+3. The throws clause is valid even though unnecessary in this case.
+4. It is true that assertions are disabled by default however, methodX is throwing an AssertionError explicitly like any other Throwable. Here, the assertion mechanism is not even used.
+Correct response: 1.
 
 *Java Basics* ---------------------------------------------
 
@@ -33,6 +132,109 @@ Reverse these two words and everything will compile fine.
 Correct response: no.
 
 *Working with Inheritance* --------------------------------
+
+Question:
+interface Flyer{ }
+class Bird implements Flyer { }
+class Eagle extends Bird { }
+class Bat { }
+public class TestClass {    
+    public static void main(String[] args) {
+        Flyer f = new Eagle();
+        Eagle e = new Eagle();
+        Bat b = new Bat();
+        if(f instanceof Flyer) System.out.println("f is a Flyer");
+        if(e instanceof Bird) System.out.println("e is a Bird");
+        if(b instanceof Bird) System.out.println("f is a Bird");
+    }
+}
+What will be printed when the above code is compiled and run?
+
+Answer:
+b points to an object of class Bat, which does not extend from Bird. Now, it is possible for b to point to an object of any subclass of Bat. However, it is not possible for that sub class to extend Bird (because a class can at most extend from only one class). Therefore, it is not possible for b to point to an object of a class that extends Bird. The compiler figures out this fact at compile time itself and so the code fails to compile.
+Therefore you cannot call instanceof on unrelated classes.  If Bat did extend Bird or Flyer even, the code would compile.  Or, if the b instanceof Bird line is removed, the output would be:
+f is a Flyer
+e is a Bird
+At run time, f points to an object of class Eagle. Now, Eagle extends Bird, which implements Flyer so f instanceof Flyer returns true.
+e points to an object of class Eagle. Eagle extends Bird. Therefore, e instanceof Bird will also return true.
+Correct response:  The class will not compile, error: incovertible types.
+(See Test30.java)
+
+Question:
+Consider the following code:
+class Super { static String ID = "QBANK"; }
+class Sub extends Super{
+   static { System.out.print("In Sub"); }
+}
+public class Test{
+   public static void main(String[] args){
+      System.out.println(Sub.ID);
+   }
+}
+What will be the output when class Test is run?
+
+Answer:
+As per Section 12.4.1 given here: http://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html
+A class or interface type T will be initialized immediately before the first occurrence of any one of the following:
+T is a class and an instance of T is created.
+T is a class and a static method declared by T is invoked.
+A static field declared by T is assigned.
+A static field declared by T is used and the field is not a constant variable (§4.12.4).
+T is a top level class (§7.6), and an assert statement (§14.10) lexically nested within T (§8.1.3) is executed.
+A reference to a static field (§8.3.1.1) causes initialization of only the class or interface that actually declares it, even though it might be referred to through the name of a subclass, a subinterface, or a class that implements an interface.
+Invocation of certain reflective methods in class Class and in package java.lang.reflect also causes class or interface initialization.
+A class or interface will not be initialized under any other circumstance.
+Correct response:  DOn't know what any of that means, but the program will print QBANK.
+(See Test28.java)
+
+Question:
+Which statement regarding the following code is correct?
+
+class A{
+   public int i = 10;
+   private int j = 20;
+}
+
+class B extends A{
+   private int i = 30; //1
+   public int k = 40;
+}
+
+class C extends B{ }
+
+public class TestClass{
+   public static void main(String args[]){
+      C c = new C();
+      System.out.println(c.i); //2
+      System.out.println(c.j); //3
+      System.out.println(c.k); 
+   }
+}
+1. It will print 10 and 40 if //3 is commented.
+2. It will print 40 if //2 and //3 are commented.
+3. It will not compile because of //1.
+4. It will compile if //2 is commented.
+
+Answer:
+You cannot access c.i because i is private in B. But you can access ( (A)c).i because i is public in A. Remember that member variables are shadowed and not overridden. So, B's i shadows A's i and since B's i is private, you can't access A's i unless you cast the reference to A. You cannot access c.j because j is private in A.
+If we add this line in class B: public int j = 50; then j in B can be read and 50, 40 will be printed.
+Correct response: 2.
+(See Test27.java)
+
+Question: 
+Consider the following class hierarchy (B1 and B2 are subclasses of A and C1, C2 are subclasses of B1)  Assume that method public void m1(){ ... } is defined in all of these classes EXCEPT B1 and C1.  Assume that "objectOfXX" means a variable that points to an object of class XX. So, objectOfC1 means a reference variable that is pointing to an object of class C1.  Which of the following statements are correct?
+1. objectOfC1.m1(); will cause a compilation error.
+2. objectOfC2.m1(); will cause A's m1() to be called.
+3. objectOfC1.m1(); will cause A's m1() to be called.
+4. objectOfB1.m1(); will cause an exception at runtime.
+5. objectOfB2.m1(); will cause an exception at runtime.
+
+Answer: 
+1 & 3 C1 will inherit B1's m1() which in turn inherits m1() from A.
+2. C2 has m1(), so its m1() will override A's m1().
+4. B1 will inherit m1() from A. So this is valid.
+5. B2 overrides m1() of A. So there will be no exception.
+Correct response: 3
 
 Question:
 Consider that you are writing a set of classes related to a new Data Transmission Protocol and have created your own exception hierarchy derived from java.lang.Exception as follows:
@@ -124,6 +326,31 @@ Correct response: 1, 2, and 3 are all wrong.
 
 *Working with Java Data Types - variables and Objects* ----
 
+Question:
+1		short s = 10;
+2		char c = s;
+3		s = c;
+Will this compile?
+
+Answer:
+Not all short values are valid char values, and neither are all char values valid short values, therefore compiler complains for both the lines 2 and 3. They will require an explicit cast.
+A char is a single 16-bit Unicode character. min'\u0000' (or 0) max'\uffff' (or 65,535 inclusive).  A short is a 16-bit signed two's complement integer.min -32,768 max 32,767 (inclusive).
+error: possible loss of precision in line 2 and 3.
+Another example:
+short s = Short.MAX_VALUE; 
+char c = s; 
+System.out.println( c == Short.MAX_VALUE);
+Discussion:
+This will not compile because a short VARIABLE can NEVER be assigned to a char without explicit casting. A short CONSTANT can be assigned to a char only if the value fits into a char.
+
+short s = 1; byte b = s; => this will also not compile because although value is small enough to be held by a byte but the Right Hand Side i.e. s is a variable and not a constant.
+final short s = 1; byte b = s; => This is fine because s is a constant and the value fits into a byte.
+final short s = 200; byte b = s; => This is invalid because although s is a constant but the value does not fit into a byte.
+
+Implicit narrowing occurs only for byte, char, short, and int. Remember that it does not occur for long, float, or double. So, this will not compile: int i = 129L;
+
+
+
 Question: What will the output of the following be?
 		byte b = (byte)128;
 		System.out.println(b);
@@ -176,6 +403,27 @@ Correct response: 2 & 3.
 
 *Using Loop Constructs* ------------------------------
 
+Question:
+Consider the following method which is called with an argument of 7:
+public void method1(int i){
+   int j = (i*30 - 2)/100;
+   POINT1 : for(;j<10; j++){
+       boolean flag  = false;
+       while(!flag){
+			if(Math.random()>0.5) break POINT1;
+       }
+   }
+   while(j>0){
+       System.out.println(j--);
+       if(j == 4) break POINT1;
+   }
+}
+What will it print? (Assume that Math.random() return a double between 0.0 and 1.0, not including 1.0)
+
+Answer: Remember that a labeled break or continue statement must always exist inside the loop where the label is declared. Here, if(j == 4) break POINT1; is a labelled break that is occurring in the second loop while the label POINT1 is declared for the first loop.
+if(j == 4) break POINT1; will cause the following error: undefined label: POINT1.
+If this problem is fixed, the output will be: 2, 1.
+
 Question: 
 Will the folliwng code print?
 public class BreakTest{
@@ -199,6 +447,7 @@ i = 0 j = 0
 i = 0 j = -1
 Note: for ( ; ; --j) actually compiles!
 So will for( ; ; )!
+(see Test29.java)
 
 Question:
 Consider the following code:  
@@ -260,7 +509,7 @@ Correct answers:
 4. 3, 3
 
 
-*Working with methos - Access Modifiers* -------------
+*Working with methods - Access Modifiers* -------------
 
 Question:
 Consider the following code in TestClass.java file:
@@ -327,6 +576,71 @@ Correct Answer: 1.
 
 
 *Using Operators and Decision Constructs* ---------------------
+
+Question:
+Consider the following code snippet:  
+XXXX m ; 
+//other code   
+switch( m ){      
+	case 32  : System.out.println("32");   break;      
+	case 64  : System.out.println("64");   break;      
+	case 128 : System.out.println("128");  break;   
+}  
+What type can 'm' be of so that the above code compiles and runs as expected ?
+
+Answer:
+Three rules must be remembered about switch statement:
+1. Only byte, char, short, int, and enum values can be used as types of a switch variable. (Java 7 allows String as well.)
+2. The switch variable must be big enough to hold all the case constants.
+So, if switch variable is of type char, then none of the case constants can be greater than 65535 because char's range is from 0 to 65535.
+3.  All case labels should be COMPILE TIME CONSTANTS.
+Correct response: int, char, short.  byte cannot hold 128.
+
+Question:
+What letters will be printed by this program?
+public class ForSwitch{
+    public static void main(String args[]){
+        char i;
+        LOOP: for (i=0;i<5;i++){
+            switch(i++){
+                case '0': System.out.println("A");
+                case 1: System.out.println("B"); break LOOP;
+                case 2: System.out.println("C"); break;
+                case 3: System.out.println("D"); break;
+                case 4: System.out.println("E");
+                case 'E' : System.out.println("F");
+            }
+        }
+    }
+}
+
+Answer:
+1. Defining i as char doesn't mean that it can only hold characters (a, b, c etc). It is an integral data type which can take any +ive integer value from 0 to 2^16 -1.
+2. Integer 0 or 1, 2 etc. is not same as char '0', '1' or '2' etc.
+so when i is equal to 0, nothing gets printed and i is incremented to 1 (due to i++ in the switch).
+ i is then incremented again by the for loop for next iteration. so i becomes 2.
+when i = 2, "C" is printed and i is incremented to 3 (due to i++ in the switch) and then i is incremented to 4 by the for loop so i becomes 4.
+when i = 4, "E" is printed and since there is no break, it falls through to case '5' and "F" is printed.
+i is incremented to 5 and the for loop ends.
+Correct response: C, E, F.
+But, bonsider this code:
+        int j = 0;
+        switch (j++)
+        {
+        	case 0: System.out.println("j "+j); break;
+        	case 1: System.out.println("j "+j); break;
+        	default: System.out.println("j "+j); break;
+        }
+The output for this is: j 1
+This indicates that the j++ is applied before the cases are applied.  But in the initial question, if the i++ is applied before the cases, then B would be printed.  This next example shows exactly what is happening:
+        int k = 0;
+        switch (k++)
+        {
+        	case 0: System.out.println("k is 0 "+k); break;
+        	case 1: System.out.println("k is 1 "+k); break;
+        }
+The output is: k is 0 1
+This means the the switch/case statement is considered as the same line for Java, but the statement after case, the prtinln, is considered the next line, so the variable is incremented.
 
 Question:
 Assume that a, b, and c refer to instances of primitive wrapper classes. Which of the following statements are correct?
@@ -408,4 +722,29 @@ Since ArrayList is a generics enabled class, it helps you write type safe code. 
 Correct Answer: false.
 
 
+*Bunus Material!* ----------------------------------------------
 
+Question:
+String s1 = "Rakesh";
+String s2 = "Rakesh";
+String s3 = "Rakesh".intern();
+String s4 = new String("Rakesh");
+String s5 = new String("Rakesh").intern();
+if ( s1 == s2 ){System.out.println("s1 and s2 are same");}
+if ( s1 == s3 ){System.out.println("s1 and s3 are same" );}
+if ( s1 == s4 ){System.out.println("s1 and s4 are same" );}
+if ( s1 == s5 ){System.out.println("s1 and s5 are same" );}
+
+Answer:
+public String intern()
+Returns a canonical representation for the string object.
+A pool of strings, initially empty, is maintained privately by the class String.
+When the intern method is invoked, if the pool already contains a string equal to this String object as determined by the equals(Object) method, then the string from the pool is returned. Otherwise, this String object is added to the pool and a reference to this String object is returned.
+It follows that for any two strings s and t, s.intern() == t.intern() is true if and only if s.equals(t) is true.
+All literal strings and string-valued constant expressions are interned. String literals are defined in 3.10.5 of the Java Language Specification
+Returns:
+a string that has the same contents as this string, but is guaranteed to be from a pool of unique strings.
+Correct response:
+s1 and s2 are same
+s1 and s3 are same
+s1 and s5 are same

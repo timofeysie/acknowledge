@@ -53,7 +53,9 @@ setLength(), append(), delete(), insert(), replace(), setCharAt(), reverse()
 \'  single quote character  
 \"  double quote character  
 
+
 ###The String Class###
+
 - boolean ends/startsWith(String su/prefix)
 - boolean startsWith(String prefix, int offset) 
 - int compareTo/IgnoreCase(String anotherString) Compares two strings lexicographically. Returns an integer indicating whether this string is greater than (result is > 0), equal to (result is = 0), or less than (result is < 0) the argument.
@@ -86,7 +88,8 @@ setLength(), append(), delete(), insert(), replace(), setCharAt(), reverse()
 - boolean regionMatches(int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.  Region is of length len and begins at the index toffset for this string and ooffset for the other string.
 - boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)	Tests whether the specified region of this string matches the specified region of the String argument.  Region is of length len and begins at the index toffset for this string and ooffset for the other string. The boolean argument indicates whether case should be ignored; if true, case is ignored when comparing characters.
 - boolean matches(String regex)	Tests whether this string matches the specified regular expression.
-
+int	offsetByCodePoints(int index, int codePointOffset) Returns the index within this String that is offset from the given index by codePointOffset code points.
+String	intern() - Returns a canonical representation for the string object.
 
 ###CharSequence###
 - char charAt(int index)
