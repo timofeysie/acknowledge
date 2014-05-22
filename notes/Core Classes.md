@@ -90,6 +90,9 @@ setLength(), append(), delete(), insert(), replace(), setCharAt(), reverse()
 - boolean matches(String regex)	Tests whether this string matches the specified regular expression.
 int	offsetByCodePoints(int index, int codePointOffset) Returns the index within this String that is offset from the given index by codePointOffset code points.
 String	intern() - Returns a canonical representation for the string object.
+Field: CASE_INSENSITIVE_ORDER
+public static final Comparator<String> CASE_INSENSITIVE_ORDER
+A Comparator that orders String objects as by compareToIgnoreCase. This comparator is serializable.  Note that this Comparator does not take locale into account, and will result in an unsatisfactory ordering for certain locales. The java.text package provides Collators to allow locale-sensitive ordering.
 
 ###CharSequence###
 - char charAt(int index)

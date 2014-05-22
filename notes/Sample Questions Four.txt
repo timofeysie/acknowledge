@@ -1,17 +1,17 @@
-Sample Questions Four
+Sample Questions Four - Practice Test 2.
 
 Encapsulation
-Working with Java Data Types: String, StringBuilder x 1
-Handling Exceptions x 1
-Java Basics x 1
-Working with Inheritance x 7
-Working with Java Data Types - variables and Objects
+Working with Java Data Types: String, StringBuilder x 2
+Handling Exceptions x 4
+Java Basics x 3
+Working with Inheritance x 8
+Working with Java Data Types - variables and Objects x 2
 Overloading Methods
-Using Loop Constructs x 4
+Using Loop Constructs x 5
 Working with methods - Access Modifiers
 Java Basics - Garbage Collection
-Using Operators and Decision Constructs x 5
-Creating and Using Arrays x 2
+Using Operators and Decision Constructs x 9
+Creating and Using Arrays x 3
 
 *Encapsulation* -------------------------------------------
 
@@ -38,6 +38,24 @@ The class should have been coded with proper encapsulation of the fields in the 
 Correct response: 3.
 
 *Working with Java Data Types: String, StringBuilder* -----
+
+Question:
+What will be written to the standard output when the following program is run?  
+public class TrimTest{    
+	public static void main(String args[]){       
+		String blank  = " ";  // one space       
+		String line = blank + "hello" + blank + blank;       
+		line.concat("world");       
+		String newLine  =  line.trim();       
+		System.out.println((int)(line.length() + newLine.length()));    
+	} 
+}
+
+Answer:
+Note that line.concat("world") does not change line itself. It creates a new String object containing " hello world  " but it is lost because there is no reference to it.
+Similarly, calling trim() does not change the object itself.
+So the answer is 8 + 5 = 13 !
+
 
 Question:
 Which of the following methods modify the object on which they are called?
@@ -86,6 +104,110 @@ Correct response: F.
 *Handling Exceptions* -------------------------------------
 
 Question:
+What will the following code print?
+public class Test{
+   public int luckyNumber(int seed){
+      if(seed > 10) return seed%10;
+         int x = 0;
+            try{
+               if(seed%2 == 0) throw new Exception("No Even no.");
+               else return x;
+            }
+            catch(Exception e){
+               return 3;
+            }
+            finally{
+               return 7;
+            }
+         }
+
+        public static void main(String args[]){
+           int amount = 100, seed = 6;
+           switch( new Test().luckyNumber(6) ){
+               case 3: amount = amount * 2;
+               case 7: amount = amount * 2;
+               case 6: amount = amount + amount;
+               default :
+           }
+          System.out.println(amount);
+       }
+}
+
+Answer:
+When you pass 6 to luckyNumber(), if(seed%2 == 0) throw new Exception("No Even no."); is executed and the exception is caught by the catch block where it tries to return 3; But as there is a finally associated with the try/catch block, it is executed before anything is returned. Now, as finally has return 7;, this value supersedes 3. 
+In fact, this method will always return 7 if seed <= 10.  
+Now, in the switch there is no break statement. 
+So both - 
+case 7: amount = amount * 2; 
+and 
+case 6: amount = amount + amount; are executed.
+So the final amount becomes 400.
+
+
+Question:
+Consider the following code snippet:
+void m1() throws Exception{
+   try{
+      // line1
+   }
+   catch (IOException e){
+       throw new SQLException();
+   }
+   catch(SQLException e){
+       throw new InstantiationException();
+   }
+   finally{
+      throw new CloneNotSupportedException();   // this is not a RuntimeException.
+   }
+}
+Which of the following statements are true?
+1. If IOException gets thrown at line1, then the whole method will end up throwing SQLException.
+2. If IOException gets thrown at line1, then the whole method will end up throwing CloneNotSupportedException.
+3. If no exception is thrown at line1, then the whole method will end up throwing CloneNotSupportedException.
+4. If SQLException gets thrown at line1, then the whole method will end up throwing InstantiationException()
+
+Answer:
+The fundamental concepts at play here are:
+1. The Exception that is thrown in the last, is the Exception that is thrown by the method to the caller.
+So, when no exception or any exception is thrown at line 1, the control goes to finally or some catch block. Now, even if the catch blocks throws some exception, the control goes to finally. The finally block throws CloneNotSupportedException, so the method ends up throwing CloneNotSupportedException. Other exceptions thrown by the code prior to this point are lost.
+2. Exception thrown by a catch cannot be caught by the following catch blocks at the same level. So, if IOException is thrown at line 1, the control goes to first catch which throws SQLException. Now, although there is a catch for SQLException, it won't catch the exception because it is at the same level. So, the control goes to the finally and same process as explained above continues. Any exceptions thrown before this exception are lost.
+Correct response: 2 and 3.
+
+Question:
+Identify the correct constructs.
+1. 
+try {
+  for( ;; );
+}finally { }
+
+2.
+try {
+       s = new ServerSocket(3030); 
+} 
+catch(Exception t){ t.printStackTrace(); } 
+catch(IOException e) { 
+    s = new ServerSocket(4040);
+}
+catch(Throwable t){ t.printStackTrace();  }
+
+3.
+int x = validMethod();
+try {
+  if(x == 5) throw new IOException();
+  else if(x == 6) throw new Exception();
+}finally {
+ x = 8;
+}
+catch(Exception e){ x = 9; }
+
+Answer:
+1. A try block must be accompanied by either a catch block or a finally block or both.
+2. You can have any number of catch blocks in any order but each catch must be of a different type. Also, a catch for a subclass exception should occur before a catch block for the superclass exception. Here, IOException is placed before Throwable, which is good but Exception is placed before IOException, which is invalid and will not compile.
+3. finally cannot occur before any catch block.
+Correct response: 2.
+Note that a try with resources block may or may not to have any catch or finally block at all. However, try with resources is not in scope for this exam.
+
+Question:
 What will the following program print when run using the command line: java TestClass   
 public class TestClass {     
 	public static void methodX() throws Exception {       
@@ -113,6 +235,37 @@ Correct response: 1.
 
 *Java Basics* ---------------------------------------------
 
+Question:
+An instance member ...
+1. can be a variable, a constant or a method.
+2. belongs to an instance of the class.
+3. is same as a local variable.
+
+ANswer:
+3. variables defined in methods are called local variables (also known as automatic variables) where as instance members are defined in the class scope.
+An instance member belongs to a single instance, not the class as a whole. An instance member is a member variable or a member method that belongs to a specific object instance. All non-static members are instance members.
+Correct response: 1 & 2
+
+
+
+Question:
+Which of the following are valid declarations:
+1. int a = b = c = 100;
+2. int a, b, c; a = b = c = 100;
+3. int a, b, c=100;
+4. int a=100, b, c;
+
+Answer:
+1. Chaining to use a value of a variable at the time of declaration is not allowed. Had b and c been already declared, it would have been valid. For example, the following is valid:   
+int  b = 0, c = 0;   
+int a = b = c = 100; 
+Even the following is valid:   
+int  b , c;  //Not initializing b and c here.   
+int a = b = c = 100; //declaring a and initializing c, b, and a at the same time. 
+Notice the order of initialization of the variables - c is initialized first, b is initialized next by assigning to it the value of c. Finally, a is initialized.
+Java does not allow chained initialization in declaration so option 1 is not valid.
+Correct repsonse: 2, 3, 4.
+
 Question:  Will the following code compile and run?
 static import java.lang.System.*;//1
 class $$//2
@@ -132,6 +285,28 @@ Reverse these two words and everything will compile fine.
 Correct response: no.
 
 *Working with Inheritance* --------------------------------
+
+Question:
+Given the following class definitions :
+interface MyIface{};
+class A {};
+class B extends A implements MyIface{};
+class C implements MyIface{};
+and the following object instantiations:
+  A a = new A();
+  B b = new B();
+  C c = new C();
+Which of the following assignments are legal at compile time?
+1. c = b;
+2. MyIface i = c;
+3. c = (C) b;
+
+Answer:
+1. There is no relation between b and c.
+2. Because C implements I.
+3. Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
+The statements c = b and b = c are illegal, since neither of the classes C and B is a subclass of the other. Even though a cast is provided, the statement c = (C) b is illegal because the object referred to by b cannot ever be of type C.
+Correct response: 2.
 
 Question:
 interface Flyer{ }
@@ -327,6 +502,50 @@ Correct response: 1, 2, and 3 are all wrong.
 *Working with Java Data Types - variables and Objects* ----
 
 Question:
+What will be the result of attempting to compile and run the following code?
+public class InitClass{
+   public static void main(String args[ ] ){
+      InitClass obj = new InitClass(5);
+   }
+   int m;
+   static int i1 = 5;
+   static int i2 ;
+   int  j = 100;
+   int x;
+   public InitClass(int m){
+      System.out.println(i1 + "  " + i2 + "   " + x + "  " + j + "  " + m);
+   }
+  { j = 30; i2 = 40; }  // Instance Initializer
+   static { i1++; }      // Static Initializer
+}
+
+Answer:
+The value 5 is passed to the constructor to the local (automatic) variable m. So the instance variable m is shadowed. Before the body of the constructor is executed, the instance initializer is executed and assigns values 30 and 40 to variables j and i2, respectively. A class is loaded when it is first used. For example,
+class A1{
+  static int i = 10;
+  static { System.out.println("A1 Loaded "); }
+}
+public class A{
+  static { System.out.println("A Loaded "); }
+  public static void main(String[] args){
+    System.out.println(" A should have been loaded");
+    A1 a1 = null;
+    System.out.println(" A1 should not have been loaded");
+    System.out.println(a1.i);
+  }
+}
+When you run it you get the output:
+A Loaded
+ A should have been loaded
+ A1 should not have been loaded
+A1 Loaded
+10
+Now, A should be loaded first as you are using its main method. Even though you are doing A1 a1 = null; A1 will not be loaded as it is not yet used (so the JVM figures out that it does not need to load it yet.) When you do a1.i, you are using A1, so before you use it, it must be loaded. That's when A1 is loaded. Finally 10 is printed.
+Correct response:
+The code will compile without error and will print 6 40 0 30 5 when run.
+
+
+Question:
 1		short s = 10;
 2		char c = s;
 3		s = c;
@@ -348,7 +567,6 @@ final short s = 1; byte b = s; => This is fine because s is a constant and the v
 final short s = 200; byte b = s; => This is invalid because although s is a constant but the value does not fit into a byte.
 
 Implicit narrowing occurs only for byte, char, short, and int. Remember that it does not occur for long, float, or double. So, this will not compile: int i = 129L;
-
 
 
 Question: What will the output of the following be?
@@ -402,6 +620,33 @@ Correct response: 2 & 3.
 
 
 *Using Loop Constructs* ------------------------------
+
+Question:
+What will the following code print?
+
+public class TestClass {
+        int x = 5;
+        int getX(){ return x; }
+        public static void main(String args[]) throws Exception{
+            TestClass tc = new TestClass();
+            tc.looper();
+            System.out.println(tc.x);
+        }        
+        public void looper(){
+            int x = 0;
+            while( (x = getX()) != 0 ){
+                for(int m = 10; m>=0; m--){
+                    x = m;
+                }
+            }
+            
+       }     
+}
+
+Answer:
+Note that looper() declares an automatic variable x, which shadows the instance variable x. So when x = m; is executed, it is the local variable x that is changed not the instance field x. So getX() never returns 0. If you remove int x = 0; from looper(), it will print 0 and end.
+Correct response: This program will compile and run but will never terminate.
+
 
 Question:
 Consider the following method which is called with an argument of 7:
@@ -578,6 +823,83 @@ Correct Answer: 1.
 *Using Operators and Decision Constructs* ---------------------
 
 Question:
+What, if anything, is wrong with the following code?  
+void test(int x){    
+	switch(x){       
+		case 1:       
+		case 2:       
+		case 0:       
+		default :       
+		case 4:    
+	} 
+}
+1. Any order of case statements is valid.
+2. There is nothing wrong with the code.
+
+Answer:
+1. Any order of case statements is valid.
+Correct response: 2.
+
+
+Question:
+Which of the given lines can be inserted at //1 of the following program ?  
+public class TestClass{        
+	public static void main(String[] args){      
+		short s = 9;      //1    
+	} 
+}
+1. int i = 9; System.out.println(s == i);
+2. Boolean b = s instanceof Number;
+3. Short k = 9; Integer i = 9; System.out.println(k == i);
+4. Integer i = 9; System.out.println( s == i );
+5. System.out.println(s instanceof Short);
+6. Short k = new Short(9); System.out.println(k instanceof Short);
+
+Answer:
+1. Any two integral primitives can be compared using == operator.
+2. Left operand of instanceof MUST be an object and not a primitive.
+3. This will not compile because k and i are referring to objects that have no IS-A relationship among themselves.
+5. The left operand of instanceof MUST be an object and not a primitive.
+6. 9 is considered an int. This should be: Short s = new Short( (short) 9 );
+Correct response: 1 & 4
+
+
+Question:
+What will the following code print ?  
+class Test{    
+	public static void main(String[] args){       
+		int k = 1;       
+		int[] a = { 1 };       
+		k += (k = 4) * (k + 2);       
+		a[0] += (a[0] = 4) * (a[0] + 2);       
+		System.out.println( k + " , " + a[0]);    
+	} 
+}
+
+Answer:
+The value 1 of k is saved by the compound assignment operator += before its right-hand operand (k = 4) * (k + 2) is evaluated. Evaluation of this right-hand operand then assigns 4 to k, calculates the value 6 for k + 2, and then multiplies 4 by 6 to get 24. This is added to the saved value 1 to get 25, which is then stored into k by the += operator. An identical analysis applies to the case that uses a[0].   
+k += (k = 4) * (k + 2);   
+a[0] += (a[0] = 4) * (a[0] + 2);   
+k = k + (k = 4) * (k + 2);   
+a[0] = a[0] + (a[0] = 4) * (a[0] + 2);
+Correct response: 25, 25
+
+
+Question:
+The following code snippet will compile, true of false?:  
+int i = 10; System.out.println( i<20 ? out1() : out2() );  
+Assume that out1 and out2 have method signature: public void out1(); and public void out2();
+
+Answer:
+Note that it is not permitted for either the second or the third operand expression of the ? operator to be an invocation of a void method.
+- If one of the operands is of type byte and the other is of type short, then the type of the conditional expression is short.
+- If one of the operands is of type T where T is byte, short, or char, and the other operand is a constant expression of type int whose value is representable in type T, then the type of the conditional expression is T.   
+- Otherwise, binary numeric promotion (5.6.2) is applied to the operand types, and the type of the conditional expression is the promoted type of the second and third operands.
+- If one of the second and third operands is of the null type and the type of the other is a reference type, then the type of the conditional expression is that reference type.
+- If the second and third operands are of different reference types, then it must be possible to convert one of the types to the other type (call this latter type T) by assignment conversion (5.2); the type of the conditional expression is T. It is a compile-time error if neither type is assignment compatible with the other type.
+Correct response:  It will not compile.
+
+Question:
 Consider the following code snippet:  
 XXXX m ; 
 //other code   
@@ -691,6 +1013,38 @@ Correct response: compile time error.
 
 *Creating and Using Arrays* --------------------------------------
 
+Question: 
+Which of the following code fragments will successfully initialize a two-dimensional array of chars named cA with a size such that cA[2][3] refers to a valid element?  
+1.   char[][] cA = {  { 'a', 'b', 'c' },  { 'a', 'b', 'c' }   }; 
+2.   char cA[][] = new char[3][];   
+	for (int i=0; i<cA.length; i++) cA[i] = new char[4]; 
+3.   char cA[][] = { new char[ ]{ 'a', 'b', 'c' }  ,   new char[ ]{ 'a', 'b', 'c' }  }; 
+4    char cA[3][2] = new char[][] {  { 'a', 'b', 'c' },   { 'a', 'b', 'c' }   }; 
+5.   char[][] cA = { "1234", "1234",  "1234"  };
+
+Answer:
+1 and 3 declare a two dimensional array alright but they create the array of size 2, 3. And cA[2][3] means we need an array of
+size 3, 4 because the numbering starts from 0.
+4 : You cannot put array size information on LHS.
+5 : This is a one dimensional array and that too of strings. Note that a java String is not equivalent to 1 dimensional array of chars.
+This leaves us with only one choice 2.
+
+
+Question:
+What will the following program print?
+class Test{
+   public static void main(String[] args){
+      int i = 4;
+      int ia[][][] = new int[i][i = 3][i];
+      System.out.println( ia.length + ", " + ia[0].length+", "+ ia[0][0].length);
+   }
+}
+
+Answer:
+In an array creation expression, there may be one or more dimension expressions, each within brackets. Each dimension expression is fully evaluated before any part of any dimension expression to its right. The first dimension is calculated as 4 before the second dimension expression sets 'i' to 3.
+Note that if evaluation of a dimension expression completes abruptly, no part of any dimension expression to its right will appear to have been evaluated.
+Correct response: 4,3,3
+
 Question:
 What will be the result when the following code is run?
 class Test26 {
@@ -748,3 +1102,30 @@ Correct response:
 s1 and s2 are same
 s1 and s3 are same
 s1 and s5 are same
+
+There is a no difference for args whether it is defined as String[] args or String args[]. However, there is an important difference in the way it is defined as illustrated by the following:  
+1. String[] sa1, sa2; Here, both - sa1 and sa2 are String arrays.  
+2. String sa1[], sa2; Here, only sa1 is a String array. sa2 is just a String.
+
+Question:
+Given the following LOCs:     
+int rate = 10;    
+XXX amount = 1 - rate/100*1 - rate/100;  
+What can XXX be?
+
+Answer:
+Note that none of the terms in the expression 1 - rate/100*1 - rate/100; is double or float. They are all ints. So the result of the expression will be an int. Since an int can be assigned to a variable of type int, long, float or double, amount cAn integer can be assigned to a double but not vice versa.
+
+Object class's equals() method just checks whether the two references are pointing to the same location or not.
+
+When refactoring a class to make it better in terms of encapsulation, the key is that your data variable should be private and the functionality that is to be exposed outside should be public. Further, your setter methods should be coded such that they don't leave the data members inconsistent with each other.
+an be int, long, float or double.
+Correct response: int, long, float or double
+
+An integer can be assigned to a double but not vice versa.
+A byte can ALWAYS be assigned to an int.
+
+Object class's equals() method just checks whether the two references are pointing to the same location or not.
+
+When refactoring a class to make it better in terms of encapsulation, the key is that your data variable should be private and the functionality that is to be exposed outside should be public. Further, your setter methods should be coded such that they don't leave the data members inconsistent with each other.
+

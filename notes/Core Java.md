@@ -60,7 +60,6 @@ Volatile
 - The initial capacity of a ArrayList created with its default
 constructor is 10. 
 - StringBuilder()- initial capacity of 16 characters.
-
 ```
 String c = new String("1234567890");
 StringBuffer sb = new StringBuffer(c);
@@ -623,12 +622,13 @@ A collection of methods with no implementation is called an interface.
 ###Variables###
 - Instance Variables (Non-Static Fields) 
 - Class Variables (Static Fields) static modifier; one copy regardless of how many times the class has been instantiated. 
-- Local Variables declared in braces of a method. only visible to the methods in which they are declared;
+- Local Variables (automatic variables) declared in braces of a method. only visible to the methods in which they are declared;
 - A type's fields, methods, and nested types are collectively called its members.
 - A variable declared within the opening and closing parenthesis of a method is called a parameter.
 - Parameters refers to the list of variables in a method declaration. 
 - Arguments are the actual values that are passed in when the method is invoked.
 - Parameters classified as "variables" not "fields". other parameter-accepting constructs as well (constructors and exception handlers)
+- instance members are variables, constants and methods that belong to an instance of a class.
 
 **compile-time constant** a primitive type or a string is defined as a constant and the value is known at compile time, the compiler replaces the constant name everywhere in the code with its value.
 - The args variable is the parameter to a main method. parameters are always classified as "variables" not "fields". 
@@ -2129,4 +2129,3 @@ The main differences between synchronized and volatile are:
 - because accessing a volatile variable never holds a lock, it is not suitable for cases where we want to read-update-write as an atomic operation (unless we're prepared to "miss an update");
 - a volatile variable that is an object reference may be null (because you're effectively synchronizing on the reference, not the actual object).
 - Attempting to synchronize on a null object will throw a NullPointerException.
-

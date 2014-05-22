@@ -856,6 +856,13 @@ private static void defualtValue()
         }
 	}
 
+	private static void testInitialization()
+	{
+		// int a = b = c = 100;  cannot find symbols b and c.
+		int b , c; //Not initializing b and c here.   
+		int a = b = c = 100; //declaring a and initializing c, b, and a at the same time.
+	}
+
 	public static void main(String args[]) 
 	{
 		//testExamQuestions();
@@ -900,6 +907,6 @@ private static void defualtValue()
 		//testOrder();
 		//testByte();
 		//testIntern();
-		testForSwitch();
+		//testForSwitch();
 	}
 }
