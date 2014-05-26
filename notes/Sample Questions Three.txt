@@ -314,7 +314,10 @@ Answer:
 A. It does.
 Direct Known Subclasses: 
 AttributeList, RoleList, RoleUnresolvedList 
-B. This is true because only Objects can be stored in it.
+B. This is true because only Objects can be stored in it. 
+ArrayList<int> ai = new ArrayList<int>(); // error: unexpected type
+required: reference
+found: int
 C. This is true because it implements java.util.RandomAccess interface, which is a marker interface that signifies that you can directly access any element of this collection. This also implies that it takes the same amount of time to access any element.
 D. This is true. The elements are actually stored in an array and that is why is it called an ArrayList.
 (The expression "backed by an array" means that the implementation of ArrayList actually uses an array to store elements.)
@@ -640,7 +643,7 @@ byte, char, short, int, String, and enums. Note that long, float, double, and bo
 All the case constants should be assignable to the switch variable type. i.e. had there been a case label of 128 ( case 128 : //some code ), it would not have compiled. Because the range of a byte is from -128 to 127 and so 128 is not assignable to 'x'.  
 The integral value of 'b' is 98, which is less than 127 so Line //1 is fine.  
 Note: Although it is not required for the exam to know the integral values of characters, it is good to know that all English letters (upper case as well as lower case) as well as 0-9 are below 127 and so are assignable to byte.
-
+Correct response: true.
 
 Question:
 Given the following class definitions, the expression  

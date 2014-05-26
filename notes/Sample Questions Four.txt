@@ -5,7 +5,7 @@ Working with Java Data Types: String, StringBuilder x 2
 Handling Exceptions x 4
 Java Basics x 3
 Working with Inheritance x 8
-Working with Java Data Types - variables and Objects x 2
+Working with Java Data Types - variables and Objects x 2n
 Overloading Methods
 Using Loop Constructs x 5
 Working with methods - Access Modifiers
@@ -833,7 +833,7 @@ void test(int x){    
 		case 4:    
 	} 
 }
-1. Any order of case statements is valid.
+1. The default statement must go last.
 2. There is nothing wrong with the code.
 
 Answer:
@@ -1060,12 +1060,10 @@ class Test26 {
 
 Answer:
 If the array reference expression produces null instead of a reference to an array, then a NullPointerException is thrown at runtime, but only after all parts of the array reference expression have been evaluated and only if these evaluations completed normally. 
-
 This means, first index = 2 will be executed, which assigns 2 to index. After that null[2] is executed, which throws a NullPointerException. But this exception is caught by the catch block, which prints nothing. So it seems like NullPointerException is not thrown but it actually is.
-
 In other words, the embedded assignment of 2 to index occurs before the check for array reference produced by getArray().
-
 In an array access, the expression to the left of the brackets appears to be fully evaluated before any part of the expression within the brackets is evaluated. Note that if evaluation of the expression to the left of the brackets completes abruptly, no part of the expression within the brackets will appear to have been evaluated.
+Correct response: index = 2
 
 Question:
 Which of the following is a benefit of ArrayList over an array, true or false?
@@ -1124,6 +1122,12 @@ Correct response: int, long, float or double
 
 An integer can be assigned to a double but not vice versa.
 A byte can ALWAYS be assigned to an int.
+a short or byte cannot be assigned to each other unless they are cast:
+		short s = 10;
+		char c = s; // error
+		s = c;      // error
+final short s = 1; byte b = s; => This is fine because s is a constant and the value fits into a byte.
+Implicit narrowing occurs only for byte, char, short, and int. Remember that it does not occur for long, float, or double. So, this will not compile: int i = 129L;
 
 Object class's equals() method just checks whether the two references are pointing to the same location or not.
 

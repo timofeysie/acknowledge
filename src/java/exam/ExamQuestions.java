@@ -477,6 +477,8 @@ private static void defualtValue()
 		//String[] s = a.toArray();
 		String[] s3 = (String[])al.toArray();
 		String[] s4 = set.toArray(new String[al.size()]);
+
+		ArrayList<int> ai = new ArrayList<int>();
 	}
 
 	static void aMethod(Byte ob) {System.out.println("Byte");}
@@ -856,6 +858,15 @@ private static void defualtValue()
         }
 	}
 
+	public static void switchTest(byte x)
+	{
+		switch(x){
+      	case -2: System.out.println("case -1"); break;
+      	default : System.out.println("default"); break;
+      	case 80: System.out.println("case80"); break;
+   		}
+	}
+
 	private static void testInitialization()
 	{
 		// int a = b = c = 100;  cannot find symbols b and c.
@@ -874,7 +885,7 @@ private static void defualtValue()
 		//failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
-		//arrayWork();
+		arrayWork();
 		//aMethod("0");
 		// int, long, float, double, Integer, Object, error
 		//aMethod(0.0f);
@@ -908,5 +919,6 @@ private static void defualtValue()
 		//testByte();
 		//testIntern();
 		//testForSwitch();
+		//switchTest((byte)81);
 	}
 }

@@ -1,0 +1,18 @@
+
+
+
+If C extends B which extends A, what will happen when the following code is executed?
+		A a = new A();
+		B b = new B();
+		C c = new C();
+		a = b;
+		b = (B)a;
+		c = (C)a;
+1. Compiles and runs fine.
+2. Compiles and cuases a runtime exception.
+3. Wont compile.
+
+Answer:
+This code will compile but with throw a ClassCastException at runtime with the message: "B cannot be cast to a C" on the last line c = (C)a;  Not sure why.
+ 
+Correct response: 2

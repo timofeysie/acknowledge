@@ -14,5 +14,10 @@ class C extends B{
 public class D {
 	public static void main(String[] args) {
 		C c = new C("hELLO");
+		A a = new A();
+		B b = new B();
+		a = b;
+		b = (B)a;
+		c = (C)a;
 	}
 }
