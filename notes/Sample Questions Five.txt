@@ -14,5 +14,33 @@ If C extends B which extends A, what will happen when the following code is exec
 
 Answer:
 This code will compile but with throw a ClassCastException at runtime with the message: "B cannot be cast to a C" on the last line c = (C)a;  Not sure why.
- 
+
 Correct response: 2
+
+Java Basics
+
+Question:
+Which of the given class level (nonlocal) variable declarations will not compile.
+A. protected int a;
+B. transient int b = 3;
+C. public static final int c;
+D. volatile int d;
+E. private synchronized int e;
+
+Answer: 
+Can a member variable be declared synchronized? No, because the word synchronized marks method code so that it can't be run by more than one thread at a time.  A synchronized method looks like this:
+synchronized (i){
+	//do stuff
+}
+automatic variables can be synchronized as such
+synchronized
+{
+	int i = 1;
+	code...
+}
+
+A, B, C, D will all compile fine.  
+Correct response: E.
+
+
+

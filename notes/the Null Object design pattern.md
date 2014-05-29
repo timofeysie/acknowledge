@@ -59,7 +59,7 @@ to
 ParserFactory.getParser().findAction(someInput).doSomething();
 ```
 
-Now for the Null Object Patter:
+Now for the Null Object Pattern:
 
 Description: Instead of using a null reference to convey absence of an object (for instance, a non-existent customer), one uses an object which implements the expected interface, but whose method body is empty. 
 
@@ -98,7 +98,7 @@ QA dashboard: GitHub?
 documentation and Knowledge Management: JavaDocs
 Code Review: the note files.
 
-Obviosuly these wont be impressive answers during an interview, so we should probably get ready and fill in the list with a simple standard answer.  OpenShit may supply more answers here, such as CI.  Here is another list:
+Obviosuly these wont be impressive answers during an interview, so we should probably get ready and fill in the list with a simple standard answer.  OpenShift may supply more answers here, such as CI.  Here is another list:
 
 Building:
 Code repo:
@@ -140,19 +140,12 @@ Code repo: GitHub (Check)
 Testing: JUnit (Check)
 
 Code Coverage/Reporting: Coberturax2, Emmax2, FindBugs, JavaDoc, Clover
-
-Project management: XPlanner, GreenHopper, JIRA, or Greenhopper (Jira plugin)
-
+Project management: XPlanner, GreenHopper, JIRA(Bugzilla?), or Greenhopper (Jira plugin)
 Documentation: Confluencex2, XWikix2, Trac
-
 Mocking: EasyMockx2 + PowerMock, Mockito, JMock, mockito, XmlUnit, HtmlUnit
-
 Static Analysis: Checkstyle, FindBugs, PMD 
-
 Continuous Integration: Hudsonx2, Cruise Control, Luntbuild, Bamboox2, TeamCity
-
 QA dashboard: Sonar 
-
 Code Review: Review Board, Crucible, SmartBear 
 
 - Notes

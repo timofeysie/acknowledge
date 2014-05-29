@@ -805,6 +805,9 @@ A & B Since the first operand is a String all others (one by one) will be conver
 C. Since the first operand of + one is of numeric type, its numeric value of 98 will be used. Integer 63 will be unboxed and added to 98. Therefore, the final value will be int 161.
 D. Since the first one is numeric type so, 'b'+63 = 161, 161+"a" = 161a.
 E. Since neither of the operands of + operator is a String, it will not generate a String. However, due to auto-unboxing of 10, it will generate an int value of 73.
+error: incompatible types.  required: String, found: int
+Output without line E:
+ab63, a63, 161, 161a
 So the correct answers are A,B,C, and D.
 
 
@@ -1050,10 +1053,13 @@ and the following object instantiations:
   B b = new B();
   C c = new C();
 Which of the following assignments are legal at compile time?
+1. c = (C) b; 
+2. MyIface i = c;
 
 Answer:
 c = (C) b; // Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
 MyIface i = c; // Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
+Correct response: neither.
 
 Question:
 What will the following code print?
@@ -1095,9 +1101,9 @@ Question:
 Given:
 	StringBuilder b1 = new StringBuilder("snorkler");
 	StringBuilder b1 = new StringBuilder("yoodler");
-b1.append(b2.substring(2,5).toUpperCase());
-b2.insert(3,b1.append("a"));
-b1.replace(3,4,b2.substring(4)).append(b2.append(false));
+1. b1.append(b2.substring(2,5).toUpperCase());
+2. b2.insert(3,b1.append("a"));
+3. b1.replace(3,4,b2.substring(4)).append(b2.append(false));
 
 Answer:
 - You need to understand how append, insert, delete, and substring methods of StringBuilder/StringBuffer work. Please go through JavaDoc API for these methods. This is very important for the exam. Observe that substring() does not modify the object it is invoked on but append, insert and delete do.
@@ -1112,6 +1118,10 @@ sb.append("a").substring(0, 4).insert(2, "asdf");
 The error would be: cannot find symbol: method inster(int,String) location: class String.
 - The following is valid though:  
 String str = sb.append("a").insert(2, "asdf").substring(0, 4);
+Correct responsed:
+1. snorklerODL
+2. yoosnorkleradler
+3. snorlerkleryoodlerfalse
 
 Question:
 Consider the following method...  

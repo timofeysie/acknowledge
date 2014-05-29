@@ -478,7 +478,7 @@ private static void defualtValue()
 		String[] s3 = (String[])al.toArray();
 		String[] s4 = set.toArray(new String[al.size()]);
 
-		ArrayList<int> ai = new ArrayList<int>();
+		//ArrayList<int> ai = new ArrayList<int>();
 	}
 
 	static void aMethod(Byte ob) {System.out.println("Byte");}
@@ -742,6 +742,9 @@ private static void defualtValue()
 		System.out.println("o1 is an Object? "+(o1 instanceof Object));
 		int x = 0;
 		// while (false) { x=3; } x=3 is unreachable.
+		Short s = 9;
+		Boolean b = s instanceof Number;
+		System.out.println(b);
 	}
 
 	private static void testLoop2()
@@ -874,8 +877,37 @@ private static void defualtValue()
 		int a = b = c = 100; //declaring a and initializing c, b, and a at the same time.
 	}
 
+	public static void ifTest(boolean flag){
+   		if (flag)   //1
+   		if (flag)   //2
+   		if (flag)   //3
+   		System.out.println("False True");
+   		else        //4
+   		System.out.println("True False");
+   		else        //5
+   		System.out.println("True True");
+   		else        //6
+   		System.out.println("False False");
+	}
+
+	private static void testStrings()
+	{
+		System.out.println("a"+'b'+63);
+		System.out.println("a"+63);
+		System.out.println('b'+new Integer(63));
+		String s = 'b'+63+"a";
+		System.out.println(s);
+		//String s2 = 63 + new Integer(10);
+		//System.out.println(s2);
+	}
+
 	public static void main(String args[]) 
 	{
+		if (args.length > 0)
+		{
+			int nd = Integer.parseInt(args[0]);
+			System.out.println(nd);
+		}
 		//testExamQuestions();
 		//testEquals();
 		//testBitwise();
@@ -885,7 +917,7 @@ private static void defualtValue()
 		//failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
-		arrayWork();
+		//arrayWork();
 		//aMethod("0");
 		// int, long, float, double, Integer, Object, error
 		//aMethod(0.0f);
@@ -920,5 +952,8 @@ private static void defualtValue()
 		//testIntern();
 		//testForSwitch();
 		//switchTest((byte)81);
+		//ifTest(false);
+		//ifTest(true);
+		testStrings();
 	}
 }
