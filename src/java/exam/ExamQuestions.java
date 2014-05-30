@@ -342,11 +342,18 @@ private static void defualtValue()
 		float num6 = 123;
 		Integer num7 = new Integer("123");
 		byte num8 = 123;
+		long num10 = 99;
+		//int num11 = num10;
+		System.out.println("int = long: possible loss of precision ");
+		int num12 = 99;
+		long num13 = num12;
+		System.out.println("long = int: "+num13);
 		System.out.println("Integer == float "+(num3 == num4));
+		System.out.println("float   == Integer "+(num4 == num3));
 		System.out.println("double == float "+(num5 == num4));
 		System.out.println("float == int "+(num6 == num7));
 		System.out.println("int == byte? "+(num7 == num8));
-		System.out.println(num1 == num2); // false
+		System.out.println("double == float "+num1 == num2); // false
 		System.out.println(num1 == (double)num2); // false
 		System.out.println((float)num1 == num2); // true
 		Object obj = 99;
@@ -901,6 +908,23 @@ private static void defualtValue()
 		//System.out.println(s2);
 	}
 
+	private static void testDoubleAndFloat()
+	{
+		double num = 0.2;
+		if (num == 0.2f)
+			System.out.println("true");
+		else
+			System.out.println("false");
+
+		float num2 = 0.2f;
+		if (num == num2)
+			System.out.println("true");
+		else
+			System.out.println("false");
+		System.out.println("num :"+num);
+		System.out.println("num2:"+num2);
+	}
+
 	public static void main(String args[]) 
 	{
 		if (args.length > 0)
@@ -913,7 +937,7 @@ private static void defualtValue()
 		//testBitwise();
 		//randomCode();
 		//unorthadoxUnary();
-		//basicFailedQuestions();
+		basicFailedQuestions();
 		//failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
@@ -954,6 +978,7 @@ private static void defualtValue()
 		//switchTest((byte)81);
 		//ifTest(false);
 		//ifTest(true);
-		testStrings();
+		//testStrings();
+		//testDoubleAndFloat();
 	}
 }

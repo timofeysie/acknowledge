@@ -39,8 +39,329 @@ synchronized
 	code...
 }
 
+Answer:
 A, B, C, D will all compile fine.  
 Correct response: E.
+Category: Java Basics (Epractize)
 
+Question:  What will the output be?
+class A {A() {System.out.print("Super ");}}
+public class Main extends A {
+    public static void main(String [] args) {
+        new Main(1L).Main();
+    }
+    public Main(int x) {
+        this();
+        System.out.print(" " + (x * 2));
+    }
+    public Main(long x) {
+        this((int) x);
+        System.out.print(" " + x);
+    }
+    public Main() {
+        super(); 
+        System.out.print("No arg Sub");
+    }
+    void Main() {
+        System.out.print(" method "); 
+    }
+}
+
+Answer:
+Note: creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor.
+Correct response: Super No arg Sub 2 1 method
+Category: Working with Methods and Encapsulation (Epractize)
+
+Question:
+Select the best options
+interface A {
+	double aMethod(int a)
+}
+interface B {
+	double bMethod(int a, int b)
+}
+Which two code fragments inserted after line 7 will enable the code to compile?
+A) class X extendes A { double aMethod(int a);}
+B) interface Y implements B { double bMethod(int x, int y);}
+C) interface Z extends A { float cMethod(int a, int b);}
+D) class P implements B { double aMethod(int a);}
+E) abstract class Q implements A, B {
+	public double aMethod(int a) {return a * a * 5.16;}
+}
+
+Answer:
+The code demonstrates the usage of interface and its implementation.  An interface is a group of related methods with empty body (abstract methods).  To implement an interface, the class should use implements keyword in the class declaration.  Implementing an interface allows a class to become more formal about the behaviour it promises to provide.  Interfaces form a contract between the class and the outside world, and this contract is enforced during build time by the compiler.  If the class claims to implement an interface, all methods defined by that interface must appear in its source code before the class will successfully compile.  We can also implement few of the methods from an interface by declaring a class as an abstract.
+- Interface variables are implicily public static final
+- Interface methods a implicitly publis abstract.
+Correct response: D and E.
+Category: Interfaces? (Epractize)
+
+Question:
+public class Final {
+	public static void main(String[] args) {
+		Sub s = new Sub(5,6);
+	}
+}
+abstract class Super {
+	int i;
+	Super(int i) {
+		this.it = i;
+	}
+	absdtract double add();
+}
+final class Sub extendes Super {
+	int i;
+	Sub(int i, int j) {
+		super(j);
+		this.i=i;
+	}
+	double add(int i) {
+		return (float)++i;
+	}
+}
+What will be the result of compiling and running this program?
+
+Answer:
+The code demonstrates the abstract class and overriding abstract methods in concrete subclasses.  They key idea with an abstract class is that it is useful when (a) there is common funtionality that you would like to implement in a superclass, and (b) some behaiour is unique to specific classes and cannot be factored into the superclass.  So you implement the superclass as an abstract class, and define methods that sublasses have in common.  Then you implement each subclass by extending the abstract class, and add in the methods unique to that class.  If the extended class does not override and implement the abstract method(s) defined in super class, thent he compiler raises an erro r stating that the class should be declared as abstract.
+In the code the abstract double add() method declared in Super class in not implemented in Subclass.  Hence, the code will not compile
+Final.java 18: Sub is not abstract and does not override abstract method add() in Super.
+Category: Working with Inheritance (EPractize)
+Correct response: Compile error.
+
+Question:
+Cosnider these two classes: Parent.java and Child.java
+package p1;
+public class Parent {
+	public int x = new Interger(100);
+	protected int parentMethod() {
+		return x;
+	}
+}
+package p2;
+import p1.Parent;
+public class Child extends Parent {
+	public static void main(String [] args) {
+		new Child().childMethod();
+	}
+	void childMethod() {
+		System.out.print("This "+this.parentMethod());
+		Parent p = new Parent();
+		System.out.prin(" parent "+p.parentMethod());
+	}
+}
+What line can be removed to make the program compile and run?
+
+Answer: If line 10 is removed, then the output for the program when run is: This 100
+If you recall, a protected method can be called from a child class, as in line 8, but not from the parent class itself.
+Correct response: System.out.prin(" parent "+p.parentMethod());
+Category: Creating and Using Arrays?
+
+Question:
+public class SwitchTest {
+	public static void main(String [] args) {
+	int i = 9;
+	switch (i) {
+		case 7:
+			System.out.println("Seven");
+		case 0.1+0.9: // line 1
+			System.out.println("Eight");
+		case 0+9: // line 2
+			System.out.println("Nine");
+		case (char)0+9+1: // line 3
+			System.out.println("Ten");
+		case (short)11: // line 4
+			System.out.println("Eleven");
+		default:
+			System.out.println("Invalid number");
+		}
+	}
+}
+
+Answer:
+The code demonstrates the usage of 'switch/case'.  A switch works with the byte, short, char, and int primitives.  It also works with enumerated types.  The case labels must be an int value.
+Therefore the code will not compile due to line 1: case 0.1+0.9:
+Category: (EPractize)
+
+Question:  Choose the correct answers:
+A)
+String str = "10";
+int a = new Integer(10);
+str += a;
+B)
+String str = "10";
+int a = new Integer(10);
+boolean b = str == a;
+C)
+String str = "10";
+int a = 10;
+boolean b = stre == a.toString()
+D)
+String str = "10";
+int a = 10;
+
+Answer:
+Correct response: A, C & D are correct.
+In choid B, the comparison (a==b) is not legal, as only the + operator performs implicit conversion to a String object.
+Category: Working with Java Data Types (EPractize)
+
+Question:
+Which method names are present on both String and Pattern classes?
+A) split
+B) concat
+C) compile
+D) length
+E) matches
+
+Answer:  
+Both String and Pattern classes contain the split and matches methods.
+Category: Working with Java Date Types (Session Rewind Quiz: EPractize)
+
+Question:
+A. StringBuilder is thread-safe, mutable sequence of characters.
+B. StringBuffer is thread-safe, mutable sequence of characters.
+C. StringBuffer is a mutable sequence of characters.
+D. StringBuilder is a mutable sequence of characters.
+E. Both are thread-safe, mutable sequence of characters.
+
+Answer:  StringBuffer is safe for use by multiple threads.  The methods are synchronized where ncessary so that all the operations on any particular instance behave as if they occur in some serial order that is consitent with the order of the method calls made by each of the individual threads involved.
+This class provides an API compatible with StringBuffer, but with no guarantee of synchronization.  This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer is being used by a single thread (as is generally the case).  Where possible, it is recommended that this class be used in preference to StringBuffer, as it will be faster under most implementations.
+Correct response: B, C and D.
+
+Question:
+An inner class can be declared as:
+A. final
+B. abstract
+C. public
+D. private
+E. protected
+
+Answer:
+Nested (inner) classes can be declared abstract or final, as well as any of these answers.
+
+Question:
+double num = 0.2;
+if (num == 0.2f)
+	print("true");
+else
+	print ("false");
+What will this code print?
+
+Answer:
+0.2 is a double, it is not qual to float value 0.2f.  If we have the same value in num that is 0.2f the code will return true.
+
+Question:
+public class Test {
+	public static void main(String [] args) {
+		new Test().main("");
+	}
+	public void main(String ... arg) {
+		System.out.println("HI");
+	}
+}
+
+What will happen when the code is compiled and run?
+A. The code compiles successfully and outputs "HI".
+B. Changing main(String ... arg) at line 6 to Main(String arg) will compile successfully
+C. The code fails to compile because of duplicate methods.
+
+Answer:
+There are duplicate main methods in this class.  Even without the static modifier, this is the case.
+Correct response: B and C.
+
+Question:
+Which of the following statements are true?
+A. Implicit casting means simply assigning one entity to another without any transformation guidance to the compiler.
+B. Casting a parent to a child class is called implicit casting.
+C. Implicit casting is not permitted in all kinds of transformations.
+D. Casting from a child class to a parent class is called implicit casting.
+
+Answer:
+Correct response: A, C D.
+(EPractize)
+
+Question:
+class Test {
+	public static void main(String [] args) throws IOException {
+		Writer w = new BufferedWriter(new fileWriter("FILE"));
+	}
+}
+
+What will happen when you try to compile and run the above code with FILE as directory?
+
+A. Compile error
+B. FileNotFoundError
+C. IOException
+D. The code will compile and run without error
+
+Answer:
+If the named file exists but is a directory rather than a regualr file an IOException will be thrown.
+Correct response: C.
+
+
+Question:
+Which of the following are true:
+
+A. A valid override has identical types and order, return type, not less accessable ...
+B. The overriding method must not throw any checked exceptions that were not declared for the original method.
+C. An overriding method cannot be defined in the same class as the method it overrides; rather, it must be defined in a s
+D. Overridden methods are not accessible outside the overriding class.
+E. Overriden methods are accessible outside the overriding class.
+F. An overriding method can be defined in the same class as the method it overrides.
+G. A valid overrid has identical argument types and order and the return type can be different.
+
+Answer:
+Overriding methods completely replace the original method unless the derived class makes specific reference to that original method using the super.xxx() construction.
+An overriding method cannot be defined in the same class as the method it overrides (this would be overloading?) rather, it must be defined in a subclass.
+The super.xxx() mechanism gives access to an overriden method from within the sublcass that defines the overriding method.
+Overridden methods are not accessible outside the overriding class.  Virtual method invocation otherwise insures that the behaviour associated with the object class (not with the variable type) will be the behaviour that occures.
+Correct response A, B, C, D.
+Category: (EPractize)
+
+Question:
+Which of the following methods can be overridden by subclasses?
+A. private methods
+B. static methods
+C. abstract methods
+D. synchronized methods
+
+Answer:
+Overridding methods support late binding, so which method is called is decided at run time.  (run-time polymorphism) 
+Abstract and synchronized methods can be overridden by sublasses.  Private methods of the superclasses are not visible to the subclasses, so they cannot be overridden.  
+Static methods cannot be overridden since they are invoked on the class itself and not on the object.  Static methods can be hidden.  If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.  The version of the hidden static method that gets invoked depends on whether it is invoked from the superclass or the subclass and is based on early binding (compile time).
+Also, the return type must not change and the method declaration must not have a throws clause that conflicts with that of any method that is overrides or hides.  It can throw unchecked exceptions derived from RuntimeException.
+Correct response: C & D.
+
+Question:
+Select the variables eligible for serialization:
+A. all transient variables
+B. an externalized object
+C. all non-transient instance variables
+D. all static variables
+E. all instance mehods
+F. all static methods.
+
+Answer:
+When the objects get serialized only its state will be saved and not the methods.  Externalizable interface is the sub interface for Serializable object and it is eligible for serialization.
+Except transient and static variables all other instance variables are eligible for serialization.
+Correct response: B & C are correct.
+(Epractize)
+
+Question:
+What will be the output of this code:
+class Compare {
+	public static void main(String args[]) {
+		Integer num1 = 0;
+		Float num3 = -0.0F;
+		if (num1.intValue() == num2)
+			print("equal");
+		else
+			print("not equal");
+	}
+}
+
+Answer:
+0 == -0.0F will return true and hence "equal" will be printed.  Note that except 0, if a positive number is compared with a negative number, false will be returned.
+Correct response: true will be printed.
+(EPractize)
 
 
