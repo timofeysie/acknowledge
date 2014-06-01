@@ -8,9 +8,29 @@ class Test3
 
 	public static void main(String[] args) 
 	{
-		firstTest();
+		//firstTest();
 		//secondTest();
 		//thirdTest();
+		fourthTest();
+	}
+
+	private static void fourthTest()
+	{
+		Map<String,Test3> m = new TreeMap<>();
+		m.put("c", new Test3());
+		m.put("b", new Test3());
+		m.put("a", new Test3());
+		for(Map.Entry<String,Test3> entry : m.entrySet()) 
+		{
+  			String key = entry.getKey();
+  			Test3 value = entry.getValue();
+			System.out.println(key + " => " + value);
+		}
+		Set<String> keys = m.keySet();
+		for (String key : keys)
+		{
+			System.out.println(key + " => " + m.get(key));
+		}
 	}
 
 	private static void thirdTest()
