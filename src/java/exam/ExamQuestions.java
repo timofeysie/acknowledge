@@ -353,7 +353,7 @@ private static void defualtValue()
 		System.out.println("double == float "+(num5 == num4));
 		System.out.println("float == int "+(num6 == num7));
 		System.out.println("int == byte? "+(num7 == num8));
-		System.out.println("double == float "+num1 == num2); // false
+		//System.out.println("double == float "+num1 == num2); // false
 		System.out.println(num1 == (double)num2); // false
 		System.out.println((float)num1 == num2); // true
 		Object obj = 99;
@@ -925,6 +925,76 @@ private static void defualtValue()
 		System.out.println("num2:"+num2);
 	}
 
+	public static void testNumbers2()
+	{
+		byte num_byt = 2;
+		char num_cha = 2;
+		short num_sho = 2;
+		int num_int = 2;
+		float num_flo = 2.0f;
+		long num_lon = 2;
+		double num_dou= 2;
+		
+		System.out.println("byte = byte   "+(num_byt = num_byt));
+		System.out.println("byte = char   plop");//+(num_byt = num_cha));
+		System.out.println("byte = short  plop");//+(num_byt = num_sho));
+		System.out.println("byte = int    plop");//+(num_byt = num_int));
+		System.out.println("byte = float  plop");//+(num_byt = num_flo));
+		System.out.println("byte = long   plop");//+(num_byt = num_lon));
+		System.out.println("byte = double plop");//+(num_byt = num_dou));
+
+		System.out.println("char = byte   plop");//"+(num_cha = num_byt));
+		System.out.println("char = char   "+(num_cha = num_cha));
+		System.out.println("char = short  plop");//"+(num_cha = num_sho));
+		System.out.println("char = int    plop");//"+(num_cha = num_int));
+		System.out.println("char = float  plop");//"+(num_cha = num_flo));
+		System.out.println("char = long   plop");//"+(num_cha = num_lon));
+		System.out.println("char = double plop");//"+(num_cha = num_dou));
+
+		System.out.println("short = byte   "+(num_sho = num_byt));
+		System.out.println("short = char   plop");//"+(num_sho = num_cha));
+		System.out.println("short = short  "+(num_sho = num_sho));
+		System.out.println("short = int    plop");//"+(num_sho = num_int));
+		System.out.println("short = float  plop");//"+(num_sho = num_flo));
+		System.out.println("short = long   plop");//"+(num_sho = num_lon));
+		System.out.println("short = double plop");//"+(num_sho = num_dou));
+
+		System.out.println("int = byte   "+(num_int = num_byt));
+		System.out.println("int = char   "+(num_int = num_cha));
+		System.out.println("int = short  "+(num_int = num_sho));
+		System.out.println("int = int    "+(num_int = num_int));
+		System.out.println("int = float  plop");//"+(num_int = num_flo));
+		System.out.println("int = long   plop");//"+(num_int = num_lon));
+		System.out.println("int = double plop");//"+(num_int = num_dou));
+
+		System.out.println("float = byte   "+(num_flo = num_byt));
+		System.out.println("float = char   "+(num_flo = num_cha));
+		System.out.println("float = short  "+(num_flo = num_sho));
+		System.out.println("float = int    "+(num_flo = num_int));
+		System.out.println("float = float  "+(num_flo = num_flo));
+		System.out.println("float = long   "+(num_flo = num_lon));
+		System.out.println("float = double plop");//"+(num_flo = num_dou));
+
+		System.out.println("long = byte   "+(num_lon = num_byt));
+		System.out.println("long = char   "+(num_lon = num_cha));
+		System.out.println("long = short  "+(num_lon = num_sho));
+		System.out.println("long = int    "+(num_lon = num_int));
+		System.out.println("long = float   plop");//"+(num_lon = num_flo));
+		System.out.println("long = long   "+(num_lon = num_lon));
+		System.out.println("long = double  plop");//"+(num_lon = num_dou));
+
+		System.out.println("double = byte   "+(num_dou = num_byt));
+		System.out.println("double = char   "+(num_dou = num_cha));
+		System.out.println("double = short  "+(num_dou = num_sho));
+		System.out.println("double = int    "+(num_dou = num_int));
+		System.out.println("double = float  "+(num_dou = num_flo));
+		System.out.println("double = long   "+(num_dou = num_lon));
+		System.out.println("double = double "+(num_dou = num_dou));
+
+		System.out.println("double == float "+(num_dou == num_flo));
+		System.out.println("--------------- ");
+	}
+
 	public static void main(String args[]) 
 	{
 		if (args.length > 0)
@@ -937,7 +1007,7 @@ private static void defualtValue()
 		//testBitwise();
 		//randomCode();
 		//unorthadoxUnary();
-		basicFailedQuestions();
+		//basicFailedQuestions();
 		//failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
@@ -980,5 +1050,7 @@ private static void defualtValue()
 		//ifTest(true);
 		//testStrings();
 		//testDoubleAndFloat();
+		testNumbers2();
+		System.out.printf("Hi %03d", 1);
 	}
 }

@@ -1,0 +1,6 @@
+Q: Why Java is considered dynamic?
+
+A: It is designed to adapt to an evolving environment. Java programs can carry extensive amount of run-time information that can be used to verify and resolve accesses to objects on run-time.
+
+Source:
+http://www.tutorialspoint.com/java/java_interview_questions.htm
