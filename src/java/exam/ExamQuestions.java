@@ -749,9 +749,20 @@ private static void defualtValue()
 		System.out.println("o1 is an Object? "+(o1 instanceof Object));
 		int x = 0;
 		// while (false) { x=3; } x=3 is unreachable.
-		Short s = 9;
-		Boolean b = s instanceof Number;
+		short s = 9;
+		Short sh = 9;
+		Boolean b = sh instanceof Number;
 		System.out.println(b);
+		Integer in = 9;
+		System.out.println(s == in);
+		float f = 9f;
+		System.out.println(s == f);
+		char c = 9;
+		System.out.println(s == c);
+		int i = 9;
+		Double d = 9.0;
+		System.out.println(d == i); // if one is a primitive and the other a wrapper class, that's OK.
+		//System.out.println(sh == i); // incomparable types if they are both wrapper classes.
 	}
 
 	private static void testLoop2()
@@ -995,6 +1006,28 @@ private static void defualtValue()
 		System.out.println("--------------- ");
 	}
 
+	private static void testArrays()
+	{
+		char [] data = {'t','i','m','o','t','h','y'};
+		//char [] date = {'timoteus'};
+		String s = String.copyValueOf(data, 0, 3); // concats the chars
+		char [] tim = new char[3];
+		s.getChars(0,3,tim,0); // fills tim with the first three letters
+		for (char c: tim)
+		{
+			System.out.print(c);
+		}
+		/* removed Korean characters
+		int code_point = verb.codePointCount(0,1);
+		int dong = verb.indexOf();
+		System.out.println(code_point+" "+dong);
+		String timo = "timo";
+		String tima = "tima";
+		boolean matches = timo.regionMatches(0, tima, 0, 3); // true
+		System.out.println(matches);
+		*/
+	}
+
 	public static void main(String args[]) 
 	{
 		if (args.length > 0)
@@ -1002,6 +1035,7 @@ private static void defualtValue()
 			int nd = Integer.parseInt(args[0]);
 			System.out.println(nd);
 		}
+		//testArrays();
 		//testExamQuestions();
 		//testEquals();
 		//testBitwise();
@@ -1037,7 +1071,7 @@ private static void defualtValue()
 		//testLoops();
 		//testStringBuilder();
 		//testCharValues();
-		//testInstanceof();
+		testInstanceof();
 		//testLoop2();
 		//testPromotion();
 		//testFloat();
@@ -1050,7 +1084,7 @@ private static void defualtValue()
 		//ifTest(true);
 		//testStrings();
 		//testDoubleAndFloat();
-		testNumbers2();
-		System.out.printf("Hi %03d", 1);
+		//testNumbers2();
+		//System.out.printf("Hi %03d", 1);
 	}
 }

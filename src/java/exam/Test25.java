@@ -10,10 +10,10 @@ class Test25
          if ( i == 2)
          {
             // line 1
-            // break;
-            continue;
+            //break;
+            //continue;
             // m++;
-            // i = 4;
+             i = 4;
          }
          m++;
          System.out.println("i "+i+" k "+k+" m "+m);

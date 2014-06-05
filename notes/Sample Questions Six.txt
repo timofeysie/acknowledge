@@ -1,0 +1,35 @@
+Question:
+Consider the following classes :
+interface I{}
+class A implements I{}
+class B extends A {}
+class C extends B{}
+And the following declarations:
+A a = new A();
+B b = new B(); 
+Identify options that will compile and run without error.
+1. a = (B)(I)b;
+2. b = (B)(I) a;
+3. a = (I) b;
+4. I i = (C) a;
+
+Answer:
+1. class B does implement I because it extends A, which implements I. A reference of type I can be cast to any class at compile time. Since B is-a A, it can be assigned to a. 
+2. This will fail at run time because a does not point to an object of class B.
+3. An I is not an A. Therefore, it will not compile.
+4. It will compile because a C is-a A, which is-a I, and a reference of class A can point to an object of class C. But it will fail at runtime because a does not point to an object of class C.
+So answer 1 is correct.
+I still don't understand why:
+a = (B)(I)b;
+will work, but this wont:
+a = (I)b;
+b is already of type B, so it doesn't need to be cast.  Also, I suppose I didn't know that you cant cast to two different types.  Never seen that before.
+So check out Test20.java.  The error for 3 would be:
+incompatible types: required A, found I
+Interface cast works exactly the same as a class cast and a multiple cast is not much different from a single one. You should break a multiple into two single casts as shown below: 
+b = (B)(I) a; 
+is same as: 
+I temp = (I) a; 
+b = (B) temp; 
+Now, if you know single casts, there should be no issue with the above
+(Category: Inheritace.  Source: Sample Questions Three.)
