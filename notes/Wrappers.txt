@@ -1,0 +1,117 @@
+
+
+
+Byte(byte value), Byte(String s) 
+Byte bObj = new Byte("1"); 
+byte	byteValue() 	Returns the value of this Byte as a byte.
+static  int				compare(byte x, byte y) Compares two byte values numerically.
+int		compareTo(Byte anotherByte) Compares two Byte objects numerically.
+static 	Byte			decode(String nm) Decodes a String into a Byte.
+double	doubleValue() 	Returns the value of this Byte as a double.
+boolean	equals(Object obj) Compares this object to the specified object.
+float	floatValue() Returns the value of this Byte as a float.
+int		hashCode() Returns a hash code for this Byte; equal to the result of invoking intValue().
+int		intValue() Returns the value of this Byte as an int.
+long	longValue() Returns the value of this Byte as a long.
+static  byte	parseByte(String s) Parses the string argument as a signed decimal byte.
+static  byte	parseByte(String s, int radix) Parses the string argument as a signed byte in the radix specified by the 2nd arg.
+short	shortValue() Returns the value of this Byte as a short.
+String	toString() Returns a String object representing this Byte's value.
+static 	String	toString(byte b) Returns a new String object representing the specified byte.
+static 	Byte	valueOf(byte b) Returns a Byte instance representing the specified byte value.
+static 	Byte	valueOf(String s) Returns a Byte object holding the value given by the specified String.
+static 	Byte	valueOf(String s, int radix) Returns a Byte object holding the value extracted from the specified String when parsed with the radix given by the second argument.
+
+Character
+Character(char value)
+static 	class 	Character.Subset Instances of this class represent particular subsets of the Unicode character set.
+static 	class 	Character.UnicodeBlock A family of character subsets representing the character blocks in the Unicode specification.
+static 	class 	Character.UnicodeScript A family of character subsets representing the character scripts defined in the Unicode Standard Annex #24: Script Names.
+static int	charCount(int codePoint) Determines the number of char values needed to represent the specified character (Unicode code point).
+char	charValue() Returns the value of this Character object.
+static int	codePointAt(char[] a, int index) Returns the code point at the given index of the char array.
+static int	codePointAt(char[] a, int index, int limit) Returns the code point at the given index of the char array, where only array elements with index less than limit can be used.
+static int	codePointAt(CharSequence seq, int index) Returns the code point at the given index of the CharSequence.
+static int	codePointBefore(char[] a, int index) Returns the code point preceding the given index of the char array.
+static int	codePointBefore(char[] a, int index, int start) Returns the code point preceding the given index of the char array, where only array elements with index greater than or equal to start can be used.
+static int	codePointBefore(CharSequence seq, int index) Returns the code point preceding the given index of the CharSequence.
+static int	codePointCount(char[] a, int offset, int count) Returns the number of Unicode code points in a subarray of the char array argument.
+static int	codePointCount(CharSequence seq, int beginIndex, int endIndex) Returns the number of Unicode code points in the text range of the specified char sequence.
+static int	compare(char x, char y) Compares two char values numerically.
+int	compareTo(Character anotherCharacter) Compares two Character objects numerically.
+static int	digit(char ch, int radix) Returns the numeric value of the character ch in the specified radix.
+static int	digit(int codePoint, int radix) Returns the numeric value of the specified character (Unicode code point) in the specified radix.
+boolean	equals(Object obj) Compares this object against the specified object.
+static char	forDigit(int digit, int radix) Determines the character representation for a specific digit in the specified radix.
+static byte	getDirectionality(char ch) Returns the Unicode directionality property for the given character.
+static byte	getDirectionality(int codePoint) Returns the Unicode directionality property for the given character (Unicode code point).
+static String	getName(int codePoint) Returns the Unicode name of the specified character codePoint, or null if the code point is unassigned.
+static int	getNumericValue(char ch) Returns the int value that the specified Unicode character represents.
+static int	getNumericValue(int codePoint) Returns the int value that the specified character (Unicode code point) represents.
+static int	getType(char ch) Returns a value indicating a character's general category.
+static int	getType(int codePoint) Returns a value indicating a character's general category.
+int	hashCode() Returns a hash code for this Character; equal to the result of invoking charValue().
+static char	highSurrogate(int codePoint) Returns the leading surrogate (a high surrogate code unit) of the surrogate pair representing the specified supplementary character (Unicode code point) in the UTF-16 encoding.
+static boolean	isAlphabetic(int codePoint) Determines if the specified character (Unicode code point) is an alphabet.
+static boolean	isBmpCodePoint(int codePoint) Determines whether the specified character (Unicode code point) is in the Basic Multilingual Plane (BMP).
+static boolean	isDefined(char ch) Determines if a character is defined in Unicode.
+static boolean	isDefined(int codePoint) Determines if a character (Unicode code point) is defined in Unicode.
+static boolean	isDigit(char ch) Determines if the specified character is a digit.
+static boolean	isDigit(int codePoint) Determines if the specified character (Unicode code point) is a digit.
+static boolean	isHighSurrogate(char ch) Determines if the given char value is a Unicode high-surrogate code unit (also known as leading-surrogate code unit).
+static boolean	isIdentifierIgnorable(char ch) Determines if the specified character should be regarded as an ignorable character in a Java identifier or a Unicode identifier.
+static boolean	isIdentifierIgnorable(int codePoint) Determines if the specified character (Unicode code point) should be regarded as an ignorable character in a Java identifier or a Unicode identifier.
+static boolean	isIdeographic(int codePoint) Determines if the specified character (Unicode code point) is a CJKV (Chinese, Japanese, Korean and Vietnamese) ideograph, as defined by the Unicode Standard.
+static boolean	isISOControl(char ch) Determines if the specified character is an ISO control character.
+static boolean	isISOControl(int codePoint) Determines if the referenced character (Unicode code point) is an ISO control character.
+static boolean	isJavaIdentifierPart(char ch) Determines if the specified character may be part of a Java identifier as other than the first character.
+static boolean	isJavaIdentifierPart(int codePoint) Determines if the character (Unicode code point) may be part of a Java identifier as other than the first character. static boolean	isJavaIdentifierStart(char ch)
+Determines if the specified character is permissible as the first character in a Java identifier.
+static boolean	isJavaIdentifierStart(int codePoint) Determines if the character (Unicode code point) is permissible as the first character in a Java identifier.
+static boolean	isJavaLetter(char ch) Deprecated.  Replaced by isJavaIdentifierStart(char).
+static boolean	isJavaLetterOrDigit(char ch) Deprecated.  Replaced by isJavaIdentifierPart(char).
+static boolean	isLetter(char ch) Determines if the specified character is a letter.
+static boolean	isLetter(int codePoint) Determines if the specified character (Unicode code point) is a letter.
+static boolean	isLetterOrDigit(char ch) Determines if the specified character is a letter or digit.
+static boolean	isLetterOrDigit(int codePoint) Determines if the specified character (Unicode code point) is a letter or digit.
+static boolean	isLowerCase(char ch) Determines if the specified character is a lowercase character.
+static boolean	isLowerCase(int codePoint) Determines if the specified character (Unicode code point) is a lowercase character.
+static boolean	isLowSurrogate(char ch) Determines if the given char value is a Unicode low-surrogate code unit (also known as trailing-surrogate code unit).
+static boolean	isMirrored(char ch) Determines whether the character is mirrored according to the Unicode specification.
+static boolean	isMirrored(int codePoint) Determines whether the specified character (Unicode code point) is mirrored according to the Unicode specification.
+static boolean	isSpace(char ch) Deprecated.  Replaced by isWhitespace(char).
+static boolean	isSpaceChar(char ch) Determines if the specified character is a Unicode space character.
+static boolean	isSpaceChar(int codePoint) Determines if the specified character (Unicode code point) is a Unicode space character.
+static boolean	isSupplementaryCodePoint(int codePoint) Determines whether the specified character (Unicode code point) is in the supplementary character range.
+static boolean	isSurrogate(char ch) Determines if the given char value is a Unicode surrogate code unit.
+static boolean	isSurrogatePair(char high, char low) Determines whether the specified pair of char values is a valid Unicode surrogate pair.
+static boolean	isTitleCase(char ch) Determines if the specified character is a titlecase character.
+static boolean	isTitleCase(int codePoint) Determines if the specified character (Unicode code point) is a titlecase character.
+static boolean	isUnicodeIdentifierPart(char ch) Determines if the specified character may be part of a Unicode identifier as other than the first character.
+static boolean	isUnicodeIdentifierPart(int codePoint) Determines if the specified character (Unicode code point) may be part of a Unicode identifier as other than the first character.
+static boolean	isUnicodeIdentifierStart(char ch) Determines if the specified character is permissible as the first character in a Unicode identifier.
+static boolean	isUnicodeIdentifierStart(int codePoint) Determines if the specified character (Unicode code point) is permissible as the first character in a Unicode identifier.
+static boolean	isUpperCase(char ch) Determines if the specified character is an uppercase character.
+static boolean	isUpperCase(int codePoint) Determines if the specified character (Unicode code point) is an uppercase character.
+static boolean	isValidCodePoint(int codePoint) Determines whether the specified code point is a valid Unicode code point value.
+static boolean	isWhitespace(char ch) Determines if the specified character is white space according to Java.
+static boolean	isWhitespace(int codePoint) Determines if the specified character (Unicode code point) is white space according to Java.
+static char	lowSurrogate(int codePoint) Returns the trailing surrogate (a low surrogate code unit) of the surrogate pair representing the specified supplementary character (Unicode code point) in the UTF-16 encoding.
+static int	offsetByCodePoints(char[] a, int start, int count, int index, int codePointOffset) Returns the index within the given char subarray that is offset from the given index by codePointOffset code points.
+static int	offsetByCodePoints(CharSequence seq, int index, int codePointOffset) Returns the index within the given char sequence that is offset from the given index by codePointOffset code points.
+static char	reverseBytes(char ch) Returns the value obtained by reversing the order of the bytes in the specified char value.
+static char[]	toChars(int codePoint) Converts the specified character (Unicode code point) to its UTF-16 representation stored in a char array.
+static int	toChars(int codePoint, char[] dst, int dstIndex)
+Converts the specified character (Unicode code point) to its UTF-16 representation.
+static int	toCodePoint(char high, char low) Converts the specified surrogate pair to its supplementary code point value.
+static char	toLowerCase(char ch) Converts the character argument to lowercase using case mapping information from the UnicodeData file.
+static int	toLowerCase(int codePoint) Converts the character (Unicode code point) argument to lowercase using case mapping information from the UnicodeData file.
+String	toString() Returns a String object representing this Character's value.
+static String	toString(char c) Returns a String object representing the specified char.
+static char	toTitleCase(char ch) Converts the character argument to titlecase using case mapping information from the UnicodeData file.
+static int	toTitleCase(int codePoint) Converts the character (Unicode code point) argument to titlecase using case mapping information from the UnicodeData file.
+static char	toUpperCase(char ch) Converts the character argument to uppercase using case mapping information from the UnicodeData file.
+static int	toUpperCase(int codePoint) Converts the character (Unicode code point) argument to uppercase using case mapping information from the UnicodeData file.
+static Character	valueOf(char c) Returns a Character instance representing the specified char value.
+
+

@@ -1028,6 +1028,47 @@ private static void defualtValue()
 		*/
 	}
 
+	private static void testValueOf()
+	{
+		String binary = "01000000";
+		int result = Integer.valueOf(binary,2);
+		System.out.println(result);
+	}
+
+	private static void testWappers()
+	{
+		Byte b = new Byte("0");
+		Character c = new Character('`');
+		Short s = new Short((short)0);
+		Integer i = new Integer(0);
+		Float f = new Float(0);
+		Long l = new Long(0);
+		Double d = new Double(0);
+		
+		byte by = 0;
+		char ch = (char)0;
+		short sh = 0;;
+		int in = 0;
+		float fl = 0;
+		long lo = 0;
+		double do1 = 0;
+		System.out.println(b.equals(b));
+		System.out.println(b.equals(c));
+		System.out.println(b.equals(s));
+		System.out.println(b.equals(i));
+		System.out.println(b.equals(f));
+		System.out.println(b.equals(l));
+		System.out.println(b.equals(d));
+		System.out.println("");
+		System.out.println(i == ch);
+		System.out.println(i == sh);
+		System.out.println(i == in);
+		System.out.println(i == fl);
+		System.out.println(i == lo);
+		System.out.println(i == do1);
+
+	}
+
 	public static void main(String args[]) 
 	{
 		if (args.length > 0)
@@ -1071,7 +1112,7 @@ private static void defualtValue()
 		//testLoops();
 		//testStringBuilder();
 		//testCharValues();
-		testInstanceof();
+		//testInstanceof();
 		//testLoop2();
 		//testPromotion();
 		//testFloat();
@@ -1086,5 +1127,7 @@ private static void defualtValue()
 		//testDoubleAndFloat();
 		//testNumbers2();
 		//System.out.printf("Hi %03d", 1);
+		//testValueOf();
+		testWappers();
 	}
 }

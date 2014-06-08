@@ -31,5 +31,28 @@ b = (B)(I) a;
 is same as: 
 I temp = (I) a; 
 b = (B) temp; 
-Now, if you know single casts, there should be no issue with the above
+Now, if you know single casts, there should be no issue with the above.
+Option 3 is wrong because you cannot assign any arbitrary I to a variable of type A. 
+Class A implements interface I, but there could be other classes, unrelated to A, that also implement I. If option 3 were possible, you could do: 
+class D implements I { ... }
+D d = new D();
+a = (I)d; // This should not work!
 (Category: Inheritace.  Source: Sample Questions Three.)
+1. a = (B)(I)b;
+Type B is upcast to I - Legal as B extends A which implements I 
+Type I is downcast to B - Legal as the object in this case is of type B 
+Type B is assigned to variable of type A - Legal, you can always assigned an object to a variable which is a super type. ie it is always legal to upcast. 
+2. b = (B)(I) a;
+Type A is upcast to I - Legal as A implements I 
+Type I is downcast to B - Illegal as the object in this case is of type A and can't be downcast to type B 
+3. a = (I) b;
+Type B is upcast to I - Legal as B extends A which implements I 
+Type I is assigned to variable of type A - Illegal, you can't downcast unless you specify the type you are downcasting to. 
+4. I i = (C) a;
+Type A is downcast to C - Illegal as the object in this case is of type a and can not be downcast to type C. 
+.Look's like now my assumption of not looking on the left side of = is false
+
+
+
+
+
