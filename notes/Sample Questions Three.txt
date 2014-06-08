@@ -532,6 +532,12 @@ a = (I)b;
 b is already of type B, so it doesn't need to be cast.  Also, I suppose I didn't know that you cant cast to two different types.  Never seen that before.
 So check out Test20.java.  The error for 3 would be:
 incompatible types: required A, found I
+Interface cast works exactly the same as a class cast and a multiple cast is not much different from a single one. You should break a multiple into two single casts as shown below: 
+b = (B)(I) a; 
+is same as: 
+I temp = (I) a; 
+b = (B) temp; 
+Now, if you know single casts, there should be no issue with the above
 
 
 Question:

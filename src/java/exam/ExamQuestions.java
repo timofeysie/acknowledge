@@ -553,9 +553,15 @@ private static void defualtValue()
 
 	private static void testNumbers()
 	{
-		Byte b1 = 1;
+		byte b1 = 1;
 		byte b2 = 1;
 		System.out.println((b1==b2)); // true
+		b1 = (byte)(b1 + b2);
+		b1 += b2;
+		short a1 =10;
+ 		byte b7=20;
+ 		short c1 = (short)(a1+b7);
+ 		int i7 = b1 + b2;
 		double num1 = 0.2;
 		float num2 = 0.2f;
 		System.out.println(num1+" == "+num2);
@@ -582,14 +588,109 @@ private static void defualtValue()
 
 	private static void testOperators()
 	{
-		byte b1 = 1;
-		byte b2 = 2;
-		System.out.print(b1+" += "+b2+" = ");
+		byte b1 = 3;
+		byte b2 = 4;
+		System.out.println(b1+" += "+b2+" = ");
 		// b1 = b1 + b2; // 1
 		b1 += b2; // compilation successful
-		System.out.print(b1);
+		System.out.println(b1);
 		/* 1 compilation fails due to error: possible loss of precision.
 		*/
+		int x = 5;
+		int y = 6;
+		x += y += x += y;  
+		System.out.println("A. x += y += x += y is x = "+x+" y = "+y);
+
+		y = 7;
+		y = ++y +y++; 
+		System.out.println("B. y = ++y +y++ is "+y);
+
+		y = 8;
+		y = y + ++y +y++;
+		System.out.println("C. y = y + ++y +y++ is "+y);
+
+		y = 9;
+		y = y + (++y + y++); // ?
+		System.out.println("D. y = y + (++y + y++) is "+y);
+
+		y = 10;		
+		y = y++ + (y + y++);  // y=1 + 2 + 2 
+		System.out.println("E. y++ + (y + y++) is "+y);
+
+		x = 11;  
+		int z = ++x * x * x--; // Prints 216  
+		System.out.println("F. ++x * x * x-- is "+z);
+
+		int a = 1;
+		int b = 1;
+		int c = 1;
+		int d = 1;
+		int i = 10;
+		a = (b = i++) + (c = ++i) + (d = i--); 
+		//    10			12			12
+		System.out.println("G. a = (b = i++) + (c = ++i) + (d = i--) is a = "+a+" b = "+b+" c = "+c+" d "+d+" i "+i);
+
+		x = 2;
+    	z = ++x * x--;   // The output is 36 because x is incremented first.
+    	System.out.println("H. z = ++x * x-- is x = "+x+" y = "+y+" z = "+z);
+		x = 4;
+		z = x++ * --x;
+		System.out.println("I. x++ * --x is "+z);
+		//This is 25.
+
+	}
+
+	private static void testOperators2()
+	{
+		byte b1 = 3;
+		byte b2 = 4;
+		System.out.println(b1+" += "+b2+" = ");
+		// b1 = b1 + b2; // 1
+		b1 += b2; // compilation successful
+		System.out.println(b1);
+		/* 1 compilation fails due to error: possible loss of precision.
+		*/
+		int x = 1;
+		int y = 1;
+		x += y += x += y;  
+		System.out.println("A. x += y += x += y is x = "+x+" y = "+y);
+
+		y = 1;
+		y = ++y +y++; 
+		System.out.println("B. y = ++y +y++ is "+y);
+
+		y = 1;
+		y = y + ++y +y++;
+		System.out.println("C. y = y + ++y +y++ is "+y);
+
+		y = 1;
+		y = y + (++y + y++); // ?
+		System.out.println("D. y = y + (++y + y++) is "+y);
+
+		y = 1;		
+		y = y++ + (y + y++);  // y=1 + 2 + 2 
+		System.out.println("E. y++ + (y + y++) is "+y);
+
+		x = 5;  
+		int z = ++x * x * x--; // Prints 216  
+		System.out.println("F. ++x * x * x-- is "+x);
+
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
+		int i = 10;
+		a = (b = i++) + (c = ++i) + (d = i--); 
+		System.out.println("G. a = (b = i++) + (c = ++i) + (d = i--) is a = "+a+" b = "+b+" c = "+c+" d "+d+" i "+i);
+
+		x = 2;
+    	z = ++x * x--;   // The output is 36 because x is incremented first.
+    	System.out.println("H. z = ++x * x-- is x = "+x+" y = "+y+" z = "+z);
+		x = 4;
+		z = x++ * --x;
+		System.out.println("I. x++ * --x is "+z);
+		//This is 25.
+
 	}
 
 	private static void testErrors()
@@ -1044,9 +1145,11 @@ private static void defualtValue()
 		Float f = new Float(0);
 		Long l = new Long(0);
 		Double d = new Double(0);
-		
+
 		byte by = 0;
 		char ch = (char)0;
+		ch = '\0';
+		ch = '\u0000';
 		short sh = 0;;
 		int in = 0;
 		float fl = 0;
@@ -1094,7 +1197,9 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers();
-		//testOperators();
+		testOperators();
+		System.out.println("");
+		testOperators2();
 		//testErrors();
 		try
 		{
@@ -1128,6 +1233,6 @@ private static void defualtValue()
 		//testNumbers2();
 		//System.out.printf("Hi %03d", 1);
 		//testValueOf();
-		testWappers();
+		//testWappers();
 	}
 }

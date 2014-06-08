@@ -1,5 +1,4 @@
-
-
+Primitive Wrapper Classes
 
 Byte(byte value), Byte(String s) 
 Byte bObj = new Byte("1"); 
@@ -16,7 +15,6 @@ long	longValue() Returns the value of this Byte as a long.
 static  byte	parseByte(String s) Parses the string argument as a signed decimal byte.
 static  byte	parseByte(String s, int radix) Parses the string argument as a signed byte in the radix specified by the 2nd arg.
 short	shortValue() Returns the value of this Byte as a short.
-String	toString() Returns a String object representing this Byte's value.
 static 	String	toString(byte b) Returns a new String object representing the specified byte.
 static 	Byte	valueOf(byte b) Returns a Byte instance representing the specified byte value.
 static 	Byte	valueOf(String s) Returns a Byte object holding the value given by the specified String.
