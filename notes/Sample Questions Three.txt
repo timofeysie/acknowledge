@@ -1059,13 +1059,16 @@ and the following object instantiations:
   B b = new B();
   C c = new C();
 Which of the following assignments are legal at compile time?
-1. c = (C) b; 
+1. c = b;
 2. MyIface i = c;
+3. c = (C) b;
 
 Answer:
-c = (C) b; // Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
-MyIface i = c; // Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
-Correct response: neither.
+1. There is no relation between b and c.
+2. Because C implements I.
+3. Compiler can see that in no case can an object referred to by b can be of class c. So it is a compile time error.
+The statements c = b and b = c are illegal, since neither of the classes C and B is a subclass of the other. Even though a cast is provided, the statement c = (C) b is illegal because the object referred to by b cannot ever be of type C.
+Correct response: 2.
 
 Question:
 What will the following code print?

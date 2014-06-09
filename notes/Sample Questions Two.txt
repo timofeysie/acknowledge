@@ -465,7 +465,7 @@ public class ExtendedObject extends java.lang.Object
 		}
 }
 
-a. the code will not compinle
+a. the code will not compile.
 b. by uncommenting line 1, it will compile.
 
 The finalize() method is declared as protected in the class Object, so it cannot be invoked from code in other packages.  The compile error msg says finalize() has protected access in java.lang.Object

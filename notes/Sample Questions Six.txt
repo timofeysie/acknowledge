@@ -112,6 +112,14 @@ Questions A - I:
 		z = x++ * --x;
 		System.out.println("I. x++ * --x is "+z);
 
+		x = 1;
+		z = ++x + ++x + ++x;
+		System.out.println("J. ++x + ++x + ++x is "+z);
+
+		x = 1;
+		z = x++ + x++ + x++;
+		System.out.println("K. x++ + x++ + x++ is "+z);
+
 
 Answers:
 A. x = 22 y = 17
@@ -123,4 +131,107 @@ F. x = 1728
 G. a = 34 b = 10 c = 12 d = 12 i = 11
 H. x = 2 y = 32 z = 9
 I. x = 16
+J. 9
+K. 6
+
+Question:
+	private static void testNan()
+	{
+		Double d1 = new Double(-1.0/0.0);
+		Double d2 = new Double(0.0/0.0); 
+     	System.out.println("A. "+(d1 + " = " + d1.isNaN()));
+     	System.out.println("B. "+(d2 + " = " + d2.isNaN())); 
+		Byte b1 = 1;
+		byte b2 = 1;
+		System.out.println("C. "+(b1==b2)); 
+		double num1 = 0.2;
+		float num2 = 0.2f;
+		System.out.println("D. "+(num1+" == "+num2));
+		System.out.println("E. "+(num1 == num2)); 
+		System.out.println("F. "+(num1 == (double)num2)); 
+		System.out.println("G. "+((float)num1 == num2)); 
+		num1 = 0.5;
+		num2 = 0.5f;
+		System.out.println("H. "+(num1+" == "+num2));
+		System.out.println("I. "+(num1 == num2)); 
+		System.out.println("J. "+(num1 == (double)num2)); 
+		System.out.println("K. "+((float)num1 == num2)); 
+	}
+
+Answer:
+A. -Infinity = false
+B. Nan = true
+C. true
+D 0.2 == 0.2
+E. false
+F. false
+G. true
+H. 05. == 0.5
+I. true
+J. true
+K. true
+
+Question:
+class Parent
+{
+	private void method1(){System.out.println("Parent1");}
+	public void method2(){System.out.println("Parent2"); method1();}
+}
+class Child extends Parent
+{
+	public void method1()
+	{System.out.println("Child1");}
+	 public static void main(String args[])
+	 {Parent p = new Child();p.method2();}
+}
+
+Answer:
+Output: 
+Parent2
+Parent1
+If method1 in parent were not private, the output would be:
+Parent2
+Child1
+super.arentMethod() calls the parent method.
+
+Question: if A extends B,
+A a = new A();
+B b = new B(); 
+which are legal?
+b=a 	
+b=(A)a; 
+a=b;
+a=(A)b;
+a=(B)b;
+
+Answer: 
+The first two are not legal.
+
+
+Question:
+What will the following code do when compiled and run?
+public class TestInterface
+{
+	public abstract class InnerTest
+	{
+		abstract void f();
+	}
+	public static void main(String[] args) {
+		TestInterface t = new TestInterface();
+		TestInterface.InnerTest test = t.new InnerTest()
+		{
+			public void f() 
+			{ 
+				System.out.println("Inner f");
+			}
+		};
+		test.f(); 
+	}
+}
+
+Answer:
+Compiles fine.
+
+
+
 

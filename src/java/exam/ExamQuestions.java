@@ -15,8 +15,33 @@ public class ExamQuestions
 
 	ExamQuestions (String name)
 	{
+		//this();
+		//super();
 		System.out.println("Started :"+name);
 	}
+
+	private static void testNan()
+	{
+		Double d1 = new Double(-1.0/0.0);
+		Double d2 = new Double(0.0/0.0); 
+     	System.out.println("A. "+(d1 + " = " + d1.isNaN()));
+     	System.out.println("B. "+(d2 + " = " + d2.isNaN())); 
+		Byte b1 = 1;
+		byte b2 = 1;
+		System.out.println("C. "+(b1==b2)); 
+		double num1 = 0.2;
+		float num2 = 0.2f;
+		System.out.println("D. "+(num1+" == "+num2));
+		System.out.println("E. "+(num1 == num2)); 
+		System.out.println("F. "+(num1 == (double)num2)); 
+		System.out.println("G. "+((float)num1 == num2)); 
+		num1 = 0.5;
+		num2 = 0.5f;
+		System.out.println("H. "+(num1+" == "+num2));
+		System.out.println("I. "+(num1 == num2)); 
+		System.out.println("J. "+(num1 == (double)num2)); 
+		System.out.println("K. "+((float)num1 == num2)); 
+}
 
 /*
 This is a very good question to test the concepts of execution flow 
@@ -444,6 +469,10 @@ private static void defualtValue()
 		String c2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		char c3 = c2.charAt('!');
 		System.out.println(c3);
+
+		String string = "TimbreakJinyoungbreakHenrybreakCheriebreakDonbreakWilliambreakRob";
+		//System.out.println(Arrays.toString(str.split("*",-2)));
+		System.out.println(Arrays.toString(string.split("break",-2)));
 	}
 
 	/**
@@ -673,7 +702,7 @@ private static void defualtValue()
 
 		x = 5;  
 		int z = ++x * x * x--; // Prints 216  
-		System.out.println("F. ++x * x * x-- is "+x);
+		System.out.println("F. ++x * x * x-- is "+z);
 
 		int a = 0;
 		int b = 0;
@@ -683,14 +712,22 @@ private static void defualtValue()
 		a = (b = i++) + (c = ++i) + (d = i--); 
 		System.out.println("G. a = (b = i++) + (c = ++i) + (d = i--) is a = "+a+" b = "+b+" c = "+c+" d "+d+" i "+i);
 
-		x = 2;
+		x = 5;
     	z = ++x * x--;   // The output is 36 because x is incremented first.
     	System.out.println("H. z = ++x * x-- is x = "+x+" y = "+y+" z = "+z);
-		x = 4;
+		x = 5;
 		z = x++ * --x;
 		System.out.println("I. x++ * --x is "+z);
-		//This is 25.
+		
+		x = 1;
+		z = ++x + ++x + ++x;
+		System.out.println("J. ++x + ++x + ++x is "+z);
 
+		x = 1;
+		z = x++ + x++ + x++;
+		System.out.println("K. x++ + x++ + x++ is "+z);
+
+		
 	}
 
 	private static void testErrors()
@@ -1174,6 +1211,7 @@ private static void defualtValue()
 
 	public static void main(String args[]) 
 	{
+		ExamQuestions eq = new ExamQuestions();
 		if (args.length > 0)
 		{
 			int nd = Integer.parseInt(args[0]);
@@ -1186,7 +1224,7 @@ private static void defualtValue()
 		//randomCode();
 		//unorthadoxUnary();
 		//basicFailedQuestions();
-		//failedRegex();
+		failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
 		//arrayWork();
@@ -1197,9 +1235,9 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers();
-		testOperators();
-		System.out.println("");
-		testOperators2();
+		//testOperators();
+		//System.out.println("");
+		//testOperators2();
 		//testErrors();
 		try
 		{
@@ -1234,5 +1272,6 @@ private static void defualtValue()
 		//System.out.printf("Hi %03d", 1);
 		//testValueOf();
 		//testWappers();
+		testNan();
 	}
 }

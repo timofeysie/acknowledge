@@ -51,3 +51,27 @@ For example:
 class Animal {} class Cat extends Animal {}
 Cat c = new Cat();
 (c instanceof Animal) == true
+
+Question:
+public class ExamQuestions
+{
+	ExamQuestions () {
+		this("ExamQuestions");
+	}
+
+	ExamQuestions (String name)
+	{
+		this();
+		//super();
+		System.out.println("Started :"+name);
+	}
+
+	public satatic void main(String [] args)
+	{
+		ExamQuestions eq = new ExamQuestions();
+	}
+What will be the result if this is compiled and run?
+
+Answer: 
+There will be a compile time error: recursive constructor invocation.
+Category: Constructors?
