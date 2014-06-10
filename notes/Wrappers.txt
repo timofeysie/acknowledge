@@ -1,24 +1,119 @@
 Primitive Wrapper Classes
 
+Object
+static 	String	toString(byte b) Returns a new String object representing the specified byte.
+boolean	equals(Object obj) Compares this object to the specified object.
+int		hashCode() Returns a hash code for this Byte; equal to the result of invoking intValue().
+
+Shared
+byte	byteValue() 	Returns the value of this Byte as a byte.
+short	shortValue() 	Returns the value of this Byte as a short.
+int		intValue() 		Returns the value of this Byte as an int.
+float	floatValue() 	Returns the value of this Byte as a float.
+long	longValue() 	Returns the value of this Byte as a long.
+double	doubleValue() 	Returns the value of this Byte as a double.
+
 Byte(byte value), Byte(String s) 
 Byte bObj = new Byte("1"); 
-byte	byteValue() 	Returns the value of this Byte as a byte.
-static  int				compare(byte x, byte y) Compares two byte values numerically.
-int		compareTo(Byte anotherByte) Compares two Byte objects numerically.
-static 	Byte			decode(String nm) Decodes a String into a Byte.
-double	doubleValue() 	Returns the value of this Byte as a double.
-boolean	equals(Object obj) Compares this object to the specified object.
-float	floatValue() Returns the value of this Byte as a float.
-int		hashCode() Returns a hash code for this Byte; equal to the result of invoking intValue().
-int		intValue() Returns the value of this Byte as an int.
-long	longValue() Returns the value of this Byte as a long.
+static  int		compare(byte x, byte y) Compares two byte values numerically.
+int				compareTo(Byte anotherByte) Compares two Byte objects numerically.
+static 	Byte	decode(String nm) Decodes a String into a Byte.
 static  byte	parseByte(String s) Parses the string argument as a signed decimal byte.
 static  byte	parseByte(String s, int radix) Parses the string argument as a signed byte in the radix specified by the 2nd arg.
-short	shortValue() Returns the value of this Byte as a short.
-static 	String	toString(byte b) Returns a new String object representing the specified byte.
 static 	Byte	valueOf(byte b) Returns a Byte instance representing the specified byte value.
 static 	Byte	valueOf(String s) Returns a Byte object holding the value given by the specified String.
 static 	Byte	valueOf(String s, int radix) Returns a Byte object holding the value extracted from the specified String when parsed with the radix given by the second argument.
+
+Character
+Character(char value)
+static 	class 	Character.Subset 
+static 	class 	Character.UnicodeBlock 
+static 	class 	Character.UnicodeScript 
+static int	charCount(int codePoint) 
+char	charValue() 
+static int	codePointAt(char[] a, int index) 
+static int	codePointAt(char[] a, int index, int limit) 
+static int	codePointAt(CharSequence seq, int index) 
+static int	codePointBefore(char[] a, int index) 
+static int	codePointBefore(char[] a, int index, int start) 
+static int	codePointBefore(CharSequence seq, int index) 
+static int	codePointCount(char[] a, int offset, int count)
+static int	codePointCount(CharSequence seq, int beginIndex, int endIndex) 
+int	compareTo(Character anotherCharacter)
+static int	digit(char ch, int radix) 
+static int	digit(int codePoint, int radix) 
+static char	forDigit(int digit, int radix) 
+static byte	getDirectionality(char ch) 
+static byte	getDirectionality(int codePoint) 
+static String	getName(int codePoint)
+static int	getNumericValue(char ch) 
+static int	getNumericValue(int codePoint) 
+static int	getType(char ch) 
+static int	getType(int codePoint)
+static char	highSurrogate(int codePoint) 
+static boolean	isAlphabetic(int codePoint) 
+static boolean	isBmpCodePoint(int codePoint) 
+static boolean	isDefined(char ch) 
+static boolean	isDefined(int codePoint)
+static boolean	isDigit(char ch) 
+static boolean	isDigit(int codePoint) 
+static boolean	isHighSurrogate(char ch) 
+static boolean	isIdentifierIgnorable(char ch) 
+static boolean	isIdentifierIgnorable(int codePoint)
+static boolean	isIdeographic(int codePoint) 
+static boolean	isISOControl(char ch) 
+static boolean	isISOControl(int codePoint)
+static boolean	isJavaIdentifierPart(char ch)
+static boolean	isJavaIdentifierPart(int codePoint)boolean	isJavaIdentifierStart(char ch)
+static boolean	isJavaIdentifierStart(int codePoint) 
+static boolean	isLetter(char ch) 
+static boolean	isLetter(int codePoint) 
+static boolean	isLetterOrDigit(char ch) 
+static boolean	isLetterOrDigit(int codePoint)
+static boolean	isLowerCase(char ch) 
+static boolean	isLowerCase(int codePoint) 
+static boolean	isLowSurrogate(char ch) 
+static boolean	isMirrored(char ch) 
+static boolean	isMirrored(int codePoint)
+static boolean	isSpaceChar(char ch) 
+static boolean	isSpaceChar(int codePoint) 
+static boolean	isSupplementaryCodePoint(int codePoint) character (Unicode code point) 
+static boolean	isSurrogate(char ch)
+static boolean	isSurrogatePair(char high, char low) 
+static boolean	isTitleCase(char ch) 
+static boolean	isTitleCase(int codePoint)
+static boolean	isUnicodeIdentifierPart(char ch)
+static boolean	isUnicodeIdentifierPart(int codePoint)
+static boolean	isUnicodeIdentifierStart(char ch) 
+static boolean	isUnicodeIdentifierStart(int codePoint)
+static boolean	isUpperCase(char ch) 
+static boolean	isUpperCase(int codePoint) 
+static boolean	isValidCodePoint(int codePoint)
+static boolean	isWhitespace(char ch) 
+static boolean	isWhitespace(int codePoint).
+static char	lowSurrogate(int codePoint) 
+static int	offsetByCodePoints(char[] a, int start, int count, int index, int codePointOffset)
+static int	offsetByCodePoints(CharSequence seq, int index, int codePointOffset)
+static char	reverseBytes(char ch) 
+static char[]	toChars(int codePoint) 
+static int	toChars(int codePoint, char[] dst, int dstIndex)
+static char	toLowerCase(char ch) 
+static int	toLowerCase(int codePoint)
+static String	toString(char c) 
+static char	toTitleCase(char ch) 
+static int	toTitleCase(int codePoint) 
+static char	toUpperCase(char ch) 
+static int	toUpperCase(int codePoint) 
+static Character	valueOf(char c)
+
+
+
+
+
+
+
+
+Old -----------------------------------------------------
 
 Character
 Character(char value)
@@ -39,7 +134,6 @@ static int	compare(char x, char y) Compares two char values numerically.
 int	compareTo(Character anotherCharacter) Compares two Character objects numerically.
 static int	digit(char ch, int radix) Returns the numeric value of the character ch in the specified radix.
 static int	digit(int codePoint, int radix) Returns the numeric value of the specified character (Unicode code point) in the specified radix.
-boolean	equals(Object obj) Compares this object against the specified object.
 static char	forDigit(int digit, int radix) Determines the character representation for a specific digit in the specified radix.
 static byte	getDirectionality(char ch) Returns the Unicode directionality property for the given character.
 static byte	getDirectionality(int codePoint) Returns the Unicode directionality property for the given character (Unicode code point).
@@ -111,5 +205,3 @@ static int	toTitleCase(int codePoint) Converts the character (Unicode code point
 static char	toUpperCase(char ch) Converts the character argument to uppercase using case mapping information from the UnicodeData file.
 static int	toUpperCase(int codePoint) Converts the character (Unicode code point) argument to uppercase using case mapping information from the UnicodeData file.
 static Character	valueOf(char c) Returns a Character instance representing the specified char value.
-
-

@@ -1,0 +1,715 @@
+From ETS Practice Test 3
+
+Question 6:
+Consider the following two classes defined in two java source files.
+//in file /root/com/foo/X.java
+package com.foo;
+public class X{
+  public static int LOGICID = 10;
+  public void apply(int i){
+    System.out.println("applied");
+  }
+}
+//in file /root/com/bar/Y.java
+package com.bar;
+//1 <== INSERT STATEMENT(s) HERE
+public class Y{
+    public static void main(String[] args){
+       X x = new X();
+       x.apply(LOGICID);
+    }
+}
+What should be inserted at //1 so that Y.java can compile without any error?
+1. import static com.foo.*;
+2. import static com.foo.X.*;
+3. import com.foo.*;
+4. import com.foo.X.LOGICID;
+
+Answer:
+1. Bad syntax. com.foo is a package and you cannot import a package statically. You can only import static members of a class statically.
+2. This static import is required because of Y is accessing LOGICID directly without its class name ( i.e. X.LOGICID).
+3. This is required because Y also accesses the class X : X x = new X(); If Y had only one statement, System.out.println(LOGICID); import static com.foo.X.* would suffice.
+Correct response: 2 & 3.
+4. Syntax for importing static fields is:  import static <package>.<classname>.*; or import static <package>.<classname>.<fieldname>;
+
+Question 14:
+What will the following class print ?
+class Test{
+   public static void main(String[] args){
+      int[][] a = { { 00, 01 }, { 10, 11 } };
+      int i = 99;
+      try {
+         a[val()][i = 1]++;
+      } catch (Exception e) {
+         System.out.println( i+", "+a[1][1]);
+      }
+   }
+   static int val() throws Exception {
+     throw new Exception("unimplemented");
+   }
+}
+1. 99 , 11
+2. 1, 11
+3. Runtime exception
+
+Answer:
+If evaluation of a dimension expression completes abruptly, no part of any dimension expression to its right will appear to have been evaluated.
+Thus, while evaluating a[val()][i=1]++, when val() throws an exception, i=1 will not be executed. Therefore, i remains 99 and a[1][1] will print 11.
+Correct response: 1
+
+Question 16:
+What happens when you try to compile and run the following class...
+
+public class TestClass{
+      public static void main(String[] args) throws Exception{
+            int a = Integer.MIN_VALUE;
+            int b = -a;
+            System.out.println( a+ "   "+b);
+      }
+}
+1. It throws an OverFlowException
+2. It will print two same negative numbers.
+3. It will print two different negative numbers.
+
+Answer:
+It prints: -2147483648   -2147483648  
+This happens because negative integers are stored in 2's complement form (complement the bits and add 1). 
+For example:  
+Integer 1 in binary is  00000000 00000000 00000000 00000001  (32 bits)  
+So -1 in binary would be (complement the bits for 1 and add 1) :  
+Step 1 (complement the bits of 1): 11111111 11111111 11111111 11111110   
+Step 2 (add 1 to step 1): 11111111 11111111 11111111 11111111.  
+Now, let's see what happens in this question:
+a = Integer.MIN_VALUE = 10000000 00000000 00000000 00000000  
+To get -a, apply the above two steps:  
+Step 1  (complement the bits): 011111111 11111111 11111111 11111111 
+Step 2 (add 1) : 10000000 00000000 00000000 00000000  
+So you got the exact same value that you started with!  
+(Note that you can see the binary form of an integer using Integer.toBinaryString(i) method.)
+Correct Response: 2
+Category: Working with Java Data Types - Variables and Objects - Real brainer.
+
+Question 27:
+Given the following declarations, identify which statements will return true:  
+Integer i1 = 1; 
+Integer i2 = new Integer(1); 
+int i3 = 1; 
+Byte b1 = 1; 
+Long g1 = 1L;  
+Note: Although primitive wrapper classes are not explicitly mentioned in the exam objectives, we have seen some candidates get questions on this aspect of wrapper classes.
+1. i1 == i2
+2. i1 == i3
+3. i1 == b1
+4. i1.equals(i2)
+5. i1.equals(g1)
+6. i1.equals(b1)
+
+Answer:
+1. This will return false because both are pointing to different objects.
+2. This will return true because one operand is a primitive int, so the other will be unboxed and then the value will be compared.
+3. This will not compile because type of i1 and b1 references are classes that are not in the same class hierarchy. So the compiler figures out at compile time itself these two references cannot ever point to the same object.
+4. This will return true because both are Integer objects and both have the value 1.
+5. This will return false because they are pointing to objects of different types.
+Signature of equals method is : boolean equals(Object o);
+Thus, it can take any object as a parameter and so there will be no compilation error. 
+Further, The equals method of all wrapper classes first checks if the two object are of same class or not. If not, they immediately return false.
+6. This will return false because they are pointing to objects of different types.
+Correct response: 2, 4
+
+Question 30:
+Given:  
+double daaa[][][] = new double[3][][]; 
+double d = 100.0; 
+double[][] daa = new double[1][1];  
+Which of the following will not cause any problem at compile time or runtime?
+1. daaa[0] = d;
+2. daaa[0] = daa;
+3. daaa[0] = daa[0];
+4. daa[1][1] = d;
+5. daa = daaa[0];
+
+Answer:
+1. daaa[0] should be a 2 dimensional array because daaa is a 3 dimensional array.
+3. daaa[0] should be a 2 dimensional array while daa[0] is a one dimensional array.
+4. daa[1][1] will cause an ArrayIndexOutofBoundsException because daa's length is only 1 and the indexing starts from 0. To access the first element, you should use daa[0][0].
+Correct response: 2, 5
+
+Question 32:
+Which of the following statements regarding 'break' and 'continue' are true?
+1. break without a label, can occur only in a switch, while, do, or for statement.
+2. continue without a label, can occur only in a switch, while, do, or for statement.
+3. non of these
+
+Answer:
+A break statement with no label attempts to transfer control to the innermost enclosing switch, while, do, or for statement; this statement, which is called the break target, then immediately completes normally. If no switch, while, do, or for statement encloses the break statement, a compile-time error occurs.
+
+A break statement with label Identifier attempts to transfer control to the enclosing labeled statement  that has the same Identifier as its label; this statement, which is called the break target, then immediately completes normally. In this case, the break target need not be a while, do, for, or switch statement.
+
+A continue statement with no label attempts to transfer control to the innermost enclosing while, do, or for statement; this statement, which is called the continue target, then immediately ends the current iteration and begins a new one. If no while, do, or for statement encloses the continue statement, a compile-time error occurs.
+
+A continue statement with label Identifier attempts to transfer control to the enclosing labelled statement that has the same Identifier as its label; that statement, which is called the continue target, then immediately ends the current iteration and begins a new one. The continue target must be a while, do, or for statement or a compile-time error occurs. If no labelled statement with Identifier as its label contains the continue statement, a compile-time error occurs.
+Correct response: 1
+
+Question 35:
+Consider the following code:
+
+class A{
+ public XXX m1(int a){
+   return a*10/4-30;
+ }
+}
+class A2 extends A{
+ public YYY m1(int a){
+   return a*10/4.0;
+ }
+}
+What can be substituted for XXX and YYY so that it can compile without any problems?
+1. int, int
+2. int, double
+3. double, double
+4. double, int
+
+Answer:
+1. a*10/4.0; generates a double so, A2's m1() cannot return an int. (It will need a cast otherwise: return (int) (a*10/4.0);)
+2. The return type should be same for overridden and overriding method.
+3. a*10/4-30; generates an int which can be returned as a double without any cast.
+4. The return type should be same for overridden and overriding method.
+Note that when a method returns objects (as opposed to primitives, like in this question), the principle of covariant returns applies. Meaning, the overriding method is allowed to return a subclass of the return type defined in the overridden method. Thus, if a base class's method is: public A m(); then a subclass is free to override it with: public A1 m(); if A1 extends A.
+Correct response 3.
+Category: Working with inheritance.
+
+Question 40:
+Which of these expressions will return true?
+1. "hello world".equals("hello world")
+2. "HELLO world".equalsIgnoreCase("hello world")
+3. "hello".concat(" world").trim().equals("hello world")
+4. "hello world".compareTo("Hello world") < 0
+5. "Hello world".toLowerCase( ).equals("hello world")
+
+Answer:
+2. equalsIgnoreCase() method treats both cases (upper and lower) as same.
+3. "hello".concat(" world") will return "hello world" and trim() won't do any change because there is no space at the beginning or end of the string.
+4. Notice that the Strings differ at the first position. The value returned by compareTo is (Unicode value of the left hand side - Unicode value of the right hand side).
+Although not required for the exam, it is good to know that for English alphabets, the unicode value of any lower case letter is always 32 more than the unicode value of the same letter in upper case. So, 'a' - 'A' or 'h' - 'H' is 32.
+5. toLowerCase() converts all uppercase letters to lower case.
+compareTo() does a lexicographical (like a dictionary) comparison. It stops at the first place where the strings have different letters.
+If left hand side is bigger, it returns a positive number otherwise it returns a negative number. The value is equal to the difference of their unicode values.
+If there is no difference then it returns zero. In this case,  it will return ( 'h' - 'H') which is 32.
+Our note was "Seems like all answers are correct"
+Correct response: 1,2,3,5
+Category: Working with Java Data Types - String, StringBuilder
+
+Question 43:
+Consider the following code:
+interface Flyer{ String getName(); }
+class Bird implements Flyer{
+    public String name;
+    public Bird(String name){
+        this.name = name;
+    }
+    public String getName(){ return name; }
+}
+class Eagle extends Bird { 
+    public Eagle(String name){
+        super(name);
+    }
+}
+public class TestClass {
+    public static void main(String[] args) throws Exception {
+        Flyer f = new Eagle("American Bald Eagle");
+        //PRINT NAME HERE
+   }
+}
+Which of the following lines of code will print the name of the Eagle object?
+1. System.out.println(f.name);
+2. System.out.println(f.getName());
+3. System.out.println(((Eagle)f).name);
+4. System.out.println(((Bird)f).getName());
+
+Answer:
+While accessing a method or variable, the compiler will only allow you to access a method or variable that is visible through the class of the reference.  When you try to use f.name, the class of the reference f is Flyer and Flyer has no field named "name", thus, it will not compile. But when you cast f to Bird (or Eagle), the compiler sees that the class Bird (or Eagle, because Eagle inherits from Bird) does have a field named "name" so ((Eagle)f).name or ((Bird)f).name will work fine.  f.getName() will work because Flyer does have a getName() method.
+Correct response: 2,3,4.
+Category: Working with Inheritance. Tough.
+
+Question 45:
+What will the following code snippet print: Float f = null; 
+try{     
+	f = Float.valueOf("12.3");     
+	String s = f.toString();     
+	int i = Integer.parseInt(s);     
+	System.out.println("i = "+i); 
+} catch(Exception e){     
+	System.out.println("trouble : "+f); 
+}
+
+Answer:
+f = Float.valueOf("12.3"); executes without any problem. int i = Integer.parseInt(s); throws a NumberFormatException because 12.3 is not an integer. Thus, the catch block prints trouble : 12.3
+Correct response: 12.3
+Category: Handling Excpetions.
+(Note, we marked this question for review)
+
+Question 50:
+Which of the following statements can be inserted at // 1 to make the code compile without errors?
+ public class InitTest{
+   static int si = 10;
+   int  i;
+   final boolean bool;
+   // 1
+}
+1. instance { bool = true; }
+2. InitTest() { si += 10; }
+3. { si = 5; i = bool ? 1000 : 2000;}
+4. { i = 1000; }
+5. { bool = (si > 5); i = 1000; }
+
+Answer:
+1. you cannot put the word instance here. It is not a keyword.
+2. It is a valid constructor but does not initialize bool, which is a final variable and must be initialized either in an instance block or in a constructor.
+3. cannot use bool before initializing it !
+4. bool remains uninitialized.
+Explanation: A final variable must be initialized when an instance is constructed, or else the code will not compile. This can be done either in an instance initializer or in EVERY constructor.
+The keyword static is used to signify that a block is static initializer. If nothing is there before starting curly brace then it is an instance initializer.
+Correct response: 5
+Category: Working with Java Data Types - Variables and Objects. Easy
+
+Question 51:
+What will the following code print when compiled and run?  
+public class TestClass {   
+	public static void main(String[] args) {      
+		String s = "blooper";     
+		StringBuilder sb = new StringBuilder(s);     
+		s.append("whopper");     
+		sb.append("shopper");          
+		System.out.println(s);     
+		System.out.println(sb);   
+	} 
+}
+
+Answer:
+append() method does not exist in String class. It exits only in StringBuffer and StringBuilder. The value of sb will be bloopershopper though.
+Correct response: It will not compile
+Category: Working with Java Data Types: String, StringBuilder: very easy
+
+Question 53:
+Consider the following variable declaration within the definition of an interface:   
+int i = 10; 
+Which of the following declarations defined in a non-abstract class, is equivalent to the above?
+1. public static int i = 10;
+2. public final int i = 10;
+3. public static final int i = 10;
+4. public int i = 10;
+5. final int i = 10;
+
+Answer:
+Fields in an interface are implicitly public, static and final. Although you can put these words in the interface definition but it is not a good practice to do so.
+Correct response: 3
+Category: Working with Inheritance: Easy
+
+Question 58:
+Which method declarations will enable a class to be run as a standalone program?
+1. static void main(String args[ ])
+2. public void static main(String args[ ])
+3. public static main(String[ ] argv)
+4. final public static void main(String [ ] array)
+5. public static void main(String args[ ])
+
+Answer:
+1. Surprisingly, it does work. Even if the class is defined in a package.
+2. Remember, return type and method name are NEVER separated.
+3. There always has to be return type for a method. Only constructors don't have a return type.
+4. final only means that subclasses cannot shadow (in case of static methods) or override (in case of instance methods) it. 
+Explanation:
+If you run the following program by changing the accessibility from public to private and protected, it may work on some versions of Java.  However, for the purpose of Java Certification exam, it should be assumed that for the JVM to execute a class using the standard main method, the accessibility of the main method must be public.  
+package test; 
+public class TestClass{    
+	private static void main(String args[]){          System.out.println("hello");    
+	} 
+}
+Correct response: 4, 5.
+Category: Java Basics: Very Easy
+
+Question 63:
+What sequence of digits will the following program print?
+import java.util.* ;
+public class ListTest{
+   public static void main(String args[]){
+      List s1 = new ArrayList( );
+      s1.add("a");
+      s1.add("b");
+      s1.add(1, "c");
+      List s2 = new ArrayList(  s1.subList(1, 1) );
+      s1.addAll(s2);
+      System.out.println(s1);
+   }
+}
+
+Answer:
+add(1, "c") will insert 'c' between 'a' and 'b' . sublist(1 , 1) will return an empty list.
+Explanation: First, "a" and "b" are appended to an empty list. Next, "c" is added between "1" and "2".
+Then a new list s2 is created using the sublist view allowing access to elements from index 1 to index 1(exclusive) (i.e. no elements ).
+Now, s2 is added to s1.
+So s1 remains :a, c, b
+Correct response: The sequence a, c, b is printed.
+Category: Creating and Using Arrays: Very Easy
+
+Question 64:
+What, if anything, is wrong with the following code?
+abstract class TestClass{
+   transient int j;
+   synchronized int k;
+   final void TestClass(){}
+   static void f(){
+      k = j++;
+   }
+}
+1. The class TestClass cannot be declared abstract.
+2. The variable j cannot be declared transient.
+3. The variable k cannot be declared synchronized.
+4. The constructor TestClass( ) cannot be declared final.
+5. The method f( ) cannot be declared static.
+
+Answer:
+1. Any class can be declared abstract even if it does not have any abstract method.
+3. Variables cannot be declared synchronized. Only methods can be declared synchronized.
+4. It is not a constructor, it is a simple method. Notice void return type.
+5. Because it refers to instance variables j and k
+Explanation:
+The moment you put a return type, it ceases to be a constructor. So the compiler thinks that option 4 is a method.
+
+FYI, constructors are not inherited, and so it doesn't make sense to mark them as final. (It is illegal to mark a constructor as final for the same reason). So there is no question of overriding them.
+
+Static methods cannot refer to non-static/instance members (this includes fields and methods).
+Correct response: 3, 5.
+Category: Working with Java Data Types - Variables and Objects: Very Easy
+
+Question 69:
+Given the following code, which statements can be placed at the indicated position without causing compile and run time errors?  
+public class Test{    
+	int i1;    
+	static int i2;    
+	public void method1(){       
+		int i;       
+		// ... insert statements here    
+	} 
+}
+1. i = this.i1
+2. i = this.i2;
+3. this = new Test( );
+4. this.i = 4;
+5. this.i1 = i2;
+Answer:
+1. As i1 is an instance variable, it is accessible through 'this'.
+2. Although 'this' is not needed to access i2, it is not an error to do so.
+3. Nope, you can't change this.
+4. You cannot do this.i as i is a local variable.
+5. You are just assigning a static field's value to non-static field.
+Correct response: 1, 2, 5.
+Category: Java Basics: Very Easy
+
+Question 70:
+What will the following class print when compiled and run?
+
+class Holder{
+   int value = 1;
+   Holder link;
+   public Holder(int val){ this.value = val; }
+   public static void main(String[] args){
+	final Holder a = new Holder(5);
+	Holder b = new Holder(10);
+	a.link = b;
+	b.link = setIt(a, b);
+	System.out.println(a.link.value+" "+b.link.value);
+   }
+   
+   public static Holder setIt(final Holder x, final Holder y){
+       x.link = y.link;
+       return x;
+   }
+   
+}
+1. It will not compile because 'a' is final.
+2. It will not compile because method setIt() cannot change x.link.
+3. It will throw an exception when run.
+
+Answer:
+1. 'a' is final is true, but that only means that a will keep pointing to the same object for the entire life of the program. The object's internal fields, however, can change.
+2. Since x and y are final, the method cannot change what x and y to point to some other object but it can change the objects' internal fields.
+3. When method setIt() executes, x.link = y.link, x.link becomes null because y.link is null so a.link.value throws NullPointerException.
+Correct response: 3
+Category: Working with Methods: Tough
+
+Question 74:
+Given:
+public class Triangle{
+    public int base;
+    public int height;
+    public double area;
+    
+    public Triangle(int base, int height){
+        this.base = base; this.height = height;
+        updateArea();
+    }
+
+    void updateArea(){
+        area = base*height/2;
+    }
+    public void setBase(int b){ base  = b; updateArea(); }
+    public void setHeight(int h){ height  = h; updateArea(); }
+}
+The above class needs to protect an invariant on the "area" field. Which three members must have the public access modifiers removed to ensure that the invariant is maintained?
+1. the base field
+2. the height field
+3. the area field
+4. the Triangle constructor
+5. the setBase method
+6. the setHeight method
+Answer:
+Explanation:
+An invariant means a certain condition that constrains the state stored in the object. For example, in this case the value of the area field of the Triangle must always be consistent with its base and height fields. Thus, it should never have a value that is different from base*height/2.  If you allow other classes to directly change the value of base, height, or area, using direct field access, the area field may not contain the correct area thereby breaking the invariant.  To prevent this inconsistency from happening, you need to prohibit changing the instance fields directly and instead permit the changes only through the setter method because these methods call the updateArea method and keep the area and base and height consistent.
+Correct response: 1, 2, 3.
+Category: Encapsulation: Easy
+
+Question 76:
+Which one of these is a proper definition of a class TestClass that cannot be sub-classed?
+1. final class TestClass { }
+2. abstract class TestClass { }
+3. native class TestClass { }
+4. static class TestClass { }
+5. private class TestClass { }
+Answer:
+Explanation: 
+A final class cannot be subclassed.
+Although declaring a method static usually implies that it is also final, this is not true for classes. An inner class can be declared static and still be extended.
+Note that for classes, final means it cannot be extended, while for methods, final means it cannot be overridden in a subclass.
+The native keyword can only be used on methods, not on classes and or variables.
+Correct response: 1
+Category: Java Basics: Very Easy
+
+Question 77:
+Consider the following array definitions: 
+int[] array1, array2[]; 
+int[][] array3; 
+int[] array4[], array5[]; 
+Which of the following are valid statements?
+1. array2 = array3;
+2. array2 = array4;
+3. array1 = array2;
+4. array4 = array1;
+5. array5 = array3;
+Answer:
+Explanation:
+There is a subtle difference between: int[] i; and int i[]; although in both the cases, i is an array of integers. The difference is if you declare multiple variables in the same statement such as: int[] i, j; and int i[], j;, j is not of the same type in the two cases. In the first case, j is an array of integers while in the second case, j is just an integer. Therefore, in this question: 
+array1 is an array of int 
+array2, array3, array4, and array5  are arrays of int arrays 
+Therefore, option 1, 2 and 5 are valid. 
+Correct response: 1, 2, 5.
+Category: Creating and Using Arrays: Easy
+
+Question 78:
+Which of these group of statements are valid?
+1. { { } }
+2. { continue ; }
+3. block : { break block ; }
+4. block : { continue block ; }
+5. The break keyword can only be used if there exists an enclosing loop construct ( i.e. while, do-while or for ).
+
+Answer:
+1. See explanation.
+2. continue can be used only inside a 'for', 'while' or 'do while' loop.
+3. This is a valid example of breaking out of a labelled block.
+4. continue can be used only inside a 'for', 'while' or 'do while' loop.
+5. It can also be used to break out of a labeled block and in switch construct. For example, option 3.
+Explanation:
+The construct '{ }' is a compound statement. The compound statement can contain zero or more arbitrary statements.
+Thus, { { } }, which is a compound statement containing one statement which is a compound statement containing no statement, is legal.
+Correct response: 1, 3.
+Category:
+
+Question 79:
+What is the result of executing the following fragment of code:  boolean b1 = false; boolean b2  = false; if (b2 = b1 != b2){    System.out.println("true"); } else{    System.out.println("false"); }
+
+Answer:
+Expalanation:
+All an if() needs is a boolean. Now, b1 != b2 returns false which is a boolean and so the expression becomes b2 = false.  It returns false which is again a boolean. So there is no error and it prints false. Remember that every expression has a return value (which is actually the Left Hand Side of the expression). For example, The value of the expressing i = 10 , is 10 (an int). 
+Correct response: 3.
+Category: Using Operators and Decision Constructs: Real Brainer.
+
+Question 80:
+What will be the output of the following program:
+public class TestClass{
+   public static void main(String args[]){
+      try{
+         m1();
+      }catch(IndexOutOfBoundsException e){
+         System.out.println("1");
+         throw new NullPointerException();
+      }catch(NullPointerException e){
+         System.out.println("2");
+         return;
+      }catch (Exception e) {
+         System.out.println("3");
+      }finally{
+         System.out.println("4");
+      }
+      System.out.println("END");
+   }
+   // IndexOutOfBoundsException is a subclass of RuntimeException.
+   static void m1(){
+      System.out.println("m1 Starts");
+      throw new IndexOutOfBoundsException( "Big Bang " );
+   }
+}
+1. The program will print m1 Starts.
+2. The program will print m1 Starts, 1 and 4, in that order.
+3. The program will print m1 Starts, 1 and 2, in that order.
+4. The program will print m1 Starts, 1, 2 and 4 in that order.
+5. END will not be printed.
+Answer:
+Explanation:
+The IndexOutOfBoundsException is handled by the first catch block. Inside this block, a new NullPointerException is thrown. As this exception is not thrown inside the try block, it will not be caught by any of the remaining catch blocks. It will actually be sent to the caller of the main() method after the finally block is executed. (Hence '4' in the output.)  The code that prints END is never reached, since the NullPointerException remains uncaught after the execution of the finally block.  At the end a stack trace for the NullPointerException will be printed.
+Correct response: 1, 2, 5.
+Category: Handling Exceptions: Easy
+
+Question 81:
+Consider following classes:
+
+//In File Other.java
+package other;
+public class Other { public static String hello = "Hello"; }
+
+//In File Test.java
+package testPackage;
+import other.*;
+class Test{
+   public static void main(String[] args){
+      String hello = "Hello", lo = "lo";
+      System.out.print((testPackage.Other.hello == hello) + " ");    //line 1
+      System.out.print((other.Other.hello == hello) + " ");   //line 2
+      System.out.print((hello == ("Hel"+"lo")) + " ");           //line 3
+      System.out.print((hello == ("Hel"+lo)) + " ");              //line 4
+      System.out.println(hello == ("Hel"+lo).intern());          //line 5
+   }
+}
+class Other { static String hello = "Hello"; }
+What will be the output of running class Test?
+
+Answer:
+Explanation:
+These are the six facts on Strings:
+1. Literal strings within the same class in the same package represent references to the same String object. 
+2. Literal strings within different classes in the same package represent references to the same String object. 
+3. Literal strings within different classes in different packages likewise represent references to the same String object. 
+4. Strings computed by constant expressions are computed at compile time and then treated as if they were literals. 
+5. Strings computed at run time are newly created and therefore are distinct. (So line 4 prints false.)
+6. The result of explicitly interning a computed string is the same string as any pre-existing literal string with the same contents. (So line 5 prints true.)
+
+We advise you to read section 3.10.5 String Literals in Java Language Specification.
+
+Correct response: true true true false true
+Category: Working with Hava Data Types - String, StringBuilder: Real Brainer
+
+Question 85:
+Given the following definitions and reference declarations:
+
+interface I1 { }
+interface I2 { }
+class C1 implements I1 { }
+class C2 implements I2 { }
+class C3 extends C1 implements I2 { }
+C1 o1;
+C2 o2;
+C3 o3;
+Which of these statements are legal?
+1. class C4 extends C3 implements I1, I2 { }
+2. o3 = o1;
+3. o3 = o2;
+4. I1 i1 = o3; I2 i2 = (I2) i1;
+5. I1 b = o3;
+Answer:
+1. Although, the implements I1, I2 is redundant here because C3 already implements I1 and I2, it is not invalid.
+2. superclass reference cannot be assigned to subclass reference without explicit cast.
+3. There is no way a reference of class C2 (which is o2) can point to an object of class C3 because C2 and C3 have no inheritance relationship. So this assignment is rejected at compile time itself.
+4. This is valid because at run time i1 actually refers to an object that implements I2.
+5. Because C3 extends C1 which implements I1.
+Correct response: 1, 4, 5.
+Category: Working with Inheritance: Easy
+
+Question 86:
+Consider the following code:
+
+class A{
+   A() {  print();   }
+   void print() { System.out.println("A"); }
+}
+class B extends A{
+   int i =   Math.round(3.5f);
+   public static void main(String[] args){
+      A a = new B();
+      a.print();
+   }
+   void print() { System.out.println(i); }
+}
+What will be the output when class B is run ?
+
+Answer:
+Explanation:
+Note that method print() is overridden in class B. Due to polymorphism, the method to be executed is selected depending on the class of the actual object. Here, when an object of class B is created, first A's constructor is called, which in turn calls print(). Now, since the class of actual object is B, B's print() is selected. At this point of time, variable i has not been initialized (because we are still initializing A at this point), so its default value i.e. 0 is printed. This happens because the method print() is non-private, hence polymorphic.  Finally, 4 is printed.
+Correct response: It will print 0, 4
+Category: Working with Inheritance: Real Brainer.
+
+Question 89:
+What will be the result of attempting to compile and run the following program?  
+public class TestClass{    
+	public static void main(String args[ ] ){      
+		StringBuilder sb = new StringBuilder("12345678");       
+		sb.setLength(5);       
+		sb.setLength(10);       
+		System.out.println(sb.length());    
+	} 
+}
+
+1. It will print 5.
+2. It will print 10.
+3. None of the above.
+
+Answer:
+1. Although it truncates the string to length 5 but setLength(10) will append 5 spaces (actually null chars i.e. \u0000).
+3. The program will compile without error and will print 10 when run. 
+Explanation:
+If you do System.out.println(sb); it will indeed print 12345 but the length will be 10.  From javadocs:  public void setLength(int newLength) Sets the length of the character sequence. The sequence is changed to a new character sequence whose length is specified by the argument. For every nonnegative index k less than newLength, the character at index k in the new character sequence is the same as the character at index k in the old sequence if k is less than the length of the old character sequence; otherwise, it is the null character '\u0000'. In other words, if the newLength argument is less than the current length, the length is changed to the specified length. If the newLength argument is greater than or equal to the current length, sufficient null characters ('\u0000') are appended so that length becomes the newLength argument.  
+The newLength argument must be greater than or equal to 0.  
+Parameters: newLength - the new length 
+Throws: IndexOutOfBoundsException - if the newLength argument is negative.
+Correct response: 2.
+Category: Working with Java Data Types - String, StringBuilder: Very Easy.
+
+Question 90:
+Consider the following code appearing in the same file:
+
+class Data {
+    private int x = 0, y = 0;
+    public Data(int x, int y){
+        this.x = x; this.y = y;
+    }
+}
+public class TestClass {
+    public static void main(String[] args) throws Exception {
+        Data d = new Data(1, 1);
+        //add code here
+    }
+}
+Which of the following options when applied individually will change the Data object currently referred to by the variable d to contain 2, 2 as values for its data fields?
+1. Add the following two statements : d.x = 2; d.y = 2;
+2. Add the following statement: d = new Data(2, 2);
+3. Add the following two statements: d.x += 1; d.y += 1;
+4. Add the following method to Data class: public void setValues(int x, int y){   this.x.setInt(x);   this.y.setInt(y); }  Then add the following statement: d.setValues(2, 2);
+5. Add the following method to Data class: public void setValues(int x, int y){   this.x = x;   this.y = y; }  Then add the following statement: d.setValues(2, 2);
+
+Answer:
+1. Note that x and y are private in class Data. Therefore, you cannot access these members from any other class.
+2. This will create a new Data object and will not change the original Data object referred to be d.
+3. Note that x and y are private in class Data. Therefore, you cannot access these members from any other class.
+4. x is primitive int.You cannot call any methods on a primitive. so this.x.setInt(...) or this.y.setInt(...) don't make any sense.
+5. This is a good example of encapsulation where the data members of Data class are private and there is a method in Data class to manipulate its data. Compare this approach to making x and y as public and letting other classes directly modify the values.
+Correct response: 5
+Category: Working with Methods: Very Easy.

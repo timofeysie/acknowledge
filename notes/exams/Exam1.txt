@@ -75,3 +75,26 @@ What will be the result if this is compiled and run?
 Answer: 
 There will be a compile time error: recursive constructor invocation.
 Category: Constructors?
+
+
+Question:
+What will be the output when running this class?
+	private static void testInstanceOf()
+	{
+		Object o = 1;
+		if (o instanceof Integer)
+		{
+			System.out.println("OK!");
+		} else
+		{
+			System.out.println("Not OK!");
+		}
+	}
+A. Compile error.
+B. Runtime error.
+C. Compiles and prints Not OK! when run.
+D. Compiles and prints OK! when run.
+
+Answer:
+1 is autoboxed into an Integer wrapper object for Object o.  So when compared with the instanceof operator, it proves that autoboxing happened.
+Correct response: D.

@@ -233,5 +233,39 @@ Answer:
 Compiles fine.
 
 
+Question:
+Consider that str is a variable of class java.lang.String. Which of the following lines of code may throw a NullPointerException in certain situations?  Or a tougher version of the question could be : Which of the following lines of code are not an example of robust design ?
+1. if ( (str != null) | ( i == str.length() ) ) 
+2. if ( (str == null) | ( i == str.length() ) ) 
+3. if ( (str != null) || (i == str.length() ) )
+4. if ( (str == null) || (i == str.length() ) )
+
+Answer:
+(See TestClass22)
+1. (i == str.length()) will always be executed so if 'str' is null, then str.length() will throw a NullPointerException.
+2. (i == str.length()) will always be executed so if 'str' is null, then str.length() will throw a NullPointerException.
+3. (i == str.length()) will only be evaluated if (str != null) is false, and (str != null) will be false if 'str' is null. So it will also throw a NullPointerException.
+4. (i == str.length()) will only be evaluated if (str == null) is false, and (str == null) will be false if 'str' is NOT null. So it will NEVER throw a NullPointerException.
+The correct answers are 1,2 and 3.
+(From Sample Questions Three)
+
+Question:  What will be the output of the following method:
+	public static void testLessThanOrEqualTo()
+	{
+		int num;
+		for (num = 0; num <= 10; num++)
+		{
+			System.out.println("num "+num);
+		}
+		System.out.println("num at end of loop "+num);
+	}
+
+Answer:
+The number will be incremented and tested one more time when the value of num is 10, which means that num will be at 11 and the loop test will return false, and the loop will end.  So the output is:
+1
+2
+..
+10
+num at end of loop 11
 
 

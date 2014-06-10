@@ -41,7 +41,7 @@ public class ExamQuestions
 		System.out.println("I. "+(num1 == num2)); 
 		System.out.println("J. "+(num1 == (double)num2)); 
 		System.out.println("K. "+((float)num1 == num2)); 
-}
+	}
 
 /*
 This is a very good question to test the concepts of execution flow 
@@ -799,6 +799,15 @@ private static void defualtValue()
 		StringBuilder b1 = new StringBuilder("snorkler");
 		StringBuilder b2 = new StringBuilder("yoodler");
 		b1.replace(3,4,b2.substring(4)).append(b2.append(false));
+		System.out.println("b1 "+b1.toString());
+	}
+
+	private static void testSubstring4()
+	{
+		System.out.println("testSubstring3---");
+		StringBuilder b1 = new StringBuilder("snorkler");
+		StringBuilder b2 = new StringBuilder("yoodler");
+		b1.replace(3,4,b2.substring(4)).append(b2.append(false));
 		StringBuilder b1e = b1;
 		StringBuilder b2e = b2;
 
@@ -1209,6 +1218,25 @@ private static void defualtValue()
 
 	}
 
+	public static void testLessThanOrEqualTo()
+	{
+		int num;
+		for (num = 0; num <= 10; num++)
+		{
+			System.out.println("num "+num);
+		}
+		System.out.println("num at end of loop "+num);
+	}
+
+	private static void testInstanceOf()
+	{
+		Object o = 1;
+		if (o instanceof Integer)
+		{
+			System.out.println("OK!");
+		}
+	}
+
 	public static void main(String args[]) 
 	{
 		ExamQuestions eq = new ExamQuestions();
@@ -1224,7 +1252,7 @@ private static void defualtValue()
 		//randomCode();
 		//unorthadoxUnary();
 		//basicFailedQuestions();
-		failedRegex();
+		//failedRegex();
 		//payRollExample();
 		//Class ExamQuestions = ExamQuestions.class;
 		//arrayWork();
@@ -1272,6 +1300,8 @@ private static void defualtValue()
 		//System.out.printf("Hi %03d", 1);
 		//testValueOf();
 		//testWappers();
-		testNan();
+		//testNan();
+		//testLessThanOrEqualTo();
+		testInstanceOf();
 	}
 }
