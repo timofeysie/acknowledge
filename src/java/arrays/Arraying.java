@@ -142,6 +142,20 @@ public class Arraying
         for(int i :  scores1) System.out.print(i);
 	}
 
+	private static void testSubtleDifferences()
+	{
+		int[] array1, array2[]; // array1 is an array of ints,
+		// but array2, 3, 4, and 5 are arrays of int arrays. 
+		int[][] array3; 
+		int[] array4[], array5[]; 
+		// Which of the following are valid statements?
+		//array2 = array3; // incompatible types
+		//array2 = array4; // incompatible types
+		array1 = array2; 
+		array4 = array1;
+		array5 = array3;
+	}
+
 	public static void main(String[] args) 
 	{
 		//decrementTest();
@@ -150,7 +164,8 @@ public class Arraying
 		//whatWorks();//?
 		//EpractizeQuestions();
 		//equalsTest();
-		testArraycopy();
+		//testArraycopy();
+		testSubtleDifferences();
 	}
 
 }

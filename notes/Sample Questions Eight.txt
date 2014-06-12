@@ -1,0 +1,51 @@
+Question 22:
+What will be the result of attempting to compile and run the following code?  
+class SwitchTest{    
+	public static void main(String args[]){       
+		for ( int i = 0 ; i < 3 ; i++){          
+			boolean flag  = false;          
+				switch (i){             
+				flag  = true;          
+				}          
+			if ( flag )  System.out.println( i );       
+		}    
+	} 
+}
+
+Answer:
+You cannot have unlabeled block of code inside a switch block. Any code block must succeed a case label (or default label). Since there is no case statement in this switch block, there is no way the line flag = true; can be reached! Therefore, it will not compile.
+Correct response: Will not compile.  It will say 'case', 'default' or '}' expected at compile time.
+
+Question 7:
+What will be the result of attempting to compile and run the following program?
+
+public class TestClass{
+   public static void main(String args[]){
+      try{
+         RuntimeException re = null;
+         throw re;
+      }
+      catch(Exception e){
+         System.out.println(e);
+      }
+   }
+}
+1. The code will fail to compile, since RuntimeException cannot be caught by catching an Exception.
+2. The program will fail to compile, since re is null.
+3. The program will compile without error and will print java.lang.RuntimeException when run.
+4. The program will compile without error and will print java.lang.NullPointerException when run.
+5. The program will compile without error and will run and print null.
+
+Answer:
+1. RuntimeException can be caught by catch(Exception e) statement because RuntimeException is a subclass of Exception.
+Explanation: 
+4. A NullPointerException will be thrown if the expression given to the throw statement results in a null pointer. 
+The try block generates NullPointerException which will be caught by the catch block.
+Correct response: 4.
+
+Question:
+unsigned byte b = 0;
+
+Answer:
+Wont compile. A char can be used as an unsigned integer.
+
