@@ -98,3 +98,30 @@ D. Compiles and prints OK! when run.
 Answer:
 1 is autoboxed into an Integer wrapper object for Object o.  So when compared with the instanceof operator, it proves that autoboxing happened.
 Correct response: D.
+
+
+Question:
+What will be the result of compiling and running the following code:
+public class FinalInit
+{
+	final int i;
+	FinalInit() {}
+	FinalInit(int _i) {i = _i;}
+	FinalInit(Object o) {i = 2;}
+	public static void main(String[] args) 
+	{
+		FinalInit fi = new FinalInit();
+		System.out.println("i is "+fi.i);
+	}
+}
+A. Compile error.
+B. Runtime error.
+C. Compiles and prints "i is 1"
+D. Compiles and prints "i is 2"
+E. Compiles and prints "i is"
+
+Correct response: A
+Explanation: A final variable must be initialized when an instance is constructed, or else the code will not compile. This can be done either in an instance initializer or in EVERY constructor.
+The keyword static is used to signify that a block is static initializer. If nothing is there before starting curly brace then it is an instance initializer. (from ETS)
+Correct response: 5
+Category: Working with Java Data Types - Variables and Objects. Easy
