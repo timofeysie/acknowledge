@@ -1092,7 +1092,16 @@ private static void defualtValue()
 		float num_flo = 2.0f;
 		long num_lon = 2;
 		double num_dou= 2;
-		
+
+		final byte f_num_byt = 2;
+		final char f_num_cha = 2;
+		final short f_num_sho = 2;
+		final int f_num_int = 2;
+		final float f_num_flo = 2.0f;
+		final long f_num_lon = 2;
+		final double f_num_dou= 2;
+
+		System.out.println("plop = possible loss of precision");
 		System.out.println("byte = byte   "+(num_byt = num_byt));
 		System.out.println("byte = char   plop");//+(num_byt = num_cha));
 		System.out.println("byte = short  plop");//+(num_byt = num_sho));
@@ -1100,7 +1109,16 @@ private static void defualtValue()
 		System.out.println("byte = float  plop");//+(num_byt = num_flo));
 		System.out.println("byte = long   plop");//+(num_byt = num_lon));
 		System.out.println("byte = double plop");//+(num_byt = num_dou));
-
+		System.out.println("with finals");
+		System.out.println("byte = byte   "+(num_byt = f_num_byt));
+		System.out.println("byte = char   "+(num_byt = f_num_cha));
+		System.out.println("byte = short  "+(num_byt = f_num_sho));
+		System.out.println("byte = int    "+(num_byt = f_num_int));
+		System.out.println("byte = float  plop");//+(num_byt = f_num_flo));
+		System.out.println("byte = long   plop");//+(num_byt = f_num_lon));
+		System.out.println("byte = double plop");//+(num_byt = f_num_dou));
+		
+		System.out.println("");
 		System.out.println("char = byte   plop");//"+(num_cha = num_byt));
 		System.out.println("char = char   "+(num_cha = num_cha));
 		System.out.println("char = short  plop");//"+(num_cha = num_sho));
@@ -1109,6 +1127,16 @@ private static void defualtValue()
 		System.out.println("char = long   plop");//"+(num_cha = num_lon));
 		System.out.println("char = double plop");//"+(num_cha = num_dou));
 
+		System.out.println("with finals");
+		System.out.println("char = byte   "+(num_cha = f_num_byt));
+		System.out.println("char = char   "+(num_cha = f_num_cha));
+		System.out.println("char = short  "+(num_cha = f_num_sho));
+		System.out.println("char = int    "+(num_cha = f_num_int));
+		System.out.println("char = float  plop");//+(num_cha = f_num_flo));
+		System.out.println("char = long   plop");//+(num_cha = f_num_lon));
+		System.out.println("char = double plop");//+(num_cha = f_num_dou));
+
+		System.out.println("");
 		System.out.println("short = byte   "+(num_sho = num_byt));
 		System.out.println("short = char   plop");//"+(num_sho = num_cha));
 		System.out.println("short = short  "+(num_sho = num_sho));
@@ -1117,6 +1145,16 @@ private static void defualtValue()
 		System.out.println("short = long   plop");//"+(num_sho = num_lon));
 		System.out.println("short = double plop");//"+(num_sho = num_dou));
 
+		System.out.println("");
+		System.out.println("short = byte   "+(num_sho = f_num_byt));
+		System.out.println("short = char   "+(num_sho = f_num_cha));
+		System.out.println("short = short  "+(num_sho = f_num_sho));
+		System.out.println("short = int    "+(num_sho = f_num_int));
+		System.out.println("short = float  plop");//+(num_sho = f_num_flo));
+		System.out.println("short = long   plop");//+(num_sho = f_num_lon));
+		System.out.println("short = double plop");//+(num_sho = f_num_dou));
+
+		System.out.println("");
 		System.out.println("int = byte   "+(num_int = num_byt));
 		System.out.println("int = char   "+(num_int = num_cha));
 		System.out.println("int = short  "+(num_int = num_sho));
@@ -1124,15 +1162,15 @@ private static void defualtValue()
 		System.out.println("int = float  plop");//"+(num_int = num_flo));
 		System.out.println("int = long   plop");//"+(num_int = num_lon));
 		System.out.println("int = double plop");//"+(num_int = num_dou));
-
+		System.out.println("");
 		System.out.println("float = byte   "+(num_flo = num_byt));
 		System.out.println("float = char   "+(num_flo = num_cha));
 		System.out.println("float = short  "+(num_flo = num_sho));
 		System.out.println("float = int    "+(num_flo = num_int));
 		System.out.println("float = float  "+(num_flo = num_flo));
 		System.out.println("float = long   "+(num_flo = num_lon));
-		System.out.println("float = double plop");//"+(num_flo = num_dou));
-
+		System.out.println("float = double ");//"+(num_flo = num_dou));
+		System.out.println("");
 		System.out.println("long = byte   "+(num_lon = num_byt));
 		System.out.println("long = char   "+(num_lon = num_cha));
 		System.out.println("long = short  "+(num_lon = num_sho));
@@ -1140,7 +1178,7 @@ private static void defualtValue()
 		System.out.println("long = float   plop");//"+(num_lon = num_flo));
 		System.out.println("long = long   "+(num_lon = num_lon));
 		System.out.println("long = double  plop");//"+(num_lon = num_dou));
-
+		System.out.println("");
 		System.out.println("double = byte   "+(num_dou = num_byt));
 		System.out.println("double = char   "+(num_dou = num_cha));
 		System.out.println("double = short  "+(num_dou = num_sho));
@@ -1148,9 +1186,129 @@ private static void defualtValue()
 		System.out.println("double = float  "+(num_dou = num_flo));
 		System.out.println("double = long   "+(num_dou = num_lon));
 		System.out.println("double = double "+(num_dou = num_dou));
-
+		System.out.println("");	
 		System.out.println("double == float "+(num_dou == num_flo));
 		System.out.println("--------------- ");
+	}
+
+	public static void testNumbers3()
+	{
+		byte num_byt = 2;
+		char num_cha = 2;
+		short num_sho = 2;
+		int num_int = 2;
+		float num_flo = 2.0f;
+		long num_lon = 2;
+		double num_dou= 2;
+		
+		System.out.println("byte == byte   "+(num_byt == num_byt));
+		System.out.println("byte == char   "+(num_byt == num_cha));
+		System.out.println("byte == short  "+(num_byt == num_sho));
+		System.out.println("byte == int    "+(num_byt == num_int));
+		System.out.println("byte == float  "+(num_byt == num_flo));
+		System.out.println("byte == long   "+(num_byt == num_lon));
+		System.out.println("byte == double "+(num_byt == num_dou));
+		System.out.println("");
+		System.out.println("char == byte   "+(num_cha == num_byt));
+		System.out.println("char == char   "+(num_cha == num_cha));
+		System.out.println("char == short  "+(num_cha == num_sho));
+		System.out.println("char == int    "+(num_cha == num_int));
+		System.out.println("char == float  "+(num_cha == num_flo));
+		System.out.println("char == long   "+(num_cha == num_lon));
+		System.out.println("char == double "+(num_cha == num_dou));
+		Byte wrapper_byt = 2;
+		Character wrapper_cha = 2;
+		Short wrapper_sho = 2;
+		Integer wrapper_int = 2;
+		Float wrapper_flo = 2.0f;
+		Long wrapper_lon = 2L;
+		Double wrapper_dou = 2D;
+		System.out.println("");
+		System.out.println("Byte = byte   "+(wrapper_byt = num_byt));
+		System.out.println("Byte = char   incompatible types ");//+(wrapper_byt = num_cha));
+		System.out.println("Byte = short  incompatible types ");//"+(wrapper_byt = num_sho));
+		System.out.println("Byte = int    incompatible types ");//"+(wrapper_byt = num_int));
+		System.out.println("Byte = float  incompatible types ");//"+(wrapper_byt = num_flo));
+		System.out.println("Byte = long   incompatible types ");//"+(wrapper_byt = num_lon));
+		System.out.println("Byte = double incompatible types ");//"+(wrapper_byt = num_dou));
+
+		System.out.println("");
+		System.out.println("byte = Byte      "+(num_byt = wrapper_byt));
+		System.out.println("byte = Character incompatible types ");//"+(num_byt = wrapper_cha));
+		System.out.println("byte = Short  	 incompatible types ");//"+(num_byt = wrapper_sho));
+		System.out.println("byte = Interger  incompatible types ");//"+(num_byt = wrapper_int));
+		System.out.println("byte = Float  	 incompatible types ");//"+(num_byt = wrapper_flo));
+		System.out.println("byte = Long   	 incompatible types ");//"+(num_byt = wrapper_lon));
+		System.out.println("byte = Double 	 incompatible types ");//"+(num_byt = wrapper_dou));
+
+		System.out.println("");
+		System.out.println("Character = byte      incompatible types ");//"+(wrapper_cha = num_byt));
+
+		System.out.println("");
+		System.out.println("char = Byte      	  incompatible types ");//"+(cha_byt = wrapper_byt));
+
+		// int = Wrapper
+		System.out.println("");
+		System.out.println("int = Wrapper");
+		System.out.println("int = Byte      "+(num_int = wrapper_byt));
+		System.out.println("int = Character "+(num_int = wrapper_cha));
+		System.out.println("int = Short  	"+(num_int = wrapper_sho));
+		System.out.println("int = Interger  "+(num_int = wrapper_int));
+		System.out.println("int = Float  	incompatible types ");//"+(num_int = wrapper_flo));
+		System.out.println("int = Long   	incompatible types ");//"+(num_int = wrapper_lon));
+		System.out.println("int = Double 	incompatible types ");//"+(num_int = wrapper_dou));
+		// Integer = primitive
+		System.out.println("");	
+		System.out.println("Integer = primitive");
+		System.out.println("Integer = byte   incompatible types ");//"+(wrapper_int = num_byt));
+		System.out.println("Integer = char   incompatible types ");//"+(wrapper_int = num_cha));
+		System.out.println("Integer = short  incompatible types ");//"+(wrapper_int = num_sho));
+		System.out.println("Integer = int    "+(wrapper_int = num_int));
+		System.out.println("Integer = float  incompatible types ");//"+(wrapper_int = num_flo));
+		System.out.println("Integer = long   incompatible types ");//"+(wrapper_int = num_lon));
+		System.out.println("Integer = double incompatible types ");//"+(wrapper_int = num_dou));
+
+		// float = Wrapper
+		System.out.println("");
+		System.out.println("float = Wrapper");
+		System.out.println("float = Byte      "+(num_flo = wrapper_byt));
+		System.out.println("float = Character "+(num_flo = wrapper_cha));
+		System.out.println("float = Short  	"+(num_flo = wrapper_sho));
+		System.out.println("float = Interger  "+(num_flo = wrapper_int));
+		System.out.println("float = Float  	"+(num_flo = wrapper_flo));
+		System.out.println("float = Long   	"+(num_flo = wrapper_lon));
+		System.out.println("float = Double 	incompatible types ");//"+(num_flo = wrapper_dou));
+		
+		System.out.println("");	
+		System.out.println("Float = primitive");
+		System.out.println("Float = byte   incompatible types ");//"+(wrapper_flo = num_byt));
+		System.out.println("Float = char   incompatible types ");//"+(wrapper_flo = num_cha));
+		System.out.println("Float = short  incompatible types ");//"+(wrapper_flo = num_sho));
+		System.out.println("Float = int    incompatible types ");//"+(wrapper_flo = num_int));
+		System.out.println("Float = float  "+(wrapper_flo = num_flo));
+		System.out.println("Float = long   incompatible types ");//"+(wrapper_flo = num_lon));
+		System.out.println("Float = double incompatible types ");//"+(wrapper_flo = num_dou));
+
+		// dobule to Wrapper
+		System.out.println("");
+		System.out.println("double = Wrapper");
+		System.out.println("double = Byte      "+(num_dou = wrapper_byt));
+		System.out.println("double = Character "+(num_dou = wrapper_cha));
+		System.out.println("double = Short  	"+(num_dou = wrapper_sho));
+		System.out.println("double = Interger  "+(num_dou = wrapper_int));
+		System.out.println("double = Float  	"+(num_dou = wrapper_flo));
+		System.out.println("double = Long   	"+(num_dou = wrapper_lon));
+		System.out.println("double = Double 	"+(num_dou = wrapper_dou));
+		
+		System.out.println("");	
+		System.out.println("Double = primitive");
+		System.out.println("Double = byte   incompatible types ");//"+(wrapper_dou = num_byt));
+		System.out.println("Double = char   incompatible types ");//"+(wrapper_dou = num_cha));
+		System.out.println("Double = short  incompatible types ");//"+(wrapper_dou = num_sho));
+		System.out.println("Double = int    incompatible types ");//"+(wrapper_dou = num_int));
+		System.out.println("Double = float  incompatible types ");//"+(wrapper_dou = num_flo));
+		System.out.println("Double = long   incompatible types ");//"+(wrapper_dou = num_lon));
+		System.out.println("Double = double "+(wrapper_dou = num_dou));
 	}
 
 	private static void testArrays()
@@ -1262,7 +1420,8 @@ private static void defualtValue()
 		// float, double, Float, Object, error.
 		//testIO();
 		//testException();
-		//testNumbers();
+		//testNumbers2();
+		testNumbers3();
 		//testOperators();
 		//System.out.println("");
 		//testOperators2();
@@ -1302,6 +1461,6 @@ private static void defualtValue()
 		//testWappers();
 		//testNan();
 		//testLessThanOrEqualTo();
-		testInstanceOf();
+		//testInstanceOf();
 	}
 }
