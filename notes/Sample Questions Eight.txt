@@ -47,5 +47,270 @@ Question:
 unsigned byte b = 0;
 
 Answer:
+What do you think, hugh, punk?
 Wont compile. A char can be used as an unsigned integer.
+
+Question:
+Assuming that the following classes are in the same package, which
+statements are true?
+class SomeClass 
+{
+	void method1() { }
+	public void method2() { }
+	private void method3() { }
+	protected void method4() { }
+}
+public class SomeClassAccessDemo 
+{
+	public void someMethod(String[] parameters) 
+	{
+		SomeClass sc = new SomeClass();
+		sc.method1();
+		sc.method2();
+		sc.method3();
+		sc.method4();
+	}
+}
+a. sc.method1() will generate a syntax error.
+b. sc.method2() will generate a syntax error.
+c. sc.method3() will generate a syntax error.
+d. sc.method4() will generate a syntax error.
+e. No syntax errors will be generated.
+c As the classes are in the same package and all of the methods
+are visible except for the private method.
+(From Sample Questions Two)
+
+Question:
+What will be the outcome of compiling and runing this class be?
+package packages;
+public class ProtectedAccount { protected String number = "123"; }
+import packages.*;
+public class PublicAccount extends ProtectedAccount
+{
+	public static void main(String[] args) {
+		Account protected = new Account();
+		System.out.println(protected.number); // call 1
+		SilverAccount pub = new SilverAccount();
+		System.out.println(pub.number); } // call 2
+}
+
+Answer:
+Protected variables or methods will not be accessable by a sub-class from their parent classes which are in different packages.  
+Correct response:
+call 1<- protected access!
+call 2 works with the subclass.	
+(From Sample Questions Two)
+
+Question:
+What will happen when the following code snippet is compiled and run?
+If there are errors, what are they?
+byte b1 = 1;
+byte b2 = 2;
+Byte b3 = 3;
+b1 = b1 + b2; // line A
+b1 += b2; // line B
+b3 = b3 + b3; // line C
+
+Answer:
+Line A cuases a plop (possible loss of precision)
+Line B will run fine.
+Line C causes a incomtype (incompatible types)
+(From Sample Questions Two)
+
+Question:
+What will the following output?
+int a = 4 / 2 * 3 + 1;
+System.out.println(a);
+
+Answer:
+This will be reuced to:
+(((4 / 2) * 3) + 1);
+Correct response: 7.
+(From Sample Questions Two)
+
+Question:
+		int a = 6;
+		int b = 5;
+		int c = 10;
+		int rs = a + ++b * c / a * b;
+		System.out.println(rs);
+		rs = a + (++b)* ((c / a)* b);
+		System.out.println(rs);		
+What will the output be?
+
+Answer:
+The correct response will be 66 and 55.
+(From Sample Questions Two)
+
+Question:
+What will the output be?
+		int d = 1;
+		int e = 2;
+		int f = 3;
+		int g = f / e / d;
+		System.out.println(g);
+
+Answer:
+the / operator has left-to-right associativity.
+(f / e) / d
+Correct response: 1.
+(From Sample Questions Two)
+
+Question:
+What will be the result of compiling and running the following code:
+class Test3 implements Comparable
+{
+	static index = 0;
+	Test3() {index++;}
+	public String toString() {
+		return "Test3 "+index;
+	}
+	public static void main(String[] args) {
+		Set<Test3> s = new TreeSet<Test3>();
+		s.add(new Test3());
+		s.add(new Test3());
+		s.add(new Test3());
+		for (Test3 out: s)
+			System.out.println(out);
+	}
+	public int compareTo(Test3 test)
+    { 
+    	if (test.index > index)
+    	{
+    		return -1;
+    	} else
+    	{
+    		return 1;
+    	}
+     }
+}
+
+Answer:
+Test3 cannot be cast to Comparable.
+(From Sample Questions Two)
+
+Question:
+What will be the output if the following program is compiled and run?
+public class Test11
+{
+	public static void main(String[] args) 
+	{
+		Integer  arg = 30;
+		switch(arg)
+		{
+			default:
+				System.out.println("default"); // seems unreachable
+			case 10:
+				System.out.println("100");
+			case 20:
+				System.out.println("200");
+		}
+	}
+}
+
+Answer:
+The Java runtime will go through the whole list and find no match, and then will go back to the default, and start again.  Since there is no break statements, all the cases will then be executed.
+default
+100
+200
+(From Sample Questions Two)
+
+Question:
+What will be the result of running the following code snippet?
+		Character c = new Character('c');
+		Character n = null;
+		boolean equ = c.equals(n); // A 
+		int compare = c.compareTo(n);  // B
+
+Answer:
+x.equals(null) returns false, x.compareTo(null) will always throw a NullPointerException.
+Correct response.
+B causes as NullPointerExcetpion.
+(From Sample Questions Two)
+
+Question: What is the result of the following:
+		Character c = new Character('c');
+		Character a = new Character('a');
+		boolean equ = c.equals(a);
+		int compare = c.compareTo(a);
+		System.out.println(equ+" "+compare);
+
+Answer:
+false 2
+(From Sample Questions Two)
+
+Question:
+What will be the result of compiling and running this code:
+enum Month {JAN,FEB,MAR,APR,MAY}
+public class Test10
+{
+	public static void main(String[] args) {
+		Month mon = Month.valueOf("JAN");
+		if(mon==Month.JAN)
+			System.out.println("Inside JAN 1");
+		if(mon.equals(Month.JAN))
+			System.out.println("Inside JAN 2");
+		if(mon == "JAN")
+			System.out.println("Inside JAN 3");
+	}
+}
+
+Answer:
+There will be an "incomparable types: Month and String" error at compile time for mon == "JAN"
+(From Sample Questions Two)
+
+Question:
+Boolean string1=new Boolean("TrUe");
+boolean character1=true;
+System.out.println(string1.booleanValue()==character1); // 1
+System.out.println(string1==character1);				// 2
+System.out.println(string1.equals(character1));			// 3
+System.out.println(string1.booleanValue()=="true"); 	// 4
+System.out.println(string1.equals("true"));				// 5
+System.out.println(character1=="true"); 				// 6
+What is the output?
+
+Answer: 
+Compile error: incompatible types, boolean and String
+For lines 4 and 6.  #5 will return false if those are commented out.  The first three will return true.
+(From Sample Questions Two)
+
+
+Question:
+int num = -50;
+System.out.println(num % 25.0)
+
+
+Answer:
+Following the rules of promotion the output will be -0.0.  Not sure why the negative is kept.
+(From Sample Questions Two)
+
+
+Question
+Which of the following must be true for a method to support polymorphism?
+a. The method must override a base class method
+b. The method must overload a base class method
+c. The method's class must extend a base class that has the
+overridden method
+d. The method must execute against a base class reference variable
+
+Answer: 
+Overloading only occurs within the same class. It is not necessary to have a base class. A common implemented interface will also work for polymorphic behavior. So a and d are correct.
+
+If a method declararation overrides a method in the super class, there will be a compile time error when:
+- there are different return types
+- one is void and the other has a return type
+- one throws a clause that conflicts with that of any other method that it overrides or hides
+However, it can throw unchecked exceptions (RuntimeExceptions and it's descendants)  
+
+Question:
+Question:  What is the return type of method round(double d) and round(float a) defined in Math class?
+
+Answer: 
+long and int.
+
+
+
+
+
 

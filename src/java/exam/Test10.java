@@ -7,5 +7,7 @@ public class Test10
 			System.out.println("Inside JAN 1");
 		if(mon.equals(Month.JAN))
 			System.out.println("Inside JAN 2");
+		if(Month.JAN == "JAN")
+			System.out.println("Inside JAN 3");
 	}
 }

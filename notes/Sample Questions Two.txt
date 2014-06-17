@@ -786,8 +786,6 @@ static int	round(float a): Returns the closest int to the argument, with ties ro
 
 **Access** -----------------------------------------
 
-You cannot access an instance variable from a static method.
-
 Question:
 Which of the following keywords cannot be used when declaring a class?
 a. public  
