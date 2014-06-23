@@ -125,3 +125,18 @@ Explanation: A final variable must be initialized when an instance is constructe
 The keyword static is used to signify that a block is static initializer. If nothing is there before starting curly brace then it is an instance initializer. (from ETS)
 Correct response: 5
 Category: Working with Java Data Types - Variables and Objects. Easy
+
+Questin:
+What will the following print when compiled and run?
+		final byte x = 64;
+		final byte y = 64;
+		byte z = x + y;
+A. Compile error: possible loss of precision.
+B. Runtime error.
+C. Compiles and prints 128
+D. Compiles and prints -128
+
+Answer:
+If the sum of variables x and y was less the 127 (the max value of a byte) then this code would compile.  As it is, there is a compile time error saying "possible loss of precision".  If the sum was less than 127, but the bytes were not final, you would also get the same error.
+Correct response: A.
+
