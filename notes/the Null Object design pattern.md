@@ -222,3 +222,7 @@ GreenHopper is now called JIRA Agile.
 
 Actions.  We could start by using Cobertura with Domartin to make sure tests test the all the code.  We can add it to the ant build script.  In fact we may be able to run Findbugs, Pmd, Checkstyle, JUnit and Cobertrua with Ant.
 
+
+package org.springframework.boot.autoconfigure does not exist
+
+

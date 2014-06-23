@@ -4,16 +4,6 @@ import java.util.ArrayList;
 public class StringDemo 
 {
 
-    public static int sumEven(List<Integer> li) {
-        int sum = 0;
-        for (Integer i: li)
-        {
-            if (i % 2 == 0)
-                sum += i;
-        }
-        return sum;
-    }
-
     public static void main(String[] args) 
     {
         String anotherPalindrome = "Niagara. O roar again!"; 
@@ -165,6 +155,16 @@ public class StringDemo
         }
     }
 
+    public static int sumEven(List<Integer> li) {
+        int sum = 0;
+        for (Integer i: li)
+        {
+            if (i % 2 == 0)
+                sum += i;
+        }
+        return sum;
+    }
+    
     /**
     * Returns the index of the find_me substring, or -1 if it is not
     * contained in the search string.
