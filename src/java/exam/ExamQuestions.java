@@ -224,6 +224,9 @@ static void unorthadoxUnary()
 	int x = 2; 
 	x += x++ * x++ * x++;
 	System.out.println("Unary test 1: "+x);
+	int a = -1;
+	int b = -a;
+	System.out.println(a+" "+b);
 }
 
 private static void testExamQuestions()
@@ -1206,6 +1209,11 @@ private static void defualtValue()
 
 	public static void testNumbers2_5()
 	{
+		final byte x = 64;
+		final byte y = 63;
+		byte z = x / y;// Compilation error it no longer fits in byte
+		System.out.println("z "+z);	
+
 		byte num_byt = 2;
 		char num_cha = 2;
 		short num_sho = 2;
@@ -1213,7 +1221,15 @@ private static void defualtValue()
 		float num_flo = 2.0f;
 		long num_lon = 2;
 		double num_dou= 2;
+		Byte wrapper_byt = 2;
+		Character wrapper_cha = 2;
+		Short wrapper_sho = 2;
+		Integer wrapper_int = 2;
+		Float wrapper_flo = 2.0f;
+		Long wrapper_lon = 2L;
+		Double wrapper_dou = 2D;
 		
+		System.out.println("");
 		System.out.println("byte == byte   "+(num_byt == num_byt));
 		System.out.println("byte == char   "+(num_byt == num_cha));
 		System.out.println("byte == short  "+(num_byt == num_sho));
@@ -1222,6 +1238,24 @@ private static void defualtValue()
 		System.out.println("byte == long   "+(num_byt == num_lon));
 		System.out.println("byte == double "+(num_byt == num_dou));
 		System.out.println("");
+		System.out.println("byte == Byte   		"+(num_byt == wrapper_byt));
+		System.out.println("byte == Character   "+(num_byt == wrapper_cha));
+		System.out.println("byte == Short  		"+(num_byt == wrapper_sho));
+		System.out.println("byte == Integer    	"+(num_byt == wrapper_int));
+		System.out.println("byte == Float  		"+(num_byt == wrapper_flo));
+		System.out.println("byte == Long   		"+(num_byt == wrapper_lon));
+		System.out.println("byte == Double 		"+(num_byt == wrapper_dou));
+		System.out.println("");
+		System.out.println("Byte.equals(byte)   "+(wrapper_byt.equals(num_byt)));
+		System.out.println("byte.equals(char)   "+(wrapper_byt.equals(num_cha)));
+		System.out.println("byte.equals(short)  "+(wrapper_byt.equals(num_sho)));
+		System.out.println("byte.equals(int)    "+(wrapper_byt.equals(num_int)));
+		System.out.println("byte.equals(float)  "+(wrapper_byt.equals(num_flo)));
+		System.out.println("byte.equals(long)  	"+(wrapper_byt.equals(num_lon)));
+		System.out.println("byte.equals(double) "+(wrapper_byt.equals(num_dou)));
+
+
+		System.out.println("");
 		System.out.println("char == byte   "+(num_cha == num_byt));
 		System.out.println("char == char   "+(num_cha == num_cha));
 		System.out.println("char == short  "+(num_cha == num_sho));
@@ -1229,6 +1263,14 @@ private static void defualtValue()
 		System.out.println("char == float  "+(num_cha == num_flo));
 		System.out.println("char == long   "+(num_cha == num_lon));
 		System.out.println("char == double "+(num_cha == num_dou));
+		System.out.println("");
+		System.out.println("char == Byte   		"+(num_cha == wrapper_byt));
+		System.out.println("char == Character   "+(num_cha == wrapper_cha));
+		System.out.println("char == Short  		"+(num_cha == wrapper_sho));
+		System.out.println("char == Integer    	"+(num_cha == wrapper_int));
+		System.out.println("char == Float  		"+(num_cha == wrapper_flo));
+		System.out.println("char == Long   		"+(num_cha == wrapper_lon));
+		System.out.println("char == Double 		"+(num_cha == wrapper_dou));
 	}
 
 	public static void testNumbers3()
@@ -1495,6 +1537,7 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers2();
+		testNumbers2_5();
 		//testNumbers3();
 		//testOperators();
 		//System.out.println("");
@@ -1537,6 +1580,6 @@ private static void defualtValue()
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
 		//testPrecedence();
-		testBooleans();
+		//testBooleans();
 	}
 }

@@ -151,9 +151,23 @@ public class Arraying
 		// Which of the following are valid statements?
 		//array2 = array3; // incompatible types
 		//array2 = array4; // incompatible types
-		array1 = array2; 
-		array4 = array1;
-		array5 = array3;
+		//array1 = array2; 
+		//array4 = array1;
+		//array5 = array3;
+	}
+
+	private static void test13()
+	{
+		ArrayList<String> a =new ArrayList<String>();
+		a.add("one");
+		a.add("two");
+		a.add("three");
+		//String[] s1 = (String[])a.toArray();
+		String[] s = a.toArray(new String[a.size()]);
+		for (String str:s)
+		{
+			System.out.println(str);
+		}
 	}
 
 	public static void main(String[] args) 
@@ -165,7 +179,8 @@ public class Arraying
 		//EpractizeQuestions();
 		//equalsTest();
 		//testArraycopy();
-		testSubtleDifferences();
+		//testSubtleDifferences();
+		test13();
 	}
 
 }
