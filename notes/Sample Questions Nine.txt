@@ -20,7 +20,7 @@ Notes:
 3. Inheritance
 4. Polymorphism
 
-Question 1:
+Question 1: O? 6/27
 What will the following code print when compiled and run?
 
 class Test{
@@ -47,7 +47,7 @@ Category: Using Loop Contructs (Ets Standard Test 4)
 
 
 
-Question 3:
+Question 3: X 6/27
 What will be the output when the following program is run?
 
 public class TestClass{
@@ -75,14 +75,14 @@ t1 = t2 = new TestClass();
 t3 = new TestClass();
 Objects: ?  References: ?
 
-Answer:
+Answer: O 6/27
 A declared reference variable exists regardless of whether a reference value (i.e. an object) has been assigned to it or not.
 two news => two objects. t1, t2, t3, t4 => 4 references.
 Correct response: 2 objects, 4 references.
-Notes: Confidence: A
+Notes: Confidence: A?
 Category: Variables and Objects (Ets Standard Test 4)
 
-Question 7:
+Question 7: X 6/27
 Which of the following are correct ways to initialize the static variables MAX and CLASS_GUID ?
 class Widget{
    static int MAX;     //1
@@ -113,8 +113,8 @@ Correct response: A and B.
 Notes: Confidence: A - answered correctly.
 Category:  Variables & Objects (Ets Standard Test 4)
 
-Question 8:
-Following is a supposedly robust method to parse an input for a float :
+Question 8: ? 6/27
+The following is a supposedly robust method to parse an input for a float :
 
 public float parseFloat(String s){
    float f = 0.0f;
@@ -131,14 +131,29 @@ public float parseFloat(String s){
    return f ;
 }
 Which of the following statements about the above method is/are true?
+1. If input is 0.1 then it will return 0.1 and print finally.
+2. If input is 0x.1 then it will return Float.NaN and print Invalid input 0x.1 and finally.
+3. If input is 1 then it will return 1.0 and print finally.
+4. If input is 0x1 then it will return 0.0 and print Invalid input 0x1 and finally.
+5. The code will not compile.
 
 Answer:
 Note that the return statement after finally block is unreachable. Otherwise, if this line were not there, choices 1, 2, 3 are valid.
-Correct response: Will not compile.
+Correct response: 5 Will not compile.
 Notes: Confidence: ? answered correctly, but because we thought Float.valueOf(s) returns a float, and then the next floatValue() method would not be found.
+In this question, the try and catch both have return statements. Therefore, there is no way anything after the finally block can be executed.
+But in the following example, statement after finally is not unreacheable:
+public void m1(){
+   try{
+     System.out.println("in try");
+   }finally{
+     System.out.println("in finally");
+   }
+     System.out.println("after finally...reachable.");
+}
 Category: Handling Exceptions (Ets Standard Test 4)
 
-Question 9:
+Question 9: ?  6/27
 Given the following code snippet:
    int rate = 10;
    int t = 5;
@@ -151,12 +166,12 @@ What can XXX be?
 Answer:
 There is no need for analyzing the whole code. XXX amount = 1000.0; will be valid only if XXX is double.  
 Note that the options do not include wrapper classes. Otherwise, Double is also valid because of auto boxing.
+When you write a floating point number without 'f', it is considered a double. In this case, 1000.0 is actually a double and not a float, so it can't be assigned to a variable of type float. To assign it to a float variable, you need to write 1000.0f or 1000.0F
 Correct response: only double
 Notes: Confidence: ? failed.
 Category:  Working with Java Data Types (Ets Standard Test 4)
 
-Question 10:
-
+Question 10: X 6/27
 Which one of the following class definitions is/are a legal definition of a class that cannot be instantiated?
 class Automobile{
    abstract void honk();  //(1)
@@ -185,11 +200,11 @@ If any method in a class is declared abstract, then the whole class must be decl
 3 - This is a valid abstract class although it doesn't have any abstract method.
 4 - An abstract method cannot have a method body. {} constitutes a valid method body.
 5 - This is a valid abstract class
-Correct response: 3
+Correct response: 3, 5.
 Notes: Confidence: ? failed.
 Category: Working with methods (Ets Standard Test 4)
 
-Question 13:
+Question 13: X 6/27
 What will be the result of compiling and running the following code?
 class Base{
    public Object getValue(){ return new Object(); } //1
@@ -213,17 +228,21 @@ Correct response: It will print hello.
 Notes: Confidence: ? incorrect.
 Category: Working with Inheritance (Ets Standard Test 4)
 
-Question 15:
+Question 15: X 6/27
 Consider :
-
  class A {  public void perform_work(){}  }
  class B extends A {  public void perform_work(){}  }
  class C extends B {  public void perform_work(){}  }
 How can you let perform_work() method of A to be called from an instance method in C?
+1. ( (A) this ).perform_work( );
+2. super.perform_work( );
+3. super.super.perform_work( );
+4. this.super.perform_work( );
+5. It is not possible.
 
 Answer:
 The method in C needs to call a method in a superclass two levels up. But super is a keyword and not an attribute so super.super.perform_work( ) strategy will not work. There is no way to go more than one level up for methods. Remember that this problem doesn't occur for instance variables because variable are never overridden. They are shadowed. So to access any of the super class's variable, you can unshadow it using a cast. For example, ((A) c).data; This will give you the data variable defined in A even if it is shadowed in B as well as in C.
-Correct response: ot possible.
+Correct response: 5. it is possible.
 Notes: Confidence: ? incorrect
 Category: Working with Inheritance (Ets Standard Test 4)
 
@@ -237,7 +256,7 @@ All operands of type byte, char or short are promoted AT LEAST to an int before 
 Notes: Confidence: ? correct. 
 Category: Using Operators and Decision Constructs (Ets Standard Test 4)
 
-Question 18:
+Question 18: X 6/27
 Which of these statements concerning interfaces are true?
 1. An interface may extend an interface.
 2. An interface may extend a class and may implement an interface.
@@ -254,7 +273,7 @@ Correct response: 1,3
 Notes: Confidence: B
 Category: Working with Inheritance (Ets Standard Test 4)
 
-Question 19:
+Question 19: X 6/27
 Which of the following statements are true?
 1. private keyword can never be applied to a class.
 2. synchronized keyword can never be applied to a class.

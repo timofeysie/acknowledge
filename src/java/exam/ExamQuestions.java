@@ -1511,6 +1511,21 @@ private static void defualtValue()
 		System.out.println((72 / 2) / 3);
 	}
 
+	public float parseFloat(String s){
+   		float f = 0.0f;
+   		try{
+      		f = Float.valueOf(s).floatValue();
+      		return f ;
+   		}
+   		catch(NumberFormatException nfe){
+      		System.out.println("Invalid input " + s);
+      		f = Float.NaN ;
+      		return f;
+   		}
+   		finally { System.out.println("finally");  }
+   		return f ;
+	}
+
 	public static void main(String args[]) 
 	{
 		ExamQuestions eq = new ExamQuestions();
