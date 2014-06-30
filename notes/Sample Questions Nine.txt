@@ -1,0 +1,1157 @@
+From Ets Standard Test 4
+
+
+Categories: 
+Java Basics
+Working with Data Types
+Using Operators and Decision Constructs
+Creating and Using Arrays
+Using Loop Contructs
+Working with Constructors, Methods, and Encapsulation
+Working with Inherhitance
+Handling Exceptions
+
+Notes:
+
+- A constructor cannot be final, static or abstract.
+- 4 fundamentals of OOP
+1. Encapsulation
+2. Abstraction - the development of classes, objects, types in terms of their interfaces and functionality. Encapsulation hides the details of that implementation.
+3. Inheritance
+4. Polymorphism
+
+Question 1: O? 6/27
+What will the following code print when compiled and run?
+
+class Test{
+    public static void main(String args[]){
+        int c = 0;
+        A: for(int i = 0; i < 2; i++){
+            B: for(int j = 0; j < 2; j++){
+                C: for(int k = 0; k < 3; k++){
+                    c++;
+                    if(k>j) break;
+                }
+            }
+        }
+        System.out.println(c);
+    }
+}
+
+Answer:
+The point to note here is that a break without any label breaks the innermost outer loop. So in this case, whenever k>j, the C loop breaks.
+You should run the program and follow it step by step to understand how it progresses.
+Correct response: 10
+Notes: Confidence: B but answered correctly.
+Category: Using Loop Contructs (Ets Standard Test 4)
+
+
+
+Question 3: X 6/27
+What will be the output when the following program is run?
+
+public class TestClass{
+   public static void main(String args[]){
+      int i;
+      int j;
+      for (i = 0, j = 0; j < i; ++j, i++){
+         System.out.println(i + " " + j);
+      }
+      System.out.println(i + " " + j);
+   }
+}
+
+Answer:
+++j and i++ do not matter in this case.
+The loop will not execute even once since j is not less than i at the start of the loop so the condition fails and the program will print 0 0 just once.
+Correct response: 0 0 will be printed once.
+Notes: Confidence: ?
+Category: Using Loop Contructs (Ets Standard Test 4)
+
+Question 6:
+Given that TestClass is a class, how many objects and reference variables are created by the following code?  
+TestClass t1, t2, t3, t4; 
+t1 = t2 = new TestClass(); 
+t3 = new TestClass();
+Objects: ?  References: ?
+
+Answer: O 6/27
+A declared reference variable exists regardless of whether a reference value (i.e. an object) has been assigned to it or not.
+two news => two objects. t1, t2, t3, t4 => 4 references.
+Correct response: 2 objects, 4 references.
+Notes: Confidence: A?
+Category: Variables and Objects (Ets Standard Test 4)
+
+Question 7: X 6/27
+Which of the following are correct ways to initialize the static variables MAX and CLASS_GUID ?
+class Widget{
+   static int MAX;     //1
+   static final String CLASS_GUID;   // 2
+   Widget(){
+       //3
+   }
+   Widget(int k){
+       //4
+   }
+}
+A. Modify lines //1 and //2 as : static int MAX = 111; static final String CLASS_GUID = "XYZ123";
+B. Add the following line just after //2 : static {  MAX = 111; CLASS_GUID = "XYZ123"; }
+C. Add the following line just before //1 : { MAX = 111; CLASS_GUID = "XYZ123"; 
+D. Add the following line at //3 as well as //4 : MAX = 111; CLASS_GUID = "XYZ123";
+
+Answer:
+The rules are: 
+1. static variables can be left without initializing. (They will get default values). 
+2. final variables must be explicitly initialized. 
+Now, here CLASS_GUID is a 'static final' variable and not just final or static. As static fields can be accessed even without creating an instance of the class, it is entirely possible that this field can be accessed before even a  single instance is created. In this case, no constructor or non-static initializer had ever been called. And so, the field (as it is final and so must be initialized explicitly) remains uninitialized. This causes the compiler to complain.  
+Had CLASS_GUID been just a final variable, option 4 would work but as it is also static, it cannot wait till the constructor executes to be initialized.
+A. You can initialize both the variables at declaration itself.
+B. Initializing the static variables in a static block ensures that they are initialized even when no instance of the class is created.
+C. This is not a static initializer and so will not be executed until an instance is created.
+D. This works for non-static final fields but not for static final fields.
+Correct response: A and B.
+Notes: Confidence: A - answered correctly.
+Category:  Variables & Objects (Ets Standard Test 4)
+
+Question 8: ? 6/27
+The following is a supposedly robust method to parse an input for a float :
+
+public float parseFloat(String s){
+   float f = 0.0f;
+   try{
+      f = Float.valueOf(s).floatValue();
+      return f ;
+   }
+   catch(NumberFormatException nfe){
+      System.out.println("Invalid input " + s);
+      f = Float.NaN ;
+      return f;
+   }
+   finally { System.out.println("finally");  }
+   return f ;
+}
+Which of the following statements about the above method is/are true?
+1. If input is 0.1 then it will return 0.1 and print finally.
+2. If input is 0x.1 then it will return Float.NaN and print Invalid input 0x.1 and finally.
+3. If input is 1 then it will return 1.0 and print finally.
+4. If input is 0x1 then it will return 0.0 and print Invalid input 0x1 and finally.
+5. The code will not compile.
+
+Answer:
+Note that the return statement after finally block is unreachable. Otherwise, if this line were not there, choices 1, 2, 3 are valid.
+Correct response: 5 Will not compile.
+Notes: Confidence: ? answered correctly, but because we thought Float.valueOf(s) returns a float, and then the next floatValue() method would not be found.
+In this question, the try and catch both have return statements. Therefore, there is no way anything after the finally block can be executed.
+But in the following example, statement after finally is not unreacheable:
+public void m1(){
+   try{
+     System.out.println("in try");
+   }finally{
+     System.out.println("in finally");
+   }
+     System.out.println("after finally...reachable.");
+}
+Category: Handling Exceptions (Ets Standard Test 4)
+
+Question 9: ?  6/27
+Given the following code snippet:
+   int rate = 10;
+   int t = 5;
+   XXX amount = 1000.0;
+   for(int i=0; i<t; i++){
+      amount = amount*(1 - rate/100);
+   }
+What can XXX be?
+
+Answer:
+There is no need for analyzing the whole code. XXX amount = 1000.0; will be valid only if XXX is double.  
+Note that the options do not include wrapper classes. Otherwise, Double is also valid because of auto boxing.
+When you write a floating point number without 'f', it is considered a double. In this case, 1000.0 is actually a double and not a float, so it can't be assigned to a variable of type float. To assign it to a float variable, you need to write 1000.0f or 1000.0F
+Correct response: only double
+Notes: Confidence: ? failed.
+Category:  Working with Java Data Types (Ets Standard Test 4)
+
+Question 10: X 6/27
+Which one of the following class definitions is/are a legal definition of a class that cannot be instantiated?
+class Automobile{
+   abstract void honk();  //(1)
+}
+abstract class Automobile{
+   void honk();   //(2)
+}
+abstract class Automobile{
+   void honk(){};   //(3)
+}
+abstract class Automobile{
+   abstract void honk(){}   //(4)
+}
+abstract class Automobile{
+   abstract void honk();   //(5)
+}
+
+Answer:
+Here are some points to remember:  
+A class is uninstantiable if the class is declared abstract. 
+If a method has been declared as abstract, it cannot provide an implementation i.e. a method body even if empty (and the class containing that method must be declared abstract). 
+If a method is not declared abstract, it must provide a method body (the class can be abstract but not necessarily so). 
+If any method in a class is declared abstract, then the whole class must be declared abstract.
+1 - will not compile as one of its method is abstract but the class itself is not abstract.
+2 - It will not compile as the method doesn't have the body and also is not declared abstract.
+3 - This is a valid abstract class although it doesn't have any abstract method.
+4 - An abstract method cannot have a method body. {} constitutes a valid method body.
+5 - This is a valid abstract class
+Correct response: 3, 5.
+Notes: Confidence: ? failed.
+Category: Working with methods (Ets Standard Test 4)
+
+Question 13: X 6/27
+What will be the result of compiling and running the following code?
+class Base{
+   public Object getValue(){ return new Object(); } //1
+}
+
+class Base2 extends Base{
+   public String getValue(){ return "hello"; } //2
+}
+
+public class TestClass{
+   public static void main(String[] args){
+      Base b = new Base2();
+      System.out.println(b.getValue()); //3
+   }
+}
+
+Answer:
+Observe that at run time b points to an object of class Base2. Further, Base2 overrides getValue(). Therefore, Base2's getValue() will be invoked and it will return hello.
+Covariant returns are allowed since Java 1.5, which means that an overriding method can change the return type to a subclass of the return type declared in the overridden method. But remember than covarient returns does not apply to primitives.
+Correct response: It will print hello.
+Notes: Confidence: ? incorrect.
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 15: X 6/27
+Consider :
+ class A {  public void perform_work(){}  }
+ class B extends A {  public void perform_work(){}  }
+ class C extends B {  public void perform_work(){}  }
+How can you let perform_work() method of A to be called from an instance method in C?
+1. ( (A) this ).perform_work( );
+2. super.perform_work( );
+3. super.super.perform_work( );
+4. this.super.perform_work( );
+5. It is not possible.
+
+Answer:
+The method in C needs to call a method in a superclass two levels up. But super is a keyword and not an attribute so super.super.perform_work( ) strategy will not work. There is no way to go more than one level up for methods. Remember that this problem doesn't occur for instance variables because variable are never overridden. They are shadowed. So to access any of the super class's variable, you can unshadow it using a cast. For example, ((A) c).data; This will give you the data variable defined in A even if it is shadowed in B as well as in C.
+Correct response: 5. it is possible.
+Notes: Confidence: ? incorrect
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 17 d:
+What will be the output:
+System.out.println('a' + 1 );
+
+Answer:
+Correct response:  would print b.
+All operands of type byte, char or short are promoted AT LEAST to an int before performing mathematical operations. If one of the operands is larger than an int then the other one is promoted to the same type. Note that System.out.println((float)5/4); will print 1.25. If you remove the explicit cast (float), it will print 1.
+Notes: Confidence: ? correct. 
+Category: Using Operators and Decision Constructs (Ets Standard Test 4)
+
+Question 18: X 6/27
+Which of these statements concerning interfaces are true?
+1. An interface may extend an interface.
+2. An interface may extend a class and may implement an interface.
+3. A class can implement an interface and extend a class.
+4. A class can extend an interface and can implement a class.
+5. An interface can only be implemented and cannot be extended.
+
+Answer:
+The keyword implements is used when a class inherits method prototypes from an interface. The keyword extends is used when an interface inherits from another interface, or a class inherits from another class.
+1. Unlike a class, an interface can extend from multiple interfaces.
+2. interface does not implement anything. It can extend another interface but not class.
+5. It can be extended by another interface.
+Correct response: 1,3
+Notes: Confidence: B
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 19: X 6/27
+Which of the following statements are true?
+1. private keyword can never be applied to a class.
+2. synchronized keyword can never be applied to a class.
+3. synchronized keyword may be applied to a non-primitive variable.
+4. final keyword can never be applied to a class.
+5. A final variable can be shadowed in a subclass.
+
+Answer:
+final keyword when applied to a class means the class cannot be subclassed, when applied to a method means the method cannot be overridden (it can be overloaded though) and when applied to a variable means that the variable is a constant.
+1. private, protected and public can be applied to an Inner class.
+3. It can only be applied to a method or a block.
+4. It can be applied to class, variable and methods.
+Correct response: 2, 5
+Notes: Confidence: A - incorrect, we answered 1,2.
+Category:  (Ets Standard Test 4)
+
+Question 24:
+1. public class ImaginaryNumber extends Number { //implementation for abstract methods of the base class }
+2. public class ThreeWayBoolean extends Boolean { //implementation for abstract methods of the base class }
+3. public class NewSystem extends System { //implementation for abstract methods of the base class }
+4. public class ReverseString extends String { //implementation for abstract methods of the base class }
+
+Answer:
+String, StringBuilder, and StringBuffer - all are final classes.  
+1. Remember that wrapper classes for primitives (java.lang.Boolean, java.lang.Integer, java.lang.Long, java.lang.Short etc.) are also final and so they cannot be extended.  
+2. java.lang.Number, however, is not final. Integer, Long, Double etc. extend Number.  
+3. java.lang.System is final as well.
+Number is not a final class so you can extend it.
+Correct response: 1
+Notes: Confidence: C. answered 3
+Category:  (Ets Standard Test 4)
+
+Question 28:
+Consider the following program:
+
+public class TestClass{
+   public static void main(String[] args)  {     calculate(2);    }
+   public static void calculate(int x){
+      String val;
+      switch(x){
+         case 2:
+         default:
+         val = "def";
+      }
+      System.out.println(val);
+   }
+}
+What will happen if you try to compile and run the program?
+1. It will not compile saying that variable val may not have been initialized..
+2. It will compile and print def
+3. As such it will not compile but it will compile if calculate(2); is replaced by calculate(3);
+4. It will compile for any int values in calculate(...);
+
+Answer:
+When you try to access a local variable, the compiler makes sure that it is initialized in all the cases. If it finds that there is a case in which it may not be initialized then it flags an error. For example:  
+int i; 
+if( somecondition) i = 20; 
+int k = i;  
+Here, if some condition returns false, then i remains uninitialized hence the compiler flags an error. In the given question: As there is no break after case 2, val will always be initialized in the switch block. So it will compile and run fine. Note that it will not compile if break is placed after case 2 because the compiler will figure out that in certain cases val may be left uninitialized.
+Correct response: 2, 3
+Notes: Confidence: C but correct.
+Category:  (Ets Standard Test 4)
+
+Question 29:
+Which of these statements are true?
+1. A static method can call other non-static methods in the same class by using the 'this' keyword.
+2. A class may contain both static and non-static variables and both static and non-static methods. 
+3. Instance methods may access local variables of static methods.
+4. All methods in a class are implicitly passed a 'this' parameter when called.
+
+Answer:
+The keyword 'this' can only be used within non-static methods. static methods cannot access non static fields or methods.
+Note : you can't do something like
+this = new Object();
+1. 'this' reference is not available within a static method.
+4. local variables can only be accessed in the method they are defined. So you cannot access them anywhere outside that method.
+5. All non-static/instance methods in a class are implicitly passed a 'this' parameter when called.
+Correct response: 2, 3
+Notes: Confidence: B but correct
+Category: Java Basics (Ets Standard Test 4)
+
+Question 30:
+Which of the following code snippets will print exactly 10?  
+1.  
+Object t = new Integer(106);     
+int k = ((Integer) t).intValue()/10;     
+System.out.println(k);  
+2.  
+System.out.println(100/9.9);  
+3.  
+System.out.println(100/10.0);  
+4.  
+System.out.println(100/10);  
+5.  
+System.out.println(3 + 100/10*2-13);
+
+Answer:
+1. int k = ((Integer) t).intValue()/10; Since both the operands of / are ints, it is a integer division. This means the resulting value is truncated (and not rounded). Therefore, the above statement will print 10 and not 11. 
+5. 3 + 100/10*2-13 will be parsed as: 3 + (100/10)*2-13. This is because the precedence of / and * is same (and is higher than + and -) and since the expression is evaluated from left to right, the operands are grouped on first come first served basis. [This is not the right terminology but you will be able to answer the questions if you remember this rule.]
+2. Since one of the operands (9.9) is a double, it wil perform a real division and will print 10.1010101010101
+3. Since one of the operands (10.0) is a double, it will perform a real division and will print 10.0
+Answer:
+Correct response: 1, 4, 5
+Notes: Confidence: C and was incorrect.
+Category:  (Ets Standard Test 4)
+
+Question 32:
+Consider the following class:  
+public class PortConnector{    
+	public PortConnector(int port) throws IOException{    
+		...lot of valid code.    
+	}    
+	...other valid code. 
+}  
+You want to write another class CleanConnector that extends from PortConnector. Which of the following statements should hold true for CleanConnector class?
+
+Answer:
+Observe that the rule for overriding a method is opposite to the rule for constructors. An overriding method cannot throw a superclass exception, while a constructor of a subclass cannot throw subclass exception (Assuming that the same exception or its super class is not present in the subclass constructor's throws clause). For example:    
+class A{     
+	public A() throws IOException{ }       
+	void m() throws IOException{ }   
+}    
+class B extends A{     
+	//IOException is valid here, but FileNotFoundException is invalid     
+	public B() throws IOException{ }      
+	//FileNotFoundException is valid here, but Exception is invalid     
+	void m() throws FileNotFoundException{ } 
+} 
+(Note: FileNotFoundException is a subclass of IOException, which is a subclass of Exception) 
+If the subclass constructor's throws clause includes the same exception or its superclass, then it can throw any other exception as well. 
+
+Explanation:
+As PortConnector has only one constructor, there is only one way to instantiate it. Now, to instantiate any subclass of PortConnector, the subclass's constructor should call super(int). But that throws throws IOException. And so it (or its super class) must be defined in the throws clause of subclass's constructor. Note that you cannot do something like:
+public CleanConnector(){
+   try{ super(); }catch(Exception e){} //WRONG : call to super must be first statement in constructor
+}
+Remember: Constructor must declare all the checked exceptions declared in the base constructor (or the super classes of the checked exceptions). They may add other exception. This behavior is exactly opposite from that of methods. The overriding method cannot throw any exception other than overridden method. It may throw subclasses of those exceptions.
+Correct response: 
+Notes: Confidence: A and was correct.
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 33:
+What should be the return type of the following method?
+public RETURNTYPE methodX( byte by){
+    double d = 10.0;
+    return (long) by/d*3;
+}
+
+Answer:
+Note that the cast (long) applies to 'by' not to the whole expression. 
+( (long) by ) / d * 3; 
+Now, division operation on long gives you a double. So the return type should be double.
+Correct response: double
+Notes: Confidence: A but incorrect.
+Category:  (Ets Standard Test 4)
+
+Question 35:
+An overriding method must have a same parameter list and the same return type as that of the overridden method.
+
+Answer:
+This would have been true prior to Java 1.5. But from Java 1.5, an overriding method is allowed to change the return type to any subclass of the original return type, also known as covariant return type. This does not apply to primitives, in which case, the return type of the overriding method must match exactly to the return type of the overridden method.
+Correct response: False.
+Notes: Confidence: A but incorrect.
+Category:  (Ets Standard Test 4)
+
+Question 38:
+Consider the following code:  
+public class Logger{     
+	private StringBuilder sb = new StringBuilder();          
+	public void logMsg(String location, String message){     
+		sb.append(location);     
+		sb.append("-");     
+		sb.append(message);     
+	}
+	public void dumpLog(){     
+		System.out.println(sb.toString());     
+		//Empty the contents of sb here     
+	}      
+}  
+Which of the following options will empty the contents of the StringBuilder referred to by variable sb in method dumpLog()?
+1. sb.delete(0, sb.length());
+2. sb.clear();
+3. sb.empty();
+4. sb.removeAll();
+5. sb.deleteAll();
+
+Answer:
+public StringBuilder delete(int start, int end) 
+Removes the characters in a substring of this sequence. The substring begins at the specified start and extends to the character at index end - 1 or to the end of the sequence if no such character exists. If start is equal to end, no changes are made. 
+Parameters: 
+start - The beginning index, inclusive. 
+end - The ending index, exclusive. 
+Returns: 
+This object. 
+Throws: StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
+Correct response: 1
+Notes: Confidence: C and incorrect.
+Category:  (Ets Standard Test 4)
+
+Question 43:
+Which of these are not part of the StringBuilder class?
+1. trim( )
+2. ensureCapacity(int )
+3. append(boolean)
+4. reverse( )
+5. setLength(int)
+Answer:
+1. This method is in String class.
+2. Ensures that the capacity of the buffer is at least equal to the specified minimum.
+3. It has all sorts of overloaded append methods !!!
+5. Sets the length of this String buffer. This string buffer is altered to represent a new character sequence whose length is specified by the argument. For every nonnegative index k less than newLength, the character at index k in the new character sequence is the same as the character at index k in the old sequence if k is less than the length of the old character sequence; otherwise, it is the null character '' (\u0000). In other words, if the newLength argument is less than the current length of the string buffer, the string buffer is truncated to contain exactly the number of characters given by the newLength argument.
+If the newLength argument is greater than or equal to the current length, sufficient null characters ('\u0000') are appended to the string buffer so that length becomes the newLength argument.
+The newLength argument must be greater than or equal to 0.
+Parameters:
+newLength - the new length of the buffer.
+Throws:
+IndexOutOfBoundsException - if the newLength argument is negative.
+Correct response: 1
+Notes: Confidence: A
+Category: Working with Java Data Types (Ets Standard Test 4)
+
+Question 46:
+Consider the contents of following two files:
+
+//File A.java
+package a;
+public class A{
+   A(){ }
+   public void  print(){ System.out.println("A"); }
+}
+
+//File B.java
+package b;
+import a.*;
+public class B extends A{
+   B(){ }
+   public void  print(){ System.out.println("B"); }
+   public static void main(String[] args){
+      new B();
+   }
+}
+What will be printed when you try to compile and run class B?
+
+Answer:
+Note that there is no modifier for A's constructor. So it has default access. This means only classes in package a can use it. Also note that class B is in a different package and is extending from A. In B's constructor the compiler will automatically add super() as the first line. But since A() is not accessible in B, this code will not compile.
+Because A() is not accessible in B.
+Correct response: It will not compile.
+Notes: Confidence: A but incorrect
+Category:  Working with Inheritance (Ets Standard Test 4)
+
+Question 48:
+Consider the following code:
+
+class A {
+    public void doA(int k) throws Exception {  // 0
+        for(int i=0; i< 10; i++) {
+            if(i == k) throw new Exception("Index of k is "+i); // 1
+        }
+    }
+    public void doB(boolean f) { // 2
+        if(f) {
+            doA(15); // 3
+        }
+        else return;
+    }
+    public static void main(String[] args) { // 4
+        A a = new A();
+        a.doB(args.length>0); // 5
+    }
+ }
+Which of the following statements are correct?
+1. This will compile and run without any errors or exception.
+2. This will compile if throws Exception is added at line //2
+3. This will compile if throws Exception is added at line //4
+4. This will compile if throws Exception is added at line //2 as well as //4
+5. This will compile if  line marked // 1 is enclosed in a try - catch block.
+
+Answer:
+5. Even if // 1 is enclosed in a try block, the method still has throws Exception in its declaration, which will force the caller of this method to either declare Exception in its throws clause or put the call within a try block.
+Any checked exceptions must be either handled using a try block or the method that generates the exception must declare that it throws that exception. In this case, doA() declares that it throws Exception. doB() is calling doA but it is not handling the exception generated by doA(). So, it must declare that it throws Exception. Now, the main() method is calling doB(), which generates an exception (due to a call to doA()). Therefore, main() must also either wrap the call to doB() in a try block or declare it in its throws clause.  The main(String[] args) method is the last point in your program where any unhandled checked exception can bubble up to. After that the exception is thrown to the JVM and the JVM kills the thread.
+Correct response: 4
+Notes: Confidence: A but incorrect.
+Category: Handling Exceptions (Ets Standard Test 4)
+
+Question 50:
+Which of the following is a legal return type of a method overriding the given method:  public Object  myMethod() {...} (Select the best option.)
+1. Object
+2. String
+3. Return type can be any class since all objects can be cast to Object.
+4. void
+5. None of the above.
+Answer:
+Since the original method is returning Object, the Overriding method can return any object type because all classes in Java ultimately extend from Object. Since 1.5, Java allows covariant return types, which means an overriding method can have its return type as any subclass of the original return type of the overridden method.
+3. Note that the return type cannot be a primitive such as int or char. It must be a class. So it can be Integer or Character as well.
+Correct response: 3
+Notes: Confidence: A but incorrect.
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 52:
+Consider the following classes :
+
+class A{ 
+   public void mA(){ };
+}
+
+class B extends A { 
+   public void mA(){ }
+   public void mB() { }
+}
+
+class C extends B { 
+   public void mC(){ }
+}
+and the following declarations:
+A x = new B(); B y = new B(); B z = new C();
+Which of the following calls are polymorphic calls?
+1. x.mA();
+2. x.mB();
+3. y.mA();
+4. z.mC();
+5. z.mB();
+
+Answer:
+A Polymorphic call means that irrespective of the type of the variable, the method of the actual class of the object referred by the variable is invoked. In java, all non-private method calls are polymorphic because which method is invoked is decided at runtime based on the class of the object instead of compile time.  In this case, x.mB() is invalid call. It will not even compile because the class of x is A, which does not contain method mB(). Even though the object referred to by x is of class B which does contain mB(). z.mC() is invalid for the same reason.
+Correct response: 1, 3, 5. 
+Notes: Confidence: B but correct.
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 57:
+What will be the result of attempting to compile and run the following program?  public class TestClass{    public static void main(String args[]){       Exception e = null;       throw e;    } }
+
+Answer:
+You are throwing an exception and there is no try or catch block, or a throws clause. So it will not compile. If you do either put a try catch block or declare a throws clause for the method then it will throw a NullPointerException at run time because e is null. A method that throws a 'checked' exception i.e. an exception that is not a subclass of Error or RuntimeException, either must declare it in throws clause or put the code that throws the exception in a try/catch block.
+Correct response: The code will fail to compile. 
+Notes: Confidence: A but incorrect.
+Category: Handing Exceptions (Ets Standard Test 4)
+
+Question 59:
+Consider the following code:
+
+interface Flyer{ }
+class Bird implements Flyer { }
+class Eagle extends Bird { }
+class Bat { }
+
+public class TestClass {
+    
+    public static void main(String[] args) {
+        Flyer f = new Eagle();
+        Eagle e = new Eagle();
+        Bat b = new Bat();
+        
+        if(f instanceof Bird) System.out.println("f is a Bird");
+        if(e instanceof Flyer) System.out.println("e is a Flyer");
+        if(b instanceof Flyer) System.out.println("b is a Flyer");
+    }
+}
+What will be printed when the above code is compiled and run?
+
+Answer:
+Note that there is no compilation issue with b instanceof Flyer because Flyer is an interface and it is possible for b to point to an object of a class that is a sub class of Bat and also implements Flyer. So the compiler doesn't complain. If you make Bat class as final, b instanceof Flyer will not compile because the compiler knows that it is not possible for b to point to an object of a class that implements Flyer.
+Correct response: f is a Bird e is a Flyer
+At run time, f points to an object of class Eagle. Now, Eagle extends Bird so f instanceof Bird returns true. e points to an object of class Eagle. Eagle extends Bird, which in turn implements Flyer. So an Eagle is a Flyer. Therefore, e instanceof Flyer will also return true.  b points to an object of class Bat, which does not extend from Bird. Therefore, b instanceof Flyer returns false.
+Notes: Confidence: B and incorrect. 
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 60:
+The options below contain the complete contents of a file (the name of the file is not specified). Which of these options can be run with the following command line once compiled? java main
+1. //in file main.java 
+public class anotherone{ } 
+class main {    
+	public static void main(String[] args) {        
+		System.out.println("hello");    
+	} 
+}
+2. //in file main.java 
+class anothermain{    
+	public static void main(String[] args) {        
+		System.out.println("hello2");    
+	}
+} 
+class main {    
+	public final static void main(String[] args) {        
+		System.out.println("hello");    
+	} 
+}
+
+Answer:
+1. A public class must exist in a file by the same name. So this code is invalid because anotherone is a public class but the name of the file is main. It would have been valid if the name of the file were anotherone.java.
+2. class main's main method will be executed. final is a valid modifier for the standard main method. 
+
+Note that final means a method cannot be overridden. Although static methods can never be overridden. (they can be shadowed), making a static method final prevents the subclass from implementing the same static method.
+
+A non public class may exist in any file. This implies that there can be only one public class in a file.
+Observe that the given code does not follow the standard Java naming convention. The class names should start with a capital letter. 
+
+There are questions in the exam that contain similar non-conventional and confusing names and that is why we have kept a few questions like that in this question bank.
+Correct response: 2
+Notes: Confidence: B and incorrect.
+Category: Using Operators and Decision Constructs (Ets Standard Test 4)
+
+Question 62:
+What will be the output of the following program?  
+public class TestClass{    
+public static void main(String args[ ] ){
+       int i = 0 ;
+        boolean bool1 = true ;
+        boolean bool2 = false;
+        boolean bool  = false;
+        bool = ( bool2 &  method1(i++) ); //1
+        bool = ( bool2 && method1(i++) ); //2
+        bool = ( bool1 |  method1(i++) ); //3
+        bool = ( bool1 || method1(i++) ); //4
+        System.out.println(i);
+    }
+    public static boolean method1(int i){
+        return i>0 ? true : false;
+    }
+}
+
+Answer:
+& and | do not short circuit the expression but && and || do.
+As the value of all the expressions ( 1 through 4) can be determined just by looking at the first part, && and || do not evaluate the rest of the expression, so method1() is not called for 2 and 4.
+Hence the value of i is incremented only twice.
+Correct response: It will print 2.
+Notes: Confidence: A but incorrect
+Category: Using Operators and Decision Constructs (Ets Standard Test 4)
+
+Question 63:
+What will be the output of compiling and running the following program:
+
+class TestClass implements I1, I2{
+   public void m1() { System.out.println("Hello"); }
+   public static void main(String[] args){
+      TestClass tc = new TestClass();
+      ( (I1) tc).m1();
+   }
+}
+interface I1{
+   int VALUE = 1;
+   void m1();
+}
+interface I2{
+   int VALUE = 2;
+   void m1();
+}
+
+Answer:
+Having ambiguous fields does not cause any problems but referring to such fields in an ambiguous way will cause a compile time error. So you cannot call : System.out.println(VALUE) as it will be ambiguous.   as there is no ambiguity in referring the field: 
+TestClass tc = new TestClass(); 
+System.out.println(( ( I1) tc).VALUE); 
+So, any of the VALUE fields can be accessed by casting.
+Correct response: It will print Hello.
+Notes: Confidence: B but correct.
+Category: Working with Inheritance (Ets Standard Test 4)
+
+Question 64:
+What will happen when the following code is compiled and run?  
+class AX{   
+	static int[] x = new int[0];   
+	static{    x[0] = 10;   }   
+	public static void main(String[] args){     
+		AX ax = new AX();   
+	} 
+} 
+
+Answer:
+The following is the output when the program is run: 
+java.lang.ExceptionInInitializerError 
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0        
+	at AX.<clinit>(SM.java:6) 
+Exception in thread "main" Java Result: 1  
+Note that the program ends with ExceptionInInitializerError because any exception thrown in a static block is wrapped into ExceptionInInitializerError and then that ExceptionInInitializerError is thrown.
+Even though the line x[0] = 10; will throw java.lang.ArrayIndexOutOfBoundsException, JVM will wrap it and rethrow java.lang.ExceptionInInitializerError.
+Correct response: It will throw ExceptionInInitializerError at runtime.
+Confidence: A but incorrect.
+Category: Creating and using Arrays (Ets Standard Test 4)
+
+Question 66:
+What will be the result of attempting to compile and run the following class?
+
+public class InitTest{
+   static String s1 = sM1("a");{
+      s1 = sM1("b");
+   }
+   static{
+      s1 = sM1("c");
+   }
+   public static void main(String args[]){
+      InitTest it = new InitTest();
+   }
+   private static String sM1(String s){
+      System.out.println(s);  return s;
+   }
+}
+
+Answer:
+First, static statements/blocks are called IN THE ORDER they are defined. (Hence, a and c will be printed.)
+Next, instance initializer statements/blocks are called IN THE ORDER they are defined. Finally, the constructor is called. So, then it prints b.
+Correct response: The program will compile without error and will print a, c and b in that order when run.
+Confidence: B but answered correctly.
+Category: Working with Methods (Ets Standard Test 4)
+
+Question 67:
+Given the following program, which statement is true?  
+class SomeClass{    
+	public static void main( String args[ ] ){       
+		if (args.length == 0 ){          
+			System.out.println("no arguments") ;       
+		}       
+		else{          
+		System.out.println( args.length + " arguments") ;       
+		}    
+	} 
+} 
+
+Answer:
+The word java and class name are not a part of the argument list.
+When the program is called with no arguments, the args array will be of length zero.
+When the program is called with no arguments, the args array will be of length zero. Unlike in C/C++, args[0] is not the name of the program or class. This is because the name of the class is always the same as defined in the java file. So there is no need for passing its name as an argument to main method.
+Correct response: The program will print no arguments when called with zero arguments and 1 arguments  when called with one argument.
+Confidence: B but answered correctly
+Category: Java Basics (Ets Standard Test 4)
+
+Question 68:
+Consider the following class...  
+class Test{    
+	public static void main(String[ ] args){       
+		int[] a = { 1, 2, 3, 4 };       
+		int[] b = { 2, 3, 1, 0 };       
+		System.out.println( a [ (a = b)[3] ] );    
+	} 
+}  
+What will it print when compiled and run ?
+
+Answer:
+In an array access, the expression to the left of the brackets appears to be fully evaluated before any part of the expression within the brackets is evaluated. In the expression a[(a=b)[3]], the expression a is fully evaluated before the expression (a=b)[3]; this means that the original value of a is fetched and remembered while the expression (a=b)[3] is evaluated. 
+This array referenced by the original value of a is then subscripted by a value that is element 3 of another array (possibly the same array) that was referenced by b and is now also referenced by a. So, it is actually a[0] = 1. Note that if evaluation of the expression to the left of the brackets completes abruptly, no part of the expression within the brackets will appear to have been evaluated.
+Correct response: It will print 1.
+Confidence: A and correct.
+Category: Creating and Using Arrays (Ets Standard Test 4)
+
+Question 70:
+1. Interfaces are abstract by default.
+2. An interface can have static methods.
+3. All methods in an interface are abstract although you need not declare them to be so.
+4. Fields of an interface may be declared as transient or volatile but not synchronized.
+5. interfaces cannot be final.
+
+Answer:
+Here are the rules: 
+1. Every interface is implicitly abstract. This modifier is obsolete for interfaces and should not be used in new Java programs. 
+2. An interface can extend any number of other interfaces and can be extended by any number of other interfaces 
+3. Every field declaration in the body of an interface is implicitly public, static and final. It is permitted, but strongly discouraged as a matter of style, to redundantly specify any or all of these modifiers for such fields. A constant declaration in an interface must not include any of the modifiers synchronized, transient or volatile, or a compile-time error occurs. 
+4.It is possible for an interface to inherit more than one field with the same name. Such a situation does not in itself cause a compile-time error. However, any attempt within the body of the interface to refer to either field by its simple name will result in a compile-time error, because such a reference is ambiguous. 
+5. Every method declaration in the body of an interface is implicitly public and abstract, so its body is always represented by a semicolon, not a block. 
+6. A method in an interface cannot be declared static, because in Java static methods cannot be abstract. 
+7. A method in an interface cannot be declared native or synchronized, or a compile-time error occurs, because those keywords describe implementation properties rather than interface properties. However, a method declared in an interface may be implemented by a method that is declared native or synchronized in a class that implements the interface.
+Answer 1: Because they don't have any implementation and so can't be instantiated.
+Correct response: 1,3,5
+Confidence: B and incorrect.
+Category:  (Ets Standard Test 4)
+
+Question 71:
+What will be the result of attempting to compile and run the following program?
+
+class TestClass{
+   public static void main(String args[]){
+      int i = 0;
+      for (i=1 ;  i<5  ; i++) continue;  //(1)
+      for (i=0 ;       ; i++) break;       //(2)
+      for (    ; i<5?false:true ;    );     //(3)
+   }
+}
+
+Answer:
+A continue statement can occur in and only in a for, while or do-while loop. A continue statement means: Forget about the rest of the statements in the loop and start the next iteration. 
+So, 
+for (i=1 ;  i<5  ; i++) continue; just increments the value of i up to 5 because of i++.  
+for (i=0 ;       ; i++) break; iterates only once because of the break so the value of i becomes 0.  
+for (    ; i<5?false:true ;    ); never iterates because i is less than 5 (it is 0 because of //2) and the condition expression is false!  
+At the end of the code, the value of i is 0.
+If you answered infinite loop: the condition part is 'false' so the control will never go inside the loop.
+Correct response: The code will compile without error and will terminate without problems when run.
+Confidence: C and incorrect.
+Category: Using Loop Constructs (Ets Standard Test 4)
+
+Question 75:
+Which of the following statements are true?
+1. The modulus operator % can only be used with integer operands.
+2. & can have integral as well as boolean operands.
+3. The arithmetic operators *, / and % have the same level of precedence.
+4. && can have integer as well as boolean operands.
+5. ~ can have integer as well as boolean operands.
+
+Answer:
+Note : 
+integral types means byte, short, int, long, and char
+Reference: http://java.sun.com/docs/books/jls/third_edition/html/typesValues.html
+"The types of the Java programming language are divided into two categories: primitive types and reference types. The primitive types (§4.2) are the boolean type and the numeric types. The numeric types are the integral types byte, short, int, long, and char, and the floating-point types float and double. The reference types (§4.3) are class types, interface types, and array types. There is also a special null type. An object (§4.3.1) is a dynamically created instance of a class type or a dynamically created array. The values of a reference type are references to objects. All objects, including arrays, support the methods of class Object (§4.3.2). String literals are represented by String objects (§4.3.3)."
+1. It can be used on floating points operands also. For example, 5.5 % 3 = 2.5
+2. unlike &&, & will not "short circuit" the expression if used on boolean parameters.
+4. !, && and || operate only on booleans.
+5. ~ Operates only on integral types
+Correct response: 2, 3.
+Confidence: B and incorrect.
+Category: Using Operators and Decision Constructs (Ets Standard Test 4)
+
+Question 76:
+What will be the result of trying to compile and execute of the following program?  
+public class TestClass{    
+	public static void main(String args[] ){       
+		int i = 0 ;       
+		int[] iA = {10, 20} ;       
+		iA[i] = i = 30 ;       
+		System.out.println(""+ iA[ 0 ] + " " + iA[ 1 ] + "  "+i) ;     
+	} 
+}
+
+Answer:
+The statement iA[i] = i = 30 ; will be processed as follows:
+iA[i] = i = 30; => iA[0] = i = 30 ;  =>  i = 30; iA[0] = i ; =>   iA[0] = 30 ;
+
+Here is what JLS says on this:
+1 Evaluate Left-Hand Operand First  
+2 Evaluate Operands before Operation  
+3 Evaluation Respects Parentheses and Precedence  
+4 Argument Lists are Evaluated Left-to-Right  
+
+For Arrays: First, the dimension expressions are evaluated, left-to-right. If any of the expression evaluations completes abruptly, the expressions to the right of it are not evaluated.
+Correct response: It will print 30 20 30
+Confidence: B but correct.
+Category:  (Ets Standard Test 4)
+
+Question 77:
+Consider the following interface definition: 
+interface Bozo{          
+	int type = 0;          
+	public void jump(); 
+}   
+Now consider the following class:  
+public class Type1Bozo implements Bozo{          
+	public Type1Bozo(){             
+		type = 1;         
+	}           
+	public void jump(){             
+		System.out.println("jumping..."+type);          
+	}           
+	public static void main(String[] args){             
+		Bozo b = new Type1Bozo();             
+		b.jump();          
+	} 
+} 
+What will the program print when compiled and run?
+
+Answer:
+Fields defined in an interface are ALWAYS considered as public, static, and final. (Methods are public and abstract.) Even if you don't explicitly define them as such. In fact, you cannot even declare a field to be private or protected in an interface. Therefore, you cannot assign any value to 'type' outside the interface definition.
+Correct response: This program will not compile.
+Confidence: A but wrong.
+Category:  (Ets Standard Test 4)
+
+Question 78:
+How can you initialize a StringBuilder to have a capacity of at least 100 characters?
+1. StringBuilder sb = new StringBuilder(100);
+2. StringBuilder sb = StringBuilder.getInstance(100);
+3. StringBuilder sb = new StringBuilder(); sb.setCapacity(100);
+4. StringBuilder sb = new StringBuilder(); sb.ensureCapacity(100);
+
+Answer:
+Observe that the question says "at least 100 characters". In the exam, you may get a question that says "100 characters", in that case, ensureCapacity() may not be a valid option.
+1. public StringBuilder(int capacity)
+Constructs a string builder with no characters in it and an initial capacity specified by the capacity argument.
+4. public void ensureCapacity(int minimumCapacity)
+Ensures that the capacity is at least equal to the specified minimum. If the current capacity is less than the argument, then a new internal array is allocated with greater capacity. The new capacity is the larger of: 
+The minimumCapacity argument. 
+Twice the old capacity, plus 2. 
+If the minimumCapacity argument is nonpositive, this method takes no action and simply returns.
+Correct response: 1, 4
+Confidence: A but wrong.
+Category: Working with Java Data Types (Ets Standard Test 4)
+
+Question 80:
+Consider the following classes...
+
+class Teacher{
+      void teach(String student){
+          /* lots of code */
+      }
+}
+class Prof extends Teacher{
+        //1
+}
+Which of the following methods can be inserted at line //1 ?
+1. public void teach() throws Exception
+2. private void teach(int i) throws Exception
+3. protected void teach(String s)
+4. public final void teach(String s)
+5. public abstract void teach(String s)
+
+Answer:
+Note that 'protected' is less restrictive than default 'no modifier'. So choice 3 is valid.
+"public abstract void teach(String s)" would have been valid if class Prof had been declared abstract.
+1. It overloads the teach() method instead of overriding it.
+2. It overloads the teach() method instead of overriding it.
+3. This overrides Teacher's teach method. The overriding method can have more visibility. (It cannot have less. Here, it cannot be private.)
+4. Overriding method may be made final.
+5. This is wrong because class Prof has not been declared as abstract. Note that otherwise it is OK to override a method by an abstract method.
+Correct response: 1, 2, 3, 4.
+Confidence: C and incorrect.
+Category:  (Ets Standard Test 4)
+
+Question 82:
+Which of the following are NOT valid operators in Java?
+1. <<<
+2. instanceof
+
+Answer:
+For left shifts there is no difference between shifting signed and unsigned values so there is only one leftshift '<<' in java.
+Correct response: 1.
+Confidence: B and correct.
+Category: Using Operators and Decision Constructs (Ets Standard Test 4)
+
+Question 83:
+Given the following declaration:    
+int[][] twoD = { { 1, 2, 3} , { 4, 5, 6, 7}, { 8, 9, 10 } };  
+What will the following lines of code print?  
+System.out.println(twoD[1].length); 
+System.out.println(twoD[2].getClass().isArray()); 
+System.out.println(twoD[1][2]);
+
+Answer:
+In Java, array numbering starts from 0. So in this case, twoD is an array containing 3 other arrays. 
+twoD[0] is { 1, 2, 3} , twoD[1] is { 4, 5, 6, 7}, and twoD[2] is  { 8, 9, 10 }.  
+Thus, twoD[1].length is 4 and twoD[1][2] is the third element in { 4, 5, 6, 7}, which is 6.  
+In Java, arrays are just like regular Objects and arrays of different types have different class names. For example, the class name of an int[] is [I and the class name for int[][] is [[I.  
+For array classes, the isArray() method of a Class returns true. 
+For example, twoD.getClass().isArray() will return true.  There are a few questions in the exam that require you to know about this.
+Correct response: 4 true 6
+Confidence: A and correct.
+Category: Creating and Using arrays (Ets Standard Test 4)
+
+Question 84:
+What will the following code print?
+
+void crazyLoop(){
+  int c = 0;
+  JACK: while (c < 8){
+    JILL: System.out.println(c);
+    if (c > 3) break JACK; else c++;
+  }
+}
+1. 
+2. 
+3. 
+4. 
+5. 
+Answer:
+This is a straight forward loop that contains a labelled break statement. A labelled break breaks out of the loop that is marked with the given label. Therefore, a labelled break is used to break out from deeply nested loops to the outer loops. Here, there is only one nested loop so the break; and break JACK; are same, but consider the following code:
+    public static void crazyLoop(){
+      int c = 0;
+      JACK: while (c < 8){
+        JILL: System.out.println("c = "+c);
+        for(int k = 0; k<c; k++){
+            System.out.println(" k = "+k+" c = "+c);
+            if (c > 3) break JACK; 
+        }
+        c++;
+      }
+    }
+This code prints:
+c = 0
+c = 1
+  k = 0 c = 1
+c = 2
+  k = 0 c = 2
+  k = 1 c = 2
+c = 3
+  k = 0 c = 3
+  k = 1 c = 3
+  k = 2 c = 3
+c = 4
+  k = 0 c = 4
+As you can see, in this case, break JACK; will break out from the outer most loop (the while loop). If break JACK; is replaced by break; it will print:
+c = 0
+c = 1
+  k = 0 c = 1
+c = 2
+  k = 0 c = 2
+  k = 1 c = 2
+c = 3
+  k = 0 c = 3
+  k = 1 c = 3
+  k = 2 c = 3
+c = 4
+  k = 0 c = 4
+c = 5
+  k = 0 c = 5
+c = 6
+  k = 0 c = 6
+c = 7
+  k = 0 c = 7
+This shows that a break without a label only breaks out of the current loop.
+Correct response: It will print numbers from 0 to 4
+Confidence: B but correct.
+Category:  (Ets Standard Test 4)
+
+Question 85:
+Given:
+public class TestClass{
+  public static int getSwitch(String str){
+      return (int) Math.round( Double.parseDouble(str.substring(1, str.length()-1)) );
+  }
+  public static void main(String args []){
+    switch(getSwitch(args[0])){
+      case 0 : System.out.print("Hello ");
+      case 1 : System.out.print("World"); break;
+      default : System.out.print(" Good Bye");
+    }
+  }
+}
+
+What will be printed by the above code if it is run with command line: java TestClass --0.50 (There are two minuses before 0.)
+
+Answer:
+str.substring(1, str.length()-1) => "--0.50".substring(1, (6-1) ) => -0.5
+Math.round(-0.5) = 0.0 so getSwitch(...) returns 0 if passed an argument of "--0.50". 
+Now, there is no "break" in case 0 of switch. 
+so the control falls through to the next case ( i.e. case 1) after printing Hello. At case 1, it prints World. And since there is a break. default is not executed.
+Correct response: Hello World
+Confidence: B but correct.
+Category:  (Ets Standard Test 4)
+
+Question 90:
+What should be placed in the two blanks so that the following code will compile without errors:  
+class XXX{    
+	public void m() throws Exception{         
+		throw new Exception();     
+	}
+} 
+class YYY extends XXX{     
+	public void m() {     
+	} 
+}
+public class TestClass {     
+	public static void main(String[] args) {        
+		______ obj = new ______();         
+		obj.m();     
+	} 
+}
+
+Answer:
+1. The overriding method may choose to have no throws clause even if the overridden method has a throws clause. 
+2. Whether a call needs to be wrapped in a try/catch or whether the enclosing method requires a throws clause depends on the class of the reference and not the class of the actual object.  
+Here, if you define obj of type XXX, the call obj.m() will have to be wrapped into a try/catch because main() doesn't have a throws clause. But if you define obj of class YYY, there is no need of try catch because YYY's m() does not throw an exception. 
+Now, if the class of obj is YYY, you cannot assign it an object of class XXX because XXX is a superclass of YYY. So the only option is to do:  
+YYY obj = new YYY();
+Correct response: YYY and YYY
+Confidence: A but incorrect.
+Category: Overloading Methods (Ets Standard Test 4)
+
+Question 91:
+What will the following code print?          
+int value = 1,000,000; //1         
+switch(value){             
+	case 1_000_000 : System.out.println("A million 1"); //2     
+		break;             
+	case 1000000 : System.out.println("A million 2"); //3
+		break;         
+	}
+
+Answer:
+1. You may use underscores (but not commas) to format a number for better code readability. So //1 is invalid. 
+2. Adding underscores doesn't actually change the number. The compiler ignores the underscores. So 1_000_000 and 1000000 are actually same and you cannot have two case blocks with the same value. Therefore, the second case at //3 is invalid.  
+You may use underscore for all kinds of numbers including long, double, float, binary, as well as hex.  For example, the following are all valid numbers - 
+int hex = 0xCAFE_BABE; 
+float f = 9898_7878.333_333f; 
+int bin = 0b1111_0000_1100_1100;
+Correct response: Compilation error because of //1 and //3
+Confidence: B but correct.
+Category: Working with Java Data Types (Ets Standard Test 4)
+
