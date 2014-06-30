@@ -1511,6 +1511,17 @@ private static void defualtValue()
 		System.out.println((72 / 2) / 3);
 	}
 
+	private static void testPrecedence2()
+	{
+		int x = 2;
+		int y = 3;
+		x += y += x += y;  
+		System.out.println("x += y += x += y is x = "+x+" y = "+y);
+		y = 1;
+		x = y++ + y++ + y++;
+		System.out.println("x = "+x);
+	}
+
 	public static void main(String args[]) 
 	{
 		ExamQuestions eq = new ExamQuestions();
@@ -1537,7 +1548,7 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers2();
-		testNumbers2_5();
+		//testNumbers2_5();
 		//testNumbers3();
 		//testOperators();
 		//System.out.println("");
@@ -1579,7 +1590,7 @@ private static void defualtValue()
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
-		//testPrecedence();
+		testPrecedence2();
 		//testBooleans();
 	}
 }
