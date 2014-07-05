@@ -1511,7 +1511,19 @@ private static void defualtValue()
 		System.out.println((72 / 2) / 3);
 	}
 
-	public float parseFloat(String s){
+	private static void testPrecedence2()
+	{
+		int x = 2;
+		int y = 3;
+		x += y += x += y;  
+		System.out.println("x += y += x += y is x = "+x+" y = "+y);
+		y = 1;
+		x = y++ + y++ + y++;
+		System.out.println("x = "+x);
+	}
+
+	public float parseFloat(String s)
+	{
    		float f = 0.0f;
    		try{
       		f = Float.valueOf(s).floatValue();
@@ -1523,7 +1535,7 @@ private static void defualtValue()
       		return f;
    		}
    		finally { System.out.println("finally");  }
-   		return f ;
+   		// return f; unreachable
 	}
 
 	public static void main(String args[]) 
@@ -1552,7 +1564,7 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers2();
-		testNumbers2_5();
+		//testNumbers2_5();
 		//testNumbers3();
 		//testOperators();
 		//System.out.println("");
@@ -1594,7 +1606,7 @@ private static void defualtValue()
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
-		//testPrecedence();
+		testPrecedence2();
 		//testBooleans();
 	}
 }
