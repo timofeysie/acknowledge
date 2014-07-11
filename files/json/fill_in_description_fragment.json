@@ -1,0 +1,13 @@
+"definition": 
+{
+	"description": 
+	{
+        	"en-US": "Ben is often heard saying: "
+    	},
+    	"type": "http://adlnet.gov/expapi/activities/cmi.interaction",
+    	"interactionType": "fill-in",
+    	"correctResponsesPattern": 
+	[
+        	"Bob's your uncle"
+    	]
+}

@@ -1,0 +1,41 @@
+{
+	"actor":   { /* Agent.java */},
+    	"verb" :   { /*Verb.java*/ },
+	"object":  { /* ??? */},
+	"context": { /* Context.java*/ }
+}
+
+"Agent";
+    private String name;
+    private String mbox;
+    private String mboxSHA1Sum;
+    private String openID;
+    private AgentAccount account;
+
+Verb
+    private URI id;
+    private LanguageMap display;
+
+ActivityDefinition
+    private LanguageMap name;
+    private LanguageMap description;
+    private URI type;
+    private Extensions extensions;
+    private InteractionType interactionType;
+    private ArrayList<String> correctResponsesPattern;
+    private ArrayList<InteractionComponent> choices;
+    private ArrayList<InteractionComponent> scale;
+    private ArrayList<InteractionComponent> source;
+    private ArrayList<InteractionComponent> target;
+    private ArrayList<InteractionComponent> steps;
+
+Context
+    private UUID registration;
+    private Agent instructor;
+    private Agent team;
+    private ContextActivities contextActivities;
+    private String revision;
+    private String platform;
+    private String language;
+    private SubStatement statement;
+    private Extensions extensions;
