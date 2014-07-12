@@ -1606,6 +1606,7 @@ private static void defualtValue()
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
+		testPrecedence();
 		testPrecedence2();
 		//testBooleans();
 	}
