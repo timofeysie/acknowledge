@@ -9,8 +9,13 @@ import java.io.*;
 
 public class ExamQuestions
 {
+
+	protected int a;
+
 	ExamQuestions () {
 		this("ExamQuestions");
+		a = 10;
+		System.out.println("a :"+a);
 	}
 
 	ExamQuestions (String name)
@@ -18,6 +23,7 @@ public class ExamQuestions
 		//this();
 		//super();
 		System.out.println("Started :"+name);
+		a = 20;
 	}
 
 	private static void testNan()
@@ -1606,6 +1612,7 @@ private static void defualtValue()
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
+		testPrecedence();
 		testPrecedence2();
 		//testBooleans();
 	}
