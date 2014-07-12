@@ -1,0 +1,229 @@
+Question (from Sample Questions Four):
+What will the following program print when run using the command line: java TestClass   
+public class TestClass {     
+	public static void methodX() throws Exception {       
+		throw new AssertionError();    
+	}       
+	public static void main(String[] args) {       
+		try{          
+			methodX();       
+		} catch (Exception e) {         
+			System.out.println("EXCEPTION");       
+		}    
+	} 
+}
+1. It will print EXCEPTION.
+2. It will throw AssertionError out of the main method.
+3. It will not compile because of the throws clause in methodX().
+4. It will end without printing anything because assertions are disabled by default.
+
+Answer:
+1. The catch block will not be able to catch the Error thrown by methodX().
+2. A subclass of Error cannot be caught using a catch block for Exception because java.lang.Error does not extend java.lang.Exception. 
+3. The throws clause is valid even though unnecessary in this case.
+4. It is true that assertions are disabled by default however, methodX is throwing an AssertionError explicitly like any other Throwable. Here, the assertion mechanism is not even used.
+Correct response: 2.
+
+Question (from sample questions four):  Will the following code compile and run?
+static import java.lang.System.*;//1
+class $$//2
+{
+	static public void main(String... _$_) //3
+	{
+		String _ = ""; //4
+		for(int $=0; ++$ < _$_.length; ) //5
+			_ += _$_[$]; //6
+		out.println(_); //7
+	}
+}
+
+Answer:
+Everything here is valid, except the import statement, which should be import static ...
+Reverse these two words and everything will compile fine.
+Correct response: no.
+
+Question:
+Given the following code:
+class TestClass{
+   public static void main(String args[]){
+      int k = 0;
+      int m = 0;
+      for (int i = 0; i <= 3; i++){
+         k++;
+         if ( i == 2){
+            // line 1
+         }
+         m++;
+      }
+      System.out.println( k + ", " + m );
+   }
+}
+What is the output if line 1 is replaces by:
+1. break;
+2. continue
+3. i = m ++;
+4. i = 4;
+
+Answer:
+This is a simple loop. All you need to do is execute each statement in your head. For example, if line 1 is replaced by break:  
+1. k=0, m=0 2. 
+iteration 1: i=0     
+2.1 k = 1     
+2.2 i == 2 is false     
+2.3 m = 1 3. 
+iteration 2: i = 1     
+3.1 k=2     
+3.2 i==2 is false     
+3.3 m = 2 4. 
+iteration 3: i = 2     
+4.1 k=3     
+4.2 i==2 is true     
+4.3 break 5. 
+print 3, 2
+Correct answers:
+1. 3, 2
+2. 4, 3
+3. 4, 5
+4. 3, 3
+(From Sample Questions Four)
+
+Question:
+Consider the following code in TestClass.java file:
+package p;
+private class TC extends java.util.HashMap{
+   public TC(){
+      super(100);
+      System.out.println("TC created");
+   }
+}
+public class TestClass extends TC{
+   public TestClass(){
+      System.out.println("TestClass created");
+   }
+   public static void main(String[] args){ new TestClass(); }
+}
+What will be the output when TestClass is run?
+
+Answer:
+The correct answer is that the code will not compile because TC is a top level class and private is not a valid access modifier for a top level class. private can be applied to an inner class.
+Error: modifier private not allowed here.
+(Four)
+
+Question:
+Which of the given lines can be inserted at //1 of the following program ?  
+public class TestClass{        
+	public static void main(String[] args){      
+		short s = 9;      //1    
+	} 
+}
+1. int i = 9; System.out.println(s == i);
+2. Boolean b = s instanceof Number;
+3. Short k = 9; Integer i = 9; System.out.println(k == i);
+4. Integer i = 9; System.out.println( s == i );
+5. System.out.println(s instanceof Short);
+6. Short k = new Short(9); System.out.println(k instanceof Short);
+
+Answer:
+1. Any two integral primitives can be compared using == operator.
+2. Left operand of instanceof MUST be an object and not a primitive.
+3. This will not compile because k and i are referring to objects that have no IS-A relationship among themselves.
+5. The left operand of instanceof MUST be an object and not a primitive.
+6. 9 is considered an int. This should be: Short s = new Short( (short) 9 );
+Correct response: 1 & 4
+(4)
+
+Question:
+Consider the following lines of code:  
+Integer i = new Integer(42); 
+Long ln = new Long(42); 
+Double d = new Double(42.0);
+System.out.println(ln.equals(42));
+What will be the output?
+
+Answer:
+The concept to understand here is as follows -
+If the compiler can figure out that something can NEVER happen, then it flags an error. In this question, the compiler knows that ln, i or d can never point to the same object in any case because they are references to different classes of objects that have no relation ( superclass/subclass ) between themselves.
+Therefore 1 and 2 will fail at compile time.
+5. Due to auto-boxing int 42 is converted into an Integer object containing 42. So this is valid. It will return false though because ln is a Long and 42 is boxed into an Integer.
+Correct response: false
+(fOUR)
+
+Question:
+Given the following LOCs:     
+int rate = 10;    
+XXX amount = 1 - rate/100*1 - rate/100;  
+What can XXX be?
+
+Answer:
+Note that none of the terms in the expression 1 - rate/100*1 - rate/100; is double or float. They are all ints. So the result of the expression will be an int. Since an int can be assigned to a variable of type int, long, float or double, amount cAn integer can be assigned to a double but not vice versa.
+
+Object class's equals() method just checks whether the two references are pointing to the same location or not.
+
+When refactoring a class to make it better in terms of encapsulation, the key is that your data variable should be private and the functionality that is to be exposed outside should be public. Further, your setter methods should be coded such that they don't leave the data members inconsistent with each other.
+an be int, long, float or double.
+Correct response: int, long, float or double
+
+An integer can be assigned to a double but not vice versa.
+A byte can ALWAYS be assigned to an int.
+a short or byte cannot be assigned to each other unless they are cast:
+		short s = 10;
+		char c = s; // error
+		s = c;      // error
+final short s = 1; byte b = s; => This is fine because s is a constant and the value fits into a byte.
+Implicit narrowing occurs only for byte, char, short, and int. Remember that it does not occur for long, float, or double. So, this will not compile: int i = 129L;
+
+Object class's equals() method just checks whether the two references are pointing to the same location or not.
+
+When refactoring a class to make it better in terms of encapsulation, the key is that your data variable should be private and the functionality that is to be exposed outside should be public. Further, your setter methods should be coded such that they don't leave the data members inconsistent with each other.
+
+Question:
+Which lines commented our will allow this program to compile?
+interface A {
+	double aMethod(int a);
+}
+interface B {
+	double bMethod(int a, int b);
+}
+
+1. class X extendes A { double aMethod(int a);}
+2. interface Y implements B { double bMethod(int x, int y);}
+3. interface Z extends A { float cMethod(int a, int b);}
+4. class P implements B { double aMethod(int a);}
+5. abstract class Q implements A, B {
+	public double aMethod(int a) {return a * a * 5.16;}
+}
+
+Answer:
+Correct response: 1  2.
+(from Sample Questions Five)
+
+
+Question:
+Cosnider these two classes: Parent.java and Child.java
+package p1;
+public class Parent {
+	public int x = new Interger(100);
+	protected int parentMethod() {
+		return x;
+	}
+}
+package p2;
+import p1.Parent;
+public class Child extends Parent {
+	public static void main(String [] args) {
+		new Child().childMethod();
+	}
+	void childMethod() {
+		System.out.print("This "+this.parentMethod());
+		Parent p = new Parent();
+		System.out.prin(" parent "+p.parentMethod());
+	}
+}
+What line can be removed to make the program compile and run?
+
+Answer: If line 10 is removed, then the output for the program when run is: This 100
+If you recall, a protected method can be called from a child class, as in line 8, but not from the parent class itself.
+Correct response: System.out.prin(" parent "+p.parentMethod());
+Category: Creating and Using Arrays?
+Cinsider that p.parentMethod is trying to use a method thru parent, while this.parentMethod is accessing the method as the part of itself which extends parent.
+What's a good family metaphore for this?  Family is allowed to access private methods.  Family being by inheritance.
