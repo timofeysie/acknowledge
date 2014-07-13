@@ -15,15 +15,27 @@ public class ExamQuestions
 	ExamQuestions () {
 		this("ExamQuestions");
 		a = 10;
-		System.out.println("a :"+a);
+		//System.out.println("a :"+a);
 	}
 
 	ExamQuestions (String name)
 	{
 		//this();
 		//super();
-		System.out.println("Started :"+name);
+		//System.out.println("Started :"+name);
 		a = 20;
+	}
+
+	private static void testDoubleEqualsFloat()
+	{
+		double num1 = 0.2;
+		if (num1 == 0.2f)
+		{
+			System.out.println("num == 0.2f");
+		} else
+		{
+			System.out.println("not equal"); 
+		}
 	}
 
 	private static void testNan()
@@ -385,7 +397,7 @@ private static void defualtValue()
 		System.out.println("Integer == float "+(num3 == num4));
 		System.out.println("float   == Integer "+(num4 == num3));
 		System.out.println("double == float "+(num5 == num4));
-		System.out.println("float == int "+(num6 == num7));
+		System.out.println("float == Integer "+(num6 == num7));
 		System.out.println("int == byte? "+(num7 == num8));
 		//System.out.println("double == float "+num1 == num2); // false
 		System.out.println(num1 == (double)num2); // false
@@ -523,7 +535,10 @@ private static void defualtValue()
 		String[] s3 = (String[])al.toArray();
 		String[] s4 = set.toArray(new String[al.size()]);
 
-		//ArrayList<int> ai = new ArrayList<int>();
+		ArrayList<Integer> ai = new ArrayList<Integer>();
+		ai.add(1);
+		ai.add(2);
+		ai.add(3);
 	}
 
 	static void aMethod(Byte ob) {System.out.println("Byte");}
@@ -1046,6 +1061,18 @@ private static void defualtValue()
    		}
 	}
 
+	public static void switchTest2(byte x)
+	{
+		final byte b1 = 1;
+		final byte b2 = 2;
+		final byte b3 = 3;
+		switch(x){
+      	case b1: System.out.println("case 1"); break;
+      	case b2: System.out.println("case 2"); break;
+      	case b3: System.out.println("case3"); break;
+   		}
+	}
+
 	private static void testInitialization()
 	{
 		// int a = b = c = 100;  cannot find symbols b and c.
@@ -1277,6 +1304,43 @@ private static void defualtValue()
 		System.out.println("char == Float  		"+(num_cha == wrapper_flo));
 		System.out.println("char == Long   		"+(num_cha == wrapper_lon));
 		System.out.println("char == Double 		"+(num_cha == wrapper_dou));
+
+
+
+		// short
+		System.out.println("");
+		System.out.println("short == byte   "+(num_sho == num_byt));
+		System.out.println("short == char   "+(num_sho == num_cha));
+		System.out.println("short == short  "+(num_sho == num_sho));
+		System.out.println("short == int    "+(num_sho == num_int));
+		System.out.println("short == float  "+(num_sho == num_flo));
+		System.out.println("short == long   "+(num_sho == num_lon));
+		System.out.println("short == double "+(num_sho == num_dou));
+		System.out.println("");
+		System.out.println("short == Byte   		"+(num_sho == wrapper_byt));
+		System.out.println("short == Character   "+(num_sho == wrapper_cha));
+		System.out.println("short == Short  		"+(num_sho == wrapper_sho));
+		System.out.println("short == Integer    	"+(num_sho == wrapper_int));
+		System.out.println("short == Float  		"+(num_sho == wrapper_flo));
+		System.out.println("short == Long   		"+(num_sho == wrapper_lon));
+		System.out.println("short == Double 		"+(num_sho == wrapper_dou));
+		System.out.println("");
+		System.out.println("Short.equals(byte)   "+(wrapper_sho.equals(num_byt)));
+		System.out.println("Short.equals(char)   "+(wrapper_sho.equals(num_cha)));
+		System.out.println("Short.equals(short)  "+(wrapper_sho.equals(num_sho)));
+		System.out.println("Short.equals(int)    "+(wrapper_sho.equals(num_int)));
+		System.out.println("Short.equals(float)  "+(wrapper_sho.equals(num_flo)));
+		System.out.println("Short.equals(long)  	"+(wrapper_sho.equals(num_lon)));
+		System.out.println("Short.equals(double) "+(wrapper_sho.equals(num_dou)));
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Integer.equals(byte)   "+(wrapper_int.equals(num_byt)));
+		System.out.println("Integer.equals(char)   "+(wrapper_int.equals(num_cha)));
+		System.out.println("Integer.equals(short)  "+(wrapper_int.equals(num_sho)));
+		System.out.println("Integer.equals(int)    "+(wrapper_int.equals(num_int)));
+		System.out.println("Integer.equals(float)  "+(wrapper_int.equals(num_flo)));
+		System.out.println("Integer.equals(long)  	"+(wrapper_int.equals(num_lon)));
+		System.out.println("Integer.equals(double) "+(wrapper_int.equals(num_dou)));
 	}
 
 	public static void testNumbers3()
@@ -1570,7 +1634,7 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers2();
-		//testNumbers2_5();
+		testNumbers2_5();
 		//testNumbers3();
 		//testOperators();
 		//System.out.println("");
@@ -1601,6 +1665,7 @@ private static void defualtValue()
 		//testIntern();
 		//testForSwitch();
 		//switchTest((byte)81);
+		//switchTest2((byte)2);
 		//ifTest(false);
 		//ifTest(true);
 		//testStrings();
@@ -1612,8 +1677,9 @@ private static void defualtValue()
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
-		testPrecedence();
-		testPrecedence2();
+		//testPrecedence();
+		//testPrecedence2();
 		//testBooleans();
+		//testDoubleEqualsFloat();
 	}
 }
