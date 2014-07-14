@@ -227,3 +227,55 @@ Correct response: System.out.prin(" parent "+p.parentMethod());
 Category: Creating and Using Arrays?
 Cinsider that p.parentMethod is trying to use a method thru parent, while this.parentMethod is accessing the method as the part of itself which extends parent.
 What's a good family metaphore for this?  Family is allowed to access private methods.  Family being by inheritance.
+
+Question 85:
+Given the following definitions and reference declarations:
+
+interface I1 { }
+interface I2 { }
+class C1 implements I1 { }
+class C2 implements I2 { }
+class C3 extends C1 implements I2 { }
+C1 o1;
+C2 o2;
+C3 o3;
+Which of these statements are legal?
+1. class C4 extends C3 implements I1, I2 { }
+2. o3 = o1;
+3. o3 = o2;
+4. I1 i1 = o3; I2 i2 = (I2) i1;
+5. I1 b = o3;
+
+Answer:
+1. Although, the implements I1, I2 is redundant here because C3 already implements I1 and I2, it is not invalid.
+2. superclass reference cannot be assigned to subclass reference without explicit cast.
+3. There is no way a reference of class C2 (which is o2) can point to an object of class C3 because C2 and C3 have no inheritance relationship. So this assignment is rejected at compile time itself.
+4. This is valid because at run time i1 actually refers to an object that implements I2.
+5. Because C3 extends C1 which implements I1.
+Correct response: 1, 4, 5.
+Category: Working with Inheritance: Easy
+(From Seven)
+
+Question 86:
+Consider the following code:
+
+class A{
+   A() {  print();   }
+   void print() { System.out.println("A"); }
+}
+class B extends A{
+   int i =   Math.round(3.5f);
+   public static void main(String[] args){
+      A a = new B();
+      a.print();
+   }
+   void print() { System.out.println(i); }
+}
+What will be the output when class B is run ?
+
+Answer:
+Explanation:
+Note that method print() is overridden in class B. Due to polymorphism, the method to be executed is selected depending on the class of the actual object. Here, when an object of class B is created, first A's constructor is called, which in turn calls print(). Now, since the class of actual object is B, B's print() is selected. At this point of time, variable i has not been initialized (because we are still initializing A at this point), so its default value i.e. 0 is printed. This happens because the method print() is non-private, hence polymorphic.  Finally, 4 is printed.
+Correct response: It will print 0, 4
+Category: Working with Inheritance: Real Brainer.
+(Seven)
