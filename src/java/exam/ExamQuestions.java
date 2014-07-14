@@ -683,9 +683,9 @@ private static void defualtValue()
 		//    10			12			12
 		System.out.println("G. a = (b = i++) + (c = ++i) + (d = i--) is a = "+a+" b = "+b+" c = "+c+" d "+d+" i "+i);
 
-		x = 2;
-    	z = ++x * x--;   // The output is 36 because x is incremented first.
-    	System.out.println("H. z = ++x * x-- is x = "+x+" y = "+y+" z = "+z);
+		x = 4;
+    	z = ++x * x--;
+    	System.out.println("H. z = ++x * x-- is x = "+x+" z = "+z);
 		x = 4;
 		z = x++ * --x;
 		System.out.println("I. x++ * --x is "+z);
@@ -974,10 +974,9 @@ private static void defualtValue()
 		System.out.println(Integer.toBinaryString(bin));
 		System.out.println(two);
 		System.out.println(Integer.toBinaryString(two));
-		int x = 5;
-		int y = 10;
-		int z = ++x * y--;
-		System.out.println("x "+x+" y "+y+" z "+z);
+		int x = 4;
+		int z = ++x * x--;
+		System.out.println("x "+x+" z "+z);
 	}
 
 	private static void testFloat()
@@ -1540,8 +1539,12 @@ private static void defualtValue()
 		System.out.println(i == fl);
 		System.out.println(i == lo);
 		System.out.println(i == do1);
-
+		System.out.println("");
+		System.out.println(i.equals(d));
+		System.out.println(d.equals(l));
+		System.out.println(l.equals(0));
 	}
+	
 
 	public static void testLessThanOrEqualTo()
 	{
@@ -1634,7 +1637,7 @@ private static void defualtValue()
 		//testIO();
 		//testException();
 		//testNumbers2();
-		testNumbers2_5();
+		//testNumbers2_5();
 		//testNumbers3();
 		//testOperators();
 		//System.out.println("");
@@ -1673,7 +1676,7 @@ private static void defualtValue()
 		//testNumbers2();
 		//System.out.printf("Hi %03d", 1);
 		//testValueOf();
-		//testWappers();
+		testWappers();
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();

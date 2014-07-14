@@ -8,7 +8,8 @@ public class Test16 {
 			A a1 = new B();
 			A b1 = new C();
 			a1 = b1;
-			//C b2 = (C)a1;
+			C b2 = (C)a1;
+			/*
 			// A a2 = (A) new D(); // Runtime ClassCastException
 			//D d3 = new D();
 			//E e1 = (E)d3; // Compile Error: inconvertable types
@@ -22,6 +23,7 @@ public class Test16 {
 			//A a_a_d = (A) new D(); // runtime error: D cannot be cast to an A.
 			D d_d = new D();
 			E e_e_d = (E)d_d; // runtime error: D cannot be cast to E
+			*/
 		}	
 }
 /*

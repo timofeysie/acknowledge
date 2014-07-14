@@ -12,8 +12,9 @@ class Test25
             // line 1
             //break;
             //continue;
-            // m++;
-             i = 4;
+            i = m++;
+            System.out.println("i set to m++ "+i);
+             //i = 4;
          }
          m++;
          System.out.println("i "+i+" k "+k+" m "+m);
