@@ -1545,6 +1545,35 @@ private static void defualtValue()
 		System.out.println(l.equals(0));
 	}
 	
+	private static void testNegation()
+	{
+		int a = -1;
+		int b = -a;
+		System.out.println(a+" "+b);
+
+		int c = 10;
+		float d = 1.0f;
+		Object o = c/d;
+		System.out.println(o);
+		if (o instanceof Float) System.out.println("Float");
+		if (o instanceof Double) System.out.println("Double");
+
+		c = 10;
+		double d1 = 1.0f;
+		Object o1 = c/d1;
+		System.out.println(o1);
+		if (o1 instanceof Float) System.out.println("Float");
+		if (o1 instanceof Double) System.out.println("Double");
+
+		c = 10;
+		byte d2 = 1;
+		Object o2 = c/d2;
+		System.out.println(o2);
+		if (o2 instanceof Integer) System.out.println("Integer");
+		if (o2 instanceof Float) System.out.println("Float");
+		if (o2 instanceof Long) System.out.println("Long");
+		if (o2 instanceof Double) System.out.println("Double");
+	}
 
 	public static void testLessThanOrEqualTo()
 	{
@@ -1571,10 +1600,14 @@ private static void defualtValue()
 		int b = 5;
 		int c = 10;
 		int rs = a + ++b * c / a * b;
-		System.out.println(rs);
+		System.out.println("1. "+rs);
+		a = 6;
+		b = 5;
+		c = 10;
 		rs = a + (++b)* ((c / a)* b);
-		System.out.println(rs);	
+		System.out.println("2. "+rs);	
 
+		System.out.println("---------");
 		int d = 1;
 		int e = 2;
 		int f = 3;
@@ -1582,6 +1615,10 @@ private static void defualtValue()
 		System.out.println(g);
 
 		System.out.println((72 / 2) / 3);
+
+		System.out.println("---------");
+		int h = 4 / 2 * 3 + 1;
+		System.out.println(h);
 	}
 
 	private static void testPrecedence2()
@@ -1676,13 +1713,14 @@ private static void defualtValue()
 		//testNumbers2();
 		//System.out.printf("Hi %03d", 1);
 		//testValueOf();
-		testWappers();
+		//testWappers();
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
-		//testPrecedence();
+		testPrecedence();
 		//testPrecedence2();
 		//testBooleans();
 		//testDoubleEqualsFloat();
+		//testNegation();
 	}
 }

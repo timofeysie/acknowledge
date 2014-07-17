@@ -1,7 +1,15 @@
 import java.util.*;
 
-class Test3
+class Test3 implements Comparable
 {
+
+	static int index;
+
+	public int compareTo(Object test)
+	{
+		return 1;
+	}
+
 	public String toString() {
 		return "Test3";
 	}
@@ -10,8 +18,8 @@ class Test3
 	{
 		//firstTest();
 		//secondTest();
-		//thirdTest();
-		fourthTest();
+		thirdTest();
+		//fourthTest();
 	}
 
 	private static void fourthTest()
@@ -35,7 +43,7 @@ class Test3
 
 	private static void thirdTest()
 	{
-		Set<Test3> s = new HashSet<Test3>();
+		Set<Test3> s = new TreeSet<Test3>();
 		s.add(new Test3()); // Test3 cannot be cast to Comparable.
 		s.add(new Test3());
 		s.add(new Test3());
