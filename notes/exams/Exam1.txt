@@ -140,3 +140,24 @@ Answer:
 If the sum of variables x and y was less the 127 (the max value of a byte) then this code would compile.  As it is, there is a compile time error saying "possible loss of precision".  If the sum was less than 127, but the bytes were not final, you would also get the same error.
 Correct response: A.
 
+Question:
+Given the following code:
+class Test35A{
+     public Test35A(int i){
+     	System.out.println("No no arguments constructor");
+     }
+}
+
+class Test35 extends Test35A{
+}
+	public static void main(String[] args) {
+		new B(10);
+	}
+}
+What will be the output if the program Test35 is compiled and executed?
+
+Answer:
+Correct response:
+Test35.java:9: error: class, interface, or enum expected
+(or similar compile message)
+Category: Working with Inheritance.
