@@ -1648,6 +1648,14 @@ private static void defualtValue()
    		// return f; unreachable
 	}
 
+	private static void testSampleQuestionsThree()
+	{
+		System.out.println('b' + new Integer(10));
+		Integer a = 'b' + new Integer(10);
+		Integer s = 66 + new Integer(10);
+		System.out.println(a+" "+s);
+	}
+
 	public static void main(String args[]) 
 	{
 		ExamQuestions eq = new ExamQuestions();
@@ -1717,10 +1725,11 @@ private static void defualtValue()
 		//testNan();
 		//testLessThanOrEqualTo();
 		//testInstanceOf();
-		testPrecedence();
+		//testPrecedence();
 		//testPrecedence2();
 		//testBooleans();
 		//testDoubleEqualsFloat();
 		//testNegation();
+		testSampleQuestionsThree();
 	}
 }

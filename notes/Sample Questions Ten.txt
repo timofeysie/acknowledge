@@ -296,3 +296,39 @@ public class BreakTest{
 
 Answer:
 Correct response: i = 0 j = -1.
+
+
+Question:
+Consider that str is a variable of class java.lang.String. Which of the following lines of code may throw a NullPointerException in certain situations?  Or a tougher version of the question could be : Which of the following lines of code are not an example of robust design ?
+1. if ( (str != null) | ( i == str.length() ) ) 
+2. if ( (str == null) | ( i == str.length() ) ) 
+3. if ( (str != null) || (i == str.length() ) )
+4. if ( (str == null) || (i == str.length() ) )
+
+Answer:
+(See TestClass22)
+1. (i == str.length()) will always be executed so if 'str' is null, then str.length() will throw a NullPointerException.
+2. (i == str.length()) will always be executed so if 'str' is null, then str.length() will throw a NullPointerException.
+3. (i == str.length()) will only be evaluated if (str != null) is false, and (str != null) will be false if 'str' is null. So it will also throw a NullPointerException.
+4. (i == str.length()) will only be evaluated if (str == null) is false, and (str == null) will be false if 'str' is NOT null. So it will NEVER throw a NullPointerException.
+The correct answers are 1,2 and 3.
+(From Sample Questions Three)
+
+Questions:
+Consider the following method:
+	private static void testSampleQuestionsThree()
+	{
+		System.out.println('b' + new Integer(10)); // 1
+		String a = 'b' + new Integer(10);		   // 2
+		String s = 66 + new Integer(10);		   // 3
+		System.out.println(a+" "+s);			   // 4
+	}
+What will be the output when compiled and run?
+
+Answer:
+There will be two compile tile errors:
+At line 2 and 3: incpmpatible types
+required: String
+found: int
+For line 1: Since the first operand of + one is of numeric type, its numberic value of 98 will be used.  Integer 10 will be unboxed and added to 98.  Therefore, the final value will be int 108.
+For line 2: Since we are assinging an int to a String, we will get an error on the same code in line 1 used outside a println statement.  If both String variables are changed to int or Integer, then the output would be 108, 108 76.
