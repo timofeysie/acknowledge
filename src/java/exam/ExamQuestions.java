@@ -828,6 +828,20 @@ private static void defualtValue()
 		System.out.println("b1 "+b1.toString());
 	}
 
+	private static void testSubstring3A()
+	{
+		System.out.println("testSubstring3A---");
+		StringBuilder b1 = new StringBuilder("snorkler");
+		StringBuilder b2 = new StringBuilder("yoodler");
+		System.out.println("b1 "+b1.toString());
+		String b1A = b2.substring(4);
+		System.out.println("b1A "+b1A);
+		StringBuilder b3 = b1.replace(3,4,b1A);
+		System.out.println("b3 "+b3.toString());
+		StringBuilder b4 = b3.append(b2.append(false));
+		System.out.println("b4 "+b4.toString());
+	}
+
 	private static void testSubstring4()
 	{
 		System.out.println("testSubstring3---");
@@ -952,6 +966,37 @@ private static void defualtValue()
       {
       	System.out.println(i+" == "+f);
       }
+	}
+
+	private static void testLoop3()
+	{
+		int k = 0;
+      	int m = 0;
+      	for (int i = 0; i <= 3; i++) {
+        	k++;
+         	if ( i == 2) {
+            i = m ++;
+            System.out.println("i == 2, i set to "+i);
+         	}
+         	m++;
+         	System.out.println(i+" "+k + ", " + m );
+      	}
+      	System.out.println( k + ", " + m );
+	}
+
+	private static void testSwitch1()
+	{
+		byte b = 'a';
+		final byte c = 'c';
+		final byte d = 'd';
+		switch (b)
+		{
+			case c: System.out.println("c");
+					break;
+			case d: System.out.println("d");
+					break;
+			default: System.out.println("default");
+		}
 	}
 
 	private static void testPromotion()
@@ -1701,11 +1746,13 @@ private static void defualtValue()
 		//testSubstring1();
 		//testSubstring2();
 		//testSubstring3();
+		//testSubstring3A();
 		//testLoops();
 		//testStringBuilder();
 		//testCharValues();
 		//testInstanceof();
 		//testLoop2();
+		testLoop3();
 		//testPromotion();
 		//testFloat();
 		//testOrder();
@@ -1730,6 +1777,7 @@ private static void defualtValue()
 		//testBooleans();
 		//testDoubleEqualsFloat();
 		//testNegation();
-		testSampleQuestionsThree();
+		//testSampleQuestionsThree();
+		testSwitch1();
 	}
 }

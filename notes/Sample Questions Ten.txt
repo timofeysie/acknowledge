@@ -332,3 +332,345 @@ required: String
 found: int
 For line 1: Since the first operand of + one is of numeric type, its numberic value of 98 will be used.  Integer 10 will be unboxed and added to 98.  Therefore, the final value will be int 108.
 For line 2: Since we are assinging an int to a String, we will get an error on the same code in line 1 used outside a println statement.  If both String variables are changed to int or Integer, then the output would be 108, 108 76.
+
+Question:
+Consider the following code...  
+class MyException extends Exception {}  
+public class TestClass{      
+	public void myMethod() throws XXXX{          
+		throw new MyException();      
+	} 
+}  
+What can replace XXXX?
+A. MyException
+B. Exception
+C. Throwable
+D. RuntimeException
+
+Answer:
+B. Because Exception is a superclass of MyException.
+A throws clause is necessary because MyException is a checked exception. Any exception that extends java.lang.Exception but is not a subclass of java.lang.RuntimeException is a checked exception.
+C. Because Throwable is a super class of Exception.
+Why: You can use Throwable as well as Exception as both of them are super classes of MyException. RuntimeException (and its subclasses such as NullPointerException and ArrayIndexOutOfBoundsException) is not a checked exception. So it cannot cover for MyException which is a checked exception. You cannot use Error as well because it is not in the hierarchy of MyException, which is: 
+Object <- Throwable <- Exception <- MyException.
+Correct Answer: A, B, C but not D.
+(From Sample Questions Three)
+
+Question:
+Given:
+	StringBuilder b1 = new StringBuilder("snorkler");
+	StringBuilder b1 = new StringBuilder("yoodler");
+	b1.replace(3,4,b2.substring(4)).append(b2.append(false));
+
+Answer:
+- You need to understand how append, insert, delete, and substring methods of StringBuilder/StringBuffer work. Please go through JavaDoc API for these methods. This is very important for the exam. Observe that substring() does not modify the object it is invoked on but append, insert and delete do.
+- In the exam, you will find questions that use such quirky syntax, where multiple calls are chained together. For example: 
+sb.append("a").append("asdf").insert(2, "asdf"). 
+- Make yourself familiar with this technique. If in doubt, just break it down into multiple calls. For example, the aforementioned statement can be thought of as:  
+sb.append("a"); 
+sb.append("asdf"); 
+sb.insert(2, "asdf")  
+- Note that the method substring() in StringBuilder/StringBuffer returns a String (and not a reference to itself, unlike append, insert, and delete). So another StringBuilder method cannot be chained to it. For example, the following is not valid: 
+sb.append("a").substring(0, 4).insert(2, "asdf");  
+The error would be: cannot find symbol: method inster(int,String) location: class String.
+- The following is valid though:  
+String str = sb.append("a").insert(2, "asdf").substring(0, 4);
+Also note that the substring(int i) method includes all from i to the end of the string.  In this case that is "ler", not just "l".
+Correct response: snorlerkleryoodlerfalse
+(From Three)
+
+Question:
+Consider the following method...  
+public int setVar(int a, int b, float c) { ...}  
+Which of the following methods correctly overload the above method?
+A. public int setVar(int a, float b, int c){   return (int)(a + b + c); }
+B. public int setVar(int a, float b, int c){   return this(a, c, b); }
+C. public float setVar(int a){   return a; }
+
+Answer:
+B. this( ... ) can only be called in a constructor and that too as a first statement.
+method is said to be overloaded when the other method's name is same and parameters ( either the number or their order) are different. Option 2 is not valid Because of the line: return this(a, c, b); This is the syntax of calling a constructor and not a method. It should have been: return this.setVar(a, c, b);
+
+Question:
+What will the following program print? 
+class LoopTest{
+    public static void main(String args[]) {
+        int counter = 0;
+        outer:
+        for (int i = 0; i < 3; i++) {
+            middle:
+            for (int j = 0; j < 3; j++) {
+                inner:
+                for (int k = 0; k < 3; k++) {
+                    if (k - j > 0) {
+                        break middle;
+                    }
+                    counter++;
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
+
+Answer:
+To understand how this loop works let us put some extra print statements in the innermost loop:
+System.out.println("i="+i+" j="+j+" k="+k);
+if(k-j>0){
+     System.out.println("breaking middle "+j);
+     break middle;
+}
+counter++;
+This is what it prints:
+i=0 j=0 k=0
+i=0 j=0 k=1
+breaking middle 0
+i=1 j=0 k=0
+i=1 j=0 k=1
+breaking middle 0
+i=2 j=0 k=0
+i=2 j=0 k=1
+breaking middle 0
+3
+The key is that the middle loop is broken as soon as k-j becomes > 0. This happens on every second iteration of inner loop when k is 1 and j is 0. Now, when middle is broken inner cannot continue. So the next iteration of outer starts.
+(From Three)
+
+Question: Which of the following statements are correct?
+1. An interface can be extended by an abstract class.
+2. An interface can be extended by a concrete class.
+3. An abstract class cannot implement an interface.
+Answer:
+1. A class "implements" an interface. It does not "extend" an interface.
+3. Any class, whether abstract or concrete, can implement any interface.
+Correct response: 1, 2, and 3 are all wrong.
+(From Four)
+
+Question:
+Give the following classes:
+
+package seven.one.initialization;
+import org.apache.log4j.Logger;
+class SuperSuper
+{
+	static Logger log = Logger.getLogger(SuperSuper.class);
+	
+	SuperSuper(){log.info("S: super super constructor");}
+}
+
+package seven.one.initialization;
+import org.apache.log4j.Logger;
+class SuperSequence extends SuperSuper
+{
+	static Logger log = Logger.getLogger(SuperSequence.class);
+	
+	SuperSequence(){log.info("s: super constructor");}
+}
+
+package seven.one.initialization;
+import org.apache.log4j.Logger;
+public class Sequence extends SuperSequence
+{ 
+	static Logger log = Logger.getLogger(Sequence.class);
+	Sequence() {log.info("c: constructor"); } 
+	{log.info("y: normal init block"); } 
+	public static void main(String[] args) 
+	{ 
+		log.info("1st Object -------");
+		new Sequence().go(); 
+		log.info("2nd Object -------");
+		Sequence s = new Sequence();
+		s.go();
+	} 
+	void go() {log.info("g: go method"); } 
+	static {log.info("w: static init block"); } 
+	{log.info("z: normal init block"); } 
+	static {log.info("x: static init block"); } 
+} 
+
+And the following test:
+
+	public void testSequence()
+    {
+        log.info("");
+        log.info(this.getClass().getSimpleName());
+        log.info("1st Object -------");
+        new Sequence().go(); 
+        log.info("2nd Object -------");
+        Sequence s = new Sequence();
+        s.go();
+        String expected = "value";
+        String actual = "value";
+        assertEquals(expected,actual);
+    }
+
+What will be the output?
+
+Answer:
+Correct response:
+InitializationTest
+1st Object -------
+w: static init block
+x: static init block
+S: super super constructor
+s: super constructor
+y: normal init block
+z: normal init block
+c: constructor
+g: go method
+2nd Object -------
+S: super super constructor
+s: super constructor
+y: normal init block
+z: normal init block
+c: constructor
+g: go method
+
+Question:
+	private static void testLoop3()
+	{
+		int k = 0;
+      	int m = 0;
+      	for (int i = 0; i <= 3; i++) {
+        	k++;
+         	if ( i == 2) {
+            i = m ++;
+         	}
+         	m++;
+      	}
+      	System.out.println( k + ", " + m );
+	}
+What will be the output?
+
+Answer:
+If you add the folliwing to the if statement:
+System.out.println("i == 2, i set to "+i);
+And this at the end of the loop block:
+System.out.println(i+" "+k + ", " + m );
+This will be the output:
+0 1, 1
+1 2, 2
+i == 2, i set to 2
+2 3, 4
+3 4, 5
+4, 5
+(Adapted from a question from Four)
+
+Question:
+Consider the following code in TestClass.java file:
+package p;
+private class TC extends java.util.HashMap{
+   public TC(){
+      super(100);
+      System.out.println("TC created");
+   }
+}
+public class TestClass extends TC{
+   public TestClass(){
+      System.out.println("TestClass created");
+   }
+   public static void main(String[] args){ new TestClass(); }
+}
+What will be the output when TestClass is run?
+
+Answer:
+The correct answer is that the code will not compile because TC is a top level class and private is not a valid access modifier for a top level class. private can be applied to an inner class.
+Error: modifier private not allowed here.
+Category: Working with methods - Access Modifiers
+(From Four)
+
+Question:
+Which of the given class level (nonlocal) variable declarations will not compile.
+A. protected int a;
+B. transient int b = 3;
+C. public static final int c;
+D. volatile int d;
+E. private synchronized int e;
+
+Answer: 
+Can a member variable be declared synchronized? No, because the word synchronized marks method code so that it can't be run by more than one thread at a time.  A synchronized method looks like this:
+synchronized (i){
+	//do stuff
+}
+automatic variables can be synchronized as such
+synchronized
+{
+	int i = 1;
+	code...
+}
+
+Answer:
+A, B, C, D will all compile fine.  
+Correct response: E.
+Category: Java Basics (Epractize)
+(From Sample Questions Five)
+
+
+Question:  What will the output be?
+class A {A() {System.out.print("A ");}}
+public class Main extends A {
+	public static void main(String [] args) {
+	new Main(1L).Main();
+	}
+	public Main(int x) {
+		this();
+		System.out.print("B ");
+	}
+	public Main(long x) {
+		this((int) x);
+		System.out.print("C ");
+	}
+	public Main() {
+		super(); 
+		System.out.print("D ");
+	}
+	void Main() {
+		System.out.print("E "); 
+	}
+}
+
+Answer:
+Note: creating a class without a no args constructor causes a COMPILER error when creating the class with a no args constructor.
+Correct response: A D B C E
+Category: Working with Methods and Encapsulation (Epractize)
+(Modified from Sample Questions Five)
+
+Question:
+Which of the following are true:
+
+A. A valid override has identical types and order, return type, not less accessable ...
+B. The overriding method must not throw any checked exceptions that were not declared for the original method.
+C. An overriding method cannot be defined in the same class as the method it overrides; rather, it must be defined in a s
+D. Overridden methods are not accessible outside the overriding class.
+E. Overridden methods are accessible outside the overriding class.
+F. An overriding method can be defined in the same class as the method it overrides.
+G. A valid override has identical argument types and order and the return type can be different.
+
+Answer:
+Overriding methods completely replace the original method unless the derived class makes specific reference to that original method using the super.xxx() construction.
+An overriding method cannot be defined in the same class as the method it overrides (this would be overloading?) rather, it must be defined in a subclass.
+The super.xxx() mechanism gives access to an overriden method from within the sublcass that defines the overriding method.
+Overridden methods are not accessible outside the overriding class.  Virtual method invocation otherwise insures that the behaviour associated with the object class (not with the variable type) will be the behaviour that occures.
+Correct response A, B, C, D.
+Category: (EPractize)
+(From Sample Questions Five)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
