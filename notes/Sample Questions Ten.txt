@@ -654,6 +654,57 @@ Correct response A, B, C, D.
 Category: (EPractize)
 (From Sample Questions Five)
 
+Question:
+Consider the following classes :
+interface I{}
+class A implements I{}
+class B extends A {}
+class C extends B{}
+And the following declarations:
+A a = new A();
+B b = new B(); 
+Identify options that will compile and run without error.
+1. a = (B)(I)b;
+2. b = (B)(I) a;
+3. a = (I) b;
+4. I i = (C) a;
+
+Answer:
+1. class B does implement I because it extends A, which implements I. A reference of type I can be cast to any class at compile time. Since B is-a A, it can be assigned to a. 
+2. This will fail at run time because a does not point to an object of class B.
+3. An I is not an A. Therefore, it will not compile.
+4. It will compile because a C is-a A, which is-a I, and a reference of class A can point to an object of class C. But it will fail at runtime because a does not point to an object of class C.
+ Test20.java.  The error for 3 would be:
+incompatible types: required A, found I
+Interface cast works exactly the same as a class cast and a multiple cast is not much different from a single one. You should break a multiple into two single casts as shown below: 
+b = (B)(I) a; 
+is same as: 
+I temp = (I) a; 
+b = (B) temp; 
+Now, if you know single casts, there should be no issue with the above.
+Option 3 is wrong because you cannot assign any arbitrary I to a variable of type A. 
+Class A implements interface I, but there could be other classes, unrelated to A, that also implement I. If option 3 were possible, you could do: 
+class D implements I { ... }
+D d = new D();
+a = (I)d; // This should not work!
+(Category: Inheritace.  Source: Sample Questions Three.)
+1. a = (B)(I)b;
+Type B is upcast to I - Legal as B extends A which implements I 
+Type I is downcast to B - Legal as the object in this case is of type B 
+Type B is assigned to variable of type A - Legal, you can always assigned an object to a variable which is a super type. ie it is always legal to upcast. 
+2. b = (B)(I) a;
+Type A is upcast to I - Legal as A implements I 
+Type I is downcast to B - Illegal as the object in this case is of type A and can't be downcast to type B 
+3. a = (I) b;
+Type B is upcast to I - Legal as B extends A which implements I 
+Type I is assigned to variable of type A - Illegal, you can't downcast unless you specify the type you are downcasting to. 
+4. I i = (C) a;
+Type A is downcast to C - Illegal as the object in this case is of type a and can not be downcast to type C. 
+.Look's like now my assumption of not looking on the left side of = is false
+Correct response: answer 1 is correct.
+(From Sample Questions Six)
+
+
 
 
 

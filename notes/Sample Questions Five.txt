@@ -304,9 +304,9 @@ A. A valid override has identical types and order, return type, not less accessa
 B. The overriding method must not throw any checked exceptions that were not declared for the original method.
 C. An overriding method cannot be defined in the same class as the method it overrides; rather, it must be defined in a s
 D. Overridden methods are not accessible outside the overriding class.
-E. Overriden methods are accessible outside the overriding class.
+E. Overridden methods are accessible outside the overriding class.
 F. An overriding method can be defined in the same class as the method it overrides.
-G. A valid overrid has identical argument types and order and the return type can be different.
+G. A valid override has identical argument types and order and the return type can be different.
 
 Answer:
 Overriding methods completely replace the original method unless the derived class makes specific reference to that original method using the super.xxx() construction.
