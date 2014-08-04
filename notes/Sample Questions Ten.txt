@@ -704,13 +704,100 @@ Type A is downcast to C - Illegal as the object in this case is of type a and ca
 Correct response: answer 1 is correct.
 (From Sample Questions Six)
 
+Question:
+1. class Ex6{
+2.  public static void main(String args[]){
+3.    int x = 0, y=10;          
+4.      try{
+5.        y /=x; 
+6.        }
+7.    System.out.print("/ by 0");
+8.      catch(Exception e){
+9.        System.out.print("error");
+10.      }
+11.  }  } 
 
+Answer:
+What is the result? FIX ANSWER E PROBLEM
+ A. 0 
+ B. error
+ C. Compilation fails 
+ D. An uncaught exception is thrown at runtime.  E. No output
+You cannot put code in between the try and the catch block, so line 7 causes a compilation error.
+Correct response: compiliation error.
+(Source: go certify)
 
+Question:
+Given
 
+- A and E are classes
+- B and D are interfaces
 
+Which are true? (Choose 2)
 
+ A. interface F implements B,D{ }
+ B. interface F implements D{ }
+ C. interface F extends D{ }
+ D. interface F extends E{ }
+ E. interface F extends B,D{ }
 
+Answer:
+intefaces can only extend other interfaces.
+Correct response: E.
+(source: go certify)
 
+Question:
+Given
+1.  class Ex1{
+2.    public static void main(String[] args) {
+3.    int a[] = { 1,2,053,4};
+4.    int b[][] = { {1,2,4} , {2,2,1},{0,43,2}};
+5.    System.out.print(a[3]==b[0][2] );
+6.    System.out.print(" " + (a[2]==b[2][1]));
+7.      }
+8.    }
+Which is the result?
+ A. true false
+ B. false false
+ C. false true
+ D. true true 
+ E. Compilation fails
+
+Answer:
+We have assinged an octal value to a[2] so the value of the element is 53 in decimal.  ANd we have assigned 43 in decimal to b [2][1].
+Correct response: true false.
+
+Question 12:
+Consider the following classes:
+1.  class Person{
+2.  Person(String s,inti ){
+3.      ++pid;
+4.      name=s;
+5.      age=i;
+6.      }
+7.    static int pid;
+8.    int age;
+9.    String name;
+10.      }
+11.  class Test{
+12.    public static void main(String args[]){
+13.    Person p1 = new Person("John" , 22);
+14.    Test te = new Test();
+15.    Person p2 = te.change(p1);
+16.    System.out.println(p2.pid +" "+p2.name+ " "+p2.age);
+17.    System.out.print(p1.pid +" "+p1.name+" "+ p1.age);
+18.  }
+19.  private Person change(Object o){
+20.  Person p2 = (Person)o;
+21.  p2.age = 25;
+22.  return p2;
+23.  }
+24.  }
+What is the result?
+
+Answer:
+Objects are passed by reference, so both p1 and p2 objects are modified at the same time.  And there is no problem in casting at line 20 (actually p1 is a person)
+Correct response: 1 John 25, 1 John 25
 
 
 
