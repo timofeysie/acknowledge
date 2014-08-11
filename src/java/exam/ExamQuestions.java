@@ -1701,6 +1701,23 @@ private static void defualtValue()
 		System.out.println(a+" "+s);
 	}
 
+	private static void testRemoveCurlies()
+	{
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("\"object\": {");
+        	buffer.append("\"id\": \"http://en.wiktionary.org/wiki/cat\",");
+        	buffer.append("\"objectType\": \"Activity\",");
+        	buffer.append("\"definition\": {");
+        	buffer.append("\"name\": {\"ko-KR\": \"goyangi\"},");
+        	buffer.append("\"description\": \"Reading\",");
+        	buffer.append("\"type\": \"http://ko.wiktionary.org/wiki/goyangi\"");
+        	buffer.append("}}");
+        	String expected = buffer.toString();
+        	System.out.println(expected);
+		String actual = expected.replaceAll("[{}]","");
+        	System.err.println("actual "+actual);
+	}
+
 	public static void main(String args[]) 
 	{
 		ExamQuestions eq = new ExamQuestions();
@@ -1752,7 +1769,7 @@ private static void defualtValue()
 		//testCharValues();
 		//testInstanceof();
 		//testLoop2();
-		testLoop3();
+		//testLoop3();
 		//testPromotion();
 		//testFloat();
 		//testOrder();
@@ -1778,6 +1795,7 @@ private static void defualtValue()
 		//testDoubleEqualsFloat();
 		//testNegation();
 		//testSampleQuestionsThree();
-		testSwitch1();
+		//testSwitch1();
+		testRemoveCurlies();
 	}
 }
