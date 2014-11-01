@@ -1,0 +1,709 @@
+
+
+Question:1 
+What will the following program snippet print?
+   int i=0, j=11;
+   do{
+      if(i > j) { break; }
+      j--;
+   }while( ++i < 5);
+   System.out.println(i+"  "+j);
+
+Answer: ++i < 5 means, increment the value of i and then compare with 5. Now, Try to work out the values of i and j at every iteration. To start with, i=0 and j=11. At the time of evaluation of the while condition, i and j are as follows:
+j = 10 and i=1 (loop will continue because i<5) (Remember that comparison will happen AFTER increment i because it is ++i and not i++.
+j = 9 and i=2 (loop will continue because i<5).
+j = 8 and i=3 (loop will continue because i<5).
+j = 7 and i=4 (loop will continue because i<5).
+j = 6 and i=5 (loop will NOT continue because i not <5).
+Correct response: it will print 5 6. (It is print i first and then j).
+Category: Using Loop COntructs: Very Tough
+
+Question: 2
+Note: This question may be considered too advanced for this exam. 
+What will the code shown below print when compiled and run with the following command line?  java WarZone self   
+interface XMen {
+   void shoot(String a);
+}
+
+public class WarZone {
+   public static void main(String[] args){
+       XMen x = null;
+       if(args.length() > 0){
+          x = new XMen(){
+             public void shoot(String s){
+                for(int i=0; i<s.length; i++){
+                  System.out.println("shot : "+s.charAt(i));
+                }
+             }
+          };
+       }
+       
+       if(x != null){
+          x.shoot(args[0]);
+       }
+   }
+}
+1. It will not compile because interface XMen cannot be instantiated.
+2. It will print shot :   4 times, one at each line.
+3. It will print "shot : s", "shot : e", "shot : l", "shot : f" one by one on 4 lines.
+4. It will compile but will throw an exception at runtime.
+5. None of these options is correct.
+
+Answer:
+1. An anonymous inner class that implements XMen interface is being created.
+2. This would be correct, if args.length() is changed to args.length and s.length to s.length().
+5. Read the question carefully. 'args' is an array and length is an attribute (not a method) of arrays. 's' is a String and there is no attribute length in a String but a method length(). Expect questions that try to confuse by adding misleading statements.
+Correct response: 5.  No correct options.
+Category: Java Basics  (Marked Question)
+
+Question 3:
+Note: This question may be considered too advanced for this exam. Given:
+class MySuper{
+    public MySuper(int i){ }
+}
+
+abstract class MySub extends MySuper{
+    public MySub(int i){ super(i); }
+    public abstract void m1();
+}
+
+class MyTest{
+    public static void main(String[] args){
+        MySub ms = new MySub(){
+            public void m1() { System.out.println("In MySub.m1()"); }
+        };
+        ms.m1();
+    }
+}
+What will be the output when the above code is compiled and run?
+1. It will not compile.
+2. It will throw an exception at run time.
+3. It will print In MySub.m1()
+4. It will compile and run without any exception but will not print anything.
+5.
+
+Answer:
+1. When you define and instantiate an anonymous inner class for an abstract class as being done here, the anonymous class is actually a subclass of the abstract class (in this case, it is a subclass of MySub). Now, since the anonymous class does not define any constructor, the compiler will add the default no-args constructor to the anonymous class, which will try to call the no-args constructor of its super class MySub. But MySub doesn't have any no-args constructor. Therefore, it will not compile. The anonymous inner class should have been created like this: MySub ms = new MySub( someInteger ){ ... };
+Correct response: 1
+Category: Working with Inheritance (Marked Question)
+
+Question 4:
+Given the following code, which statements are true?
+
+interface Automobile { String describe(); }
+
+class FourWheeler implements Automobile{
+   String name;
+   public String describe(){ return " 4 Wheeler " + name; }
+}
+
+class TwoWheeler extends FourWheeler{
+    String name;
+    public String describe(){ return " 2 Wheeler " + name; }
+}
+1. An instance of TwoWheeler is also an instance of FourWheeler.
+2. An instance of TwoWheeler is a valid instance of Automobile.
+3. The use of inheritance is not justified here because a TwoWheeler is not really a FourWheeler.
+4. The code will compile only if name is removed from TwoWheeler.
+5. The code will fail to compile.
+
+Answer:
+The use of inheritance in this code is not justifiable, since conceptually, a TwoWheeler is-not-a FourWheeler. 
+Correct response: 1, 2, and 3.
+Category:
+
+Question 5:
+What will be the output when the following program is run?
+
+public class TestClass{
+    char c;
+    public void m1(){
+        char[ ] cA = { 'a' , 'b'};
+        m2(c, cA);
+        System.out.println( ( (int)c)  + ", " + cA[1] );
+    }
+    public void m2(char c, char[ ] cA){
+        c = 'b';
+        cA[1] = cA[0] = 'm';
+    }
+    public static void main(String args[]){
+        new TestClass().m1();
+    }
+}
+1. Compile time error.
+2.  ,m
+3. 0,m
+4. b,b
+5. b,m
+
+Answer:
+1. c is an instance variable of numeric type so it will be given a default value of 0, which prints as empty space.
+2. Because of the explicit cast to int in the println() call, c will be printed as 0.
+Note that Arrays are Objects (i.e. cA instanceof Object is true) so are effectively passed by reference. So in m1() the change in cA[1] done by m2() is reflected everywhere the array is used. c is a primitive type and is passed by value. In method m2() the passed parameter c is different than instance variable 'c' as local variable hides the instance variable. So instance member 'c' keeps its default (i.e. 0) value.
+Correct response: 3.
+Category: Working with Methods: Very Easy
+
+
+
+Question 7:
+What will be the output of the following class...
+
+class Test{
+   public static void main(String[] args){
+      int j = 1;
+      try{
+         int i = doIt() / (j = 2);
+      } catch (Exception e){
+         System.out.println(" j = " + j);
+      }
+   }
+   public static int doIt() throws Exception {  throw new Exception("FORGET IT");  }
+}
+1. It will print j = 1;
+2. It will print j = 2;
+3. The value of j cannot be determined.
+4. It will not compile.
+5. None of the above.
+
+Answer:
+If evaluation of the left-hand operand of a binary operator completes abruptly, no part of the right-hand operand appears to have been evaluated.
+So, as doIt() throws exception, j = 2 never gets executed.
+Correct response: 1
+Category: Handling Exceptions: Easy
+
+
+Question 11:
+Consider the following class...  class MyString extends String{    MyString(){ super(); } }   The above code will not compile.
+True or False?
+
+Answer:
+This will not compile because String is a final class and final classes cannot be extended. There are questions on this aspect in the exam and so you should remember that StringBuffer and StringBuilder are also final. All Primitive wrappers are also final (i.e. Boolean, Integer, Byte etc). java.lang.System is also final.
+Correct response: true (it will not compile)
+Category: Working with Java Data Types.
+
+
+Question 12:
+What will the following code print?
+void crazyLoop(){
+   int c = 0;
+   JACK: while (c < 8){
+       JILL: System.out.println(c);
+       if (c > 3) break JILL; else c++;
+   }
+}
+
+1. It will not compile.
+2. It will throw an exception at runtime.
+3. It will print numbers from 0 to 8
+4. It will print numbers from 0 to 3
+5. It will print numbers from 0 to 4
+
+Answer:
+Because break JILL; would be valid only when it is within the block of code under the scope of the label JILL. In this case, the scope of JILL extends only up till System.out.println(c); and break JILL; is out of the scope of the label. 
+Correct response: 1
+Category: Using Loop Contructs
+
+Question 14:
+Consider the following class:  
+public class ArgsPrinter{    
+	public static void main(String args){       
+		for(int i=0; i<3; i++){          
+			System.out.print(args+" ");       
+		}    
+	}
+}  
+What will be printed when the above class is run using the following command line: java ArgsPrinter 1 2 3 4
+
+Answer:
+To run a class from the command line, you need a main(String[] ) method that takes an array of Strings array not just a String. Therefore, an exception will be thrown at runtime saying no main(String[] ) method found.
+Correct response: Runtime exception
+Category: Java Basics
+
+Question 18:
+Given the following classes, what will be the output of compiling and running the class Truck?
+class Automobile{
+   public void drive() {  System.out.println("Automobile: drive");   }
+}
+
+public class Truck extends Automobile{
+   public void drive() {  System.out.println("Truck: drive");   }
+   public static void main (String args [ ]){
+      Automobile  a = new Automobile();
+      Truck t  = new Truck();
+      a.drive(); //1
+      t.drive(); //2
+      a = t;     //3
+      a.drive(); //4
+   }
+}
+1. Compiler error at line 3.
+2. Runtime error at line 3.
+3. It will print:  Automobile: drive Truck: drive Automobile: drive in that order.
+4. It will print: Automobile: drive Truck: drive Truck: drive in that order.
+5. It will print: Automobile: drive Automobile: drive Automobile: drive in that order.
+
+Answer:
+Since Truck is a subclass of Automobile, a = t will be valid at compile time as well runtime. But a cast is needed to make for t = (Truck) a; This will be ok at compile time but if at run time 'a' does not refer to an object of class Truck then a ClassCastException will be thrown. Now, method to be executed is decided at run time and it depends on the actual class of object referred to by the variable. 
+Here, at line 4, variable a refers to an object of class Truck. So Truck's drive() will be called which prints Truck: drive. This is polymorphism in action!
+Correct response: It will print: 4
+Automobile: drive 
+Truck: drive 
+Truck: drive 
+in that order.
+Category: Working with Inheritance.
+
+Question 20:
+A try statement must always have a ............. associated with it.
+1 . catch
+2. throws
+3. finally
+4. catch, finally or both
+5. throw
+
+Answer:
+A try without resources must have either a catch or a finally. It may have both as well. Thus, the following constructs are valid:  
+1. try{ } 
+catch(Exception e){  }          // no finally  
+2. try{ } finally{  }          // no catch  
+3. try{ } catch(Exception e){  } finally{  }  
+4. A catch can catch multiple exceptions: try{ } catch(Exception1|Exception2|Exception3 e){  }   
+Note: try with resources (which is not on this exam) may omit catch as well as finally blocks.
+Correct response: 4
+Category:
+
+Question 21:
+Note: This question may be considered too advanced for this exam.  Which statements can be inserted at line 1 in the following code to make the program write x on the standard output when run?
+
+public class AccessTest{
+   String a = "x";
+   static char b = 'x';
+   String  c = "x";
+   class Inner{
+      String  a = "y";
+      String  get(){
+         String c = "temp";
+         // Line 1
+         return c;
+      }
+   }
+
+   AccessTest() { 
+     System.out.println(  new Inner().get()  ); 
+   }
+
+   public static void main(String args[]) {  new AccessTest();  }
+}
+
+1. c = c;
+2. c = this.a;
+3. c = ""+AccessTest.b;
+4. c = AccessTest.this.a;
+5. c = ""+b;
+
+Answer:
+1. It will reassign 'temp' to c!
+2. It will assign "y" to c.
+3. Because b is static.
+Correct response: 3, 4 and 5.
+Category: Working with Java Data Types
+
+Question 23:
+Note: This question may be considered too advanced for this exam. Given: String mStr = "123"; long m = // 1 Which of the following options when put at //1 will assign 123 to m?
+1. new Long(mStr);
+2. Long.parseLong(mStr);
+3. Long.longValue(mStr);
+4. (new Long()).parseLong(mStr);
+5. Long.valueOf(mStr).longValue();
+
+Answer:
+1. Auto unboxing will occur.
+3. longValue is a non-static method in Long class.
+4. Long (or any wrapper class) does not have a no-args constructor, so new Long() is invalid.
+5. Long.valueOf(mStr) returns a Long object containing 123. longValue() on the Long object returns 123.
+Correct response: 1, 2 & 5.
+Category: Working with Java Data Types
+
+Question 24:
+Consider the following method -
+public float parseFloat( String s ){
+   float f = 0.0f;
+   try{
+      f = Float.valueOf( s ).floatValue();
+      return f ;
+   }
+   catch(NumberFormatException nfe){
+      f = Float.NaN ;
+      return f;
+   }
+   finally{
+      f = 10.0f;
+      return f;
+   }
+}
+What will it return if the method is called with the input "0.0" ?
+1. It will not compile.
+2. It will return 10.0
+3. It will return Float.Nan
+4. It will return 0.0
+5. None of the above.
+
+Answer:
+finally block will always execute (except when there is a System.exit() in try or catch). And inside the finally block, it is setting f to 10.0. So no matter what the input is, this method will always return 10.0.
+Correct response: 2.
+Category: Handling Exceptions
+
+Question 25:
+What, if anything, is wrong with the following code?
+// Filename: TestClass.java
+class TestClass implements T1, T2{
+   public void m1(){
+   		TestClass tc = new TestClass();  // 1
+   		System.out.println(( ( T1) tc).VALUE); // 2
+   		System.out.println(VALUE);  // 3
+   }
+}
+interface T1{
+   int VALUE = 1;
+   void m1();
+}
+interface T2{
+   int VALUE = 2;
+   void m1();
+}
+
+Answer:
+Having ambiguous fields or methods does not cause any problems by itself but referring to such fields/methods in an ambiguous way will cause a compile time error. So you cannot call : System.out.println(VALUE); because it will be ambiguous (there are two VALUE definitions). But the following lines are valid :  TestClass tc = new TestClass(); System.out.println(( ( T1) tc).VALUE);  However, explicit cast is not required for calling the method m1() : ( ( T2) tc).m1(); tc.m1() is also fine because even though m1() is declared in both the interfaces, the definition to both resolves unambiguously to only one m1(), which is defined in TestClass.
+Correct response: Complie time error.
+Category: Working with Inheritance.
+
+Question 26: 
+Note: This question may be considered too advanced for this exam. What will the following code print when run?
+
+public class TestClass{	
+    public static Integer wiggler(Integer x){
+       Integer y = x + 10;
+       x++;
+       System.out.println(x);
+       return y;
+    }
+
+    public static void main(String[] args){
+       Integer dataWrapper = new Integer(5);
+       Integer value = wiggler(dataWrapper);
+       System.out.println(dataWrapper+value);
+    }
+}
+
+Answer:
+1. Wrapper objects are always immutable. Therefore, when dataWrapper is passed into wiggler() method, it is never changed even when x++; is executed. However, x, which was pointing to the same object as dataWrapper, is assigned a new Integer object (different from dataWrapper) containing 6.  
+2. If both the operands of the + operator are numeric, it adds the two operands. Here, the two operands are Integer 5 and Integer 15, so it unboxes them, adds them, and prints 20.
+
+Correct response: 6 and 20.
+Category: 
+
+Question 29: 
+Which is the first line that will cause compilation to fail in the following program?
+
+// Filename: A.java
+class A{
+   public static void main(String args[]){
+      A a = new A();
+      B b = new B();
+      a = b;  // 1
+      b = a;  // 2
+      a = (B) b; // 3
+      b = (B) a; // 4
+   }
+}
+class B extends A { }
+
+Answer:
+Because 'a' is declared of class A and 'b' is of B which is a subclass of A. So an explicit cast is needed.
+Casting a base class to a subclass as in : b = (B) a; is also called as narrowing (as you are trying to narrow the base class object to a more specific class object) and needs explicit cast. 
+Casting a sub class to a base class as in: A a = b; is also called as widening and does not need any casting.  
+For example, consider two classes: Automobile and Car, where Car extends Automobile 
+Now, Automobile a = new Car(); is valid because a car is definitely an Automobile. So it does not need an explicit cast.  
+But, Car c = a; is not valid because 'a' is an Automobile and it may be a Car, a Truck, or a MotorCycle, so the programmer has to explicitly let the compiler know that at runtime 'a' will point to an object of class Car. Therefore, the programmer must use an explicit cast: Car c = (Car) a;
+Correct response: line 2
+Category:  Working with Inheritance: Very Easy
+
+Question 30: 
+Identify the valid for loop constructs assuming the following declarations:
+Object o = null;
+Collection c = //valid collection object.
+int[][] ia = //valid array
+1. for(o : c){ }
+2. for(final Object o2 :c){ }
+3. for(int i : ia) { }
+4. for(Iterator it : c.iterator()){ }
+5. for(int i : ia[0]){ }
+
+Answer:
+1. Cannot use an existing/predefined variable in the variable declaration part.
+2. final is the only modifier (excluding annotations) that is allowed here.
+3. Each element of ia is itself an array. Thus, they cannot be assigned to an int.
+4. c.iterator() does not return any Collection. Note that the following would have been valid: Collection<Iterator> c = //some collection that contains Iterator objects for(Iterator it : c){ }
+5. Since ia[0] is an array of ints, this is valid. (It may throw a NullPointerException or ArrayIndexOutOfBoundsException at runtime if ia is not appropriately initialized.)
+Correct response: 2 and 5.
+Category: 
+
+Question 31: 
+Note: This question may be considered too advanced for this exam.  Given the declaration  
+interface Worker { void perform_work(); }  
+which of the following methods/classes are valid?
+1. Worker getWorker(int i){
+2. Worker getWorker(final int i){
+3. Worker getWorker(int i){
+4. 
+5. 
+
+Answer:
+1. Since method parameter i is not final, it cannot be accessed from perform_work().
+2. Since method paramter 'i' is final, it can be accessed from perform_work();
+3. x is not accessible from within perform_work() either. In fact, i and x are similar for all practical purposes in terms of accessibility.
+4. 
+Worker getWorker(final int i){    
+	class MyWorker implements Worker {          
+		public void perform_work() { System.out.println(i); }    };    
+	return new MyWorker(); }
+Do not get confused with option 2. You are not instantiating an interface, you are instantiating an anonymous class that implements the interface Worker.   FYI, if you have a nested static class MyWorker in TestClass as follows, 
+public class TestClass{    
+	public static class MyWorker implements Worker{        
+		public MyWorker(int i){ }        
+		public void perform_work(){ }    
+	} 
+}  
+MyWorker can be instantiated in any other class by doing: new TestClass.MyWorker( someInt );  
+There is no instance of TestClass associated with the MyWorker class in this case. Inside TestClass you can instantiate MyWorker directly  (new MyWorker(someInt)) in static or non static context.  
+Remember: A nested class is any class whose declaration occurs within the body of another class or interface. A top level class is a class that is not a nested class. An inner class is a nested class that is not explicitly or implicitly declared static. A class defined inside an interface is implicitly static.
+Correct response: 2 and 4.
+Category: Working with Inheritance: Tough
+It looks like the explaination for number 2 is wrong.  What x are they talking about?
+
+Question 32: (modified) 
+Consider the following code:
+
+public class Varargs{
+   public void test(){
+        test1(10, 20);  //1
+   }
+
+   public void test1(int i, int... j){ System.out.println("1"); }
+   public void test1(int i, int j){ System.out.println("3"); }
+
+   public static void main(String[] args){
+     new Varargs().test();
+   } 
+}
+What will the program print?
+
+Answer:
+Correct response: Will not compile
+It would compile if this method was added:
+public void test1(int... i ){ System.out.println("2"); }
+Category: 
+
+Question 34: 
+Consider the following class hierarchy
+
+class A{
+   public void m1() {   }
+}
+class B extends A{
+   public void m1() {   }
+}
+class C extends B{
+   public void m1(){
+      /*  //1
+      ... lot of code.
+      */
+   }
+}
+1. You cannot access class A's m1() from class C for the same object ( i.e. this).
+2. You can access class B's m1() using super.m1() from class C.
+3. You can access class A's m1() using ( (A) this ).m1() from class C.
+4. You can access class A's m1() using super.super.m1() from class C.
+
+Answer:
+3. Note that selection of method to be executed depends upon the actual object class. So no matter what you do, in class C you can only access C's m1() even by casting this to B or A. So, this option will not work.
+There is no construct like super.super. So, there is no way you can access m1() of A from C.
+Correct response: 1 and 2.
+Category: Working with Inheritance: Real Brainer.
+
+Question 44: 
+What will be the result of attempting to compile and run the following program?
+
+public class TestClass{
+   public static void main(String args[]){
+      int x  = 0;
+      labelA:   for (int i=10; i<0; i--){
+         int j = 0;
+         labelB:
+         while (j < 10){
+            if (j > i) break labelB;
+            if (i == j){
+               x++;
+               continue labelA;
+            }
+            j++;
+         }
+         x--;
+      }
+      System.out.println(x);
+   }
+}
+1. Compile error
+2. Infinate loop
+3. The program will write 10 to the standard output.
+4. The program will write 0 to the standard output.
+5. None of these
+
+Answer:
+This is just a simple code that is meant to confuse you. Notice the for statement: for(int i=10; i<0; i--). i is being initialized to 10 and the test is i<0, which is false. Therefore, the control will never get inside the for loop, none of the weird code will be executed, and x will remain 0, which is what is printed.
+Correct response: 4.
+Category: 
+
+Question 45: 
+What will the following program print when run?
+public class TestClass{
+  public static void main(String[] args){
+     try{
+        System.exit(0);
+     }
+     finally{
+         System.out.println("finally is always executed!");
+     }
+  }
+}
+1. It will print  "finally is always executed!"
+2. It will not compile as there is no catch block.
+3. It will not print anything.
+4. An exception will be thrown
+5. None of the above.
+
+Answer:
+finally is always executed (even if you throw an exception in try or catch) but this is the exception to the rule.
+When you call System.exit(...); The JVM exits so there is no way to execute the finally block.
+Correct response: It will not print anything.
+Category: Handling Exceptions: Easy
+
+Question 46: 
+This is a Drag and Drop type question. Please click on 'Show DnD Screen' to see the question.
+Identify the exceptions.
+1. String s = null;
+System.out.println(s.length));
+2. int[]ia = new int[]{1,2,3};
+System.out.println(ia[3]);
+3. Class.forName("java.lang.String");
+4. public class X {
+	static {
+	throw new NullPointerException();
+	}
+}
+
+
+Answer:
+1. npe
+2. aioobe
+3. will not compile
+4. eiie
+Please read ExceptionClassSummary document in the "Study References" section.
+Note that the question is not asking what exception you need to put in the catch(...) part or throws clause. It is just asking what exceptions will be thrown by the code fragments when they are executed.
+Correct response: 
+Category: Handling Exceptions: Tough
+
+
+Question 49: 
+Given:     
+byte b = 1;   
+char c = 1;   
+short s = 1;   
+int i = 1;  
+which of the following expressions are valid?
+1. s = b * b ;
+2. i = b << b ;
+3. s <<= b ;
+4. c = c + b ;
+5. s += i ;
+
+Answer:
+1. b * b returns an int.
+3. All compound assignment operators internally do an explicit cast.
+4. c + b returns an int
+5. All compound assignment operators internally do an explicit cast.
+Remember these rules for primitive types: 1. Anything bigger than an int can NEVER be assigned to an int or anything smaller than int ( byte, char, or short) without explicit cast. 2. CONSTANT values up to int can be assigned (without cast) to variables of lesser size ( for example, short to byte) if the value is representable by the variable.( that is, if it fits into the size of the variable). 3. operands of mathematical operators are ALWAYS promoted to AT LEAST int. (i.e. for byte * byte both bytes will be first promoted to int.) and the return value will be AT LEAST int. 4. Compound assignment operators ( +=, *= etc)  have strange ways so read this carefully:  
+A compound assignment expression of the form E1 op= E2 is equivalent to E1 = (T)((E1) op (E2)), where T is the type of E1, except that E1 is evaluated only once. Note that the implied cast to type T may be either an identity conversion or a narrowing primitive conversion. For example, the following code is correct:  
+short x = 3; 
+x += 4.6;  
+and results in x having the value 7 because it is equivalent to:  
+short x = 3; 
+x = (short)(x + 4.6);
+Correct response: 2,3,5. 
+Category: 
+
+Question: 52 
+Consider the directory structure shown in Image 1 that displays available folders and classes and the code given below:  
+class StockQuote{   S
+	tock stock;   
+	public StockQuote(Stock s)  {   }   
+	public void store() throws IOException{      
+		Util.store(stock);   
+	}   
+	public double computePrice(){     
+		return Helper.getPricer(stock).price();   
+	} 
+}  
+Assuming that the code uses valid method calls, what statements MUST be added to the above class?
+com.Helper.class -> enthu.Util.class ->  Stock.class
+1. package com.enthu.rad.*;
+2. import com.enthu.*;
+3. package com.enthu.rad;
+4. import com.*;
+5. import java.io.*;
+6. It is not required to import java.io.* or import java.io.IOException because java.io package is imported automatically.
+
+Answer:
+1. Bad syntax. A package statement can never have a *. It should specify the exact package name.
+3. Since there is no import statement available for com.enthu.rad package, you must put the given class in com.enthu.rad package so that it will be accessible. Classes of the same package are always available to each other.
+6. Since the code is using IOException, the java.io package (or just java.io.IOException class) must be imported. Only java.lang package is imported automatically.
+Correct response: 2,3,4,5.
+Category: 
+
+Notes:
+-25 done
+-26b
+-27a
+-29ab
+-30b
+-32c 3 or 4
+-34c ""
+-44 b
+-45 2or3b
+-49b
+-52c only 3 answers
+54b
+55c
+60b
+64b
+72b
+82 time over
+84b
+87b
+74 2 answers?
+
+Question: 
+
+1. 
+2. 
+3. 
+4. 
+5. 
+
+Answer:
+1. 
+2. 
+3. 
+4. 
+5. 
+Correct response: 
+Category: 
