@@ -669,41 +669,531 @@ Answer:
 Correct response: 2,3,4,5.
 Category: 
 
-Notes:
--25 done
--26b
--27a
--29ab
--30b
--32c 3 or 4
--34c ""
--44 b
--45 2or3b
--49b
--52c only 3 answers
-54b
-55c
-60b
-64b
-72b
-82 time over
-84b
-87b
-74 2 answers?
+Question: 53-1
+Identify the exceptio that should be thrown below at ***.
+switch(suit) {
+	case CLUBS:	
+	...
+	break;
+	case DIAMONDS
+	...
+	break;
+	case HEARTS
+	...
+	break;
+	case SPADES
+	...
+	break;
+	default: throw new ***
+}
 
-Question: 
+Answer: 
+Correct response: AssertionError();
+Category: Handling Exceptions: Very Tough
 
-1. 
-2. 
-3. 
-4. 
-5. 
+Question: 53-2 
+Identify the exceptio that should be thrown below at ***.
+public void applyCode(String code)
+{
+	if (code.startsWith("XA")) apply (code.substring(2));
+	else throw new ***
+}
 
 Answer:
-1. 
-2. 
-3. 
-4. 
-5. 
+Correct response: 
+IllegalArgumentException();
+Category: Handling Exceptions: Very Tough
+
+Question: 54
+What will be the result of attempting to compile and run the following program?
+
+public class TestClass{
+   public static void main(String args[ ] ){
+      A o1 = new C( );
+      B o2 = (B) o1;
+      System.out.println(o1.m1( ) );
+      System.out.println(o2.i );
+   }
+}
+class A { int i = 10;  int m1( ) { return i; } }
+class B extends A { int i = 20;  int m1() { return i; } }
+class C extends B { int i = 30;  int m1() { return i; } }
+
+Answer:
+Remember : variables are SHADOWED and methods are OVERRIDDEN. Which variable will be used depends on the class that the variable is declared of. Which method will be used depends on the actual class of the object that is referenced by the variable. So, in line o1.m1(), the actual class of the object is C, so C's m1() will be used. So it returns 30. In line o2.i, o2 is declared to be of class B, so B's i is used. So it returns 20.
+Correct response: It will print 30, 20
+Category: Working with Inheritance
+
+Question: 55
+Identify valid for constructs...
+Assume that Math.random() returns a double between 0.0 and 1.0 (not including 1.0).
+1.  for(;Math.random()<0.5;){     
+	    System.out.println("true"); 
+	}
+2.  for(;;Math.random()<0.5){     
+		System.out.println("true"); 
+	}
+3.  for(;;Math.random()){     
+		System.out.println("true"); 
+	}
+4.  for(;;){     
+		Math.random()<.05? break : continue; 
+	}
+5.  for(;;){     
+		if(Math.random()<.05) break; 
+	}
+
+Answer:
+The three parts of a for loop are independent of each other. However, there are certain rules for each part. Please go through section 14.14.1 of JLS to understand it fully.
+1. The second expression in a for loop m
+2. Here, the first part (i.e. the init part) and the second part (i.e. the expression/condition part) part of the for loop are empty. Both are valid. (When the expression/condition part is emtpy, it is interpreted as true.) 
+The third part (i.e. the update part) of the for loop does not allow every kind of statement. It allows only the following statements here:  Assignment, PreIncrementExpression, PreDecrementExpression, PostIncrementExpression, PostDecrementExpression, MethodInvocation, and ClassInstanceCreationExpression. Thus, Math.random()<0.5 is not valid here, and so this will not compile.
+3. This is a valid never ending loop that will keep printing true.
+4. This is an invalid use of ? : operator. Both sides of : should return the same type (excluding void). Here, break and continue do not return anything. However, the following would have been valid:
+for(;Math.random()<.05? true : false;){  }
+Correct response: 1, 3 and 5.
+Category: Using Loop Constructs
+
+Question: 58
+What will the following class print when run?
+public class Sample{
+   public static void main(String[] args)  {
+     String s1 = new String("java");
+     StringBuilder s2 = new StringBuilder("java");
+     replaceString(s1);
+     replaceStringBuilder(s2);
+     System.out.println(s1 + s2);
+  }
+  static void replaceString(String s) {
+     s = s.replace('j', 'l');
+  }
+  static void replaceStringBuilder(StringBuilder s) {
+     s.append("c");
+  }
+}
+
+Answer:
+String is immutable while StringBuilder is not. So no matter what you do in replaceString() method, the original String that was passed to it will not change. On the other hand, StringBuilder methods, such as replace or append, change the StringBuilder itself. So, 'c' is appended to java in replaceStringBuilder() method. 
+Correct response: 1, javajavac
+Category: Working with Java Data Types
+
+Question: 59
+What is the correct declaration for an abstract method 'add' accessible to any class, takes no arguments and returns nothing?
+(Use only one space between words)
+1. public void add();
+2. abstract add();
+3. abstract null add();
+4. abstract public void add(){ }
+5. abstract public void add() throws Exception;
+
+Answer:
+1. An abstract method must have the abstract keyword and must not have a method body i.e. { }.
+2. A method that is not supposed to return anything must specify void as its return type.
+3. A method that is not supposed to return anything must specify void as its return type. null is not a  type, though it is a valid return value for any type.
+4. It is invalid because has a method body i.e. { }.
+Correct response: 5.
+Category: Working with Methods.
+
+Question: 60
+Which of the given statements are correct for a method that overrides the following method:  public Set getSet(int a) {...}
+1. Its return type must be declared as Set.
+2. It may return HashSet.
+3. It can declare any Exception in throws clause
+4. It can declare any RuntimeException in throws clause.
+5. It can be abstract.
+
+Answer:
+To override a method in the subclass, the overriding method (i.e. the one in the subclass) MUST HAVE: .same name .same return type in case of primitives (a subclass is allowed for classes, this is also known as covariant return types). .same type and order of parameters .It may throw only those exceptions that are declared in the throws clause of the superclass's method or exceptions that are subclasses of the declared exceptions. It may also choose NOT to throw any exception. The names of the parameter types do not matter. For example, void methodX(int i) is same as void methodX(int k)
+1. Return type may also be a subclass/subinterface. So it can also return SortedSet, TreeSet, HashSet, or any other class that implements or subclasses a Set.
+3. Since the original (overridden) method does not have any throws clause, the overriding method cannot declare any checked exceptions.
+4. A method can throw any RuntimeException (such as a NullPointerException) even without declaring it in its throws clause.
+5. Yes, you can make it abstract!! You would have to make the class as abstract as well though.
+Correct response: 2, 4 and 5.
+Category: Working with Inheritance (confidence B and incorrect)
+
+Question: 61
+Given the deinitions of I and Klass, complete the definition of SubClass so that it extends from Klass and implements I.  Use the minimum number of elements.
+interface I
+Put the keywords in the correct order.
+{
+	void m1();
+}
+abstract class Klass
+{
+	vid m1() {};
+}
+class SubClass _1_ _2_ _3_ _4_
+{
+	public void m1() P{}
+}
+1. implments
+2. extends
+3. Klass
+4. I
+
+Answer:
+Even though class Klass implements m1(), it does not declare that it implements I. Therefore, for a subclass to 'implement' I, it must have 'implements I' in its declaration. Further, m1() in Klass is not public. So even though Subclass inherits m1() from Klass, it will not be a valid implementation of I because interface methods must be public. Therefore, SubClass must override m1() and make it public.
+Correct response: 2, 3, 1, 4.
+class SubClass extends Klass implements I
+The following order:
+class SubClass implements I extends Klass
+will cause the following error:
+SubClass.java:9: error: '{' expected
+class SubClass implements I exteds Klass
+						   ^
+Category: Working with Inheritance: Easy
+
+Question: 62 modified
+The following is a valid member variable declaration:  private static native final transient int i = 20;
+True or false?
+
+Answer:
+Although it does not make sense to make static variable transient as static variables are not serialized anyway, it is valid to do so. You can apply all the modifiers to member variables except abstract, native and synchronized. For methods, you cannot apply transient and volatile.
+Remove the native modifier and the answer would be true.
+Correct response: false
+Category: Java Basics: Tough
+
+Question: 64
+Which of the following statements are true?
+1. The condition expression in an if statement can contain method calls.
+2. If a and b are of type boolean, the expression (a = b) can be used as the condition expression of an if statement.
+3. An if statement can have either an 'if' clause or an 'else' clause.
+4. The statement : if (false) ; else ; is illegal.
+5. Only expressions which evaluate to a boolean value can be used as the condition in an if statement.
+
+Answer:
+The expression (a = b) does not compare the variables a and b, but rather assigns the value of b to the variable a. The result of the expression is the value being assigned. Since a and b are boolean variables, the value returned by the expression is also boolean. This allows the expressions to be used as the condition for an if-statement. if-clause and the else-clause can have empty statements. Empty statement ( i.e. just ; ) is a valid statement. But this is illegal : 
+if (true) else; 
+because the if part doesn't contain any valid statement. ( A statement cannot start with an else!) So, the following is valid. 
+if(true) if(false); 
+because if(false); is a valid statement.
+1. Yes, as long as the method returns a boolean value.
+3. An if-statement must always have an 'if' clause. 'else' is optional.
+4. if-clause and the else-clause can have empty statements. Empty statement ( i.e. just  a semi-colon ) is a valid statement.
+5. Unlike C/C++ where you can use integers as conditions, in java, only booleans are allowed.
+Correct response: 1,2 and 5.
+if (false) ; else ; // a valid statement!
+Category: Using Operators and decision Constructs: Very Easy
+
+Question: 66 
+Given:
+StringBuilder b1 = new StringBuilder("snorkler");
+StringBuilder b2 = new StringBuilder("yoodler");
+Write the contents of b1 and b2 after the statements shown on the left are executed independent of each other.
+1. b1.append(b2.substring(2,5).toUpperCase());
+2. b2.insert(3, b1.append("a"));
+3. b1.replace(3,4,b2.substring(4)).append(b2.append(false));
+
+Answer:
+You need to understand how append, insert, delete, and substring methods of StringBuilder/StringBuffer work. Please go through JavaDoc API for these methods. This is very important for the exam. Observe that substring() does not modify the object it is invoked on but append, insert and delete do.  
+In the exam, you will find questions that use such quirky syntax, where multiple calls are chained together. For example: sb.append("a").append("asdf").insert(2, "asdf"). Make yourself familiar with this technique. If in doubt, just break it down into multiple calls. For example, the aforementioned statement can be thought of as:  
+sb.append("a"); 
+sb.append("asdf"); 
+sb.insert(2, "asdf")  
+Note that the method substring() in StringBuilder/StringBuffer returns a String (and not a reference to itself, unlike append, insert, and delete). So another StringBuilder method cannot be chained to it. For example, the following is not valid: sb.append("a").substring(0, 4).insert(2, "asdf");  The following is valid though:  String str = sb.append("a").insert(2, "asdf").substring(0, 4);
+1. snorklerODL yoodler
+2. snorklera yoosnorkleradler
+3. snolerkleryoodlerfalse yoodlerfalse
 Correct response: 
 Category: 
+
+Question: 70
+Consider the following code snippet:      
+for(int i=INT1; i<INT2; i++){         
+	System.out.println(i);     
+}  
+INT1 and INT2 can be any two integers.  Which of the following will produce the same result?
+1. for(int i=INT1; i<INT2; System.out.println(++i));
+2. for(int i=INT1; i++<INT2; System.out.println(i));
+3. int i=INT1; while(i++<INT2) { System.out.println(i); }
+4. int i=INT1; do { System.out.println(i); }while(i++<INT2);
+5. None of these.
+
+Answer:
+In such a question it is best to take a sample data such as INT1=1 and INT2=3 and execute the loops mentally. Eliminate the wrong options. In this case, the original loop will print:
+=====ORIGINAL ====
+1
+2
+Outputs of all the options are given above (Ignoring the line breaks).
+Thus, none of them is same as the original.
+1,2 and 3 print 2 and 3
+4 prints 1 2 and 3
+Correct response: 5, none of these 
+Category: 
+
+Question: 74
+Note: Option 4 of this question may be considered too advanced for this exam.  Which lines of code will not be acceptable to the compiler?  
+import java.*; //1 
+public abstract class InternalLogic //2 
+{    
+	float density = 20.0; //3    
+	public class Doer //4    
+	{       
+		void do() //5       
+		{          //lot of valid code.       }    
+	} 
+}
+
+Answer:
+1. Although it doesn't import anything but import java.*; is valid.
+2. A class having no abstract method can still be abstract. But not vice-versa.
+3. 20.0 is a double and needs a cast to be assigned to a float. 
+4. It is a valid inner class.
+5. do is a keyword so do() is not a valid method name.
+Correct response: 3 and 5
+Category: Java Basics: Very Tough
+
+Question: 79 modified
+What will be the output when the following program is compiled and run?
+public class TestClass{     
+	public static double getSwitch(String str){         
+		return Double.parseDouble(str.substring(1, str.length()-1) );     
+	}     
+	public static void main(String args []){         
+		switch(getSwitch(args[0])){             
+			case 0.0 : System.out.println("Hello");  
+			case 1.0 : System.out.println("World"); break; default : System.out.println("Good Bye");  
+		}     
+	} 
+}
+
+Answer:
+Observe that the method getSwitch() has been declared to return a double. Its return value is being used in the switch() statement. Therefore, the program will not even compile because double/float/long/boolean cannot be used in switch(...) statement.
+Correct response:  Compile time error
+Category: Using Operators and Decision Constructs
+
+Question: 82
+Which statements, when inserted in the code below, will cause an exception at run time?
+class B {}
+class B1 extends B {}
+class B2 extends B {}
+public class ExtendsTest{
+  public static void main(String args[]){
+     B b = new B();
+     B1 b1 = new B1();
+     B2 b2 = new B2();
+     // insert statement here
+  }
+}
+
+1. b = b1;
+2. b2 = b;
+3. b1 = (B1) b;
+4. b2 = (B2) b1;
+5. b1 = (B) b1;
+
+Answer:
+1. There won't be a problem anytime because B1 is a B
+2. It fails at Compile time as an object referenced by b may not be a B2, so an explicit cast will be needed.
+3. It will pass at compile time but fail at run time as the actual object referenced by b is not a B1.
+4. It will not compile because b1 can never point to an object of class B2.
+5. This won't compile. Another cast is needed. i.e. b1 = (B1) (B) b1;
+Correct response: 3
+Category: Working with Inheritance
+
+Question: 83
+Consider the following two java files:  
+//in file SM.java 
+package x.y; 
+public class SM {     
+	public static void foo(){ }; 
+}   
+//in file TestClass.java 
+//insert import statement here //1 
+public class TestClass{    
+	public static void main(String[] args){       
+		foo();    
+	} 
+}   
+What should be inserted at //1 so that TestClass will compile and run?
+
+1. import static x.y.*;
+2. import static x.y.SM;
+3. import static x.y.SM.foo;
+4. import static x.y.SM.foo();
+5. import static x.y.SM.*;
+
+Answer:
+1. x.y.* means all the classes in package x.y. Classes cannot be imported using "import static". You must do import x.y.* for importing class.
+Further, importing a class will not give you a direct access to the members of the class. You will need to do SM.foo(), if you import SM.
+2. x.y.SM means you are trying to import class x.y.SM. A class cannot be imported statically.
+3. This is valid because this statement is importing the static member foo of class x.y.SM.
+4. Even though foo is a method, you cannot put () in the import statement.
+5. This is valid because this statement is importing all the static members of class x.y.SM.
+Correct response: 
+Category: 
+
+Question: 85 modified
+class A{
+  int i = 10;
+  public static void m1(){  }
+  public void m2() { }
+}
+class B extends A{
+  int i = 20;
+  public static void m1() {  }
+  public void m2() { }
+}
+A a  = new B();
+System.out.println(a.i)  // 1
+a.m1();  // 2
+a.m2();  // 3
+What will be the output of 1 2 and 3?
+
+Answer:
+static methods are never overridden. They are HIDDEN or SHADOWED just like static or non-static fields. For example,
+class A{
+    public static void sM1() {  System.out.println("In base static"); }
+}
+class B extends A{
+Line 1 :   // public static void sM1() {  System.out.println("In sub static"); }
+Line 2 :   // public  void sM1() {  System.out.println("In sub non-static"); }
+}
+UNLIKE m2, m1() of B does not override m1() of A, it just shadows it.
+Correct response: 
+1. will print 10 instead of 20
+2. will call A's m1
+3. will call B's m2 as m2() is not static and so overrides A's m2()
+Category: Working with Inheritance 
+
+Question: 86
+What will the following program print?
+
+class Test{
+    public static void main(String args[]){
+        int c = 0;
+        boolean flag = true;
+        for(int i = 0; i < 3; i++){
+            while(flag){
+                c++;
+                if(i>c || c>5) flag = false;
+            }
+        }
+        System.out.println(c);
+    }
+}
+
+Answer:
+In the first iteration of for loop, the while loop keeps running till c becomes 6. Now, for all next for loop iteration, the while loop never runs as the flag is false. So final value of c is 6.
+Correct response: 6
+Category: Using Loop Constructs: Easy
+
+Question: 87
+Consider the following classes in one file named A.java...  abstract class A{    
+	protected int m1(){ 
+		return 0; 
+	} 
+} 
+class B extends A{    
+	int m1(){ 
+		return 1; 
+	} 
+}  
+Which of the following statements are correct...
+
+1. The code will not compile as you cannot have more than 1 class in 1 file.
+2. The code will not compile because class B does not override the method m1() correctly.
+3. The code will not compile as A is an abstract class.
+4. The code will not compile as A does not have any abstract method.
+5. The code will compile fine.
+
+Answer:
+The concept here is that an overriding method cannot make the overridden method more private.
+The access hierarchy in increasing levels of accessibility is:
+private->'no modifier'->protected->public ( public is accessible to all and private is accessible to none except itself.)
+Here, class B has no modifier for m1() so it is trying to reduce the accessibility of protected to default.
+'protected' means the method will be accessible to all the classes in the same package and all the subclasses (even if the subclass is in a different package).
+No modifier (which is the default level) means the method will be accessible only to all the classes in the same package. (i.e. not even to the subclass if the subclass is in a different package.)
+1. ou can. But only one class can be public.
+2. The overriding method cannot decrease the accessibility.
+4. You need not have any 'abstract' method to make a class abstract. Putting 'abstract' keyword is enough.
+Correct response: 2
+Category: Working with Methods: Very Tough (Confidence B and incorrect)
+
+Question: 88
+What will be the result of attempting to compile and run the following class?
+public class TestClass{
+    public static void main(String args[ ] ){
+       int i = 1;
+       int[] iArr = {1};
+       incr(i) ;
+       incr(iArr) ;
+       System.out.println( "i = " + i + "  iArr[0] = " + iArr [ 0 ] ) ;
+    }
+    public static void incr(int   n ) { n++ ; }
+    public static void incr(int[ ] n ) { n [ 0 ]++ ; }
+}
+
+Answer:
+Arrays are proper objects (i.e. iArr instanceof Object returns true) and Object references are passed by value (so effectively, it seems as though objects are being passed by reference). So the value of reference of iArr is passed to the method incr(int[] i); This method changes the actual value of the int element at 0.
+Correct response: The code will print i = 1 iArr[0] = 2;
+Category: Creating and Using Arrays: Very Easy
+
+Question: 89
+What will be the output when the following program is run?
+
+package exceptions;
+public class TestClass{
+    public static void main(String[] args) {
+        try{
+            hello();
+        }
+        catch(MyException me){
+            System.out.println(me);
+        }
+    }
+    
+    static void hello() throws MyException{
+        int[] dear = new int[7];
+        dear[0] = 747;
+        foo();
+    }
+    
+    static void foo() throws MyException{
+        throw new MyException("Exception from foo");
+    }
+}
+
+class MyException extends Exception {
+    public MyException(String msg){
+        super(msg);
+    }
+}
+(Assume that line numbers printed in the messages given below are correct.)
+1. Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10     at exceptions.TestClass.doTest(TestClass.java:24)     at exceptions.TestClass.main(TestClass.java:14)
+2. Error in thread "main" java.lang.ArrayIndexOutOfBoundsException
+3. exceptions.MyException: Exception from foo
+4. exceptions.MyException: Exception from foo     at exceptions.TestClass.foo(TestClass.java:29)     at exceptions.TestClass.hello(TestClass.java:25)     at exceptions.TestClass.main(TestClass.java:14)
+
+Answer:
+Note that there are a few questions in the exam that test your knowledge about how exception messages are printed.  When you use System.out.println(exception), a stack trace is not printed. Just the name of the exception class and the message is printed. When you use exception.printStackTrace(), a complete chain of the names of the methods called, along with the line numbers, is printed from the point where the exception was thrown and up to the point where the exception was caught and printStackTrace() was called.
+1. You are creating an array of length 7. Since array numbering starts with 0, the first element would be array[0]. So ArrayIndexOutOfBoundsException will NOT be thrown.
+2. java.lang.ArrayIndexOutOfBoundsException extends java.lang.RuntimeException, which in turn extends java.lang.Exception. Therefore, ArrayIndexOutOfBoundsException is an Exception and not an Error.
+4. me.printStackTrace() would have produced this output.
+Correct response: 3
+Category: Handling Exceptions: Tough
+
+Question: 90
+What would be the result of attempting to compile and run the following code?
+
+// Filename: TestClass.java
+public class TestClass{
+   public static void main(String args[]){
+      B c = new C();
+      System.out.println(c.max(10, 20));
+   }
+}
+class A{
+   int max(int x, int y)  { if (x>y) return x; else return y; }
+}
+class B extends A{
+  int max(int x, int y)  {  return 2 * super.max(x, y) ; }
+}
+class C extends B{
+  int max(int x, int y)  {  return super.max( 2*x, 2*y); }
+}
+
+Answer:
+When the program is run, the main() method will call the max() method in C with parameters 10 and 20 because the actual object referenced by 'c' is of class C. This method will call the max() method in B with the parameters 20 and 40. The max() method in B will in turn call the max() method in A with the parameters 20 and 40. The max() method in A will return 40 to the max() method in B. The max() method in B will return 80 to the max() method in C. And finally the max() of C will return 80 in main() which will be printed out.
+Correct response: The code will compile without errors and will print 80 when run.
+Category:  Working with Java Data Types - Variables and Objects: Easy

@@ -620,6 +620,17 @@ Common behavior can be defined in a superclass and inherited into a subclass usi
 A collection of methods with no implementation is called an interface.  
 
 ###Variables###
+class Members
+{
+	int instance_level_field;
+	static int class_variable_fields;
+	public void setB(int method_parameter)
+	{
+
+		// actual value is called arguments
+		int local_variable = automatic;
+	}
+}
 - Instance Variables (Non-Static Fields) 
 - Class Variables (Static Fields) static modifier; one copy regardless of how many times the class has been instantiated. 
 - Local Variables (automatic variables) declared in braces of a method. only visible to the methods in which they are declared;
