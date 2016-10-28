@@ -1,70 +1,50 @@
-Acknowledge
-============
+#Acknowledge Code
+#================
 
-This is a general code deposite for the homeless.
-Current code being added is Groovy code from the user guide, notes and code from the Java trail.
+This is a general code deposite for the homeless.  Acknowledge is another word for hello.
+Instead of creating examples called hello world, this repo usually goes just a little bit further.
 
-Below is general usage examples for the markdown format:
+It's an old wasteland that contains example code, test questions and general odds and ends that don't fit anywhere else.
 
-- syntax is intended for one purpose: to be used as a format for writing for the web.
-- HTML is a publishing format; Markdown is a writing format
-- HTML elements — e.g. <div>, <table>, <pre>, <p>, etc. — must be separated from surrounding content by blank lines, and the start and end tags of the block should not be indented with tabs or spaces.
-- <span>, <cite>, or <del> — can be used anywhere in a Markdown paragraph, list item, or header.(Markdown syntax is processed within span-level tags.)
-- Markdown formatting syntax is not processed within block-level HTML tags.
-- < and &. must be escaped as entities, e.g. &lt;, and &amp;.
-- ‘AT&T’, you need to write ‘AT&amp;T’.
-http://images.google.com/images?num=30&q=larry+bird
-http://images.google.com/images?num=30&amp;q=larry+bird
-- If you use an ampersand as part of an HTML entity, it remains unchanged; otherwise it will be translated into &amp;.
-- &copy; = Markdown will leave it alone.
-- if you write: AT&T Markdown = AT&amp;T
-- 4 < 5 Markdown = 4 &lt; 5
-- When you do want to insert a <br /> break tag using Markdown, you end a line with two or more spaces, then type return.
-#one hash#
-##two hashes##
-###three hashes#
-- Headers: Setext
-This is an H1: Setext-style headers
-==========================
-This is an H2: second-level headers
----------------------------------------------------
-- Atx-style headers:1-6 hash characters at the start of the line, corresponding to header levels 1-6. For example, open or closed styles supported:
+The project was active before the maintainer became a front end developer in 2013. 
+Since that time, Plunker has been a more appropriate place for thiat kind of thing (front end examples).
 
-# This is an H1  
-## This is an H2  
-###### This is an H6  
-# This is an H1 #  
-## This is an H2 ##  
-### This is an H3 ######  
-- Blockquotes  
-> Markdown uses email-style
-> characters for blockquoting
-- Unordered lists use asterisks, pluses, and hyphens — interchangably — as list markers:
-*   Red
-+   Green
--   Blue
-- Ordered lists use numbers followed by periods:
-1.  Bird
-2.  McHale
-3.  Parish
-- This is a normal paragraph:(then indent or tab)
-    This is a code block. (like <code>
-- a horizontal rule tag (<hr />) by placing three or more hyphens, asterisks, or underscores on a line by themselves (---)
-- links:
-This is [an example](http://example.com/ "Title") inline link.
-[This link](http://example.net/) has no title attribute.
-Will produce:
-<p>This is <a href="http://example.com/" title="Title">
-an example</a> inline link.</p>
-<p><a href="http://example.net/">This link</a> has no
-title attribute.</p>
-- emphasis:
-*single asterisks* = <em>single asterisks</em>
-_single underscores_ = <em>single underscores</em>
-**double asterisks** = <strong>double asterisks</strong>
-__double underscores__ = <strong>double underscores</strong>
+So in the spirit of keeping up with old aknowledgements, here is a list of some plunkers.
 
-Here is one example:
+## Plunkers
 
-![](http://f.cl.ly/items/3435000d3G1E3t3m0J0X/canvas.png)
-Canvas is a project to simplify iOS development for both designers and developers.
+[center transform - needs some work](http://plnkr.co/edit/BbFDTy47UynXw1DJs3Fr?p=preview)
+
+[Grid Parts](http://plnkr.co/edit/X2XEd7VSsME6ikCIo7Lr?p=preview)
+
+[TC](http://plnkr.co/edit/c4UJeDecXYMEMIzVePol)
+
+[Transforms](http://plnkr.co/edit/Ba2BDaHgwC6D9nCeMoTQ?p=preview)
+
+[Shorthands](http://plnkr.co/edit/YaRt1KhQalhMIq2ccANH?p=preview)
+
+[Scale around central point technique](http://plnkr.co/edit/pa9YEvxTFOZ2GVHgVA1r?p=preview)
+
+[Cubic Bezier control point combinations](http://plnkr.co/edit/X2GkyjHQm7qr5NAvyNHb?p=preview)
+
+[Pattern tiles](http://plnkr.co/edit/ySSFY8K26w7dQDVwVZ1t?p=preview)
+
+[Dot Pattern](http://plnkr.co/edit/3Iirf4PA1NbIbIvi1V7W?p=preview)
+
+[Timothy Waves](http://plnkr.co/edit/cId1i66q2uvxFyNjLMyv?p=preview)
+
+[Two Tone Drops](http://plnkr.co/edit/Q1KNR7?p=preview)
+
+[Line Pattern Square](http://plnkr.co/edit/F5vdyvScYPv046z17oGa?p=preview)
+
+[4 syles](http://plnkr.co/edit/0vKhTe89euO6jvztZ9Zb?p=preview)
+
+[ng Animate check n show w/ no app](http://plnkr.co/edit/aX6dNC1LNJXilNWKOcqV?p=preview)
+
+[Scroll header #4](http://plnkr.co/edit/xtPvUYliLRUCdaYOppbi)
+
+[Controlling svg with js](http://plnkr.co/edit/uvo4TcwGPiX7uLnPbpfd?p=preview)
+
+[color wars](http://plnkr.co/edit/PdF8omYxZSUcnPit5ZDR?p=preview)
+
+[Functional Fun](http://plnkr.co/edit/8UHAOd?p=preview)

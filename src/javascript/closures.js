@@ -31,3 +31,39 @@ var add2 = (function () {
 add2();
 add2(); 
 add2(); // the counter is now 3
+
+/* Closures have the same process as mailing a package */
+function packBox(item){
+    // Code that puts item in the box
+    console.log('Put ' +item+ ' in the box');
+    function addressPackage(address){
+        // Code that writes the address label
+        console.log('Addressed the box to ' +address+' and ready to send the '+item+' gift');
+    }
+    return addressPackage;
+}
+
+var brotherGift= packBox('jersey')
+
+brotherGift('123 Main Street, Anywhere USA 012345')
+// Put jersey in the box
+// Addressed the box to 123 Main Street, Anywhere USA 012345 and ready to send the jersey gift
+
+// If we wanted to do this in one line, we would write: 
+packBox(‘jersey’)(‘123 Main Street, Anywhere USA 01234’);
+
+// If we wanted to pack all the gifts first and address them all later:
+var brotherGift = packBox('jersey')
+var motherGift = packBox('iTunesCard')
+
+brotherGift('123 Main Street, Anywhere USA 01234')
+//Put jersey in the box
+// Addressed the box to 123 Main Street, Anywhere USA 01234 and ready to send the jersey gift
+motherGift('123 High Street, Los Angeles USA 01234')
+//Put iTunesCard in the box
+// Addressed the box to 123 High Street, Los Angeles USA 01234 and ready to send the iTunesCard gift
+
+
+// Based on the great example by Kevin Kononenko at 
+// https://medium.freecodecamp.com/javascript-closures-explained-by-mailing-a-package-4f23e9885039#.eq3yk96do
+
