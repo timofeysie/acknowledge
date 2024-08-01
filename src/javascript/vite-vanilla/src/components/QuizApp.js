@@ -97,9 +97,9 @@ export function QuizApp() {
         <div style={style.options}>
           { questions[currentQuestion]?.options.map((answer, index) => {
           return (
-            <div key={index+answer}>
-              <input type="radio" id={index+answer} name={answer} value={answer} onChange={handleAnswerChange}/>
-              <label for={index+answer}>
+            <div key={`option${index+1}`}>
+              <input type="radio" id={`option${index+1}`} name={answer} value={answer} onChange={handleAnswerChange}/>
+              <label htmlFor={`option${index+1}`}>
                 {answer}
               </label>
             </div>)

@@ -1,15 +1,16 @@
-#Acknowledge Code
-#================
+# Acknowledge Code
 
-This is a general code deposite for the homeless.  Acknowledge is another word for hello.
-Instead of creating examples called hello world, this repo usually goes just a little bit further.
+Acknowledge is another word for hello.
 
-It's an old wasteland that contains example code, test questions and general odds and ends that don't fit anywhere else.
+Instead of creating examples called hello world, this repo usually goes just a little bit further, providing code examples and problem solutions.
 
-The project was active before the maintainer became a front end developer in 2013. 
-Since that time, Plunker has been a more appropriate place for thiat kind of thing (front end examples).
+It contains example code, test questions and general odds and ends that don't fit in other projects I maintain.
 
-So in the spirit of keeping up with old aknowledgements, here is a list of some plunkers.
+A lot of the code is from project active before the I came to focus on frontend development in 2013.
+
+Similar to the code in this project, Plunker, Stackblitz, CodePen and other cloud based code solutions have been used for the same purpose.
+
+So in the spirit of keeping up with old acknowledgements, here is a list of some plunkers.
 
 ## Plunkers
 
@@ -48,3 +49,23 @@ So in the spirit of keeping up with old aknowledgements, here is a list of some 
 [color wars](http://plnkr.co/edit/PdF8omYxZSUcnPit5ZDR?p=preview)
 
 [Functional Fun](http://plnkr.co/edit/8UHAOd?p=preview)
+
+## Further work
+
+GitHub is my primary portfolio of work, but I also have some live examples that are currently deployed.
+
+However, deploying projects costs money, so most project that have at one point or another been available online are now not available.
+
+Here is a list of projects and sites that are currently deployed.
+
+## Live Examples
+
+### [NextJS Blog using Markdown files](https://timothycurchod.com/)
+
+The [project GitHub](https://github.com/timofeysie/nextjs-markdown-blog)
+
+This is my personal developer blog.  Some of my work goes into the form of articles which may be helpful to others.  Much of the work I do exists in notes like these blogs, but it is only rarely that I edit and refine them into articles suitable for the blog.
+
+## [Quaternary](https://github.com/timofeysie/quaternary)
+
+This is a documentation project for all the other repositories contained in the timofeysie GitHub, as well as listing live samples for some of them.  It is a bit of an overlap with the goals of this project, so worth mentioning.
