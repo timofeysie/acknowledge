@@ -50,7 +50,7 @@ brotherGift('123 Main Street, Anywhere USA 012345')
 // Addressed the box to 123 Main Street, Anywhere USA 012345 and ready to send the jersey gift
 
 // If we wanted to do this in one line, we would write: 
-packBox(‘jersey’)(‘123 Main Street, Anywhere USA 01234’);
+packBox('jersey')('123 Main Street, Anywhere USA 01234');
 
 // If we wanted to pack all the gifts first and address them all later:
 var brotherGift = packBox('jersey')
