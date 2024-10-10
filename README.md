@@ -2,6 +2,8 @@
 
 Acknowledge is another word for hello.
 
+## About the examples
+
 Instead of creating examples called hello world, this repo usually goes just a little bit further, providing code examples and problem solutions.
 
 It contains example code, test questions and general odds and ends that don't fit in other projects I maintain.
@@ -10,10 +12,18 @@ A lot of the code is from project active before the I came to focus on frontend 
 
 Similar to the code in this project, Plunker, Stackblitz, CodePen and other cloud based code solutions have been used for the same purpose.
 
-So in the spirit of keeping up with old acknowledgements, here is a list of some plunkers.
+## React examples
+
+There are currently two React apps inside the examples/javascript directory.
+
+- Vite vanilla JavaScript
+- React TypeScript with Redux
+
+These can both be run by navigating to their respective directories and then running `npm install` followed by `npm run dev` for the Vite app and  `npm start` for the TS app.
 
 ## Plunkers
 
+In the spirit of keeping up with old acknowledgements, here is a list of some plunkers.
 [center transform - needs some work](http://plnkr.co/edit/BbFDTy47UynXw1DJs3Fr?p=preview)
 
 [Grid Parts](http://plnkr.co/edit/X2XEd7VSsME6ikCIo7Lr?p=preview)
