@@ -2,14 +2,26 @@ import { SortCallbacks, createSort } from "./sort";
 
 export const quickSort = <T>(originalArray: T[], originalCallbacks?: SortCallbacks<T>): T[] => {
     const { comparator, callbacks } = createSort(originalCallbacks);
-  
+    const visitedElements = new Set<T>();
+
     const sort = (array: T[]): T[] => {
       if (array.length <= 1) {
+        // Call visitingCallback for single-element arrays
+        if (array.length === 1 && !visitedElements.has(array[0])) {
+          callbacks.visitingCallback(array[0]);
+          visitedElements.add(array[0]);
+        }
         return array;
       }
   
       // Step 1: Pick an element, called a pivot, from the array.
       const [pivot, ...rest] = array;
+  
+      // Call visitingCallback for the pivot
+      if (!visitedElements.has(pivot)) {
+        callbacks.visitingCallback(pivot);
+        visitedElements.add(pivot);
+      }
   
       // Step 2: Partitioning
       const leftArray: T[] = [];
@@ -20,7 +32,10 @@ export const quickSort = <T>(originalArray: T[], originalCallbacks?: SortCallbac
       // come before the pivot, while all elements with values greater than
       // the pivot come after it. Equal values can go either way.
       for (const element of rest) {
-        callbacks.visitingCallback(element);
+        if (!visitedElements.has(element)) {
+          callbacks.visitingCallback(element);
+          visitedElements.add(element);
+        }
         if (comparator.equal(element, pivot)) {
           centerArray.push(element);
         } else if (comparator.lessThan(element, pivot)) {
