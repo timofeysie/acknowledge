@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
+import FileSystem from "./components/FileSystem";
 
 function App() {
   // This code has been covered by unit tests now.
@@ -28,9 +29,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+
         <span>
           <span>Learn </span>
           <a
@@ -70,6 +69,9 @@ function App() {
           </a>
         </span>
       </header>
+      <div>
+        <FileSystem />
+      </div>
     </div>
   );
 }
