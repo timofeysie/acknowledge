@@ -396,9 +396,9 @@ Closures can help you write more modular and maintainable code.
 
 *How do you create an object in JavaScript? What are some ways to add or modify properties of an object?*
 
-### destructuring
+### Modern JavaScript and destructuring
 
-Can you explain how object destructuring works? Provide an example.
+*Can you explain how object destructuring works? Provide an example.*
 
 ```js
 // Destructuring the object
@@ -410,6 +410,10 @@ const { name, age, job = 'Employed' } = person;
  // Nested destructuring
 const { name, address: { city, country } } = person;
 ```
+
+Destructuring, the spread and rest operators along with the fat arrow and other great new features were introduced in ES6 (ES2015).
+
+See my discussion about [modern JavaScript and destructuring, the spread and rest operators here](../examples/javascript/snippets/modern.js).
 
 ## Arrays
 
