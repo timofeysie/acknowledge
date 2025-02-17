@@ -24,7 +24,7 @@ Function calls form a stack of frames. When a function is called, a new frame is
 
 ### Heap: Objects
 
-Objects are allocated in a heap, which is a large region of memory. It’s where dynamically allocated memory lives.
+Objects are allocated in a heap, which is a large region of memory. It's where dynamically allocated memory lives.
 
 ### (Callback) Queue: async code
 
@@ -38,13 +38,13 @@ Microtasks have higher priority than Callback Queue tasks. The Event Loop checks
 
 The event loop constantly monitors the callback queue and the call stack. If the call stack is empty, it places the next function from the callback queue onto the stack. This allows JavaScript to handle concurrency and execute blocking functions asynchronously.
 
-In summary, the event loop ensures that JavaScript can handle multiple tasks efficiently, even though it’s single-threaded.  
+In summary, the event loop ensures that JavaScript can handle multiple tasks efficiently, even though it's single-threaded.  
 
 ## Variables & Scope
 
 ### var, let, and const
 
-*What’s the difference between var, let, and const in JavaScript?*
+*What's the difference between var, let, and const in JavaScript?*
 
 *When would you use each one?*
 
@@ -52,9 +52,8 @@ In summary, the event loop ensures that JavaScript can handle multiple tasks eff
 
 #### var
 
-|||
-|---|---|
 |Scope|Function-scoped|
+|---|---|
 |Hoisting|hoisted to the top of their scope and initialized with undefined|
 
 ---
@@ -64,9 +63,8 @@ In summary, the event loop ensures that JavaScript can handle multiple tasks eff
 
 #### let
 
-|||
-|---|---|
 |Scope|Block-scoped|
+|---|---|
 |Hoisting|let variables are hoisted but not initialized. Accessing them before declaration results in a ReferenceError.|
 
 - cannot re-declare let variables within the same scope.
@@ -74,9 +72,8 @@ In summary, the event loop ensures that JavaScript can handle multiple tasks eff
 
 #### const
 
-|||
-|---|---|
 |Scope|Block-scoped, similar to let.|
+|---|---|
 |Hoisting|const variables are hoisted but not initialized. Accessing them before declaration results in a ReferenceError.|
 
 ---
@@ -99,6 +96,25 @@ console.log(myConst); // ReferenceError: Cannot access 'myConst' before initiali
 const myConst = 5;    // Must provide value here
 ```
 
+### var, let, and const comparison
+
+| Feature | var | let | const |
+|---------|-----|-----|-------|
+| Scope | Function-scoped | Block-scoped | Block-scoped |
+| Hoisting | Hoisted and initialized as undefined | Hoisted but not initialized (TDZ) | Hoisted but not initialized (TDZ) |
+| Reassignment | Can be reassigned | Can be reassigned | Cannot be reassigned |
+| Redeclaration | Can be redeclared | Cannot be redeclared | Cannot be redeclared |
+| Initial Value | Optional | Optional | Required |
+| Mutability | Mutable | Mutable | Reference is immutable, but properties can be modified |
+
+> Note: TDZ = Temporal Dead Zone (cannot access variable before declaration)
+
+Best Practices:
+
+- Use `const` by default
+- Use `let` when you need to reassign values
+- Avoid `var` due to its function-scoping and hoisting behavior
+
 ## Data Types
 
 *What are the different data types in JavaScript?*
@@ -107,7 +123,7 @@ const myConst = 5;    // Must provide value here
 
 *How does JavaScript handle type coercion? Can you give an example of implicit type conversion?*
 
-### 1. Primitive types
+### 1. Seven Primitive types
 
 ```String``` - It represents a series of characters and is written with quotes. A string can be represented using a single or a 
 
@@ -123,7 +139,7 @@ const myConst = 5;    // Must provide value here
 
 ```Symbol``` - (ES6) used to store an anonymous and unique value.
 
-#### Examples
+### Example
 
 ```js
 var symbol1 = Symbol('symbol');
@@ -137,10 +153,134 @@ typeof null // Returns "object" (kind of a bug in JavaScript)
 typeof Symbol('symbol') // Returns Symbol
 ```
 
+### BigInt``` - whole numbers larger than 2^53 - 1
+
+A BigInt is created in two ways:
+1. By appending 'n' to the end of an integer literal
+2. By calling the BigInt() function
+
+```javascript
+// Using 'n' suffix
+const bigNumber = 9007199254740991n;
+
+// Using BigInt() function
+const alsoBig = BigInt(9007199254740991);
+
+// Example showing regular Number limit
+const maxSafeInteger = Number.MAX_SAFE_INTEGER;  // 9007199254740991
+console.log(maxSafeInteger + 1 === maxSafeInteger + 2);  // true (incorrect!)
+
+// Same calculation with BigInt
+const bigInteger = BigInt(maxSafeInteger);
+console.log(bigInteger + 1n === bigInteger + 2n);  // false (correct!)
+
+// Common use cases:
+// 1. Working with very large integers
+const largeNumber = 1234567890123456789012345678901234567890n;
+
+// 2. Precise integer calculations beyond Number.MAX_SAFE_INTEGER
+const preciseLarge = BigInt(Number.MAX_SAFE_INTEGER) + 1n;  // Works correctly
+
+// Note: Cannot mix BigInt with regular numbers
+// This will throw an error:
+// console.log(1n + 1);  // TypeError
+// Correct way:
+console.log(1n + BigInt(1));  // 2n
+```
+
+Key points:
+
+1. 'n' suffix creates a BigInt literal
+2. BigInt() function converts numbers to BigInt
+3. Cannot mix BigInt with regular numbers in operations
+4. Use when working with integers larger than 2^53 - 1
+
+#### Interview Question: Primitive vs Non-Primitive Types
+
+"What will be logged in each console.log and why?"
+
+```javascript
+let a = "hello";
+let b = a;
+a = "world";
+console.log(b); // "hello"
+
+let obj1 = { name: "John" };
+let obj2 = obj1;
+obj1.name = "Jane";
+console.log(obj2.name); // "Jane"
+```
+
+**Answer:**
+
+1. For primitive types (first example):
+   - When `b = a` is executed, the value is copied
+   - Changes to `a` don't affect `b` because primitives are passed by value
+   - Therefore `b` remains "hello"
+
+2. For non-primitive types (second example):
+   - When `obj2 = obj1` is executed, the reference is copied
+   - Both variables point to the same object in memory
+   - Changes through either reference affect the same object
+   - Therefore `obj2.name` shows "Jane"
+
+This demonstrates a key difference:
+
+- Primitive types are immutable and passed by value
+- Non-primitive types are mutable and passed by reference
+
 ### 2. Non-primitive types
 
 Object - Used to store collection of data.
 
+#### Interview Question: Object References
+
+"What will be logged and why?"
+
+```javascript
+const person = { name: 'John' };
+const people = [person];
+person.name = 'Jane';
+console.log(people[0].name); // "Jane"
+
+const newPerson = { ...person };
+person.name = 'Bob';
+console.log(newPerson.name); // "Jane"
+```
+
+**Answer:**
+
+1. First example shows reference behavior:
+
+   - The array contains a reference to the same object
+   - Modifying the original object affects what we see through the array
+   - Therefore `people[0].name` shows "Jane"
+
+2. Second example shows shallow copying:
+   - Spread operator creates a new object with copied values
+   - Changes to original no longer affect the copy
+   - Therefore `newPerson.name` remains "Jane"
+
+Key concept: Objects are passed by reference, but spread operator creates a shallow copy
+
+#### Interview Question: Arrays
+
+"What's the output and why?"
+
+```javascript
+const arr1 = [1, 2, [3, 4]];
+const arr2 = [...arr1];
+arr1[2][0] = 'x';
+console.log(arr2[2][0]); // "x"
+```
+
+**Answer:**
+
+- Spread operator performs shallow copy
+- Nested arrays are still referenced, not copied
+- Modifying nested array in original affects the copy
+- For deep copying, use `JSON.parse(JSON.stringify())` or structured clone
+rd
 ### Floating point
 
 Double-precision 54-bit format.
@@ -151,6 +291,24 @@ Double-precision 54-bit format.
 0.1 + 0.2 !== 0.3  // true
 console.log(0.1 + 0.2)  // 0.30000000000000004
 ```
+
+#### Interview Question: Floating Point Precision
+
+"Why does 0.1 + 0.2 not equal 0.3 in JavaScript? How would you handle this in real-world applications?"
+
+**Answer:**
+
+This is not a JavaScript bug, but rather how floating-point math works in computers:
+
+- Numbers in JavaScript use the IEEE 754 double-precision format
+- Binary can't exactly represent some decimal fractions, just like 1/3 can't be exactly represented in decimal
+- 0.1 and 0.2 in binary are actually infinite repeating fractions
+
+Best Practice: Never use floating-point numbers for financial calculations. Instead:
+
+- Use a library like Decimal.js for precise calculations
+- Work with integers (cents instead of dollars)
+- Round to a fixed number of decimal places when displaying
 
 #### Range
 
@@ -171,7 +329,7 @@ Number.MIN_SAFE_INTEGER  // -(2^53 - 1)
 
 #### Common Gotchas
 
-1. **Rounding Errors**
+##### 1. **Rounding Errors**
 
 ```javascript
 (0.1 + 0.2 === 0.3)  // false
@@ -188,7 +346,7 @@ Math.abs((0.1 + 0.2) - 0.3) < Number.EPSILON  // true
 (0.1 * 10 + 0.2 * 10) / 10 === 0.3  // true
 ```
 
-2. **Integer Precision**
+##### 2. **Integer Precision**
 
 ```js
 // Safe
@@ -198,7 +356,7 @@ console.log(999999999999999);  // 999999999999999
 console.log(9999999999999999);  // 10000000000000000
 ```
 
-3. **Decimal Places**
+#### 3. **Decimal Places**
 
 ```js
 
@@ -211,7 +369,7 @@ console.log(0.3 - 0.1);  // 0.19999999999999998
 
 #### Best practices
 
-1. **For Financial Calculations**
+##### 1. **For Financial Calculations**
 
 ```javascript
 // Don't use floating point
@@ -225,7 +383,7 @@ const priceInCents = 1099;
 const betterTotal = (priceInCents * quantity) / 100;  // 32.97
 ```
 
-2. **For Comparison**
+##### 2. **For Comparison**
 
 ```javascript
 // Don't compare floats directly
@@ -239,9 +397,9 @@ function areFloatsEqual(a, b) {
 }
 ```
 
-For Large Numbers
+#### For Large Numbers
 
-3. **For Large Numbers**
+##### 3. **For Large Numbers**
 
 ```javascript
 // Use BigInt for large integers
@@ -354,7 +512,7 @@ myCar.startRegular(); // TypeError: Cannot read property 'make' of undefined
 
 A function that remembers the environment in which it was created. This means that a closure has access to variables from its own scope, the scope of the outer function, and the global scope. Closures are created whenever a function is created, at function creation time.
 
-Here’s a simple example of a closure:
+Here's a simple example of a closure:
 
 ```JavaScript
 function outerFunction(outerVariable) {
@@ -432,9 +590,9 @@ const uniqueArray = [...new Set(array)];
 
 *Can you explain how promises work in JavaScript? What are the states of a promise?*
 
-*How does async/await improve working with promises? Can you provide an example of how you’d use async/await?*
+*How does async/await improve working with promises? Can you provide an example of how you'd use async/await?*
 
-Async/await is a syntactic sugar built on top of promises, making asynchronous code easier to read and write. Here’s how it improves working with promises:
+Async/await is a syntactic sugar built on top of promises, making asynchronous code easier to read and write. Here's how it improves working with promises:
 
 ### Benefits of Async/Await
 
@@ -554,7 +712,7 @@ items.reduce((accumulator, item) => accumulator + item.value, 0);
 
 *How does event handling work in JavaScript?*
 
-*What’s the difference between event capturing and bubbling?*
+*What's the difference between event capturing and bubbling?*
 
 *How do you prevent default behavior and stop event propagation?*
 
@@ -580,7 +738,7 @@ items.reduce((accumulator, item) => accumulator + item.value, 0);
 
 *How do you work with modules in JavaScript?*
 
-*What’s the difference between import/export and older module systems like CommonJS?*
+*What's the difference between import/export and older module systems like CommonJS?*
 
 #### Modules
 
@@ -604,7 +762,7 @@ Class components can manage their own state and have access to lifecycle methods
 
 with hooks, many developers prefer functional components for their simplicity and readability.
 
-*How does React’s virtual DOM work? Why is it beneficial for performance?*
+*How does React's virtual DOM work? Why is it beneficial for performance?*
 
 - This virtual DOM is a lightweight copy of the real DOM.
 - minimizes the number of manipulations, leading to faster updates.
@@ -615,16 +773,16 @@ with hooks, many developers prefer functional components for their simplicity an
 ### The process
 
 - When the state of a component changes, the virtual DOM updates instead of the real DOM. This process is much faster because it is just a JavaScript object.
-- “diffing” compares the new virtual DOM with the previous version and identifies the changes
-- “reconciliation” updates only the parts of the real DOM that have changed
+- "diffing" compares the new virtual DOM with the previous version and identifies the changes
+- "reconciliation" updates only the parts of the real DOM that have changed
 
 *Can you discuss the use of hooks in React? How have you used them in your projects?*
 
-*How do you manage state in a React application? Can you give an example of how you’ve used Redux in a project?*
+*How do you manage state in a React application? Can you give an example of how you've used Redux in a project?*
 
 *How do you handle global state versus component-specific state?*
 
-*How have you implemented routing in React using React Router? Can you walk us through a complex routing scenario you’ve handled?*
+*How have you implemented routing in React using React Router? Can you walk us through a complex routing scenario you've handled?*
 
 *How do you manage dynamic routes or nested routing in React?*
 
