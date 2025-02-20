@@ -1,5 +1,6 @@
 import './App.css'
-import { ContextAPI } from './components/ContextAPI'
+// import { ContextAPI } from './components/ContextAPI'
+import SearchComponent from './components/SearchComponent'
 
 function App() {
 
@@ -7,7 +8,8 @@ function App() {
     <>
       {/* <LetterTiles /> */}
       {/* <QuizApp /> */}
-      <ContextAPI />
+      {/* <ContextAPI /> */}
+      <SearchComponent />
     </>
   )
 }

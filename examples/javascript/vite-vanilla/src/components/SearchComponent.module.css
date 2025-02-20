@@ -1,0 +1,83 @@
+.search-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.user-select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-width: 120px;
+  height: 34px;
+}
+
+.loading-spinner {
+  color: #666;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  margin: 16px 0;
+}
+
+.results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.result-item {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.todo-id {
+  min-width: 40px;
+  color: #666;
+  font-weight: bold;
+}
+
+.todo-title {
+  flex: 1;
+  text-align: left;
+}
+
+.user-label {
+  color: #666;
+  font-size: 0.9em;
+  margin-right: 8px;
+}
+
+.todo-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.completed {
+  background-color: #e6ffe6;
+  color: #008000;
+}
+
+.pending {
+  background-color: #fff3e6;
+  color: #cc7000;
+} 
