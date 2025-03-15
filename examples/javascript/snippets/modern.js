@@ -43,3 +43,17 @@ first 10
 second 2
 result 7
  */
+
+// Often rest is left and spread is right
+const spread = [1, 2, 3, 4, 5];
+const [one, ...rest] = [...spread, 6, 7];
+console.log(one); // 1
+console.log(rest);  // [2, 3, 4, 5, 6, 7]
+
+const spreadOp = [1, 2, 3];
+console.log(...spreadOp);  // spread on left side of function call
+
+// But not always.
+// Rest can be used on the right side in function definitions
+const makeArray = (...restOp) => restOp;
+const array = makeArray(1, 2, 3);  // [1, 2, 3]
