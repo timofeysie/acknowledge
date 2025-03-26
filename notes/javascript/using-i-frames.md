@@ -2,6 +2,21 @@
 
 This guide covers best practices for implementing ads using iFrames in a React/TypeScript context.
 
+See the [official Mozilla documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) for more information on the large number of attributes available.
+
+- Security
+- Performance
+- Error Handling
+- Usage Example
+- Lazy Loading Implementation
+
+Additional Considerations
+
+- Accessibility
+- Analytics
+- Responsive Design
+- Ad Blocking Detection
+
 ## Basic Ad Component
 
 Here's a reusable Ad Component with TypeScript typing:
@@ -95,7 +110,7 @@ const AdWithErrorBoundary: React.FC<AdProps> = (props) => {
 };
 ```
 
-### 4. Usage Example
+Usage Example
 
 ```typescript
 const HomePage: React.FC = () => {
@@ -119,7 +134,7 @@ const HomePage: React.FC = () => {
 };
 ```
 
-### 5. Lazy Loading Implementation
+### 4. Lazy Loading Implementation
 
 ```typescript
 const LazyAdFrame = lazy(() => import('./AdFrame'));

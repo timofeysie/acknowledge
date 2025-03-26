@@ -4,10 +4,12 @@
 ## Key Technical Considerations
 
 ### 1. Performance Impact
+
 - Ads can affect Core Web Vitals
 - Consider lazy loading ads below the fold
 - Implement with proper timing to not block main content loading
 - Use appropriate `data-loading` attributes:
+
 ```html
 <ins class="adsbygoogle"
      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
