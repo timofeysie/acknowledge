@@ -447,3 +447,9 @@ const CarouselButton = styled.button`
   }
 `;
 ```
+
+## The sandbox attribute
+
+The sandbox attribute is used to allow or restrict the content in an iframe.
+
+Various scenarios for attribute values could include:
