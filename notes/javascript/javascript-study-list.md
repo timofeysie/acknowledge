@@ -679,7 +679,9 @@ See the [counter dilemma](../examples/javascript/closures.js)
 
 ### Currying
 
-Currying is a functional programming technique where a function with multiple arguments is transformed into a sequence of unary functions (functions that take single arguments).
+Currying is a functional programming technique.
+In it a function with multiple arguments is transformed into a sequence of unary functions.
+Unary functions take single arguments.
 
 ```js
 function curry(fn) {
@@ -731,7 +733,7 @@ The curry function takes a function as its argument and returns a curried versio
 
 Then you can use the curried function in various ways.
 
-TypeScript is like a dial that you can turn up if you want to.  Starting with basic types you can dial up to generics and all kinds of other features.
+### Currying in TypeScript
 
 Here is a version of the first curry function in TypeScript:
 

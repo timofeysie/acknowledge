@@ -3,7 +3,7 @@
  * @param nums 
  * @returns true if you can reach the last index, or false otherwise.
  * 
- * Start from the second to last position
+ * Start from the last position
  * Iterate backwards through the array
  * If we can reach the last good position from current position
  * Update the last good position to current position
