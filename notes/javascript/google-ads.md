@@ -1,4 +1,3 @@
-
 # Google Ads Implementation Guide
 
 ## Key Technical Considerations
@@ -20,6 +19,7 @@
 ```
 
 ### 2. Placement Best Practices
+
 - Avoid too many ads above the fold
 - Maintain adequate spacing between ads
 - Follow Google's policies on ad density:
@@ -28,6 +28,7 @@
   - Minimum spacing of 150px between ad units
 
 ### 3. Responsive Design
+
 ```typescript
 const ResponsiveAdUnit: React.FC = () => {
   useEffect(() => {
@@ -47,6 +48,7 @@ const ResponsiveAdUnit: React.FC = () => {
 ```
 
 ### 4. Error Handling
+
 ```typescript
 const AdUnit: React.FC = () => {
   useEffect(() => {
@@ -65,12 +67,14 @@ const AdUnit: React.FC = () => {
 ## Compliance Requirements
 
 ### 1. Privacy and Consent
+
 - Implement cookie consent for EU users (GDPR)
 - Include ads in your privacy policy
 - Add appropriate disclosures
 - Consider implementing a Consent Management Platform (CMP)
 
 ### 2. Content Policies
+
 - No adult content
 - No illegal content
 - No copyright infringement
@@ -78,41 +82,34 @@ const AdUnit: React.FC = () => {
 - No malicious code
 
 ### 3. Technical Requirements
+
 - Valid HTML
 - Mobile-friendly design
 - Adequate content-to-ad ratio
 - No clicking own ads
 - No artificial inflation of impressions
 
-## Implementation Checklist
-
-### Initial Setup
-- [ ] Create AdSense account
-- [ ] Verify website ownership
-- [ ] Add AdSense code to `<head>` section
-```html
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-     crossorigin="anonymous"></script>
-```
-
 ### Testing
-- [ ] Test ads in different viewports
-- [ ] Verify lazy loading works
-- [ ] Check page speed impact
-- [ ] Validate ad placements
-- [ ] Test with ad blockers
-- [ ] Verify responsive behavior
+
+- Test ads in different viewports
+- Verify lazy loading works
+- Check page speed impact
+- Validate ad placements
+- Test with ad blockers
+- Verify responsive behavior
 
 ### Monitoring
-- [ ] Set up performance monitoring
-- [ ] Track ad viewability
-- [ ] Monitor revenue metrics
-- [ ] Check for policy violations
-- [ ] Track user experience metrics
+
+- Set up performance monitoring
+- Track ad viewability
+- Monitor revenue metrics
+- Check for policy violations
+- Track user experience metrics
 
 ## Best Practices for React Implementation
 
 ### 1. Create a Reusable Ad Component
+
 ```typescript
 interface GoogleAdProps {
   adSlot: string;
@@ -149,6 +146,9 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
 ```
 
 ### 2. Implement Lazy Loading
+
+This method will use the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API to detect when the ad is visible in the viewport and then load the ad.
+
 ```typescript
 const LazyGoogleAd: React.FC<GoogleAdProps> = (props) => {
   const adRef = useRef<HTMLDivElement>(null);
@@ -168,7 +168,8 @@ const LazyGoogleAd: React.FC<GoogleAdProps> = (props) => {
     if (adRef.current) {
       observer.observe(adRef.current);
     }
-
+    // stop watching for changes when the component is unmounted or 
+    // a new element is passed to the hook to improve performance
     return () => observer.disconnect();
   }, []);
 
@@ -180,7 +181,22 @@ const LazyGoogleAd: React.FC<GoogleAdProps> = (props) => {
 };
 ```
 
+The array brackets ([entry]) in the IntersectionObserver callback function above is used for array destructuring.
+
+The IntersectionObserver callback receives an array of IntersectionObserverEntry objects, even when observing a single element.
+
+The array brackets are used to destructure this array and extract the first entry directly.
+
+An example without destructuring would be this:
+
+```javascript
+const observer = new IntersectionObserver(entries => {
+  const entry = entries[0];
+  ...
+```
+
 ### 3. Handle Ad Blocking
+
 ```typescript
 const AdWithFallback: React.FC<GoogleAdProps> = (props) => {
   const [isBlocked, setIsBlocked] = useState(false);
@@ -216,10 +232,9 @@ const AdWithFallback: React.FC<GoogleAdProps> = (props) => {
 ## Analytics Integration
 
 Consider implementing:
+
 - Google Analytics integration
 - Custom event tracking
 - Performance monitoring
 - Revenue tracking
 - User engagement metrics
-
-Remember to regularly review Google's AdSense policies as they frequently update their requirements and best practices.

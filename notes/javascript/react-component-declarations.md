@@ -1,6 +1,19 @@
 # React Functional Component Declaration Patterns
 
-Here are six different ways to declare a React functional component.
+## TL;DR
+
+```typescript
+const Component = (props: Props) => {
+  const { name, age } = props;
+  return <div>{name} is {age} years old</div>;
+};
+```
+
+**VS Code Snippet**: `rce` (React Class Export) or `rafce` (React Arrow Function Component Export)
+
+## Seven Ways to Declare a React Functional Component
+
+Here are the different ways to declare a React functional component.
 
 1. React.FC (Function Component)
 2. Function Declaration
@@ -8,7 +21,7 @@ Here are six different ways to declare a React functional component.
 4. Arrow Function with Explicit Return Type
 5. Inline Type Definition
 6. React.VoidFunctionComponent
-7. Props Parameter Pattern
+7. Props Parameter Pattern (my favorite)
 
 ## 1. React.FC (Function Component)
 
@@ -66,6 +79,7 @@ const Component: React.VoidFunctionComponent<Props> = ({ name, age }) => {
 ## 7. Props Parameter Pattern
 
 This one is my favorite.
+It is similar to the Function Declaration Pattern but uses a fat arrow instead of the `function` keyword.
 
 ```typescript
 const Component = (props: Props) => {
@@ -73,6 +87,8 @@ const Component = (props: Props) => {
   return <div>{name} is {age} years old</div>;
 };
 ```
+
+**VS Code Snippet**: `rce` (React Class Export) or `rafce` (React Arrow Function Component Export)
 
 ## Pros and Cons
 
@@ -237,3 +253,54 @@ const InputComponent = React.forwardRef<HTMLInputElement, Props>(
   }
 );
 ```
+
+## When to Use Each Pattern
+
+### Props Parameter Pattern
+
+- When you have many props
+- When you need to pass props through to children
+- When you want to avoid destructuring complexity
+- When working with TypeScript and want good type inference
+
+### Destructured Props Pattern
+
+- When you have few props
+- When you want clean, readable code
+- When you need default values
+- When you want to clearly indicate required props
+
+### React.FC Pattern
+
+- When you need children prop
+- When you want strong TypeScript integration
+- When you want to clearly indicate it's a React component
+- When working with defaultProps
+
+### Function Declaration Pattern
+
+- When you want simple, clean code
+- When you need hoisting
+- When you want flexibility
+- When you don't need TypeScript
+
+### Arrow Function with Explicit Return Type
+
+- When you need explicit return type
+- When working with HOCs
+- When you want strong TypeScript integration
+- When you need to indicate component behavior
+
+### Inline Type Definition
+
+- When you have a one-off component
+- When you want to keep types close to component
+- When you have simple prop types
+- When you don't need reusable types
+
+### VoidFunctionComponent
+
+- When your component doesn't return children
+- When you want to be explicit about component behavior
+- When you need strong TypeScript integration
+- When you want to indicate component purpose

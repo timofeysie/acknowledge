@@ -47,6 +47,8 @@ Developers should also be concerned with:
 6. Code reviews
 7. Documentation
 
+Note I am not including all the advice.  These are just the pertinent items and I may have considered the others "no-brainers" and not needed for my study.
+
 Another article on Dev.to by dcodes posted on May 18, 2023 [Write better code by following these JavaScript best practices](https://dev.to/dawsoncodes/write-better-code-by-following-these-javascript-best-practices-25mp) has a long list of best practices.
 
 1. Adopt a Consistent Coding Style
@@ -159,26 +161,58 @@ My notes pull out two items from the list of ten:
 
 - Use stateless components: One should use stateless components whenever possible. Stateful components are more complex and harder to reason about. Stateless components are easier to reuse and compose since they only have to render based on the data passed to them through props. They are also easier to test since they don't have any internal state to manage.
 
+Other articles I found useful:
 
-https://dev.to/amritapadhy/best-practices-for-writing-clean-react-code-59fm
+[Best Practices for Writing Clean React Code](https://dev.to/amritapadhy/best-practices-for-writing-clean-react-code-59fm) by Amrita-padhy posted on Oct 10, 2023
 
-an exhaustive list
-https://bluesockets.com/react/reactjs-best-practices/
+[React Best Practices](https://bluesockets.com/react/reactjs-best-practices/) by Bluesockets posted on Jan 10, 2024 (defunct?)
 
-react
-https://dev.to/nikacodes/reactjs-good-practices-59b3
+[ReactJS Good Practices](https://dev.to/nikacodes/reactjs-good-practices-59b3) by Niko posted on Jan 10, 2024
 
-githubs
-https://dev.to/novu/10-github-repositories-to-achieve-javascript-mastery-50hk
+[10 Github Repositories to Achieve JavaScript Mastery](https://dev.to/novu/10-github-repositories-to-achieve-javascript-mastery-50hk) by Novu posted on Jan 10, 2024
 
-hooks patterns
-https://www.fullstacklabs.co/blog/production-level-patterns-for-react-hooks
+[Production Level Patterns for React Hooks](https://www.fullstacklabs.co/blog/production-level-patterns-for-react-hooks) by Fullstack Labs posted on Jan 10, 2024
 
-Writing clean, reusable components in React (best practices)
+[Writing Clean, Reusable Components in React (Best Practices)](https://dev.to/codewithshahan/writing-clean-reusable-components-in-react-best-practices-2gka) by Shahan posted on Jan 10, 2024
 
-https://dev.to/codewithshahan/writing-clean-reusable-components-in-react-best-practices-2gka
+User generated best practices: [What are your best clean code tips?](https://dev.to/devteam/what-are-your-best-clean-code-tips-khm) by Dev.to posted on Jan 10, 2024
 
+## Best practices when using AI
 
-User ge
-https://dev.to/devteam/what-are-your-best-clean-code-tips-khm
+## Create aProduct requirements document
 
+This document outlines:
+
+- What the application does
+- Required technologies
+- Design patterns
+- Technical specifications
+
+Given that this app was created with Bolt.new, its development style can follow the standard React File/folder structure and coding conventions that Bolt.new uses.
+
+### Features
+
+- User authentication (login/register)
+- User profiles with customizable details
+- Role-based access (admin/guest)
+- Responsive design with mobile-first UI
+- Secure backend with Supabase
+
+### Tech Stack
+
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase (Authentication & Database)
+- Vite
+
+### Cursor rules
+
+The rules for Cursor to follow when working with your code:
+
+#### Coding standards
+
+- Use standard Prettier and ESLint rules.
+- File/folder structure conventions
+- Naming conventions
+- Architecture principles

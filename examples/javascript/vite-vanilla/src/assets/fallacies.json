@@ -1,0 +1,1043 @@
+[
+    {
+      "type": "Formal Fallacy",
+      "name": "Appeal to Probability",
+      "description": "Taking something for granted because it would probably be the case (or might possibly be the case).",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Appeal_to_probability"
+    },
+    {
+      "type": "Formal Fallacy",
+      "name": "Argument from Fallacy",
+      "description": "The assumption that, if a particular argument for a conclusion is fallacious, then the conclusion by itself is false.",
+      "also_known_as": "Fallacy Fallacy",
+      "detail_page": "https://en.wikipedia.org/wiki/Argument_from_fallacy"
+    },
+    {
+      "type": "Formal Fallacy",
+      "name": "Base Rate Fallacy",
+      "description": "Making a probability judgment based on conditional probabilities, without taking into account the effect of prior probabilities.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Base_rate_fallacy"
+    },
+    {
+      "type": "Formal Fallacy",
+      "name": "Conjunction Fallacy",
+      "description": "The assumption that an outcome simultaneously satisfying multiple conditions is more probable than an outcome satisfying a single one of them.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Conjunction_fallacy"
+    },
+    {
+      "type": "Formal Fallacy",
+      "name": "Non Sequitur Fallacy",
+      "description": "Where the conclusion does not logically follow the premise.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Non_sequitur_(fallacy)"
+    },
+    {
+      "type": "Formal Fallacy",
+      "name": "Masked-Man Fallacy",
+      "description": "The substitution of identical designators in a true statement can lead to a false one.",
+      "also_known_as": "Illicit Substitution of Identicals",
+      "detail_page": "https://en.wikipedia.org/wiki/Masked-man_fallacy"
+    },
+    {
+      "type": "Propositional Fallacy",
+      "name": "Affirming a Disjunct",
+      "description": "Concluding that one disjunct of a logical disjunction must be false because the other disjunct is true; A or B; A, therefore not B.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Affirming_a_disjunct"
+    },
+    {
+      "type": "Propositional Fallacy",
+      "name": "Affirming the Consequent",
+      "description": "The antecedent in an indicative conditional is claimed to be true because the consequent is true; if A, then B; B, therefore A.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Affirming_the_consequent"
+    },
+    {
+      "type": "Propositional Fallacy",
+      "name": "Denying the Antecedent",
+      "description": "The consequent in an indicative conditional is claimed to be false because the antecedent is false; if A, then B; not A, therefore not B.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Denying_the_antecedent"
+    },
+    {
+      "type": "Quantification Fallacy",
+      "name": "Existential Fallacy",
+      "description": "An argument that has a universal premise and a particular conclusion.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Existential_fallacy"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Affirmative Conclusion from a Negative Premise",
+      "description": "A categorical syllogism has a positive conclusion, but at least one negative premise.",
+      "also_known_as": "Illicit Negative",
+      "detail_page": "https://en.wikipedia.org/wiki/Affirmative_conclusion_from_a_negative_premise"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Fallacy of Exclusive Premises",
+      "description": "A categorical syllogism that is invalid because both of its premises are negative.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Fallacy_of_exclusive_premises"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Fallacy of Four Terms",
+      "description": "A categorical syllogism that has four terms.",
+      "also_known_as": "Quaternio Terminorum",
+      "detail_page": "https://en.wikipedia.org/wiki/Fallacy_of_four_terms"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Illicit Major",
+      "description": "A categorical syllogism that is invalid because its major term is not distributed in the major premise but distributed in the conclusion.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Illicit_major"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Illicit Minor",
+      "description": "A categorical syllogism that is invalid because its minor term is not distributed in the minor premise but distributed in the conclusion.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Illicit_minor"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Negative Conclusion from Affirmative Premises",
+      "description": "A categorical syllogism has a negative conclusion but affirmative premises.",
+      "also_known_as": "Illicit Affirmative",
+      "detail_page": "https://en.wikipedia.org/wiki/Negative_conclusion_from_affirmative_premises"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Fallacy of the Undistributed Middle",
+      "description": "The middle term in a categorical syllogism is not distributed.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Fallacy_of_the_undistributed_middle"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Modal Fallacy",
+      "description": "Confusing necessity with sufficiency.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Modal_fallacy"
+    },
+    {
+      "type": "Formal Syllogistic Fallacy",
+      "name": "Modal Scope Fallacy",
+      "description": "A degree of unwarranted necessity is placed in the conclusion.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Modal_scope_fallacy"
+    },
+    {
+      "type": "Informal fallacy",
+      "name": "Argument from Incredulity",
+      "description": "When someone can't imagine something to be true, and therefore deems it false, or conversely, holds that it must be true because they can't see how it could be false.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Argument_from_incredulity"
+    },
+    {
+      "type": "Informal fallacy",
+      "name": "Argument to Moderation",
+      "description": "Assuming that a compromise between two positions is always correct.",
+      "also_known_as": "False compromise, Middle ground, Fallacy of the mean, Argumentum ad temperantiam",
+      "detail_page": "https://en.wikipedia.org/wiki/Argument_to_moderation"
+    },
+    {
+      "type": "Informal fallacy",
+      "name": "Continuum Fallacy",
+      "description": "Improperly rejecting a claim for being imprecise.",
+      "also_known_as": "Fallacy of the beard, Line-drawing fallacy, Sorites fallacy, Fallacy of the heap, Bald man fallacy, Decision-point fallacy",
+      "detail_page": "https://en.wikipedia.org/wiki/Continuum_fallacy"
+    },
+    {
+      "type": "Informal fallacy",
+      "sub-type": "Correlative-based fallacies",
+      "name": "Suppressed Correlative",
+      "description": "A correlative is redefined so that one alternative is made impossible (e.g., \"I'm not fat because I'm thinner than John.\").",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Suppressed_correlative"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Definist Fallacy",
+      "description": "Defining a term used in an argument in a biased manner (e.g., using 'loaded terms'). The person making the argument expects that the listener will accept the provided definition, making the argument difficult to refute.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Definist_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Divine Fallacy",
+      "description": "Arguing that, because something is so phenomenal or amazing, it must be the result of superior, divine, alien, or paranormal agency.",
+      "also_known_as": "Argument from Incredulity",
+      "detail_page": "https://en.wikipedia.org/wiki/Divine_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Double Counting",
+      "description": "Counting events or occurrences more than once in probabilistic reasoning, which leads to the sum of the probabilities of all cases exceeding unity.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Double_counting_(fallacy)"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Equivocation",
+      "name": "Equivocation",
+      "description": "Using a term with more than one meaning in a statement without specifying which meaning is intended.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Equivocation"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Equivocation",
+      "name": "Ambiguous Middle Term",
+      "description": "Using a middle term with multiple meanings.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Ambiguous_middle_term"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Equivocation",
+      "name": "Definitional Retreat",
+      "description": "Changing the meaning of a word when an objection is raised. Often paired with moving the goalposts, as when an argument is challenged using a common definition of a term in the argument, and the arguer presents a different definition of the term and thereby demands different evidence to debunk the argument.",
+      "also_known_as": null,
+      "detail_page": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Equivocation",
+      "name": "Motte-and-Bailey Fallacy",
+      "description": "Conflating two positions with similar properties, one modest and easy to defend (the 'motte') and one more controversial (the 'bailey'). The arguer first states the controversial position, but when challenged, states that they are advancing the modest position.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Motte-and-bailey_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Equivocation",
+      "name": "Fallacy of Accent",
+      "description": "Changing the meaning of a statement by not specifying on which word emphasis falls.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Accent_(fallacy)"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Equivocation",
+      "name": "Persuasive Definition",
+      "description": "Purporting to use the 'true' or 'commonly accepted' meaning of a term while, in reality, using an uncommon or altered definition.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Persuasive_definition"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Equivocation",
+      "name": "If-by-Whiskey",
+      "description": "An argument that supports both sides of an issue by using terms that are emotionally sensitive and ambiguous.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/If-by-whiskey"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Ecological Fallacy",
+      "description": "Inferring about the nature of an entity based solely upon aggregate statistics collected for the group to which that entity belongs.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Ecological_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Etymological Fallacy",
+      "description": "Assuming that the original or historical meaning of a word or phrase is necessarily similar to its actual present-day usage.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Etymological_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Fallacy of Composition",
+      "description": "Assuming that something true of part of a whole must also be true of the whole.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Fallacy_of_composition"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Fallacy of Division",
+      "description": "Assuming that something true of a composite thing must also be true of all or some of its parts.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Fallacy_of_division"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "False Attribution",
+      "description": "Appealing to an irrelevant, unqualified, unidentified, biased or fabricated source in support of an argument.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/False_attribution"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "False Attribution",
+      "name": "Fallacy of Quoting Out of Context",
+      "description": "Selective excerpting of words from their original context to distort the intended meaning.",
+      "also_known_as": "Contextotomy, Contextomy, Quotation Mining",
+      "detail_page": "https://en.wikipedia.org/wiki/Fallacy_of_quoting_out_of_context"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "False Authority",
+      "description": "Using an expert of dubious credentials or using only one opinion to promote a product or idea. Related to the appeal to authority fallacy.",
+      "also_known_as": "Single Authority",
+      "detail_page": "https://en.wikipedia.org/wiki/False_authority"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "False Dilemma",
+      "description": "Two alternative statements are given as the only possible options when, in reality, there are more.",
+      "also_known_as": "False Dichotomy, Fallacy of Bifurcation, Black-or-White Fallacy",
+      "detail_page": "https://en.wikipedia.org/wiki/False_dilemma"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "False Equivalence",
+      "description": "Describing two or more statements as virtually equal when they are not.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/False_equivalence"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Feedback Fallacy",
+      "description": "Believing in the objectivity of an evaluation to be used as the basis for improvement without verifying that the source of the evaluation is a disinterested party.",
+      "also_known_as": null,
+      "detail_page": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Historian's Fallacy",
+      "description": "Assuming that decision-makers of the past had identical information as those subsequently analyzing the decision. This is not to be confused with presentism, in which present-day ideas and perspectives are anachronistically projected into the past.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Historian%27s_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Historical Fallacy",
+      "description": "Believing that certain results occurred only because a specific process was performed, though said process may actually be unrelated to the results.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Historical_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "sub-type": "Historical Fallacy",
+      "name": "Baconian Fallacy",
+      "description": "Supposing that historians can obtain the 'whole truth' via induction from individual pieces of historical evidence. The 'whole truth' is defined as learning 'something about everything', 'everything about something', or 'everything about everything'. In reality, a historian 'can only hope to know something about something'.",
+      "also_known_as": null,
+      "detail_page": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Homunculus Fallacy",
+      "description": "Using a 'middle-man' for explanation; this sometimes leads to regressive middle-men. It explains a concept in terms of the concept itself without explaining its real nature (e.g.: explaining thought as something produced by a little thinker – a homunculus – inside the head simply identifies an intermediary actor and does not explain the product or process of thinking).",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Homunculus_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Inflation of Conflict",
+      "description": "Arguing that, if experts in a field of knowledge disagree on a certain point within that field, no conclusion can be reached or that the legitimacy of that field of knowledge is questionable.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Inflation_of_conflict"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Incomplete Comparison",
+      "description": "Insufficient information is provided to make a complete comparison.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Incomplete_comparison"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Intentionality Fallacy",
+      "description": "The insistence that the ultimate meaning of an expression must be consistent with the intention of the person from whom the communication originated.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Intentional_Fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Kettle Logic",
+      "description": "Using multiple, jointly inconsistent arguments to defend a position.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Kettle_logic"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Ludic Fallacy",
+      "description": "Failing to take into account that non-regulated random occurrences (unknown unknowns) can affect the probability of an event taking place.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Ludic_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Lump of Labour Fallacy",
+      "description": "The misconception that there is a fixed amount of work to be done within an economy, which can be distributed to create more or fewer jobs.",
+      "also_known_as": null,
+      "detail_page": "https://en.wikipedia.org/wiki/Lump_of_labour_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "McNamara fallacy",
+      "description": "Making an argument using only quantitative observations (measurements, statistical or numerical values) and discounting subjective information that focuses on quality (traits, features, or relationships).",
+      "also_known_as": "quantitative fallacy",
+      "detail_page": "/wiki/McNamara_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Mind projection fallacy",
+      "description": "Assuming that a statement about an object describes an inherent property of the object, rather than a personal perception.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Mind_projection_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Moralistic fallacy",
+      "description": "Inferring factual conclusions from evaluative premises in violation of fact–value distinction (e.g.: inferring is from ought).",
+      "also_known_as": null,
+      "detail_page": "/wiki/Moralistic_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Moving the goalposts",
+      "description": "Argument in which evidence presented in response to a specific claim is dismissed and some other (often greater) evidence is demanded.",
+      "also_known_as": "raising the bar",
+      "detail_page": "/wiki/Moving_the_goalposts"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Nirvana fallacy",
+      "description": "Solutions to problems are rejected because they are not perfect.",
+      "also_known_as": "perfect-solution fallacy",
+      "detail_page": "/wiki/Nirvana_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Package deal",
+      "description": "Treating essentially dissimilar concepts as though they were essentially similar.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Package-deal_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Proof by assertion",
+      "description": "A proposition is repeatedly restated regardless of contradiction.",
+      "also_known_as": "argumentum ad infinitum, argumentum ad nauseam",
+      "detail_page": "/wiki/Proof_by_assertion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Prosecutor's fallacy",
+      "description": "A low probability of false matches does not mean a low probability of some false match being found.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Prosecutor%27s_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Proving too much",
+      "description": "An argument that results in an overly generalized conclusion (e.g.: arguing that drinking alcohol is bad because in some instances it has led to spousal or child abuse).",
+      "also_known_as": null,
+      "detail_page": "/wiki/Proving_too_much"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Psychologist's fallacy",
+      "description": "An observer presupposes the objectivity of their own perspective when analyzing a behavioral event.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Psychologist%27s_fallacy"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Referential fallacy",
+      "description": "Assuming that all words refer to existing things and that the meaning of words reside within the things they refer to, as opposed to words possibly referring to no real object or that the meaning comes from how they are used.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Direct_reference_theory"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Reification",
+      "description": "Treating an abstract belief or hypothetical construct as if it were a concrete, real event or physical entity.",
+      "also_known_as": "concretism, hypostatization, fallacy of misplaced concreteness",
+      "detail_page": "/wiki/Reification_(fallacy)"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Retrospective determinism",
+      "description": "Believing that, because an event has occurred under some circumstance, the circumstance must have made the event inevitable.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Retrospective_determinism"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Slippery slope",
+      "description": "Asserting that a proposed, relatively small, first action will inevitably lead to a chain of related events resulting in a significant and negative event and, therefore, should not be permitted.",
+      "also_known_as": "thin edge of the wedge, camel's nose",
+      "detail_page": "/wiki/Slippery_slope"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Special pleading",
+      "description": "The arguer attempts to cite something as an exemption to a generally accepted rule or principle without justifying the exemption.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Special_pleading"
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Accident",
+      "description": "An exception to a generalization is ignored.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Accident_(fallacy)",
+      "sub_type_of": "No true Scotsman"
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "No true Scotsman",
+      "description": "Makes a generalization true by changing the generalization to exclude a counterexample.",
+      "also_known_as": "appeal to purity",
+      "detail_page": "/wiki/No_true_Scotsman",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Cherry picking",
+      "description": "Using individual cases or data that confirm a particular position, while ignoring related cases or data that may contradict that position.",
+      "also_known_as": "suppressed evidence, incomplete evidence, argument by half-truth, fallacy of exclusion, card stacking, slanting",
+      "detail_page": "/wiki/Cherry_picking_(fallacy)",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Nut-picking",
+      "description": "Using individual cases or data that falsify a particular position, while ignoring related cases or data that may support that position.",
+      "also_known_as": "suppressed evidence, incomplete evidence",
+      "detail_page": "/wiki/Nut-picking",
+      "sub_type_of": "Cherry picking"
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Survivorship bias",
+      "description": "A small number of successes of a given process are actively promoted while completely ignoring a large number of failures.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Survivorship_bias",
+      "sub_type_of": "Cherry picking"
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "False analogy",
+      "description": "An argument by analogy in which the analogy is poorly suited.",
+      "also_known_as": null,
+      "detail_page": "/wiki/False_analogy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Hasty generalization",
+      "description": "Basing a broad conclusion on a small or unrepresentative sample.",
+      "also_known_as": "fallacy of insufficient statistics, fallacy of insufficient sample, fallacy of the lonely fact, hasty induction, secundum quid, converse accident, jumping to conclusions",
+      "detail_page": "/wiki/Hasty_generalization",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Argument from anecdote",
+      "description": "A fallacy where anecdotal evidence is presented as an argument; without any other contributory evidence or reasoning.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Argument_from_anecdote",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Inductive fallacy",
+      "description": "A fallacy of induction happens when a conclusion is drawn from premises that only lightly support it.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Inductive_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Misleading vividness",
+      "description": "Involves describing an occurrence in vivid detail, even if it is an exceptional occurrence, to convince someone that it is more important.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Misleading_vividness",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Overwhelming exception",
+      "description": "An accurate generalization that comes with qualifications that eliminate so many cases that what remains is much less impressive than the initial statement might have led one to assume.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Overwhelming_exception",
+      "sub_type_of": null
+    },
+    {
+      "type": "Faulty generalization",
+      "name": "Thought-terminating cliché",
+      "description": "A commonly used phrase, sometimes passing as folk wisdom, used to quell cognitive dissonance, conceal lack of forethought, move on to other topics, etc. – but in any case, to end the debate with a cliché rather than a point.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Thought-terminating_clich%C3%A9",
+      "sub_type_of": null
+    },
+    {
+      "type": "Questionable cause",
+      "name": "Cum hoc ergo propter hoc",
+      "description": "A faulty assumption that, because there is a correlation between two variables, one caused the other.",
+      "also_known_as": "correlation implies causation, faulty cause/effect, coincidental correlation, correlation without causation",
+      "detail_page": "/wiki/Cum_hoc_ergo_propter_hoc",
+      "sub_type_of": null
+    },
+    {
+      "type": "Questionable cause",
+      "name": "Post hoc ergo propter hoc",
+      "description": "X happened, then Y happened; therefore X caused Y.",
+      "also_known_as": "temporal sequence implies causation",
+      "detail_page": "/wiki/Post_hoc_ergo_propter_hoc",
+      "sub_type_of": "Cum hoc ergo propter hoc"
+    },
+    {
+      "type": "Questionable cause",
+      "name": "Wrong direction",
+      "description": "Cause and effect are reversed. The cause is said to be the effect and vice versa. The consequence of the phenomenon is claimed to be its root cause.",
+      "also_known_as": "reverse causation",
+      "detail_page": "/wiki/Wrong_direction",
+      "sub_type_of": "Cum hoc ergo propter hoc"
+    },
+    {
+      "type": "Questionable cause",
+      "name": "Ignoring a common cause",
+      "description": "The third-cause fallacy is a logical fallacy in which a spurious relationship is confused for causation. It asserts that X causes Y when in reality, both X and Y are caused by Z. It is a variation on the post hoc ergo propter hoc fallacy and a member of the questionable cause group of fallacies.",
+      "also_known_as": "third-cause fallacy,  questionable cause",
+      "detail_page": "/wiki/Ignoring_a_common_cause",
+      "sub_type_of": "Cum hoc ergo propter hoc",
+      "examples": [
+        "Sleeping with one's shoes on is strongly correlated with waking up with a headache. Therefore, sleeping with one's shoes on causes headache.",
+        "Young children who sleep with the light on are much more likely to develop myopia in later life. Therefore, sleeping with the light on causes myopia.",
+        "As ice cream sales increase, the rate of drowning deaths increases sharply. Therefore, ice cream consumption causes drowning."
+      ]
+    },
+    {
+      "type": "Questionable cause",
+      "name": "Fallacy of the single cause",
+      "description": "It is assumed that there is one, simple cause of an outcome when in reality it may have been caused by a number of only jointly sufficient causes.",
+      "also_known_as": "causal oversimplification",
+      "detail_page": "/wiki/Fallacy_of_the_single_cause",
+      "sub_type_of": null
+    },
+    {
+      "type": "Questionable cause",
+      "name": "Furtive fallacy",
+      "description": "Outcomes are asserted to have been caused by the malfeasance of decision makers.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Furtive_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Questionable cause",
+      "name": "Magical thinking",
+      "description": "Fallacious attribution of causal relationships between actions and events. In anthropology, it refers primarily to cultural beliefs that ritual, prayer, sacrifice, and taboos will produce specific supernatural consequences. In psychology, it refers to an irrational belief that thoughts by themselves can affect the world or that thinking something corresponds with doing it.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Magical_thinking",
+      "sub_type_of": null
+    },
+    {
+      "type": "Statistical fallacy",
+      "name": "Observational interpretation fallacy",
+      "description": "Occurs when associations identified in observational studies are misinterpreted as causal relationships.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Observational_interpretation_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Statistical fallacy",
+      "name": "Regression fallacy",
+      "description": "Ascribes cause where none exists. The flaw is failing to account for natural fluctuations. It is frequently a special kind of post hoc fallacy.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Regression_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Statistical fallacy",
+      "name": "Gambler's fallacy",
+      "description": "The incorrect belief that separate, independent events can affect the likelihood of another random event. If a fair coin lands on heads 10 times in a row, the belief that it is \"due to the number of times it had previously landed on tails\" is incorrect.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Gambler%27s_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Statistical fallacy",
+      "name": "Inverse gambler's fallacy",
+      "description": "The inverse of the gambler's fallacy. It is the incorrect belief that on the basis of an unlikely outcome, the process must have happened many times before.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Inverse_gambler%27s_fallacy",
+      "sub_type_of": "Gambler's fallacy"
+    },
+    {
+      "type": "Statistical fallacy",
+      "name": "p-hacking",
+      "description": "Belief in the significance of a result, not realizing that multiple comparisons or experiments have been run and only the most significant were published.",
+      "also_known_as": null,
+      "detail_page": "/wiki/P-hacking",
+      "sub_type_of": null
+    },
+    {
+      "type": "Statistical fallacy",
+      "name": "Garden of forking paths fallacy",
+      "description": "Incorrect belief that a single experiment can not be subject to the multiple comparisons effect.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Garden_of_forking_paths_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Statistical fallacy",
+      "name": "Sunk costs fallacy",
+      "description": "Refusal to leave a situation because you have already put large amounts of time or effort into it- for example trying to jump over a wall you physically cannot jump over because you have already spent an hour trying to jump.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Sunk_costs_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Red herring",
+      "description": "Introducing a second argument in response to the first argument that is irrelevant and draws attention away from the original topic (e.g.: saying \"If you want to complain about the dishes I leave in the sink, what about the dirty clothes you leave in the bathroom?\").",
+      "also_known_as": "irrelevant conclusion, ignoratio elenchi",
+      "detail_page": "/wiki/Red_herring",
+      "sub_type_of": null,
+      "related_concepts": [
+        {
+          "name": "Chewbacca defense",
+          "context": "In jury trial",
+          "detail_page": "/wiki/Chewbacca_defense"
+        },
+        {
+          "name": "Dead cat strategy",
+          "context": "In political strategy",
+          "detail_page": "/wiki/Dead_cat_strategy"
+        }
+      ]
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Ad hominem",
+      "description": "Attacking the arguer instead of the argument. (Note that \"ad hominem\" can also refer to the dialectical strategy of arguing on the basis of the opponent's own commitments. This type of ad hominem is not a fallacy.)",
+      "also_known_as": null,
+      "detail_page": "/wiki/Ad_hominem",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Circumstantial ad hominem",
+      "description": "Stating that the arguer's personal situation or perceived benefit from advancing a conclusion means that their conclusion is wrong.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Ad_hominem#Circumstantial",
+      "sub_type_of": "Ad hominem"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Poisoning the well",
+      "description": "A subtype of ad hominem presenting adverse information about a target person with the intention of discrediting everything that the target person says.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Poisoning_the_well",
+      "sub_type_of": "Ad hominem"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to motive",
+      "description": "Dismissing an idea by questioning the motives of its proposer.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Appeal_to_motive",
+      "sub_type_of": "Ad hominem"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Tone policing",
+      "description": "Focusing on emotion behind (or resulting from) a message rather than the message itself as a discrediting tactic.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Tone_policing",
+      "sub_type_of": "Ad hominem"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Traitorous critic fallacy",
+      "description": "A critic's perceived affiliation is portrayed as the underlying reason for the criticism and the critic is asked to stay away from the issue altogether.",
+      "also_known_as": "ergo decedo",
+      "detail_page": "/wiki/Ergo_decedo",
+      "sub_type_of": "Ad hominem"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Bulverism",
+      "description": "Inferring why an argument is being used, associating it to some psychological reason, then assuming it is invalid as a result. The assumption that if the origin of an idea comes from a biased mind, then the idea itself must also be a falsehood.",
+      "also_known_as": "psychogenetic fallacy",
+      "detail_page": "/wiki/Bulverism",
+      "sub_type_of": "Ad hominem"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to authority",
+      "description": "An assertion is deemed true because of the position or authority of the person asserting it.",
+      "also_known_as": "argument from authority, argumentum ad verecundiam",
+      "detail_page": "/wiki/Appeal_to_authority",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to accomplishment",
+      "description": "An assertion is deemed true or false based on the accomplishments of the proposer.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Appeal_to_accomplishment",
+      "sub_type_of": "Appeal to authority"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Courtier's reply",
+      "description": "A criticism is dismissed by claiming that the critic lacks sufficient knowledge, credentials, or training to credibly comment on the subject matter.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Courtier%27s_reply",
+      "sub_type_of": "Appeal to authority"
+    },
+  
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to emotion",
+      "description": "Manipulating the emotions of the listener rather than using valid reasoning to obtain common agreement.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Appeal_to_emotion",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to fear",
+      "description": "Generating distress, anxiety, cynicism, or prejudice towards the opponent in an argument.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Appeal_to_fear",
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to flattery",
+      "description": "Using excessive or insincere praise to obtain common agreement.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Appeal_to_flattery",
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to pity",
+      "description": "Generating feelings of sympathy or mercy in the listener to obtain common agreement.",
+      "also_known_as": "argumentum ad misericordiam",
+      "detail_page": "/wiki/Appeal_to_pity",
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to ridicule",
+      "description": "Mocking or stating that the opponent's position is laughable to deflect from the merits of the opponent's argument.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Appeal_to_ridicule",
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to spite",
+      "description": "Generating bitterness or hostility in the listener toward an opponent in an argument.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Appeal_to_spite",
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Judgmental language",
+      "description": "Using insulting or pejorative language in an argument.",
+      "also_known_as": null,
+      "detail_page": null,
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Pooh-pooh",
+      "description": "Stating that an opponent's argument is unworthy of consideration.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Pooh-pooh",
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Style over substance",
+      "description": "Embellishing an argument with compelling language, exploiting a bias towards the esthetic qualities of an argument, e.g. the rhyme-as-reason effect",
+      "also_known_as": null,
+      "detail_page": null,
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Wishful thinking",
+      "description": "Arguing for a course of action by the listener according to what might be pleasing to imagine rather than according to evidence or reason.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Wishful_thinking",
+      "sub_type_of": "Appeal to emotion"
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to nature",
+      "description": "Judgment is based solely on whether the subject of judgment is 'natural' or 'unnatural'.",
+      "also_known_as": "naturalistic fallacy (not to be confused with other fallacies by that name)",
+      "detail_page": "/wiki/Appeal_to_nature",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to novelty",
+      "description": "A proposal is claimed to be superior or better solely because it is new or modern.",
+      "also_known_as": "argumentum novitatis, argumentum ad antiquitatis",
+      "detail_page": "/wiki/Appeal_to_novelty",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to poverty",
+      "description": "Supporting a conclusion because the arguer is poor (or refuting because the arguer is wealthy).",
+      "also_known_as": "argumentum ad Lazarum",
+      "detail_page": "/wiki/Appeal_to_poverty",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to tradition",
+      "description": "A conclusion supported solely because it has long been held to be true.",
+      "also_known_as": "argumentum ad antiquitatem",
+      "detail_page": "/wiki/Appeal_to_tradition",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Appeal to wealth",
+      "description": "Supporting a conclusion because the arguer is wealthy (or refuting because the arguer is poor).",
+      "also_known_as": "argumentum ad crumenam",
+      "detail_page": "/wiki/Appeal_to_wealth",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Argumentum ad baculum",
+      "description": "An argument made through coercion or threats of force to support position.",
+      "also_known_as": "appeal to the stick, appeal to force, appeal to threat",
+      "detail_page": "/wiki/Argumentum_ad_baculum",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Argumentum ad populum",
+      "description": "A proposition is claimed to be true or good solely because a majority or many people believe it to be so.",
+      "also_known_as": "appeal to widespread belief, bandwagon argument, appeal to the majority, appeal to the people",
+      "detail_page": "/wiki/Argumentum_ad_populum",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Association fallacy",
+      "description": "Arguing that because two things share (or are implied to share) some property, they are the same.",
+      "also_known_as": "guilt by association and honor by association",
+      "detail_page": "/wiki/Association_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Logic chopping fallacy",
+      "description": "Focusing on trivial details of an argument, rather than the main point of the argumentation.",
+      "also_known_as": "nit-picking, trivial objections",
+      "detail_page": null,
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Ipse dixit",
+      "description": "A claim that is presented as true without support, as self-evidently true, or as dogmatically true. This fallacy relies on the implied expertise of the speaker or on an unstated truism.",
+      "also_known_as": "bare assertion fallacy",
+      "detail_page": "/wiki/Ipse_dixit",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Chronological snobbery",
+      "description": "A thesis is deemed incorrect because it was commonly held when something else, known to be false, was also commonly held.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Chronological_snobbery",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Fallacy of relative privation",
+      "description": "Dismissing an argument or complaint due to what are perceived to be more important problems. First World problems are a subset of this fallacy.",
+      "also_known_as": "appeal to worse problems, not as bad as",
+      "detail_page": null,
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Genetic fallacy",
+      "description": "A conclusion is suggested based solely on something or someone's origin rather than its current meaning or context.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Genetic_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "I'm entitled to my opinion",
+      "description": "A person discredits any opposition by claiming that they are entitled to their opinion.",
+      "also_known_as": null,
+      "detail_page": "/wiki/I%27m_entitled_to_my_opinion",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Moralistic fallacy",
+      "description": "Inferring factual conclusions from evaluative premises, in violation of fact–value distinction; e.g. making statements about what is, on the basis of claims about what ought to be.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Moralistic_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Straw man",
+      "description": "Refuting an argument different from the one actually under discussion, while not recognizing or acknowledging the distinction.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Straw_man",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Texas sharpshooter fallacy",
+      "description": "Improperly asserting a cause to explain a cluster of data.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Texas_sharpshooter_fallacy",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Tu quoque",
+      "description": "Stating that a position is false, wrong, or should be disregarded because its proponent fails to act consistently in accordance with it.",
+      "also_known_as": "you too, appeal to hypocrisy, whataboutism",
+      "detail_page": "/wiki/Tu_quoque",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Two wrongs make a right",
+      "description": "Assuming that, if one wrong is committed, another wrong will rectify it.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Two_wrongs_make_a_right",
+      "sub_type_of": null
+    },
+    {
+      "type": "Informal Fallacy",
+      "name": "Vacuous truth",
+      "description": "A claim that is technically true but meaningless, in the form no A in B has C, when there is no A in B. For example, claiming that no mobile phones in the room are on when there are no mobile phones in the room.",
+      "also_known_as": null,
+      "detail_page": "/wiki/Vacuous_truth",
+      "sub_type_of": null
+    }
+  ]
+  
