@@ -52,8 +52,11 @@
       "type": "Propositional Fallacy",
       "name": "Affirming the Consequent",
       "description": "The antecedent in an indicative conditional is claimed to be true because the consequent is true; if A, then B; B, therefore A.",
-      "also_known_as": null,
-      "detail_page": "https://en.wikipedia.org/wiki/Affirming_the_consequent"
+      "also_known_as": "converse error, fallacy of the converse, or confusion of necessity and sufficiency",
+      "detail_page": "https://en.wikipedia.org/wiki/Affirming_the_consequent",
+      "examples": [
+        "If an animal is a dog, then it has four legs. My cat has four legs. Therefore, my cat is a dog. "
+      ]
     },
     {
       "type": "Propositional Fallacy",

@@ -179,7 +179,7 @@ User generated best practices: [What are your best clean code tips?](https://dev
 
 ## Best practices when using AI
 
-## Create aProduct requirements document
+## Create a Product requirements document
 
 This document outlines:
 

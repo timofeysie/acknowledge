@@ -6,23 +6,14 @@ Agent mode has these options:
 - Ask - This mode lets you ask questions or get explanations about your code.
 - Manual - This mode gives you more control over how the AI assistant.
 
-The interface you're seeing might look different from cursor.com because:
-
-- The website may be showing an older/different version
-- Cursor's interface is frequently updated with improvements
-- Some features may be gradually rolled out or may vary based on your installation
-
 ## Basic uses
 
-- Sentence completion (watch out for it making stuff up!)
-- Explaining code
-- Writing docs
-- Writing unit tests
-
 - Tab complete, Multi-Line Edits and Smart Rewrites
-- Ctl-L to open the chat window
+- Ctl-L to open the chat window (and other keyboard shortcuts)
+- add files to the prompt context
 - "fix in chat"
 - Write functions, TDD? Explain code? Write documentation?
+- AI agents with [MCP servers](https://docs.cursor.com/agents/mcp-servers) for advanced use
 
 ### The downside of working with AI
 
@@ -34,13 +25,29 @@ It does not address awareness, motivation, and ability barriers.
 
 ML tools are confident in presenting incorrect information, misleading attributions to syndicated content, and inconsistent information retrieval practices.
 
-the hard part isn't writing code from scratch anymore.
+The hard part isn't writing code from scratch anymore.
 
 - It's properly testing that code for bugs
 - breaking down large problems into smaller steps the AI can handle
 - knitting together those steps into a complete solution
 
 It takes some software development experience to do so effectively – which limits the utility of AI code help for novices.
+
+In general, the skills for writing clean code with best practices are still important.
+
+- Break problems down into smaller steps
+- Use solid principles like the Singe Responsibility Patter
+- Use git often when things are working
+
+At first I used it sparingly for small focused tasks.
+But as I got better at prompting and learning about limitations I was able to do more.
+With AI you can not only save time, you can reach higher and learn while doing in ways that weren't available before.
+
+Its also important to use your knowledge when things start to go the wrong direction.
+
+There are lessons to learn about starting over when things aren't working.
+
+For example, if a prompt fails to get the desired result, and you try another prompt with goes in a different direction, often the code that didn't work the first time is left behind, and serves to confuse the model.
 
 ## Cursor's AI templates and rules system
 
@@ -124,7 +131,8 @@ A Components Directory Pattern (src/components/) has the following characteristi
 
 A rule to enforce this could look like this:
 
-```mdc# Component Directory Structure and Naming Convention
+```mdc
+# Component Directory Structure and Naming Convention
 
 ## Pattern
 All React components should follow these conventions:
@@ -220,3 +228,75 @@ The MDC format we created is better for the above file structure use case becaus
 - Provides clear examples of correct and incorrect usage
 - Includes migration guidance
 - Is easily readable and maintainable by the team
+
+## Example: No Unused or Non-Working Solutions
+
+```mdc
+# Rule: No Unused or Non-Working Solutions
+
+## Purpose
+To maintain a clean, maintainable, and production-ready codebase, all contributors must ensure that no unused, experimental, or non-working code is left in the repository.
+
+## Requirements
+- Remove any code, files, or components that are not used in the current application or are known to be non-functional.
+- Do not leave commented-out blocks of code that are not part of an active feature or fix.
+- All code committed to the main branch must be functional and relevant to the current project requirements.
+- If a solution is experimental or in-progress, it must be clearly marked and isolated in a feature branch or with a clear TODO comment and issue reference.
+- Regularly review and refactor the codebase to eliminate dead code, unused imports, and obsolete files.
+
+## Enforcement
+- Code reviews should check for and flag any unused or non-working code.
+- Automated linting and static analysis tools should be configured to warn about unused variables, imports, and unreachable code.
+- Pull requests that introduce or leave behind non-working or unused code should not be approved until cleaned up.
+
+## Rationale
+Unused and non-working code increases technical debt, confuses contributors, and can introduce bugs or regressions. Keeping the codebase clean ensures better maintainability, readability, and reliability for all team members. 
+```
+
+## Other options
+
+The field of integrating ML tools with editors will see a lot of churn.
+
+Santiago likes Zed.
+
+Zed is a rust editor that opens in under 1gb ram while 3 vscode open 1.7gb ram
+
+As soon as u enable extensions in vscode is bye bye ram.
+
+## General best practices when using AI
+
+As well as creating rules for all prompts, create a Product requirements document, a features list, the tech stack being used and coding standards to follow.
+
+### Create a Product requirements document
+
+This document outlines:
+
+- What the application does
+- Required technologies
+- Design patterns
+- Technical specifications
+
+Given that this app was created with Bolt.new, its development style can follow the standard React File/folder structure and coding conventions that Bolt.new uses.
+
+### Features
+
+- User authentication (login/register)
+- User profiles with customizable details
+- Role-based access (admin/guest)
+- Responsive design with mobile-first UI
+- Secure backend with Supabase
+
+### Tech Stack
+
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase (Authentication & Database)
+- Vite
+
+### Coding standards
+
+- Use standard Prettier and ESLint rules.
+- File/folder structure conventions
+- Naming conventions
+- Architecture principles
