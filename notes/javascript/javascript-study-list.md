@@ -233,6 +233,140 @@ function letExample() {
 }
 ```
 
+### Fat arrow versus function declaration
+
+From [this article](https://javascript.plainenglish.io/the-javascript-interview-question-thats-failing-senior-developers-929a884294e7), answers these questions about the following code:
+
+Which implementation has better performance characteristics and why?
+
+What hidden issues might appear in a real-world application?
+
+```js
+const button document.querySelector('button'); 
+const items = ['item1', 'item2', 'item3']; 
+
+// Implementation A 
+button.addEventListener('click', () => { 
+  items.forEach(item => { 
+    console.log(item); 
+  }); 
+}); 
+// Implementation B 
+button.addEventListener('click', function() { 
+  items.forEach(function(item) { 
+    console.log(item); 
+  }); 
+}); 
+```
+
+**1. Which implementation has better performance characteristics and why?**
+
+The main difference between the two implementations is how `this` is handled inside the event handler:
+
+- **Arrow functions**: `this` is lexically inherited from the surrounding scope (where the arrow function is defined).
+- **Function expressions**: `this` is dynamically set based on how the function is called (in event handlers, it refers to the element the event is bound to).
+
+**Hidden Issue**
+
+If you need to access the button element via `this` inside the event handler, Implementation A (arrow function) will not work as expected.
+
+- In Implementation A (arrow function), `this` inside the handler does NOT refer to the button element. It refers to the outer scope (likely `window` or whatever the surrounding context is).
+- In Implementation B (function expression), `this` inside the handler refers to the button element, as expected for DOM event handlers.
+
+**Example of a real-world bug:**
+
+```js
+// Suppose you want to disable the button when clicked:
+button.addEventListener('click', () => {
+  this.disabled = true; // 'this' is NOT the button! Bug!
+});
+
+button.addEventListener('click', function() {
+  this.disabled = true; // 'this' IS the button. Works!
+});
+```
+
+**2. What hidden issues might appear in a real-world application?**
+
+The main difference between the two implementations is how `this` is handled inside the event handler:
+
+- **Arrow functions**: `this` is lexically inherited from the surrounding scope (where the arrow function is defined).
+- **Function expressions**: `this` is dynamically set based on how the function is called (in event handlers, it refers to the element the event is bound to).
+
+#### Hidden Issue
+
+If you need to access the button element via `this` inside the event handler, Implementation A (arrow function) will not work as expected.
+
+- In Implementation A (arrow function), `this` inside the handler does NOT refer to the button element. It refers to the outer scope (likely `window` or whatever the surrounding context is).
+- In Implementation B (function expression), `this` inside the handler refers to the button element, as expected for DOM event handlers.
+
+**Example of a real-world bug:**
+
+```js
+// Suppose you want to disable the button when clicked:
+button.addEventListener('click', () => {
+  this.disabled = true; // 'this' is NOT the button! Bug!
+});
+
+button.addEventListener('click', function() {
+  this.disabled = true; // 'this' IS the button. Works!
+});
+```
+
+### Real-World Memory Management Implications
+
+While both arrow functions and function expressions create closures, there are subtle differences in how they capture variables, which can affect memory management in real-world applications.
+
+- **Arrow functions** close over their entire lexical scope, capturing all variables from the surrounding context, including large objects or DOM nodes if referenced.
+- **Function expressions** also create closures, but if you avoid referencing outer variables, the closure is smaller and less likely to retain unnecessary data.
+
+**Potential memory leak scenario:**
+
+If you attach an event handler with an arrow function that references a large object, and you do not properly remove the event listener when the element is removed from the DOM, the closure will keep that large object in memory:
+
+```js
+const bigData = { /* ...large data... */ };
+
+button.addEventListener('click', () => {
+  // This arrow function closes over bigData
+  console.log(bigData);
+});
+```
+
+If the button is removed from the DOM but the event listener is not detached, `bigData` cannot be garbage collected because it is still referenced by the closure.
+
+With a function expression that does not reference outer variables, the closure is smaller:
+
+```js
+button.addEventListener('click', function() {
+  // No reference to bigData here
+  console.log('clicked');
+});
+```
+
+#### The Named Functions solution
+
+Implementation of Named Functions is actually superior for event listeners, especially in long-running applications.
+
+```js
+const handleClick = function() {
+  items.forEach(processItem);
+};
+
+const processItem = function(item) {
+  console.log(item);
+};
+
+button.addEventListener('click', handleClick);
+
+// clean up later
+button.removeEventListener('click', handleClick);
+```
+
+Note that when you use JSX like <button onClick={handleClick}>, React attaches and detaches event listeners automatically as components mount and unmount.
+
+This is because React's synthetic event system, which handles cleanup and memory management for you.
+
 ## Data Types
 
 *What are the different data types in JavaScript?*
@@ -1560,25 +1694,6 @@ function ProductList({ products }) {
 }
 ```
 
-#### Webpack Magic Comments
-
-You can use webpack magic comments to customize chunk naming and loading behavior:
-
-```js
-// Name your chunk
-const Settings = lazy(() => import(/* webpackChunkName: "settings" */ './Settings'));
-
-// Mark a chunk as prefetchable
-const Help = lazy(() => 
-  import(/* webpackPrefetch: true */ './Help')
-);
-
-// Mark a chunk as preloadable
-const UserProfile = lazy(() => 
-  import(/* webpackPreload: true */ './UserProfile')
-);
-```
-
 *How do you manage dynamic routes or nested routing in React?*
 
 *What techniques do you use to optimize the performance of a React application?*
@@ -1610,7 +1725,7 @@ These three hooks have slightly different uses which is good to be clear on.
 - *useEffect* is for side effects and runs after renders.
 - *useMemo* memoizes values to optimize expensive calculations.
 - *useCallback* memoizes functions to prevent unnecessary re-renders.
-- *useLayoutEffect* runs before the browser updates the screen
+- *useLayoutEffect* runs *before* the browser updates the screen
 
 ### useEffect
 
